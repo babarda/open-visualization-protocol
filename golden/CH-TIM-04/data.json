@@ -1,0 +1,57 @@
+{
+  "title": "Site work now drives a third of monthly output",
+  "eyebrow": "OUTPUT BY STAGE . 2026",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": " units",
+  "x": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug"
+  ],
+  "series": [
+    {
+      "name": "Fabrication",
+      "values": [
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26
+      ]
+    },
+    {
+      "name": "Transport",
+      "values": [
+        4,
+        6,
+        8,
+        9,
+        11,
+        12,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "Site",
+      "values": [
+        2,
+        3,
+        5,
+        7,
+        9,
+        12,
+        15,
+        18
+      ]
+    }
+  ]
+}

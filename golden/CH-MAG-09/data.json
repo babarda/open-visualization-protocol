@@ -1,0 +1,15 @@
+{
+  "title": "Delivery on-time sits at 87%, 8 points under target",
+  "eyebrow": "DELIVERY OTD . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "min": 0,
+  "max": 100,
+  "bands": [
+    60,
+    85,
+    100
+  ],
+  "target": 95,
+  "value": 87
+}

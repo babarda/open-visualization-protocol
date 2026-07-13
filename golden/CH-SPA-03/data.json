@@ -1,0 +1,65 @@
+{
+  "title": "The corridor is 55% complete, past the river crossing",
+  "eyebrow": "CORRIDOR PROGRESS . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "corridor": [
+    [
+      5,
+      80
+    ],
+    [
+      20,
+      60
+    ],
+    [
+      38,
+      52
+    ],
+    [
+      55,
+      45
+    ],
+    [
+      70,
+      35
+    ],
+    [
+      85,
+      20
+    ]
+  ],
+  "done_to": 0.55,
+  "stations": [
+    {
+      "name": "Start terminal",
+      "at": 0.0,
+      "kind": "done"
+    },
+    {
+      "name": "Pump station 1",
+      "at": 0.22,
+      "kind": "done"
+    },
+    {
+      "name": "River crossing",
+      "at": 0.48,
+      "kind": "done"
+    },
+    {
+      "name": "Hill section",
+      "at": 0.55,
+      "kind": "current"
+    },
+    {
+      "name": "Pump station 2",
+      "at": 0.75,
+      "kind": "pending"
+    },
+    {
+      "name": "End terminal",
+      "at": 1.0,
+      "kind": "pending"
+    }
+  ]
+}

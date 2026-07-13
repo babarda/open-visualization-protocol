@@ -1,0 +1,44 @@
+{
+  "code": "CP-STA-02",
+  "name": "OUTLINED STAMP",
+  "ovp_version": "1.0",
+  "purpose": "Blueprint-register stamp: double-outlined CAPS word for document-grade statuses (ISSUED, HOLD, SUPERSEDED).",
+  "params": {
+    "h": 40,
+    "text_size": 13
+  },
+  "roles": {
+    "stamp_positive": [
+      "positive"
+    ],
+    "stamp_negative": [
+      "negative"
+    ],
+    "stamp_neutral": [
+      "body"
+    ]
+  },
+  "sample": {
+    "word": "ISSUED FOR REVIEW",
+    "tone": "neutral",
+    "w": 220
+  },
+  "golden_canvas": {
+    "w": 268,
+    "h": 88
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "tone is semantic (positive, negative, neutral), set by the data",
+    "letter-spaced caps, centered; the double outline is the signature",
+    "never rotated: legibility beats theater"
+  ],
+  "qa": [
+    "tone declared",
+    "word in caps",
+    "no rotation"
+  ]
+}

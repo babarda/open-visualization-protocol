@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Implement</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item on" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+<h1>Implement OVP</h1>
+<p class="lead">Everything needed to build a conformant parser,
+renderer, validator, or composer, without asking the authors anything.
+The reference implementation lives in <code>tools/</code> in the
+repository; this page is the contract it implements.</p>
+
+<h2>Conformance levels</h2>
+<table>
+<tr><th>Level</th><th>Name</th><th>You can claim it when</th></tr>
+<tr><td>1</td><td>Parser</td><td>you read specs and tokens and validate
+them against the published schemas</td></tr>
+<tr><td>2</td><td>Renderer</td><td>you reproduce the golden renders for
+at least one chart family from spec + tokens + data</td></tr>
+<tr><td>3</td><td>Presenter</td><td>you compose recipes (language +
+charts + components) on the slide canvas</td></tr>
+<tr><td>4</td><td>Advisor</td><td>you use the machine metadata to pick
+the right object for a message</td></tr>
+<tr><td>5</td><td>Full</td><td>you deterministically reproduce every
+golden across all built objects</td></tr>
+</table>
+
+<h2>The determinism contract</h2>
+<ul>
+<li>Same spec + same tokens + same data = the same output. For SVG,
+byte-identical; for container formats with volatile envelopes (PPTX zip
+timestamps), member-identical.</li>
+<li>Specs carry exact px values and color ROLES. Resolve a role chain
+like <code>benchmark -&gt; muted</code> to the first role the palette
+defines.</li>
+<li>Merge a spec's <code>overrides[DL-xx]</code> block over the spec
+before rendering in that language.</li>
+<li>Float formatting: at most 2 decimals, trailing zeros stripped,
+never <code>-0</code>.</li>
+<li>Nice-tick algorithm (normative, FN-05): raw = max / target_ticks;
+mag = 10^floor(log10(raw)); step = first of nice_steps x mag &gt;= raw;
+top = ceil(max / step) x step.</li>
+<li>No randomness, no timestamps, no environment-dependent values,
+ever. Deterministic layout algorithms are part of the spec (squarified
+treemap, first-free-lane beeswarm packing).</li>
+</ul>
+
+<h2>What you need</h2>
+<table>
+<tr><th>File</th><th>Validates</th></tr>
+<tr><td><a href='schemas/bq.schema.json'>bq.schema.json</a></td><td>BQ objects</td></tr><tr><td><a href='schemas/ch.schema.json'>ch.schema.json</a></td><td>CH objects</td></tr><tr><td><a href='schemas/cp.schema.json'>cp.schema.json</a></td><td>CP objects</td></tr><tr><td><a href='schemas/dl.schema.json'>dl.schema.json</a></td><td>DL objects</td></tr><tr><td><a href='schemas/nr.schema.json'>nr.schema.json</a></td><td>NR objects</td></tr><tr><td><a href='schemas/rc.schema.json'>rc.schema.json</a></td><td>RC objects</td></tr>
+<tr><td><a href='schemas/engine.json'>engine.json</a></td>
+<td>decision rules + the controlled vocabularies</td></tr>
+<tr><td><a href='REGISTRY.json'>REGISTRY.json</a></td>
+<td>the machine index of every object</td></tr>
+</table>
+<p>Golden renders and their input data live under <code>golden/</code>
+in the repository: one folder per object, <code>data.json</code> plus
+one render per design language. They are the conformance test suite:
+re-render and compare bytes.</p>
+
+<h2>Self-test</h2>
+<pre><code>for each golden folder:
+    output = render(spec, tokens[dl], data)
+    assert output == stored_golden_bytes   # svg: byte-identical</code></pre>
+<p>The reference gate (<code>tools/validate.py</code>) also checks
+schema validity, hex discipline (#RRGGBB uppercase only, in tokens
+only), WCAG AA contrast for ink and body on background, and per-chart
+data sanity (waterfalls reconcile, cumulative curves never decrease,
+rank columns are permutations, five-number summaries are ordered).</p>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

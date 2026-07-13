@@ -1,0 +1,26 @@
+{
+  "code": "BQ-07",
+  "question": "How does the total split?",
+  "ovp_version": "1.0",
+  "intent": [
+    "part-to-whole",
+    "share"
+  ],
+  "observations": [
+    "a whole divides into parts",
+    "the mix shifts across periods"
+  ],
+  "patterns": [
+    "PT-05"
+  ],
+  "charts": [
+    "CH-PTW-01",
+    "CH-PTW-02",
+    "CH-PTW-05"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "analyst",
+    "purpose": "explain"
+  }
+}

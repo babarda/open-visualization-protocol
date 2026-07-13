@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/flow_map.schema.json",
+  "title": "Input data for chart_type flow_map",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "regions",
+    "places",
+    "flows"
+  ]
+}

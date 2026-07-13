@@ -1,0 +1,11 @@
+{
+  "title": "Monthly output doubled to 412 units in August",
+  "eyebrow": "PRODUCTION . JAN-AUG",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": " units",
+  "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  "series": [
+    {"name": "Output", "values": [205, 228, 251, 280, 301, 338, 377, 412], "role": "key"}
+  ],
+  "annotation": {"text": "crosses 400 for the first time", "series": "Output", "index": 7, "tx": 700, "ty": 160, "anchor": "end"}
+}

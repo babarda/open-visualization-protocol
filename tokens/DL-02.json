@@ -1,0 +1,68 @@
+{
+  "code": "DL-02",
+  "name": "KATA",
+  "aka": "OPS ROOM",
+  "ovp_version": "1.0",
+  "status": "adopted",
+  "philosophy": {
+    "civilization": "Japan",
+    "principle": "Discipline and continuous practice",
+    "motto": "Perfect through repetition.",
+    "laws": [
+      "Standardized layouts",
+      "Repeatable structures",
+      "Consistency over novelty",
+      "Process is visible",
+      "Continuous improvement"
+    ],
+    "related": [
+      "Kaizen",
+      "Praxis",
+      "Li"
+    ]
+  },
+  "constitution": {
+    "narrative_style": "recommendation-first",
+    "density": "operational",
+    "annotation_policy": "minimal",
+    "legend_policy": "direct-labels-only",
+    "highlight_policy": "single",
+    "decision_style": "recommendation-with-owner",
+    "reading_time": "minute",
+    "charts_per_page": 2
+  },
+  "occasions": [
+    "weekly status decks",
+    "progress dashboards",
+    "PMO reporting"
+  ],
+  "palette": {
+    "background": "#FFFFFF",
+    "panel": "#F7FAFA",
+    "ink": "#222222",
+    "body": "#555555",
+    "hairline": "#E2E8E8",
+    "gridline": "#EAEAEA",
+    "primary": "#008080",
+    "primaryDark": "#005F5F",
+    "muted": "#B7DCDC",
+    "benchmark": "#AAAAAA",
+    "positive": "#339966",
+    "negative": "#D63A2F",
+    "warning": "#E08A00"
+  },
+  "fonts": {
+    "display": {
+      "family": "'Rethink Sans','Segoe UI',sans-serif",
+      "weight": 600
+    },
+    "body": {
+      "family": "'Poppins','Segoe UI',sans-serif",
+      "weight": 400
+    }
+  },
+  "chrome": {
+    "kicker": false,
+    "eyebrow": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "code": "BQ-12",
+  "question": "Which option should we choose?",
+  "ovp_version": "1.0",
+  "intent": [
+    "comparison",
+    "magnitude"
+  ],
+  "observations": [
+    "options measured in the same units",
+    "no option dominates on every axis"
+  ],
+  "patterns": [
+    "PT-07"
+  ],
+  "charts": [
+    "CH-MAG-02",
+    "CH-MAG-03",
+    "CH-RNK-06"
+  ],
+  "narrative": "NR-03",
+  "decider_hint": {
+    "audience": "executive",
+    "purpose": "decide"
+  }
+}

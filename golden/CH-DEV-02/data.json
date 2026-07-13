@@ -1,0 +1,48 @@
+{
+  "title": "System D is the only system where punch grew, 52 to 63",
+  "eyebrow": "OPEN PUNCH . W24 VS W28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "series_labels": [
+    "W24",
+    "W28"
+  ],
+  "categories": [
+    {
+      "label": "System A",
+      "values": [
+        28,
+        12
+      ]
+    },
+    {
+      "label": "System B",
+      "values": [
+        31,
+        18
+      ]
+    },
+    {
+      "label": "System C",
+      "values": [
+        39,
+        25
+      ]
+    },
+    {
+      "label": "System D",
+      "values": [
+        52,
+        63
+      ],
+      "highlight": true
+    },
+    {
+      "label": "System E",
+      "values": [
+        36,
+        31
+      ]
+    }
+  ]
+}

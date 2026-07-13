@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Business questions</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item on" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+<h1>Business questions</h1><p class='lead'>The top of the resolution chain. Match the question being asked, confirm the observations in the data, then take the pattern, the charts, and the narrative skeleton. The language comes from the <a href='decider.html'>decider</a>.</p><input class='search' placeholder='Filter questions...' oninput='filterCards(this.value)'><div class='grid g2'><div class="card findable">
+<div class="kicker">BQ-01</div>
+<h3>Why did cost overrun?</h3>
+<p><b>You will observe:</b> actual above budget; a small set of drivers explains most of the gap</p>
+<p><b>Patterns:</b> PT-07 &nbsp; <b>Tell it as:</b>
+NR-01 THE EXECUTIVE BRIEF</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-FLO-01.html'>CH-FLO-01 WATERFALL</a><a class='tag' style='text-decoration:none' href='charts/CH-MAG-02.html'>CH-MAG-02 PAIRED COLUMN</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-02</div>
+<h3>Are we on schedule?</h3>
+<p><b>You will observe:</b> cumulative actual vs plan diverge; tasks slip against a milestone line</p>
+<p><b>Patterns:</b> PT-03 &nbsp; <b>Tell it as:</b>
+NR-01 THE EXECUTIVE BRIEF</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-TIM-02.html'>CH-TIM-02 S-CURVE</a><a class='tag' style='text-decoration:none' href='charts/CH-TIM-09.html'>CH-TIM-09 GANTT</a><a class='tag' style='text-decoration:none' href='charts/CH-DEV-01.html'>CH-DEV-01 DIVERGING BAR</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-03</div>
+<h3>Where is the backlog concentrated?</h3>
+<p><b>You will observe:</b> few categories hold most of the volume</p>
+<p><b>Patterns:</b> PT-04 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-RNK-01.html'>CH-RNK-01 BAR-H</a><a class='tag' style='text-decoration:none' href='charts/CH-PTW-05.html'>CH-PTW-05 TREEMAP</a><a class='tag' style='text-decoration:none' href='charts/CH-RNK-06.html'>CH-RNK-06 TABLE WITH BARS</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-04</div>
+<h3>Who slips the most?</h3>
+<p><b>You will observe:</b> one entity sits far from the pack; signed variance across entities</p>
+<p><b>Patterns:</b> PT-02 &nbsp; <b>Tell it as:</b>
+NR-01 THE EXECUTIVE BRIEF</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-DEV-01.html'>CH-DEV-01 DIVERGING BAR</a><a class='tag' style='text-decoration:none' href='charts/CH-RNK-01.html'>CH-RNK-01 BAR-H</a><a class='tag' style='text-decoration:none' href='charts/CH-DST-07.html'>CH-DST-07 BEESWARM</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-05</div>
+<h3>Is it improving?</h3>
+<p><b>You will observe:</b> direction holds across periods; two-point change per entity</p>
+<p><b>Patterns:</b> PT-01 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-TIM-01.html'>CH-TIM-01 LINE</a><a class='tag' style='text-decoration:none' href='charts/CH-TIM-14.html'>CH-TIM-14 INDEXED LINE</a><a class='tag' style='text-decoration:none' href='charts/CH-TIM-05.html'>CH-TIM-05 SLOPE</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-06</div>
+<h3>Where is the risk building?</h3>
+<p><b>You will observe:</b> a metric approaches its threshold; a watched value holds then steps</p>
+<p><b>Patterns:</b> PT-06 &nbsp; <b>Tell it as:</b>
+NR-04 THE EXCEPTION FLASH</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-MAG-04.html'>CH-MAG-04 BULLET</a><a class='tag' style='text-decoration:none' href='charts/CH-TAB-01.html'>CH-TAB-01 STATUS MATRIX</a><a class='tag' style='text-decoration:none' href='charts/CH-TIM-13.html'>CH-TIM-13 STEP</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-07</div>
+<h3>How does the total split?</h3>
+<p><b>You will observe:</b> a whole divides into parts; the mix shifts across periods</p>
+<p><b>Patterns:</b> PT-05 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-PTW-01.html'>CH-PTW-01 STACKED BAR</a><a class='tag' style='text-decoration:none' href='charts/CH-PTW-02.html'>CH-PTW-02 STACKED BAR 100%</a><a class='tag' style='text-decoration:none' href='charts/CH-PTW-05.html'>CH-PTW-05 TREEMAP</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-08</div>
+<h3>What changed since last period?</h3>
+<p><b>You will observe:</b> before and after per category; gains and losses both present</p>
+<p><b>Patterns:</b> PT-01, PT-05 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-DEV-02.html'>CH-DEV-02 DUMBBELL</a><a class='tag' style='text-decoration:none' href='charts/CH-TIM-05.html'>CH-TIM-05 SLOPE</a><a class='tag' style='text-decoration:none' href='charts/CH-FLO-01.html'>CH-FLO-01 WATERFALL</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-09</div>
+<h3>Are these two measures related?</h3>
+<p><b>You will observe:</b> points align along a direction; one point breaks the relationship</p>
+<p><b>Patterns:</b> PT-02 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-COR-01.html'>CH-COR-01 SCATTER</a><a class='tag' style='text-decoration:none' href='charts/CH-COR-02.html'>CH-COR-02 BUBBLE</a><a class='tag' style='text-decoration:none' href='charts/CH-COR-03.html'>CH-COR-03 XY HEATMAP</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-10</div>
+<h3>How long do things take, and how spread out is it?</h3>
+<p><b>You will observe:</b> values cluster with a tail; groups differ in spread more than in center</p>
+<p><b>Patterns:</b> PT-02 &nbsp; <b>Tell it as:</b>
+NR-02 THE ANALYST READOUT</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-DST-01.html'>CH-DST-01 HISTOGRAM</a><a class='tag' style='text-decoration:none' href='charts/CH-DST-04.html'>CH-DST-04 BOXPLOT</a><a class='tag' style='text-decoration:none' href='charts/CH-DST-06.html'>CH-DST-06 CUMULATIVE CURVE</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-11</div>
+<h3>Will we hit the target?</h3>
+<p><b>You will observe:</b> trajectory vs commitment; gap to target per metric</p>
+<p><b>Patterns:</b> PT-03 &nbsp; <b>Tell it as:</b>
+NR-01 THE EXECUTIVE BRIEF</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-TIM-02.html'>CH-TIM-02 S-CURVE</a><a class='tag' style='text-decoration:none' href='charts/CH-MAG-04.html'>CH-MAG-04 BULLET</a></p>
+</div>
+<div class="card findable">
+<div class="kicker">BQ-12</div>
+<h3>Which option should we choose?</h3>
+<p><b>You will observe:</b> options measured in the same units; no option dominates on every axis</p>
+<p><b>Patterns:</b> PT-07 &nbsp; <b>Tell it as:</b>
+NR-03 THE DECISION MEMO</p>
+<p style="margin-top:8px"><a class='tag' style='text-decoration:none' href='charts/CH-MAG-02.html'>CH-MAG-02 PAIRED COLUMN</a><a class='tag' style='text-decoration:none' href='charts/CH-MAG-03.html'>CH-MAG-03 PAIRED BAR</a><a class='tag' style='text-decoration:none' href='charts/CH-RNK-06.html'>CH-RNK-06 TABLE WITH BARS</a></p>
+</div></div><h2>Narrative skeletons</h2><p>How the finding is told, ordered by the language's decision_style. Guidance per section:</p><div class='grid g2'><div class="card findable">
+<div class="kicker">NR-01 . recommendation-with-owner</div>
+<h3>THE EXECUTIVE BRIEF</h3>
+<p><b>claim &rarr; cause &rarr; evidence &rarr; action &rarr; owner</b></p>
+<table><tr><td>claim</td><td>One sentence stating the finding with its number; this is the action title.</td></tr><tr><td>cause</td><td>The single driver that explains most of the finding; name it, quantify it.</td></tr><tr><td>evidence</td><td>The chart(s) proving claim and cause; each with its QA checklist run.</td></tr><tr><td>action</td><td>The decision requested or taken, stated as a verb with a deadline.</td></tr><tr><td>owner</td><td>One name accountable for the action; a team is not an owner.</td></tr></table>
+</div>
+<div class="card findable">
+<div class="kicker">NR-02 . evidence-only</div>
+<h3>THE ANALYST READOUT</h3>
+<p><b>question &rarr; evidence &rarr; cause &rarr; claim</b></p>
+<table><tr><td>question</td><td>The business question verbatim; the reader must know what is being answered.</td></tr><tr><td>evidence</td><td>Charts in reading order, strongest first; declared inputs only.</td></tr><tr><td>cause</td><td>What explains the shape, with the competing explanation named and excluded.</td></tr><tr><td>claim</td><td>The finding, stated without a recommendation; the reader decides.</td></tr></table>
+</div>
+<div class="card findable">
+<div class="kicker">NR-03 . options</div>
+<h3>THE DECISION MEMO</h3>
+<p><b>question &rarr; evidence &rarr; options &rarr; action</b></p>
+<table><tr><td>question</td><td>The decision to be made, phrased as a choice.</td></tr><tr><td>evidence</td><td>The comparison chart(s) that make the options commensurable.</td></tr><tr><td>options</td><td>2 to 4 options, each with cost, benefit, and risk in the same units.</td></tr><tr><td>action</td><td>The decision mechanics: who chooses, by when, what happens on no decision.</td></tr></table>
+</div>
+<div class="card findable">
+<div class="kicker">NR-04 . recommendation-with-owner</div>
+<h3>THE EXCEPTION FLASH</h3>
+<p><b>claim &rarr; action &rarr; owner &rarr; evidence</b></p>
+<table><tr><td>claim</td><td>The breach, its size, and when it happened; nothing else on the first line.</td></tr><tr><td>action</td><td>What must happen and by which hour; flashes measure response in hours.</td></tr><tr><td>owner</td><td>The one name paged; escalation path if no response.</td></tr><tr><td>evidence</td><td>One chart maximum; the flash links to the full readout, it does not contain it.</td></tr></table>
+</div></div>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

@@ -1,0 +1,59 @@
+{
+  "title": "Casta moved from third to first in two quarters",
+  "eyebrow": "SUPPLIER RANKING",
+  "source": "Source: supplier scorecards, Q4",
+  "x": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+  ],
+  "series": [
+    {
+      "name": "Alpha",
+      "ranks": [
+        1,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "Bravo",
+      "ranks": [
+        2,
+        3,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "Casta",
+      "ranks": [
+        3,
+        2,
+        1,
+        1
+      ],
+      "highlight": true
+    },
+    {
+      "name": "Delta",
+      "ranks": [
+        4,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "Echo",
+      "ranks": [
+        5,
+        4,
+        5,
+        4
+      ]
+    }
+  ]
+}

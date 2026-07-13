@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#C0182B"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#F3D3D7"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#F6DEE1"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#C32234"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#EDBDC2"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#F2CED2"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#CC4554"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#E6A3AB"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#E6A4AC"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#E398A1"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#C0182B"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#C0182B"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#D25967"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#E08D97"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#DD838D"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>

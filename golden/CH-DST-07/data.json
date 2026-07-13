@@ -1,0 +1,109 @@
+{
+  "title": "One lot sits at 62 days, twice the next slowest",
+  "eyebrow": "OPEN LOTS",
+  "source": "Source: customs log, wk 28",
+  "unit": "days",
+  "points": [
+    {
+      "label": "Lot 12",
+      "value": 6
+    },
+    {
+      "label": "Lot 31",
+      "value": 7
+    },
+    {
+      "label": "Lot 07",
+      "value": 8
+    },
+    {
+      "label": "Lot 44",
+      "value": 9
+    },
+    {
+      "label": "Lot 19",
+      "value": 9
+    },
+    {
+      "label": "Lot 23",
+      "value": 10
+    },
+    {
+      "label": "Lot 51",
+      "value": 11
+    },
+    {
+      "label": "Lot 03",
+      "value": 12
+    },
+    {
+      "label": "Lot 28",
+      "value": 12
+    },
+    {
+      "label": "Lot 36",
+      "value": 13
+    },
+    {
+      "label": "Lot 15",
+      "value": 14
+    },
+    {
+      "label": "Lot 40",
+      "value": 15
+    },
+    {
+      "label": "Lot 22",
+      "value": 15
+    },
+    {
+      "label": "Lot 09",
+      "value": 16
+    },
+    {
+      "label": "Lot 47",
+      "value": 17
+    },
+    {
+      "label": "Lot 33",
+      "value": 18
+    },
+    {
+      "label": "Lot 26",
+      "value": 19
+    },
+    {
+      "label": "Lot 11",
+      "value": 21
+    },
+    {
+      "label": "Lot 38",
+      "value": 22
+    },
+    {
+      "label": "Lot 05",
+      "value": 24
+    },
+    {
+      "label": "Lot 42",
+      "value": 26
+    },
+    {
+      "label": "Lot 17",
+      "value": 29
+    },
+    {
+      "label": "Lot 55",
+      "value": 33
+    },
+    {
+      "label": "Lot 61",
+      "value": 48
+    },
+    {
+      "label": "Lot 88",
+      "value": 62,
+      "highlight": true
+    }
+  ]
+}

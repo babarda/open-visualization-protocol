@@ -1,0 +1,12 @@
+{
+  "title": "Cumulative progress reached 63% in August, 9 points behind plan",
+  "eyebrow": "SCHEDULE . MONTH 8",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  "series": [
+    {"name": "Plan", "values": [4, 10, 19, 30, 42, 54, 64, 72], "role": "context"},
+    {"name": "Actual", "values": [3, 8, 16, 26, 36, 46, 55, 63], "role": "key"}
+  ],
+  "annotation": {"text": "slippage steady since May", "series": "Actual", "index": 5, "tx": 520, "ty": 330, "anchor": "end"}
+}

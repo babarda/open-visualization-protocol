@@ -1,0 +1,36 @@
+{
+  "title": "83% of shipments clear customs within 10 days",
+  "eyebrow": "CLEARANCE TIMES . H1",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "x": [
+    "2d",
+    "4d",
+    "6d",
+    "8d",
+    "10d",
+    "14d"
+  ],
+  "series": [
+    {
+      "name": "Cleared",
+      "values": [
+        22,
+        41,
+        58,
+        71,
+        83,
+        100
+      ],
+      "role": "key"
+    }
+  ],
+  "annotation": {
+    "text": "SLA commitment: 10 days",
+    "series": "Cleared",
+    "index": 4,
+    "tx": 500,
+    "ty": 330,
+    "anchor": "start"
+  }
+}

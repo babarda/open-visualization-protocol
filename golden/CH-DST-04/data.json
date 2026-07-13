@@ -1,0 +1,49 @@
+{
+  "title": "Gate C reviews run three times longer at the median",
+  "eyebrow": "REVIEW TIME BY GATE",
+  "source": "Source: document register, H1",
+  "unit": "days",
+  "categories": [
+    {
+      "label": "Gate A",
+      "min": 2,
+      "q1": 4,
+      "med": 6,
+      "q3": 9,
+      "max": 14
+    },
+    {
+      "label": "Gate B",
+      "min": 3,
+      "q1": 6,
+      "med": 9,
+      "q3": 13,
+      "max": 19
+    },
+    {
+      "label": "Gate C",
+      "min": 6,
+      "q1": 12,
+      "med": 18,
+      "q3": 26,
+      "max": 38,
+      "highlight": true
+    },
+    {
+      "label": "Gate D",
+      "min": 3,
+      "q1": 5,
+      "med": 8,
+      "q3": 12,
+      "max": 21
+    },
+    {
+      "label": "Gate E",
+      "min": 2,
+      "q1": 5,
+      "med": 7,
+      "q3": 10,
+      "max": 16
+    }
+  ]
+}

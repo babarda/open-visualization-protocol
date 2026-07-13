@@ -1,0 +1,1891 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-PTW-06 WAFFLE</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-PTW-06</div>
+<div class="kicker">CH-PTW-06 . family PTW</div>
+<h1>WAFFLE</h1>
+<p class="lead">10x10 unit grid, one share. Needs:
+one percentage of one whole; the most honest single-share visual.</p>
+<p><span class="tag">share</span><span class="tag">part-to-whole</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#008080"/>
+<rect x="128" y="428" width="26" height="26" fill="#008080"/>
+<rect x="160" y="428" width="26" height="26" fill="#008080"/>
+<rect x="192" y="428" width="26" height="26" fill="#008080"/>
+<rect x="224" y="428" width="26" height="26" fill="#008080"/>
+<rect x="256" y="428" width="26" height="26" fill="#008080"/>
+<rect x="288" y="428" width="26" height="26" fill="#008080"/>
+<rect x="320" y="428" width="26" height="26" fill="#008080"/>
+<rect x="352" y="428" width="26" height="26" fill="#008080"/>
+<rect x="384" y="428" width="26" height="26" fill="#008080"/>
+<rect x="96" y="396" width="26" height="26" fill="#008080"/>
+<rect x="128" y="396" width="26" height="26" fill="#008080"/>
+<rect x="160" y="396" width="26" height="26" fill="#008080"/>
+<rect x="192" y="396" width="26" height="26" fill="#008080"/>
+<rect x="224" y="396" width="26" height="26" fill="#008080"/>
+<rect x="256" y="396" width="26" height="26" fill="#008080"/>
+<rect x="288" y="396" width="26" height="26" fill="#008080"/>
+<rect x="320" y="396" width="26" height="26" fill="#008080"/>
+<rect x="352" y="396" width="26" height="26" fill="#008080"/>
+<rect x="384" y="396" width="26" height="26" fill="#008080"/>
+<rect x="96" y="364" width="26" height="26" fill="#008080"/>
+<rect x="128" y="364" width="26" height="26" fill="#008080"/>
+<rect x="160" y="364" width="26" height="26" fill="#008080"/>
+<rect x="192" y="364" width="26" height="26" fill="#008080"/>
+<rect x="224" y="364" width="26" height="26" fill="#008080"/>
+<rect x="256" y="364" width="26" height="26" fill="#008080"/>
+<rect x="288" y="364" width="26" height="26" fill="#008080"/>
+<rect x="320" y="364" width="26" height="26" fill="#008080"/>
+<rect x="352" y="364" width="26" height="26" fill="#008080"/>
+<rect x="384" y="364" width="26" height="26" fill="#008080"/>
+<rect x="96" y="332" width="26" height="26" fill="#008080"/>
+<rect x="128" y="332" width="26" height="26" fill="#008080"/>
+<rect x="160" y="332" width="26" height="26" fill="#008080"/>
+<rect x="192" y="332" width="26" height="26" fill="#008080"/>
+<rect x="224" y="332" width="26" height="26" fill="#008080"/>
+<rect x="256" y="332" width="26" height="26" fill="#008080"/>
+<rect x="288" y="332" width="26" height="26" fill="#008080"/>
+<rect x="320" y="332" width="26" height="26" fill="#008080"/>
+<rect x="352" y="332" width="26" height="26" fill="#008080"/>
+<rect x="384" y="332" width="26" height="26" fill="#008080"/>
+<rect x="96" y="300" width="26" height="26" fill="#008080"/>
+<rect x="128" y="300" width="26" height="26" fill="#008080"/>
+<rect x="160" y="300" width="26" height="26" fill="#008080"/>
+<rect x="192" y="300" width="26" height="26" fill="#008080"/>
+<rect x="224" y="300" width="26" height="26" fill="#008080"/>
+<rect x="256" y="300" width="26" height="26" fill="#008080"/>
+<rect x="288" y="300" width="26" height="26" fill="#008080"/>
+<rect x="320" y="300" width="26" height="26" fill="#008080"/>
+<rect x="352" y="300" width="26" height="26" fill="#008080"/>
+<rect x="384" y="300" width="26" height="26" fill="#008080"/>
+<rect x="96" y="268" width="26" height="26" fill="#008080"/>
+<rect x="128" y="268" width="26" height="26" fill="#008080"/>
+<rect x="160" y="268" width="26" height="26" fill="#008080"/>
+<rect x="192" y="268" width="26" height="26" fill="#008080"/>
+<rect x="224" y="268" width="26" height="26" fill="#008080"/>
+<rect x="256" y="268" width="26" height="26" fill="#008080"/>
+<rect x="288" y="268" width="26" height="26" fill="#008080"/>
+<rect x="320" y="268" width="26" height="26" fill="#008080"/>
+<rect x="352" y="268" width="26" height="26" fill="#008080"/>
+<rect x="384" y="268" width="26" height="26" fill="#008080"/>
+<rect x="96" y="236" width="26" height="26" fill="#008080"/>
+<rect x="128" y="236" width="26" height="26" fill="#008080"/>
+<rect x="160" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="192" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="224" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="256" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="288" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="320" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="352" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="384" y="236" width="26" height="26" fill="#FAFAF7"/>
+<rect x="96" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="128" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="160" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="192" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="224" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="256" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="288" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="320" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="352" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="384" y="204" width="26" height="26" fill="#FAFAF7"/>
+<rect x="96" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="128" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="160" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="192" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="224" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="256" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="288" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="320" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="352" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="384" y="172" width="26" height="26" fill="#FAFAF7"/>
+<rect x="96" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="128" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="160" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="192" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="224" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="256" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="288" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="320" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="352" y="140" width="26" height="26" fill="#FAFAF7"/>
+<rect x="384" y="140" width="26" height="26" fill="#FAFAF7"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#008080" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#008080"/>
+<rect x="128" y="428" width="26" height="26" fill="#008080"/>
+<rect x="160" y="428" width="26" height="26" fill="#008080"/>
+<rect x="192" y="428" width="26" height="26" fill="#008080"/>
+<rect x="224" y="428" width="26" height="26" fill="#008080"/>
+<rect x="256" y="428" width="26" height="26" fill="#008080"/>
+<rect x="288" y="428" width="26" height="26" fill="#008080"/>
+<rect x="320" y="428" width="26" height="26" fill="#008080"/>
+<rect x="352" y="428" width="26" height="26" fill="#008080"/>
+<rect x="384" y="428" width="26" height="26" fill="#008080"/>
+<rect x="96" y="396" width="26" height="26" fill="#008080"/>
+<rect x="128" y="396" width="26" height="26" fill="#008080"/>
+<rect x="160" y="396" width="26" height="26" fill="#008080"/>
+<rect x="192" y="396" width="26" height="26" fill="#008080"/>
+<rect x="224" y="396" width="26" height="26" fill="#008080"/>
+<rect x="256" y="396" width="26" height="26" fill="#008080"/>
+<rect x="288" y="396" width="26" height="26" fill="#008080"/>
+<rect x="320" y="396" width="26" height="26" fill="#008080"/>
+<rect x="352" y="396" width="26" height="26" fill="#008080"/>
+<rect x="384" y="396" width="26" height="26" fill="#008080"/>
+<rect x="96" y="364" width="26" height="26" fill="#008080"/>
+<rect x="128" y="364" width="26" height="26" fill="#008080"/>
+<rect x="160" y="364" width="26" height="26" fill="#008080"/>
+<rect x="192" y="364" width="26" height="26" fill="#008080"/>
+<rect x="224" y="364" width="26" height="26" fill="#008080"/>
+<rect x="256" y="364" width="26" height="26" fill="#008080"/>
+<rect x="288" y="364" width="26" height="26" fill="#008080"/>
+<rect x="320" y="364" width="26" height="26" fill="#008080"/>
+<rect x="352" y="364" width="26" height="26" fill="#008080"/>
+<rect x="384" y="364" width="26" height="26" fill="#008080"/>
+<rect x="96" y="332" width="26" height="26" fill="#008080"/>
+<rect x="128" y="332" width="26" height="26" fill="#008080"/>
+<rect x="160" y="332" width="26" height="26" fill="#008080"/>
+<rect x="192" y="332" width="26" height="26" fill="#008080"/>
+<rect x="224" y="332" width="26" height="26" fill="#008080"/>
+<rect x="256" y="332" width="26" height="26" fill="#008080"/>
+<rect x="288" y="332" width="26" height="26" fill="#008080"/>
+<rect x="320" y="332" width="26" height="26" fill="#008080"/>
+<rect x="352" y="332" width="26" height="26" fill="#008080"/>
+<rect x="384" y="332" width="26" height="26" fill="#008080"/>
+<rect x="96" y="300" width="26" height="26" fill="#008080"/>
+<rect x="128" y="300" width="26" height="26" fill="#008080"/>
+<rect x="160" y="300" width="26" height="26" fill="#008080"/>
+<rect x="192" y="300" width="26" height="26" fill="#008080"/>
+<rect x="224" y="300" width="26" height="26" fill="#008080"/>
+<rect x="256" y="300" width="26" height="26" fill="#008080"/>
+<rect x="288" y="300" width="26" height="26" fill="#008080"/>
+<rect x="320" y="300" width="26" height="26" fill="#008080"/>
+<rect x="352" y="300" width="26" height="26" fill="#008080"/>
+<rect x="384" y="300" width="26" height="26" fill="#008080"/>
+<rect x="96" y="268" width="26" height="26" fill="#008080"/>
+<rect x="128" y="268" width="26" height="26" fill="#008080"/>
+<rect x="160" y="268" width="26" height="26" fill="#008080"/>
+<rect x="192" y="268" width="26" height="26" fill="#008080"/>
+<rect x="224" y="268" width="26" height="26" fill="#008080"/>
+<rect x="256" y="268" width="26" height="26" fill="#008080"/>
+<rect x="288" y="268" width="26" height="26" fill="#008080"/>
+<rect x="320" y="268" width="26" height="26" fill="#008080"/>
+<rect x="352" y="268" width="26" height="26" fill="#008080"/>
+<rect x="384" y="268" width="26" height="26" fill="#008080"/>
+<rect x="96" y="236" width="26" height="26" fill="#008080"/>
+<rect x="128" y="236" width="26" height="26" fill="#008080"/>
+<rect x="160" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="192" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="224" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="256" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="288" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="320" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="352" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="384" y="236" width="26" height="26" fill="#F7FAFA"/>
+<rect x="96" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="128" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="160" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="192" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="224" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="256" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="288" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="320" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="352" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="384" y="204" width="26" height="26" fill="#F7FAFA"/>
+<rect x="96" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="128" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="160" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="192" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="224" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="256" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="288" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="320" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="352" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="384" y="172" width="26" height="26" fill="#F7FAFA"/>
+<rect x="96" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="128" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="160" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="192" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="224" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="256" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="288" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="320" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="352" y="140" width="26" height="26" fill="#F7FAFA"/>
+<rect x="384" y="140" width="26" height="26" fill="#F7FAFA"/>
+<text x="464" y="180" font-size="56" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">SCOPE . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="428" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="396" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="364" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="332" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="300" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="192" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="224" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="256" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="288" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="320" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="352" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="384" y="268" width="26" height="26" fill="#9E2B25"/>
+<rect x="96" y="236" width="26" height="26" fill="#9E2B25"/>
+<rect x="128" y="236" width="26" height="26" fill="#9E2B25"/>
+<rect x="160" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="192" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="224" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="256" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="288" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="320" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="352" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="384" y="236" width="26" height="26" fill="#E8E0D4"/>
+<rect x="96" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="128" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="160" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="192" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="224" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="256" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="288" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="320" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="352" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="384" y="204" width="26" height="26" fill="#E8E0D4"/>
+<rect x="96" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="128" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="160" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="192" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="224" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="256" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="288" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="320" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="352" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="384" y="172" width="26" height="26" fill="#E8E0D4"/>
+<rect x="96" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="128" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="160" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="192" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="224" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="256" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="288" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="320" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="352" y="140" width="26" height="26" fill="#E8E0D4"/>
+<rect x="384" y="140" width="26" height="26" fill="#E8E0D4"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="428" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="396" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="364" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="332" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="300" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="192" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="224" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="256" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="288" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="320" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="352" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="384" y="268" width="26" height="26" fill="#1B6E8F"/>
+<rect x="96" y="236" width="26" height="26" fill="#1B6E8F"/>
+<rect x="128" y="236" width="26" height="26" fill="#1B6E8F"/>
+<rect x="160" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="192" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="224" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="256" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="288" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="320" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="352" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="384" y="236" width="26" height="26" fill="#EDF3F7"/>
+<rect x="96" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="128" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="160" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="192" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="224" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="256" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="288" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="320" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="352" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="384" y="204" width="26" height="26" fill="#EDF3F7"/>
+<rect x="96" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="128" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="160" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="192" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="224" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="256" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="288" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="320" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="352" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="384" y="172" width="26" height="26" fill="#EDF3F7"/>
+<rect x="96" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="128" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="160" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="192" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="224" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="256" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="288" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="320" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="352" y="140" width="26" height="26" fill="#EDF3F7"/>
+<rect x="384" y="140" width="26" height="26" fill="#EDF3F7"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#1B6E8F" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="428" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="396" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="364" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="332" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="300" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="192" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="224" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="256" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="288" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="320" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="352" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="384" y="268" width="26" height="26" fill="#C2410C"/>
+<rect x="96" y="236" width="26" height="26" fill="#C2410C"/>
+<rect x="128" y="236" width="26" height="26" fill="#C2410C"/>
+<rect x="160" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="192" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="224" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="256" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="288" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="320" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="352" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="384" y="236" width="26" height="26" fill="#CBD5E1"/>
+<rect x="96" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="128" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="160" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="192" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="224" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="256" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="288" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="320" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="352" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="384" y="204" width="26" height="26" fill="#CBD5E1"/>
+<rect x="96" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="128" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="160" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="192" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="224" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="256" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="288" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="320" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="352" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="384" y="172" width="26" height="26" fill="#CBD5E1"/>
+<rect x="96" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="128" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="160" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="192" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="224" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="256" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="288" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="320" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="352" y="140" width="26" height="26" fill="#CBD5E1"/>
+<rect x="384" y="140" width="26" height="26" fill="#CBD5E1"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#C2410C" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="428" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="396" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="364" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="332" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="300" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="192" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="224" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="256" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="288" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="320" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="352" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="384" y="268" width="26" height="26" fill="#7A1F1F"/>
+<rect x="96" y="236" width="26" height="26" fill="#7A1F1F"/>
+<rect x="128" y="236" width="26" height="26" fill="#7A1F1F"/>
+<rect x="160" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="192" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="224" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="256" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="288" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="320" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="352" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="384" y="236" width="26" height="26" fill="#CCCCCC"/>
+<rect x="96" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="128" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="160" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="192" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="224" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="256" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="288" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="320" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="352" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="384" y="204" width="26" height="26" fill="#CCCCCC"/>
+<rect x="96" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="128" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="160" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="192" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="224" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="256" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="288" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="320" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="352" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="384" y="172" width="26" height="26" fill="#CCCCCC"/>
+<rect x="96" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="128" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="160" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="192" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="224" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="256" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="288" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="320" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="352" y="140" width="26" height="26" fill="#CCCCCC"/>
+<rect x="384" y="140" width="26" height="26" fill="#CCCCCC"/>
+<text x="464" y="180" font-size="56" font-family="Georgia,serif" fill="#7A1F1F" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="Georgia,serif" fill="#333333" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="428" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="396" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="364" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="332" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="300" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="192" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="224" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="256" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="288" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="320" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="352" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="384" y="268" width="26" height="26" fill="#C0182B"/>
+<rect x="96" y="236" width="26" height="26" fill="#C0182B"/>
+<rect x="128" y="236" width="26" height="26" fill="#C0182B"/>
+<rect x="160" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="192" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="224" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="256" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="288" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="320" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="352" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="384" y="236" width="26" height="26" fill="#E4E4E4"/>
+<rect x="96" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="128" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="160" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="192" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="224" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="256" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="288" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="320" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="352" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="384" y="204" width="26" height="26" fill="#E4E4E4"/>
+<rect x="96" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="128" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="160" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="192" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="224" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="256" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="288" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="320" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="352" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="384" y="172" width="26" height="26" fill="#E4E4E4"/>
+<rect x="96" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="128" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="160" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="192" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="224" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="256" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="288" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="320" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="352" y="140" width="26" height="26" fill="#E4E4E4"/>
+<rect x="384" y="140" width="26" height="26" fill="#E4E4E4"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="192" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="224" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="256" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="288" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="320" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="352" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="384" y="236" width="26" height="26" fill="#1A2026"/>
+<rect x="96" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="128" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="160" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="192" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="224" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="256" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="288" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="320" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="352" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="384" y="204" width="26" height="26" fill="#1A2026"/>
+<rect x="96" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="128" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="160" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="192" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="224" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="256" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="288" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="320" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="352" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="384" y="172" width="26" height="26" fill="#1A2026"/>
+<rect x="96" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="128" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="160" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="192" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="224" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="256" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="288" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="320" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="352" y="140" width="26" height="26" fill="#1A2026"/>
+<rect x="384" y="140" width="26" height="26" fill="#1A2026"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="428" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="396" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="364" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="332" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="300" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="192" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="224" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="256" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="288" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="320" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="352" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="384" y="268" width="26" height="26" fill="#0F766E"/>
+<rect x="96" y="236" width="26" height="26" fill="#0F766E"/>
+<rect x="128" y="236" width="26" height="26" fill="#0F766E"/>
+<rect x="160" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="192" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="224" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="256" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="288" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="320" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="352" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="384" y="236" width="26" height="26" fill="#EAE3D5"/>
+<rect x="96" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="128" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="160" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="192" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="224" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="256" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="288" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="320" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="352" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="384" y="204" width="26" height="26" fill="#EAE3D5"/>
+<rect x="96" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="128" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="160" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="192" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="224" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="256" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="288" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="320" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="352" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="384" y="172" width="26" height="26" fill="#EAE3D5"/>
+<rect x="96" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="128" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="160" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="192" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="224" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="256" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="288" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="320" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="352" y="140" width="26" height="26" fill="#EAE3D5"/>
+<rect x="384" y="140" width="26" height="26" fill="#EAE3D5"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#0F766E" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="140" width="26" height="26" fill="#1C1F22"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="428" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="396" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="364" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="332" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="300" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="192" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="224" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="256" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="288" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="320" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="352" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="384" y="268" width="26" height="26" fill="#1F3864"/>
+<rect x="96" y="236" width="26" height="26" fill="#1F3864"/>
+<rect x="128" y="236" width="26" height="26" fill="#1F3864"/>
+<rect x="160" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="192" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="224" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="256" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="288" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="320" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="352" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="384" y="236" width="26" height="26" fill="#C9D6EE"/>
+<rect x="96" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="128" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="160" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="192" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="224" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="256" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="288" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="320" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="352" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="384" y="204" width="26" height="26" fill="#C9D6EE"/>
+<rect x="96" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="128" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="160" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="192" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="224" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="256" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="288" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="320" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="352" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="384" y="172" width="26" height="26" fill="#C9D6EE"/>
+<rect x="96" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="128" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="160" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="192" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="224" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="256" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="288" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="320" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="352" y="140" width="26" height="26" fill="#C9D6EE"/>
+<rect x="384" y="140" width="26" height="26" fill="#C9D6EE"/>
+<text x="464" y="180" font-size="56" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="428" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="396" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="364" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="332" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="300" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="192" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="224" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="256" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="288" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="320" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="352" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="384" y="268" width="26" height="26" fill="#D63A2F"/>
+<rect x="96" y="236" width="26" height="26" fill="#D63A2F"/>
+<rect x="128" y="236" width="26" height="26" fill="#D63A2F"/>
+<rect x="160" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="192" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="224" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="256" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="288" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="320" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="352" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="384" y="236" width="26" height="26" fill="#E2E8F0"/>
+<rect x="96" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="128" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="160" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="192" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="224" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="256" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="288" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="320" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="352" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="384" y="204" width="26" height="26" fill="#E2E8F0"/>
+<rect x="96" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="128" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="160" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="192" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="224" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="256" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="288" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="320" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="352" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="384" y="172" width="26" height="26" fill="#E2E8F0"/>
+<rect x="96" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="128" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="160" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="192" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="224" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="256" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="288" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="320" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="352" y="140" width="26" height="26" fill="#E2E8F0"/>
+<rect x="384" y="140" width="26" height="26" fill="#E2E8F0"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#D63A2F" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="428" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="396" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="364" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="332" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="300" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="192" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="224" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="256" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="288" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="320" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="352" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="384" y="268" width="26" height="26" fill="#C4572E"/>
+<rect x="96" y="236" width="26" height="26" fill="#C4572E"/>
+<rect x="128" y="236" width="26" height="26" fill="#C4572E"/>
+<rect x="160" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="192" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="224" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="256" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="288" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="320" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="352" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="384" y="236" width="26" height="26" fill="#F1E5D3"/>
+<rect x="96" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="128" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="160" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="192" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="224" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="256" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="288" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="320" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="352" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="384" y="204" width="26" height="26" fill="#F1E5D3"/>
+<rect x="96" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="128" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="160" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="192" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="224" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="256" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="288" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="320" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="352" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="384" y="172" width="26" height="26" fill="#F1E5D3"/>
+<rect x="96" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="128" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="160" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="192" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="224" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="256" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="288" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="320" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="352" y="140" width="26" height="26" fill="#F1E5D3"/>
+<rect x="384" y="140" width="26" height="26" fill="#F1E5D3"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#C4572E" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">SCOPE . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="428" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="396" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="364" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="332" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="300" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="192" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="224" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="256" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="288" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="320" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="352" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="384" y="268" width="26" height="26" fill="#2251FF"/>
+<rect x="96" y="236" width="26" height="26" fill="#2251FF"/>
+<rect x="128" y="236" width="26" height="26" fill="#2251FF"/>
+<rect x="160" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="192" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="224" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="256" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="288" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="320" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="352" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="384" y="236" width="26" height="26" fill="#E3E8ED"/>
+<rect x="96" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="128" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="160" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="192" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="224" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="256" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="288" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="320" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="352" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="384" y="204" width="26" height="26" fill="#E3E8ED"/>
+<rect x="96" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="128" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="160" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="192" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="224" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="256" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="288" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="320" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="352" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="384" y="172" width="26" height="26" fill="#E3E8ED"/>
+<rect x="96" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="128" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="160" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="192" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="224" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="256" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="288" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="320" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="352" y="140" width="26" height="26" fill="#E3E8ED"/>
+<rect x="384" y="140" width="26" height="26" fill="#E3E8ED"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#2251FF" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="428" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="396" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="364" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="332" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="300" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="192" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="224" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="256" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="288" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="320" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="352" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="384" y="268" width="26" height="26" fill="#197A56"/>
+<rect x="96" y="236" width="26" height="26" fill="#197A56"/>
+<rect x="128" y="236" width="26" height="26" fill="#197A56"/>
+<rect x="160" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="192" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="224" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="256" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="288" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="320" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="352" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="384" y="236" width="26" height="26" fill="#E5E7E2"/>
+<rect x="96" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="128" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="160" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="192" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="224" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="256" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="288" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="320" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="352" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="384" y="204" width="26" height="26" fill="#E5E7E2"/>
+<rect x="96" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="128" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="160" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="192" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="224" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="256" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="288" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="320" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="352" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="384" y="172" width="26" height="26" fill="#E5E7E2"/>
+<rect x="96" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="128" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="160" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="192" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="224" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="256" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="288" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="320" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="352" y="140" width="26" height="26" fill="#E5E7E2"/>
+<rect x="384" y="140" width="26" height="26" fill="#E5E7E2"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">62 of every 100 scope items are complete</text>
+<rect x="96" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="428" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="396" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="364" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="332" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="300" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="192" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="224" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="256" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="288" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="320" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="352" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="384" y="268" width="26" height="26" fill="#C4001A"/>
+<rect x="96" y="236" width="26" height="26" fill="#C4001A"/>
+<rect x="128" y="236" width="26" height="26" fill="#C4001A"/>
+<rect x="160" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="192" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="224" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="256" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="288" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="320" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="352" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="384" y="236" width="26" height="26" fill="#E8E6E2"/>
+<rect x="96" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="128" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="160" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="192" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="224" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="256" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="288" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="320" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="352" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="384" y="204" width="26" height="26" fill="#E8E6E2"/>
+<rect x="96" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="128" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="160" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="192" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="224" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="256" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="288" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="320" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="352" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="384" y="172" width="26" height="26" fill="#E8E6E2"/>
+<rect x="96" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="128" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="160" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="192" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="224" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="256" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="288" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="320" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="352" y="140" width="26" height="26" fill="#E8E6E2"/>
+<rect x="384" y="140" width="26" height="26" fill="#E8E6E2"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">of scope complete</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>one share communicated with countable units: 62 of every 100</li><li>audiences who distrust abstract charts (units are literal)</li></ul>
+<h2>Do not use when</h2><ul><li>multiple shares (stacked bar or pie)</li><li>shares under 3% (invisible cells)</li></ul>
+<h2>See instead</h2><ul><li>more than one share: <a href='CH-PTW-01.html'>CH-PTW-01</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-PTW-03 (two or three shares)</li></ul>
+<h2>Rules</h2><ul><li>exactly 100 cells; filled count = rounded percent</li><li>fill bottom-up so the grid reads like a container</li><li>the big number restates the percent beside the grid</li></ul>
+<h2>Never do this</h2><ul><li>icon waffles (pictogram people)</li><li>multi-color waffles</li><li>partial cells</li></ul>
+<h2>QA before delivering</h2><ul><li>cell count = 100</li><li>filled = round(percent)</li><li>big number matches</li><li>source present</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>action title restating the share in units</td></tr><tr><td>source</td><td>bottom-left always</td></tr><tr><td>percent</td><td>0-100</td></tr><tr><td>label</td><td>what the share is of</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;62 of every 100 scope items are complete&quot;,
+  &quot;eyebrow&quot;: &quot;SCOPE . WEEK 28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;percent&quot;: 62,
+  &quot;label&quot;: &quot;of scope complete&quot;
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE, role-based (themeable) -->\n\n## WAFFLE chart (CH-PTW-06)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| filled | primary |\n| empty | panel -> gridline |\n| label | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"62 of every 100 scope items are complete\",\n  \"eyebrow\": \"SCOPE . WEEK 28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"percent\": 62,\n  \"label\": \"of scope complete\"\n}", "spec": "{\n  \"code\": \"CH-PTW-06\",\n  \"name\": \"WAFFLE\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"waffle\",\n  \"meta\": {\n    \"intent\": [\n      \"share\",\n      \"part-to-whole\"\n    ],\n    \"form\": \"10x10 unit grid, one share\",\n    \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n    \"relations\": {\n      \"family\": \"PTW\",\n      \"alternatives\": [\n        \"CH-PTW-03 (two or three shares)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"more than one share\",\n          \"use\": \"CH-PTW-01\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"one share communicated with countable units: 62 of every 100\",\n    \"audiences who distrust abstract charts (units are literal)\"\n  ],\n  \"not_when\": [\n    \"multiple shares (stacked bar or pie)\",\n    \"shares under 3% (invisible cells)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"action title restating the share in units\",\n    \"source\": \"bottom-left always\",\n    \"percent\": \"0-100\",\n    \"label\": \"what the share is of\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  },\n  \"rules\": [\n    \"exactly 100 cells; filled count = rounded percent\",\n    \"fill bottom-up so the grid reads like a container\",\n    \"the big number restates the percent beside the grid\"\n  ],\n  \"roles\": {\n    \"filled\": [\n      \"primary\"\n    ],\n    \"empty\": [\n      \"panel\",\n      \"gridline\"\n    ],\n    \"label\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"icon waffles (pictogram people)\",\n    \"multi-color waffles\",\n    \"partial cells\"\n  ],\n  \"qa\": [\n    \"cell count = 100\",\n    \"filled = round(percent)\",\n    \"big number matches\",\n    \"source present\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-01 AGRAW -->\n\n## WAFFLE chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#008080` |\n| empty | `#FAFAF7` |\n| label | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-02 KATA -->\n\n## WAFFLE chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#008080` |\n| empty | `#F7FAFA` |\n| label | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-03 LOGOS -->\n\n## WAFFLE chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| filled | `#9E2B25` |\n| empty | `#E8E0D4` |\n| label | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-04 SHILPA -->\n\n## WAFFLE chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| filled | `#1B6E8F` |\n| empty | `#EDF3F7` |\n| label | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-05 OBEYA -->\n\n## WAFFLE chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#C2410C` |\n| empty | `#CBD5E1` |\n| label | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-06 LEX -->\n\n## WAFFLE chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#7A1F1F` |\n| empty | `#CCCCCC` |\n| label | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-07 SAGA -->\n\n## WAFFLE chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#C0182B` |\n| empty | `#E4E4E4` |\n| label | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-08 SENTINEL -->\n\n## WAFFLE chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| filled | `#F0B429` |\n| empty | `#1A2026` |\n| label | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-09 ATLAS -->\n\n## WAFFLE chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| filled | `#0F766E` |\n| empty | `#EAE3D5` |\n| label | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-10 BASIRA -->\n\n## WAFFLE chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| filled | `#F0B429` |\n| empty | `#1C1F22` |\n| label | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-11 SUTRA -->\n\n## WAFFLE chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#1F3864` |\n| empty | `#C9D6EE` |\n| label | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-12 NOROSHI -->\n\n## WAFFLE chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#D63A2F` |\n| empty | `#E2E8F0` |\n| label | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-13 MIZAN -->\n\n## WAFFLE chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| filled | `#C4572E` |\n| empty | `#F1E5D3` |\n| label | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-14 EVIDENTIA -->\n\n## WAFFLE chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#2251FF` |\n| empty | `#E3E8ED` |\n| label | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-15 ABRID -->\n\n## WAFFLE chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#197A56` |\n| empty | `#E5E7E2` |\n| label | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-PTW-06 WAFFLE rendered in language DL-16 TELOS -->\n\n## WAFFLE chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-PTW-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"share\",\n    \"part-to-whole\"\n  ],\n  \"form\": \"10x10 unit grid, one share\",\n  \"data_required\": \"one percentage of one whole; the most honest single-share visual\",\n  \"family\": \"PTW\",\n  \"alternatives\": [\n    \"CH-PTW-03 (two or three shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than one share\",\n      \"use\": \"CH-PTW-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- one share communicated with countable units: 62 of every 100\n- audiences who distrust abstract charts (units are literal)\n\nDo NOT use when:\n- multiple shares (stacked bar or pie)\n- shares under 3% (invisible cells)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title restating the share in units\",\n  \"source\": \"bottom-left always\",\n  \"percent\": \"0-100\",\n  \"label\": \"what the share is of\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"grid\": {\n      \"x\": 96,\n      \"y\": 140,\n      \"cell\": 26,\n      \"gap\": 6\n    },\n    \"big\": {\n      \"offset\": 48,\n      \"dy\": 40,\n      \"size\": 56\n    }\n  },\n  \"scale\": {\n    \"note\": \"cells fill bottom-up, left-right; filled = round(percent)\"\n  }\n}\n```\n\n### Rules\n- exactly 100 cells; filled count = rounded percent\n- fill bottom-up so the grid reads like a container\n- the big number restates the percent beside the grid\n\n### Never do this\n- icon waffles (pictogram people)\n- multi-color waffles\n- partial cells\n\n### QA before delivering\n- [ ] cell count = 100\n- [ ] filled = round(percent)\n- [ ] big number matches\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| filled | `#C4001A` |\n| empty | `#E8E6E2` |\n| label | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

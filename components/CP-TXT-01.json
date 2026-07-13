@@ -1,0 +1,47 @@
+{
+  "code": "CP-TXT-01",
+  "name": "ACTION TITLE",
+  "ovp_version": "1.0",
+  "purpose": "The page's governing thought: a full sentence with a number, plus the DL's chrome (kicker and eyebrow) when the language asks for it.",
+  "params": {
+    "title_size": 28,
+    "eyebrow_size": 12,
+    "eyebrow_dy": -28,
+    "eyebrow_letter_spacing": 2,
+    "kicker_w": 28,
+    "kicker_h": 4,
+    "kicker_dy": -48
+  },
+  "roles": {
+    "title": [
+      "ink"
+    ],
+    "eyebrow": [
+      "body"
+    ],
+    "kicker": [
+      "primary"
+    ]
+  },
+  "sample": {
+    "title": "Erection recovered to 84%, six days behind forecast",
+    "eyebrow": "PROGRESS . WEEK 28"
+  },
+  "golden_canvas": {
+    "w": 760,
+    "h": 140
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 96
+  },
+  "rules": [
+    "the title is a full sentence stating the finding with a number; no verb or no number means rewrite",
+    "eyebrow and kicker render only when the DL chrome asks; the component never invents them",
+    "one action title per page"
+  ],
+  "qa": [
+    "title has a verb and a number",
+    "chrome matches the DL flags exactly"
+  ]
+}

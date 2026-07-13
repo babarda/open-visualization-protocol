@@ -1,0 +1,47 @@
+{
+  "title": "Actual beats plan on four of five steps",
+  "eyebrow": "CLEARANCE STEPS",
+  "source": "Source: process log, June",
+  "unit": "days",
+  "series_labels": [
+    "Plan",
+    "Actual"
+  ],
+  "categories": [
+    {
+      "label": "Document review",
+      "values": [
+        10,
+        8
+      ]
+    },
+    {
+      "label": "Duty payment",
+      "values": [
+        6,
+        7
+      ]
+    },
+    {
+      "label": "Inspection",
+      "values": [
+        8,
+        5
+      ]
+    },
+    {
+      "label": "Release",
+      "values": [
+        4,
+        3
+      ]
+    },
+    {
+      "label": "Final delivery",
+      "values": [
+        5,
+        4
+      ]
+    }
+  ]
+}

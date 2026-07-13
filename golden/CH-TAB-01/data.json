@@ -1,0 +1,13 @@
+{
+  "title": "Two of five systems are handover-ready; System D is critical in test",
+  "eyebrow": "READINESS . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "columns": ["INSTALL", "TEST", "PUNCH", "HANDOVER"],
+  "rows": [
+    {"label": "System A", "cells": ["complete", "complete", "complete", "complete"]},
+    {"label": "System B", "cells": ["complete", "complete", "complete", "complete"]},
+    {"label": "System C", "cells": ["complete", "on_track", "watch", "na"]},
+    {"label": "System D", "cells": ["complete", "critical", "na", "na"]},
+    {"label": "System E", "cells": ["on_track", "watch", "na", "na"]}
+  ]
+}

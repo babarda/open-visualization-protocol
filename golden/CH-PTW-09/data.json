@@ -1,0 +1,51 @@
+{
+  "title": "Installation work holds 52% of remaining hours",
+  "eyebrow": "REMAINING HOURS",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "groups": [
+    {
+      "name": "Install",
+      "children": [
+        {
+          "name": "Mechanical",
+          "value": 24
+        },
+        {
+          "name": "Electrical",
+          "value": 18
+        },
+        {
+          "name": "Piping",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "Test",
+      "children": [
+        {
+          "name": "Loops",
+          "value": 16
+        },
+        {
+          "name": "Systems",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "Docs",
+      "children": [
+        {
+          "name": "As-built",
+          "value": 12
+        },
+        {
+          "name": "Handover",
+          "value": 8
+        }
+      ]
+    }
+  ]
+}

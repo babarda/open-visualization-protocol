@@ -1,0 +1,27 @@
+{
+  "code": "BQ-08",
+  "question": "What changed since last period?",
+  "ovp_version": "1.0",
+  "intent": [
+    "deviation",
+    "change-over-time"
+  ],
+  "observations": [
+    "before and after per category",
+    "gains and losses both present"
+  ],
+  "patterns": [
+    "PT-01",
+    "PT-05"
+  ],
+  "charts": [
+    "CH-DEV-02",
+    "CH-TIM-05",
+    "CH-FLO-01"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "executive",
+    "purpose": "brief"
+  }
+}

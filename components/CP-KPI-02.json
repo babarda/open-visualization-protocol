@@ -1,0 +1,48 @@
+{
+  "code": "CP-KPI-02",
+  "name": "BIG NUMBER",
+  "ovp_version": "1.0",
+  "purpose": "The one number a page exists for: caps label, display-size value, one context line. One per page maximum.",
+  "params": {
+    "label_size": 11,
+    "label_dy": 0,
+    "value_size": 56,
+    "value_dy": 58,
+    "context_size": 12,
+    "context_dy": 80
+  },
+  "roles": {
+    "label": [
+      "body"
+    ],
+    "value": [
+      "primary"
+    ],
+    "context": [
+      "body"
+    ]
+  },
+  "sample": {
+    "label": "SCOPE COMPLETE",
+    "value": "62%",
+    "context": "+4 points vs last week"
+  },
+  "golden_canvas": {
+    "w": 360,
+    "h": 140
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 28
+  },
+  "rules": [
+    "one big number per page; two big numbers mean no message",
+    "the context line names the reference, always",
+    "value in the display font, primary role"
+  ],
+  "qa": [
+    "one per page",
+    "context references named",
+    "label in caps"
+  ]
+}

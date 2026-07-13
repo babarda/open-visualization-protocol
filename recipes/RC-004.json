@@ -1,0 +1,84 @@
+{
+  "code": "RC-004",
+  "name": "EXECUTIVE BRIEF",
+  "ovp_version": "1.0",
+  "dl": "DL-01",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "title",
+      "x": 48,
+      "y": 72,
+      "data": {
+        "title": "Forecast lands 18 points over budget; logistics drives two thirds",
+        "eyebrow": "COST BRIDGE . JUNE"
+      }
+    },
+    {
+      "type": "big_number",
+      "x": 48,
+      "y": 110,
+      "data": {
+        "label": "FORECAST",
+        "value": "118 pts",
+        "context": "+18 vs budget 100"
+      }
+    },
+    {
+      "type": "chart",
+      "ref": "CH-FLO-01",
+      "data_ref": "golden/CH-FLO-01/data.json",
+      "x": 48,
+      "y": 250,
+      "w": 700,
+      "h": 309.2,
+      "crop": [
+        0,
+        96,
+        960,
+        424
+      ]
+    },
+    {
+      "type": "callout",
+      "x": 790,
+      "y": 250,
+      "data": {
+        "w": 442,
+        "h": 72,
+        "lines": [
+          "Decision asked of the board:",
+          "resequence deliveries to recover",
+          "8 points by Q3."
+        ]
+      }
+    },
+    {
+      "type": "exception_row",
+      "x": 790,
+      "y": 346,
+      "data": {
+        "status": "watch",
+        "claim": "Logistics carries 12 of 18 points",
+        "owner": "LOGISTICS LEAD",
+        "due": "FRI",
+        "w": 442
+      }
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12 . told as NR-01 executive brief"
+    }
+  ],
+  "qa": [
+    "one chart (AGRAW charts_per_page = 1)",
+    "claim, cause, evidence, action, owner all present (NR-01)",
+    "owner is one name",
+    "source line present"
+  ]
+}

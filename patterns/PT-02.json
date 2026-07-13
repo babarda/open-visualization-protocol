@@ -1,0 +1,16 @@
+{
+  "code": "PT-02",
+  "name": "OUTLIER",
+  "ovp_version": "0.1",
+  "recognition": "one entity sits far from the pack on one or two measures",
+  "meaning": "something structurally different is happening there",
+  "business_reading": "investigate the outlier before averaging it away; averages hide it",
+  "show_with": [
+    "CH-COR-01",
+    "CH-RNK-01"
+  ],
+  "avoid": [
+    "aggregated summaries that absorb the outlier",
+    "removing it silently"
+  ]
+}

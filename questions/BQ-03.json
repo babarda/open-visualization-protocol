@@ -1,0 +1,25 @@
+{
+  "code": "BQ-03",
+  "question": "Where is the backlog concentrated?",
+  "ovp_version": "1.0",
+  "intent": [
+    "ranking",
+    "composition"
+  ],
+  "observations": [
+    "few categories hold most of the volume"
+  ],
+  "patterns": [
+    "PT-04"
+  ],
+  "charts": [
+    "CH-RNK-01",
+    "CH-PTW-05",
+    "CH-RNK-06"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "operations",
+    "purpose": "decide"
+  }
+}

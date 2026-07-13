@@ -1,0 +1,41 @@
+{
+  "title": "Pipeline and stations hold 55% of the budget",
+  "eyebrow": "BUDGET . 2026 PLAN",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "M$",
+  "categories": [
+    {
+      "label": "Pipeline",
+      "value": 34,
+      "highlight": true
+    },
+    {
+      "label": "Stations",
+      "value": 21
+    },
+    {
+      "label": "Power",
+      "value": 13
+    },
+    {
+      "label": "Buildings",
+      "value": 9
+    },
+    {
+      "label": "Roads",
+      "value": 7
+    },
+    {
+      "label": "Telecom",
+      "value": 6
+    },
+    {
+      "label": "Fencing",
+      "value": 5
+    },
+    {
+      "label": "Other",
+      "value": 5
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "Site E trails the audit ranking at 61 of 100",
+  "eyebrow": "AUDIT SCORES . Q2",
+  "source": "Source: sample dataset v1 (scale 0-100), 2026-07-12",
+  "unit": "pts",
+  "categories": [
+    {
+      "label": "Site A",
+      "values": [
+        92
+      ]
+    },
+    {
+      "label": "Site B",
+      "values": [
+        88
+      ]
+    },
+    {
+      "label": "Site C",
+      "values": [
+        81
+      ]
+    },
+    {
+      "label": "Site D",
+      "values": [
+        74
+      ]
+    },
+    {
+      "label": "Site E",
+      "values": [
+        61
+      ],
+      "highlight": true
+    }
+  ]
+}

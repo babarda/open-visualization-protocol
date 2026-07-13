@@ -1,0 +1,465 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Components</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item on" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+<h1>Components</h1><p class='lead'>The furniture around charts: titles, sources, KPI cards, status chips, callouts. Same role contract, same determinism, composable into recipes.</p><div class='grid g2'><div class="card findable">
+<div class="kicker">CP-CAL-01</div>
+<h3>INSIGHT CALLOUT</h3>
+<p>A short so-what box beside a visual: lead line in ink, supporting lines in body, primary-colored bar on the left edge.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="400" height="124" viewBox="0 0 400 124">
+<rect width="400" height="124" fill="#FFFFFF"/>
+<rect x="24" y="24" width="340" height="76" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="76" fill="#008080"/>
+<text x="40" y="45" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600">Slippage steady since May.</text>
+<text x="40" y="63" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Recovery plan due Wednesday</text>
+<text x="40" y="81" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">with the logistics contractor.</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="400" height="124" viewBox="0 0 400 124">
+<rect width="400" height="124" fill="#FDF4EA"/>
+<rect x="24" y="24" width="340" height="76" fill="#FDF4EA" stroke="#E8E0D4" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="76" fill="#9E2B25"/>
+<text x="40" y="45" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600">Slippage steady since May.</text>
+<text x="40" y="63" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Recovery plan due Wednesday</text>
+<text x="40" y="81" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">with the logistics contractor.</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="400" height="124" viewBox="0 0 400 124">
+<rect width="400" height="124" fill="#101418"/>
+<rect x="24" y="24" width="340" height="76" fill="#1A2026" stroke="#2A323A" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="76" fill="#F0B429"/>
+<text x="40" y="45" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Slippage steady since May.</text>
+<text x="40" y="63" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Recovery plan due Wednesday</text>
+<text x="40" y="81" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">with the logistics contractor.</text>
+</svg>
+</figure>
+<ul><li>first line is the lead (ink, weight 600); the rest support it</li><li>a callout states a consequence or an ask, never repeats the chart title</li><li>one callout per visual maximum</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-CAL-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-CAL-02</div>
+<h3>EXCEPTION ROW</h3>
+<p>One exception, one line: status bar + dot, bold claim, owner and due date right. Stacked into exception lists on one-pagers.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="84" viewBox="0 0 608 84">
+<rect width="608" height="84" fill="#FFFFFF"/>
+<rect x="24" y="24" width="560" height="36" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="36" fill="#D63A2F"/>
+<circle cx="38" cy="42" r="4" fill="#D63A2F"/>
+<text x="52" y="42" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">Docs on-time missed target by 14 points</text>
+<text x="570" y="42" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="end" dominant-baseline="middle" letter-spacing="1">DOC CONTROL . FRI 12:00</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="84" viewBox="0 0 608 84">
+<rect width="608" height="84" fill="#FDF4EA"/>
+<rect x="24" y="24" width="560" height="36" fill="#FDF4EA" stroke="#E8E0D4" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="36" fill="#9E2B25"/>
+<circle cx="38" cy="42" r="4" fill="#9E2B25"/>
+<text x="52" y="42" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">Docs on-time missed target by 14 points</text>
+<text x="570" y="42" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="end" dominant-baseline="middle" letter-spacing="1">DOC CONTROL . FRI 12:00</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="84" viewBox="0 0 608 84">
+<rect width="608" height="84" fill="#101418"/>
+<rect x="24" y="24" width="560" height="36" fill="#1A2026" stroke="#2A323A" stroke-width="1"/>
+<rect x="24" y="24" width="4" height="36" fill="#E5534B"/>
+<circle cx="38" cy="42" r="4" fill="#E5534B"/>
+<text x="52" y="42" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">Docs on-time missed target by 14 points</text>
+<text x="570" y="42" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="end" dominant-baseline="middle" letter-spacing="1">DOC CONTROL . FRI 12:00</text>
+</svg>
+</figure>
+<ul><li>one exception per row; the claim carries a number</li><li>owner and due in caps, right-aligned: every exception is owned</li><li>status colors the bar and dot only, never the whole row</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-CAL-02')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-KPI-01</div>
+<h3>KPI CARD</h3>
+<p>One number that matters, with its label and week-over-week delta. Used in strips of 5 maximum.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="248" height="140" viewBox="0 0 248 140">
+<rect width="248" height="140" fill="#FFFFFF"/>
+<rect x="24" y="24" width="200" height="92" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<text x="38" y="48" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">DELIVERED</text>
+<text x="38" y="82" font-size="32" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600">1,284</text>
+<text x="38" y="102" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#339966" font-weight="400">+179 vs W27</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="248" height="140" viewBox="0 0 248 140">
+<rect width="248" height="140" fill="#FDF4EA"/>
+<rect x="24" y="24" width="200" height="92" fill="#FDF4EA" stroke="#E8E0D4" stroke-width="1"/>
+<text x="38" y="48" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">DELIVERED</text>
+<text x="38" y="82" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600">1,284</text>
+<text x="38" y="102" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="400">+179 vs W27</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="248" height="140" viewBox="0 0 248 140">
+<rect width="248" height="140" fill="#101418"/>
+<rect x="24" y="24" width="200" height="92" fill="#1A2026" stroke="#2A323A" stroke-width="1"/>
+<text x="38" y="48" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">DELIVERED</text>
+<text x="38" y="82" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">1,284</text>
+<text x="38" y="102" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="400">+179 vs W27</text>
+</svg>
+</figure>
+<ul><li>value in tabular figures; delta always signed and always named against its reference</li><li>tone (positive/negative/neutral) is semantic, set by the data, not by the sign</li><li>maximum 5 cards per strip; more means the page has no message</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-KPI-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-KPI-02</div>
+<h3>BIG NUMBER</h3>
+<p>The one number a page exists for: caps label, display-size value, one context line. One per page maximum.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#FFFFFF"/>
+<text x="24" y="28" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="2">SCOPE COMPLETE</text>
+<text x="24" y="86" font-size="56" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#008080" font-weight="600">62%</text>
+<text x="24" y="108" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">+4 points vs last week</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#FDF4EA"/>
+<text x="24" y="28" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">SCOPE COMPLETE</text>
+<text x="24" y="86" font-size="56" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#9E2B25" font-weight="700">62%</text>
+<text x="24" y="108" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">+4 points vs last week</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#101418"/>
+<text x="24" y="28" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="2">SCOPE COMPLETE</text>
+<text x="24" y="86" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="24" y="108" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">+4 points vs last week</text>
+</svg>
+</figure>
+<ul><li>one big number per page; two big numbers mean no message</li><li>the context line names the reference, always</li><li>value in the display font, primary role</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-KPI-02')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-LAB-01</div>
+<h3>LEADER-LINE ANNOTATION</h3>
+<p>The standalone annotation: dot on the fact, elbow leader, italic note. The house style for pointing at evidence.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#FFFFFF"/>
+<circle cx="60" cy="96" r="3.5" fill="#008080"/>
+<line x1="60" y1="96" x2="146" y2="35" stroke="#555555" stroke-width="1"/>
+<text x="150" y="40" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" font-style="italic">gap widens from April</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#FDF4EA"/>
+<circle cx="60" cy="96" r="3.5" fill="#9E2B25"/>
+<line x1="60" y1="96" x2="146" y2="35" stroke="#4A4E57" stroke-width="1"/>
+<text x="150" y="40" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" font-style="italic">gap widens from April</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140">
+<rect width="360" height="140" fill="#101418"/>
+<circle cx="60" cy="96" r="3.5" fill="#F0B429"/>
+<line x1="60" y1="96" x2="146" y2="35" stroke="#9FB0BE" stroke-width="1"/>
+<text x="150" y="40" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" font-style="italic">gap widens from April</text>
+</svg>
+</figure>
+<ul><li>the dot sits ON the fact; the leader never crosses other marks</li><li>italic body role: annotations comment, they do not shout</li><li>anchor start or end, chosen so text grows away from the chart</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-LAB-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-STA-01</div>
+<h3>STATUS CHIP</h3>
+<p>A status marker that survives color-blindness and bad projectors: outlined chip, status-colored dot, the status word in ink.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="240" height="72" viewBox="0 0 240 72">
+<rect width="240" height="72" fill="#FFFFFF"/>
+<rect x="24" y="24" width="150" height="24" rx="4" fill="none" stroke="#E08A00" stroke-width="1.5"/>
+<circle cx="34" cy="36" r="3" fill="#E08A00"/>
+<text x="44" y="36" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle" letter-spacing="1">WATCH . CUSTOMS</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="240" height="72" viewBox="0 0 240 72">
+<rect width="240" height="72" fill="#FDF4EA"/>
+<rect x="24" y="24" width="150" height="24" rx="4" fill="none" stroke="#B8B2A7" stroke-width="1.5"/>
+<circle cx="34" cy="36" r="3" fill="#B8B2A7"/>
+<text x="44" y="36" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle" letter-spacing="1">WATCH . CUSTOMS</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="240" height="72" viewBox="0 0 240 72">
+<rect width="240" height="72" fill="#101418"/>
+<rect x="24" y="24" width="150" height="24" rx="4" fill="none" stroke="#5C6B78" stroke-width="1.5"/>
+<circle cx="34" cy="36" r="3" fill="#5C6B78"/>
+<text x="44" y="36" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle" letter-spacing="1">WATCH . CUSTOMS</text>
+</svg>
+</figure>
+<ul><li>the word is mandatory; the dot and border alone are never a status</li><li>text in ink on the page background, so contrast never depends on the status color</li><li>width is set by the caller (deterministic), not measured from text</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-STA-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-STA-02</div>
+<h3>OUTLINED STAMP</h3>
+<p>Blueprint-register stamp: double-outlined CAPS word for document-grade statuses (ISSUED, HOLD, SUPERSEDED).</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="268" height="88" viewBox="0 0 268 88">
+<rect width="268" height="88" fill="#FFFFFF"/>
+<rect x="24" y="24" width="220" height="40" fill="none" stroke="#555555" stroke-width="2"/>
+<rect x="28" y="28" width="212" height="32" fill="none" stroke="#555555" stroke-width="1"/>
+<text x="134" y="44" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" dominant-baseline="middle" letter-spacing="3">ISSUED FOR REVIEW</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="268" height="88" viewBox="0 0 268 88">
+<rect width="268" height="88" fill="#FDF4EA"/>
+<rect x="24" y="24" width="220" height="40" fill="none" stroke="#4A4E57" stroke-width="2"/>
+<rect x="28" y="28" width="212" height="32" fill="none" stroke="#4A4E57" stroke-width="1"/>
+<text x="134" y="44" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" dominant-baseline="middle" letter-spacing="3">ISSUED FOR REVIEW</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="268" height="88" viewBox="0 0 268 88">
+<rect width="268" height="88" fill="#101418"/>
+<rect x="24" y="24" width="220" height="40" fill="none" stroke="#9FB0BE" stroke-width="2"/>
+<rect x="28" y="28" width="212" height="32" fill="none" stroke="#9FB0BE" stroke-width="1"/>
+<text x="134" y="44" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" dominant-baseline="middle" letter-spacing="3">ISSUED FOR REVIEW</text>
+</svg>
+</figure>
+<ul><li>tone is semantic (positive, negative, neutral), set by the data</li><li>letter-spaced caps, centered; the double outline is the signature</li><li>never rotated: legibility beats theater</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-STA-02')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-STR-01</div>
+<h3>HEADER BAND</h3>
+<p>Full-width page header: title left, meta (date, page, reference) right, ruled base.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="100" viewBox="0 0 608 100">
+<rect width="608" height="100" fill="#FFFFFF"/>
+<rect x="24" y="24" width="560" height="52" fill="#F7FAFA"/>
+<rect x="24" y="74" width="560" height="2" fill="#008080"/>
+<text x="40" y="57" font-size="18" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Weekly progress review</text>
+<text x="568" y="57" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="end" letter-spacing="1">WEEK 28 . PAGE 1 OF 6</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="100" viewBox="0 0 608 100">
+<rect width="608" height="100" fill="#FDF4EA"/>
+<rect x="24" y="24" width="560" height="52" fill="#FDF4EA"/>
+<rect x="24" y="74" width="560" height="2" fill="#9E2B25"/>
+<text x="40" y="57" font-size="18" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Weekly progress review</text>
+<text x="568" y="57" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="end" letter-spacing="1">WEEK 28 . PAGE 1 OF 6</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="608" height="100" viewBox="0 0 608 100">
+<rect width="608" height="100" fill="#101418"/>
+<rect x="24" y="24" width="560" height="52" fill="#1A2026"/>
+<rect x="24" y="74" width="560" height="2" fill="#F0B429"/>
+<text x="40" y="57" font-size="18" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Weekly progress review</text>
+<text x="568" y="57" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="end" letter-spacing="1">WEEK 28 . PAGE 1 OF 6</text>
+</svg>
+</figure>
+<ul><li>meta in caps, right-aligned, letter-spaced</li><li>the primary rule anchors the band to the page</li><li>title in the display font</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-STR-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-STR-02</div>
+<h3>DRAWING TITLE BLOCK</h3>
+<p>Engineering-register block: labeled rows (project, document, revision, date) in a framed grid, bottom-right of technical pages.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="328" height="168" viewBox="0 0 328 168">
+<rect width="328" height="168" fill="#FFFFFF"/>
+<rect x="24" y="24" width="280" height="120" fill="#F7FAFA" stroke="#222222" stroke-width="1.5"/>
+<text x="34" y="35" font-size="8" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">PROJECT</text>
+<text x="34" y="48" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400">Sample program</text>
+<line x1="24" y1="54" x2="304" y2="54" stroke="#E2E8E8" stroke-width="1"/>
+<text x="34" y="65" font-size="8" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">DOCUMENT</text>
+<text x="34" y="78" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400">Weekly readiness board</text>
+<line x1="24" y1="84" x2="304" y2="84" stroke="#E2E8E8" stroke-width="1"/>
+<text x="34" y="95" font-size="8" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">REVISION</text>
+<text x="34" y="108" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400">C . issued for review</text>
+<line x1="24" y1="114" x2="304" y2="114" stroke="#E2E8E8" stroke-width="1"/>
+<text x="34" y="125" font-size="8" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">DATE</text>
+<text x="34" y="138" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400">2026-07-12</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="328" height="168" viewBox="0 0 328 168">
+<rect width="328" height="168" fill="#FDF4EA"/>
+<rect x="24" y="24" width="280" height="120" fill="#FDF4EA" stroke="#262A33" stroke-width="1.5"/>
+<text x="34" y="35" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">PROJECT</text>
+<text x="34" y="48" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400">Sample program</text>
+<line x1="24" y1="54" x2="304" y2="54" stroke="#E8E0D4" stroke-width="1"/>
+<text x="34" y="65" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">DOCUMENT</text>
+<text x="34" y="78" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400">Weekly readiness board</text>
+<line x1="24" y1="84" x2="304" y2="84" stroke="#E8E0D4" stroke-width="1"/>
+<text x="34" y="95" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">REVISION</text>
+<text x="34" y="108" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400">C . issued for review</text>
+<line x1="24" y1="114" x2="304" y2="114" stroke="#E8E0D4" stroke-width="1"/>
+<text x="34" y="125" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">DATE</text>
+<text x="34" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400">2026-07-12</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="328" height="168" viewBox="0 0 328 168">
+<rect width="328" height="168" fill="#101418"/>
+<rect x="24" y="24" width="280" height="120" fill="#1A2026" stroke="#E6EDF3" stroke-width="1.5"/>
+<text x="34" y="35" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">PROJECT</text>
+<text x="34" y="48" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400">Sample program</text>
+<line x1="24" y1="54" x2="304" y2="54" stroke="#2A323A" stroke-width="1"/>
+<text x="34" y="65" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">DOCUMENT</text>
+<text x="34" y="78" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400">Weekly readiness board</text>
+<line x1="24" y1="84" x2="304" y2="84" stroke="#2A323A" stroke-width="1"/>
+<text x="34" y="95" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">REVISION</text>
+<text x="34" y="108" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400">C . issued for review</text>
+<line x1="24" y1="114" x2="304" y2="114" stroke="#2A323A" stroke-width="1"/>
+<text x="34" y="125" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">DATE</text>
+<text x="34" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400">2026-07-12</text>
+</svg>
+</figure>
+<ul><li>labels caps 8px, values below; the frame is ink, rows hairline</li><li>revision rows name the revision letter AND its status</li><li>bottom-right placement on technical pages</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-STR-02')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-TXT-01</div>
+<h3>ACTION TITLE</h3>
+<p>The page&#x27;s governing thought: a full sentence with a number, plus the DL&#x27;s chrome (kicker and eyebrow) when the language asks for it.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="760" height="140" viewBox="0 0 760 140">
+<rect width="760" height="140" fill="#FFFFFF"/>
+<text x="24" y="96" font-size="28" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Erection recovered to 84%, six days behind forecast</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="760" height="140" viewBox="0 0 760 140">
+<rect width="760" height="140" fill="#FDF4EA"/>
+<rect x="24" y="48" width="28" height="4" fill="#9E2B25"/>
+<text x="24" y="68" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">PROGRESS . WEEK 28</text>
+<text x="24" y="96" font-size="28" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Erection recovered to 84%, six days behind forecast</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="760" height="140" viewBox="0 0 760 140">
+<rect width="760" height="140" fill="#101418"/>
+<text x="24" y="96" font-size="28" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Erection recovered to 84%, six days behind forecast</text>
+</svg>
+</figure>
+<ul><li>the title is a full sentence stating the finding with a number; no verb or no number means rewrite</li><li>eyebrow and kicker render only when the DL chrome asks; the component never invents them</li><li>one action title per page</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-TXT-01')">Copy skill block</button></div>
+</div>
+<div class="card findable">
+<div class="kicker">CP-TXT-02</div>
+<h3>SOURCE LINE</h3>
+<p>The data provenance line, bottom-left of every page that shows data. Non-negotiable across all languages.</p>
+<figure style='margin-bottom:8px'><figcaption>DL-02</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="520" height="60" viewBox="0 0 520 60">
+<rect width="520" height="60" fill="#FFFFFF"/>
+<text x="24" y="38" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-03</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="520" height="60" viewBox="0 0 520 60">
+<rect width="520" height="60" fill="#FDF4EA"/>
+<text x="24" y="38" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure><figure style='margin-bottom:8px'><figcaption>DL-08</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="520" height="60" viewBox="0 0 520 60">
+<rect width="520" height="60" fill="#101418"/>
+<text x="24" y="38" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure>
+<ul><li>always bottom-left, always present when the page shows data</li><li>states source name and as-of date</li><li>missing data is declared here, never silently omitted</li></ul>
+<div class="copybar"><button class="copy"
+onclick="copyPayload(this,'CP-TXT-02')">Copy skill block</button></div>
+</div></div><script>const PAYLOADS = {"CP-CAL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-CAL-01 INSIGHT CALLOUT, role-based (themeable) -->\n\n## Component: INSIGHT CALLOUT (CP-CAL-01)\n\nA short so-what box beside a visual: lead line in ink, supporting lines in body, primary-colored bar on the left edge.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"bar_w\": 4,\n  \"pad\": 12,\n  \"text_size\": 12,\n  \"line_height\": 18\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| bar | primary |\n| border | hairline |\n| box_bg | panel -> background |\n| lead | ink |\n| text | body |\n\n### Rules\n- first line is the lead (ink, weight 600); the rest support it\n- a callout states a consequence or an ask, never repeats the chart title\n- one callout per visual maximum\n\n### QA\n- [ ] lead line present\n- [ ] does not restate the title\n", "CP-CAL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-CAL-02 EXCEPTION ROW, role-based (themeable) -->\n\n## Component: EXCEPTION ROW (CP-CAL-02)\n\nOne exception, one line: status bar + dot, bold claim, owner and due date right. Stacked into exception lists on one-pagers.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"h\": 36,\n  \"bar_w\": 4,\n  \"pad\": 14,\n  \"claim_size\": 13,\n  \"meta_size\": 10\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| row_bg | panel -> background |\n| rule | hairline |\n| status_critical | negative |\n| status_watch | primary |\n| status_resolved | positive |\n| claim | ink |\n| meta | body |\n\n### Rules\n- one exception per row; the claim carries a number\n- owner and due in caps, right-aligned: every exception is owned\n- status colors the bar and dot only, never the whole row\n\n### QA\n- [ ] claim has a number\n- [ ] owner and due present\n- [ ] status semantic\n", "CP-KPI-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-KPI-01 KPI CARD, role-based (themeable) -->\n\n## Component: KPI CARD (CP-KPI-01)\n\nOne number that matters, with its label and week-over-week delta. Used in strips of 5 maximum.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"w\": 200,\n  \"h\": 92,\n  \"pad\": 14,\n  \"label_size\": 10,\n  \"label_dy\": 24,\n  \"value_size\": 32,\n  \"value_dy\": 58,\n  \"delta_size\": 11,\n  \"delta_dy\": 78\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| card_bg | panel -> background |\n| border | hairline |\n| label | body |\n| value | primary |\n| delta_positive | positive |\n| delta_negative | negative |\n| delta_neutral | body |\n\n### Rules\n- value in tabular figures; delta always signed and always named against its reference\n- tone (positive/negative/neutral) is semantic, set by the data, not by the sign\n- maximum 5 cards per strip; more means the page has no message\n\n### QA\n- [ ] delta signed and referenced\n- [ ] strip count <= 5 wherever used\n", "CP-KPI-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-KPI-02 BIG NUMBER, role-based (themeable) -->\n\n## Component: BIG NUMBER (CP-KPI-02)\n\nThe one number a page exists for: caps label, display-size value, one context line. One per page maximum.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"label_size\": 11,\n  \"label_dy\": 0,\n  \"value_size\": 56,\n  \"value_dy\": 58,\n  \"context_size\": 12,\n  \"context_dy\": 80\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| label | body |\n| value | primary |\n| context | body |\n\n### Rules\n- one big number per page; two big numbers mean no message\n- the context line names the reference, always\n- value in the display font, primary role\n\n### QA\n- [ ] one per page\n- [ ] context references named\n- [ ] label in caps\n", "CP-LAB-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-LAB-01 LEADER-LINE ANNOTATION, role-based (themeable) -->\n\n## Component: LEADER-LINE ANNOTATION (CP-LAB-01)\n\nThe standalone annotation: dot on the fact, elbow leader, italic note. The house style for pointing at evidence.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"dot_r\": 3.5,\n  \"text_size\": 12,\n  \"style\": \"italic\"\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| dot | primary |\n| leader | body |\n| text | body |\n\n### Rules\n- the dot sits ON the fact; the leader never crosses other marks\n- italic body role: annotations comment, they do not shout\n- anchor start or end, chosen so text grows away from the chart\n\n### QA\n- [ ] dot on the fact\n- [ ] italic\n- [ ] no mark crossings\n", "CP-STA-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-STA-01 STATUS CHIP, role-based (themeable) -->\n\n## Component: STATUS CHIP (CP-STA-01)\n\nA status marker that survives color-blindness and bad projectors: outlined chip, status-colored dot, the status word in ink.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"h\": 24,\n  \"radius\": 4,\n  \"pad_x\": 10,\n  \"dot_r\": 3,\n  \"text_size\": 10\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| text | ink |\n| status_complete | positive |\n| status_on_track | primary |\n| status_watch | warning -> muted |\n| status_critical | negative |\n| status_na | hairline |\n\n### Rules\n- the word is mandatory; the dot and border alone are never a status\n- text in ink on the page background, so contrast never depends on the status color\n- width is set by the caller (deterministic), not measured from text\n\n### QA\n- [ ] every chip carries a word\n- [ ] text contrast is the page's ink contrast, independent of status hue\n", "CP-STA-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-STA-02 OUTLINED STAMP, role-based (themeable) -->\n\n## Component: OUTLINED STAMP (CP-STA-02)\n\nBlueprint-register stamp: double-outlined CAPS word for document-grade statuses (ISSUED, HOLD, SUPERSEDED).\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"h\": 40,\n  \"text_size\": 13\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| stamp_positive | positive |\n| stamp_negative | negative |\n| stamp_neutral | body |\n\n### Rules\n- tone is semantic (positive, negative, neutral), set by the data\n- letter-spaced caps, centered; the double outline is the signature\n- never rotated: legibility beats theater\n\n### QA\n- [ ] tone declared\n- [ ] word in caps\n- [ ] no rotation\n", "CP-STR-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-STR-01 HEADER BAND, role-based (themeable) -->\n\n## Component: HEADER BAND (CP-STR-01)\n\nFull-width page header: title left, meta (date, page, reference) right, ruled base.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"h\": 52,\n  \"pad\": 16,\n  \"title_size\": 18,\n  \"title_dy\": 33,\n  \"meta_size\": 10,\n  \"rule_h\": 2\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| band_bg | panel -> background |\n| rule | primary |\n| title | ink |\n| meta | body |\n\n### Rules\n- meta in caps, right-aligned, letter-spaced\n- the primary rule anchors the band to the page\n- title in the display font\n\n### QA\n- [ ] meta caps right\n- [ ] rule present\n- [ ] one band per page\n", "CP-STR-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-STR-02 DRAWING TITLE BLOCK, role-based (themeable) -->\n\n## Component: DRAWING TITLE BLOCK (CP-STR-02)\n\nEngineering-register block: labeled rows (project, document, revision, date) in a framed grid, bottom-right of technical pages.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"row_height\": 30,\n  \"pad\": 10,\n  \"label_size\": 8,\n  \"label_dy\": 11,\n  \"value_size\": 11,\n  \"value_dy\": 24\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| block_bg | panel -> background |\n| frame | ink |\n| rule | hairline |\n| label | body |\n| value | ink |\n\n### Rules\n- labels caps 8px, values below; the frame is ink, rows hairline\n- revision rows name the revision letter AND its status\n- bottom-right placement on technical pages\n\n### QA\n- [ ] frame + hairline rows\n- [ ] revision named\n- [ ] labels caps\n", "CP-TXT-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-TXT-01 ACTION TITLE, role-based (themeable) -->\n\n## Component: ACTION TITLE (CP-TXT-01)\n\nThe page's governing thought: a full sentence with a number, plus the DL's chrome (kicker and eyebrow) when the language asks for it.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"title_size\": 28,\n  \"eyebrow_size\": 12,\n  \"eyebrow_dy\": -28,\n  \"eyebrow_letter_spacing\": 2,\n  \"kicker_w\": 28,\n  \"kicker_h\": 4,\n  \"kicker_dy\": -48\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| title | ink |\n| eyebrow | body |\n| kicker | primary |\n\n### Rules\n- the title is a full sentence stating the finding with a number; no verb or no number means rewrite\n- eyebrow and kicker render only when the DL chrome asks; the component never invents them\n- one action title per page\n\n### QA\n- [ ] title has a verb and a number\n- [ ] chrome matches the DL flags exactly\n", "CP-TXT-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Component CP-TXT-02 SOURCE LINE, role-based (themeable) -->\n\n## Component: SOURCE LINE (CP-TXT-02)\n\nThe data provenance line, bottom-left of every page that shows data. Non-negotiable across all languages.\n\n### Geometry (px, follow literally)\n\n```json\n{\n  \"size\": 11\n}\n```\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| text | body |\n\n### Rules\n- always bottom-left, always present when the page shows data\n- states source name and as-of date\n- missing data is declared here, never silently omitted\n\n### QA\n- [ ] present on every data page\n- [ ] carries an as-of date\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

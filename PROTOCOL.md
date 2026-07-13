@@ -1,0 +1,219 @@
+# Open Visualization Protocol (OVP), version 1.0
+
+OVP is an open, deterministic, AI-native standard for information
+design. It defines how visualizations are DESCRIBED so that any agent,
+human, or renderer that speaks the protocol produces the same visual
+result from the same instruction:
+
+```
+Render CH-TIM-02 in DL-03 with data.json
+```
+
+This document is the normative reference. The words MUST, SHOULD, and
+MAY carry their usual standards meaning.
+
+---
+
+## 1. Objects and identifiers
+
+| Prefix | Object | Example |
+|---|---|---|
+| FN-nn | Foundation: a rule set everything builds on | FN-01 token contract |
+| DL-nn | Design language: a complete visual identity | DL-03 LOGOS |
+| CH-FAM-nn | Chart object, coded by message family | CH-RNK-01 BAR-H |
+| CP-FAM-nn | Component object | CP-TXT-01 action title |
+| RC-nnn | Recipe: a fully determined page | RC-001 |
+| BQ-nn | Business question: the top of the resolution chain | BQ-01 why did cost overrun |
+| NR-nn | Narrative skeleton: how the finding is told | NR-01 executive brief |
+
+Identifiers are permanent. An identifier MUST NOT be renumbered or
+reused; retired objects keep their code with status `retired`. NAMES
+may be revised (the code is the contract); a renamed object MUST keep
+its former name in `aka`. Design languages additionally carry a
+`philosophy` block (civilization, principle, motto, design laws): the
+philosophical layer that explains WHY the language's rules exist. Chart
+objects are coded by the MESSAGE (ranking, trend, deviation...), not by
+shape, because "what is the message" is the first question an agent
+must answer; the shape is metadata (`meta.form`).
+
+The full object map lives in TAXONOMY.md.
+
+## 2. The layer model
+
+OVP separates semantics from rendering across layers. Current coverage:
+
+| Layer | Concern | Where it lives today |
+|---|---|---|
+| L0 Perception | why the rules are laws, traced to research | FN-06 perceptual foundations |
+| L1 Data | required data shape per object | `data_shape` in each spec |
+| L2 Semantics | analytical patterns + message intent | `patterns/PT-*.json` -> PATTERNS.md; `meta.intent` (controlled vocabulary), CH families |
+| L3 Encoding | position, length, color roles, emphasis | FN-01, FN-04, spec `roles` |
+| L4 Objects | chart specs with exact geometry | `specs/CH-*.json` |
+| L5 Components | titles, chips, KPI cards, annotations | CP level (in build) |
+| L6 Layouts | canvases, grids, recipes | FN-02, RC level (planned) |
+| L7 Storytelling | action titles, annotations, sources | FN-05, spec `rules` and `qa` |
+| L8 Rendering | SVG (reference), PPTX (native shapes), HTML, XLSX, Power BI | `tools/render.py`; `tools/render_pptx.py` (SVG-subset transpiler); HTML/XLSX/PBI planned |
+| L9 Agents | decision engine, machine metadata, blocks | `decision/engine.json` -> DECIDER.md; `meta`, `blocks/`, CHOOSER.md, PATTERNS.md |
+
+Agent resolution order: QUESTIONS.md matches the business question and
+names the observations to confirm (BQ objects), DECIDER.md picks the
+design language (audience, purpose, medium; the language's constitution
+sets the communication contract), PATTERNS.md maps what was found in
+the data to chart codes, CHOOSER.md disambiguates by message intent,
+NR narrative skeletons structure how the finding is told
+(claim, evidence, cause, action, owner per the language's
+decision_style), then render. `meta.intent` and every constitution
+value MUST come from the controlled vocabularies in
+`decision/engine.json`; the validator enforces both.
+
+A conforming spec MUST NOT mix layers: no hex in a chart object (L3
+binds roles in the DL), no data values in a layout, no renderer
+switches in semantics.
+
+### 2.1 The three products and the runtime contract
+
+OVP ships as three products with three audiences, and mixing them is
+an anti-pattern:
+
+| Product | Audience | Content |
+|---|---|---|
+| Handbook | humans | docs site, foundations, narrative pages, this document |
+| Registry | machines | REGISTRY.json, schemas, engine.json: lookup and relations |
+| Runtime | agents executing a request | the minimal payload set below |
+
+The runtime contract: to satisfy one request, an agent SHOULD load at
+most the registry entry it resolved, one design language token block,
+the matched chart block(s) within the language's `charts_per_page`,
+and the narrative skeleton the question names. The copy blocks in
+`blocks/` are the runtime payloads: self-contained, generated,
+drift-gated. Loading the handbook into an agent context is
+non-conforming by design; token efficiency is an explicit protocol
+objective, not an optimization detail.
+
+## 3. The determinism contract
+
+1. Specs carry exact values (px, weights, ratios). Adjectives are
+   non-conforming.
+2. Chart objects reference color ROLES; design languages bind roles to
+   hex (`#RRGGBB` uppercase). Role chains (`benchmark -> muted`)
+   resolve to the first role the palette defines.
+3. Scales are algorithms, not judgment: the nice-tick algorithm and
+   float formatting rules in FN-05 are normative.
+4. Every object ships golden renders plus the input data that produced
+   them. A conforming implementation MUST reproduce the golden output
+   from spec + tokens + data. For the SVG reference implementation,
+   reproduction is byte-identical. For container formats whose envelope
+   carries volatile metadata (PPTX zip timestamps), reproduction is
+   member-identical: every file inside the package matches.
+5. Generated artifacts (blocks, chooser, previews) MUST be
+   regenerable from source; drift is a validation failure.
+6. Constitution behavior: a design language's constitution changes
+   what renders, deterministically, through exactly these hooks:
+   `highlight_policy: none` strips highlight emphasis from the data
+   before rendering; `annotation_policy: none` suppresses annotations;
+   `density` shifts every label size by +1px (executive) or -1px
+   (scientific) from the spec's operational baseline;
+   `charts_per_page` caps the chart elements a recipe may place in
+   that language (validator-enforced). This is what makes a language a
+   language and not a theme: the same spec and data communicate
+   differently under a different constitution, and both renders are
+   golden-locked.
+
+## 4. Machine metadata (`meta`)
+
+Every chart object MUST carry:
+
+```json
+"meta": {
+  "intent": ["ranking", "comparison"],
+  "form": "horizontal bar",
+  "data_required": "one categorical dimension + one non-negative measure",
+  "relations": {
+    "family": "RNK",
+    "alternatives": ["CH-RNK-03 (planned)"],
+    "see_instead": [
+      {"when": "natural category order matters", "use": "CH-MAG-01"}
+    ],
+    "implemented_by": ["svg"]
+  }
+}
+```
+
+This is the knowledge-graph layer: objects connect through
+`alternatives`, `see_instead`, `family`, and `implemented_by` edges.
+The graph is stored IN the specs and generated FROM them (CHOOSER.md,
+blocks); there is no separate graph database to drift.
+
+## 5. Conformance levels
+
+| Level | Name | Meaning |
+|---|---|---|
+| 1 | Parser | reads specs and tokens, validates against schemas |
+| 2 | Renderer | produces output matching golden renders for >= 1 chart family |
+| 3 | Presenter | composes recipes (DL + CH + CP) on the slide canvas |
+| 4 | Advisor | uses `meta` to select the right object for a message (chooser logic) |
+| 5 | Full | deterministic reproduction of every golden across all built objects |
+
+The reference implementation (`tools/`) reaches Level 5 for SVG and
+member-identical conformance for PPTX across the published conformance
+set. Certification of third-party implementations remains a possible
+post-1.0 extension (section 7).
+
+## 6. Versioning, lifecycle, and stability
+
+- Protocol version: this document, semver, currently `1.0`; frozen snapshot: RFC-0001.md.
+  Every spec and token file stamps `ovp_version`.
+- Adding an object: next free number in its family, full spec, golden
+  renders in at least 2 DLs, validation green. See CONTRIBUTING.md for
+  the admission rules per object type.
+- Adding a family or a layer: requires a TAXONOMY.md and PROTOCOL.md
+  change in the same commit.
+- Breaking an existing spec: not allowed after publication; publish a
+  new numbered object and retire the old one.
+
+### 6.1 Object lifecycle
+
+Every object moves through one lifecycle:
+
+```
+experimental -> candidate -> stable -> normative -> deprecated
+```
+
+| Lifecycle stage | Meaning | Today's statuses that map to it |
+|---|---|---|
+| experimental | may change or disappear without notice | new families in their first minor version |
+| candidate | complete and validated; promotion needs real use | DL `candidate`; CH `spec` before 1.0; CH `warn` (candidate with a permanent usage warning) |
+| stable | shipped in real deliverables; changes need a version bump | DL `adopted` |
+| normative | part of the frozen core at 1.0; extension only | foundations, schemas, this document at 1.0 |
+| deprecated | kept for reference, never reused | `retired` codes |
+
+Statuses in object files keep their current words; this table is the
+mapping. A `warn` object never promotes past candidate: the warning is
+the point.
+
+### 6.2 Stability policy
+
+Before 1.0: a breaking change to any schema, spec, or vocabulary
+REQUIRES a minor `ovp_version` bump on the affected files and a
+migration note in the same commit. Silent breaks are non-conforming.
+
+At 1.0: the core freezes. Identifiers, published schemas, the
+determinism contract, and the agent resolution order MUST NOT break;
+they only extend. RFC-0001 is the frozen snapshot of this document at
+that moment.
+
+### 6.3 Registry
+
+`REGISTRY.json` is the generated, drift-gated machine index of every
+object: id, name, type, family, version, status, relations,
+implementations, source path. Agents and tools SHOULD resolve objects
+through the registry rather than by walking the repository.
+
+## 7. Out of scope (decided, not deferred)
+
+Governance bodies, SDKs, MCP servers, handbook volumes, and renderer
+backends beyond the SVG and PPTX reference implementations are not
+protocol work. The protocol publishes complete in itself; anyone who
+wants an ecosystem builds it against the frozen spec. A third-party
+conformance certification program and the `ovp://` URI scheme remain
+possible post-1.0 extensions if a second implementer appears.

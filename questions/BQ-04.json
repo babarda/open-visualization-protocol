@@ -1,0 +1,26 @@
+{
+  "code": "BQ-04",
+  "question": "Who slips the most?",
+  "ovp_version": "1.0",
+  "intent": [
+    "ranking",
+    "deviation"
+  ],
+  "observations": [
+    "one entity sits far from the pack",
+    "signed variance across entities"
+  ],
+  "patterns": [
+    "PT-02"
+  ],
+  "charts": [
+    "CH-DEV-01",
+    "CH-RNK-01",
+    "CH-DST-07"
+  ],
+  "narrative": "NR-01",
+  "decider_hint": {
+    "audience": "operations",
+    "purpose": "alert"
+  }
+}

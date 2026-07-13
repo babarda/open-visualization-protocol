@@ -1,0 +1,19 @@
+{
+  "title": "Complete work holds 62% of total scope",
+  "eyebrow": "SCOPE . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "slices": [
+    {
+      "label": "Complete",
+      "value": 62
+    },
+    {
+      "label": "Remaining",
+      "value": 28
+    },
+    {
+      "label": "On hold",
+      "value": 10
+    }
+  ]
+}

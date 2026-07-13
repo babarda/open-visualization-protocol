@@ -1,0 +1,41 @@
+{
+  "title": "Piping holds 84 of 213 open items",
+  "eyebrow": "OPEN ITEMS BY SECTION",
+  "source": "Source: weekly punch list, wk 28",
+  "unit": "items",
+  "value_header": "OPEN ITEMS",
+  "delta_header": "VS LAST WEEK",
+  "categories": [
+    {
+      "label": "Piping",
+      "value": 84,
+      "delta": -6,
+      "highlight": true
+    },
+    {
+      "label": "Electrical",
+      "value": 46,
+      "delta": 4
+    },
+    {
+      "label": "Instrumentation",
+      "value": 33,
+      "delta": -2
+    },
+    {
+      "label": "Civil",
+      "value": 22,
+      "delta": 0
+    },
+    {
+      "label": "Mechanical",
+      "value": 18,
+      "delta": 3
+    },
+    {
+      "label": "HVAC",
+      "value": 10,
+      "delta": -1
+    }
+  ]
+}

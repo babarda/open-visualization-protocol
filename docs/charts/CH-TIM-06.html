@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-TIM-06 SPARKLINE STRIP</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-TIM-06</div>
+<div class="kicker">CH-TIM-06 . family TIM</div>
+<h1>SPARKLINE STRIP</h1>
+<p class="lead">one micro-trend per row: shape, last value, signed change. Needs:
+3-8 metrics, each with 5+ ordered values and a declared good direction.</p>
+<p><span class="tag">trend</span><span class="tag">status</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#008080"/>
+<text x="572" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#008080"/>
+<text x="572" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#008080"/>
+<text x="572" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#8B1E1E" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#008080"/>
+<text x="572" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#008080"/>
+<text x="572" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#008080"/>
+<text x="572" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#8B1E1E" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#008080"/>
+<text x="572" y="180" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#339966" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#008080"/>
+<text x="572" y="238" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#339966" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#008080"/>
+<text x="572" y="296" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#D63A2F" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#008080"/>
+<text x="572" y="354" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#339966" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#008080"/>
+<text x="572" y="412" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#339966" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#222222" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#008080"/>
+<text x="572" y="470" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#D63A2F" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">KPI STRIP . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#9E2B25"/>
+<text x="572" y="180" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#9E2B25"/>
+<text x="572" y="238" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#9E2B25"/>
+<text x="572" y="296" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#9E2B25"/>
+<text x="572" y="354" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#9E2B25"/>
+<text x="572" y="412" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#262A33" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#9E2B25"/>
+<text x="572" y="470" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#1B6E8F"/>
+<text x="572" y="180" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#1B6E8F"/>
+<text x="572" y="238" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#1B6E8F"/>
+<text x="572" y="296" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#1B6E8F"/>
+<text x="572" y="354" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#1B6E8F"/>
+<text x="572" y="412" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#143D59" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#1B6E8F"/>
+<text x="572" y="470" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#C2410C"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#C2410C"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#C2410C"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#B91C1C" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#C2410C"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#C2410C"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#C2410C"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#B91C1C" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#7A1F1F"/>
+<text x="572" y="180" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#7A1F1F"/>
+<text x="572" y="238" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#7A1F1F"/>
+<text x="572" y="296" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="11" font-family="Georgia,serif" fill="#7A1F1F" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#7A1F1F"/>
+<text x="572" y="354" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#7A1F1F"/>
+<text x="572" y="412" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#7A1F1F"/>
+<text x="572" y="470" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="11" font-family="Georgia,serif" fill="#7A1F1F" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#C0182B"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#C0182B"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#C0182B"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#C0182B"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#C0182B"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#111111" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#C0182B"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#F0B429"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#F0B429"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#F0B429"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E5534B" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#F0B429"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#F0B429"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#E6EDF3" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#F0B429"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E5534B" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#0F766E"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#0F766E"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#0F766E"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C2410C" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#0F766E"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#0F766E"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#2B3A42" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#0F766E"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C2410C" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#F0B429"/>
+<text x="572" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#F0B429"/>
+<text x="572" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#F0B429"/>
+<text x="572" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#E5534B" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#F0B429"/>
+<text x="572" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#F0B429"/>
+<text x="572" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#F0B429"/>
+<text x="572" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#E5534B" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#1F3864"/>
+<text x="572" y="180" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#1F3864"/>
+<text x="572" y="238" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#1F3864"/>
+<text x="572" y="296" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="Cambria,Georgia,serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#1F3864"/>
+<text x="572" y="354" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#1F3864"/>
+<text x="572" y="412" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#1F3864" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#1F3864"/>
+<text x="572" y="470" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="Cambria,Georgia,serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#D63A2F"/>
+<text x="572" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#D63A2F"/>
+<text x="572" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#D63A2F"/>
+<text x="572" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#D63A2F" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#D63A2F"/>
+<text x="572" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#D63A2F"/>
+<text x="572" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1F7A4D" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#D63A2F"/>
+<text x="572" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#D63A2F" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#C4572E"/>
+<text x="572" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3D5A46" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#C4572E"/>
+<text x="572" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3D5A46" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#C4572E"/>
+<text x="572" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#7A3B1E" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#C4572E"/>
+<text x="572" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3D5A46" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#C4572E"/>
+<text x="572" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3D5A46" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#31261D" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#C4572E"/>
+<text x="572" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#7A3B1E" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">KPI STRIP . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#2251FF"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#2251FF"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#2251FF"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#2251FF"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#2251FF"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#0B1F35" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#2251FF"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#197A56"/>
+<text x="572" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#197A56"/>
+<text x="572" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#197A56"/>
+<text x="572" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#197A56"/>
+<text x="572" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#197A56"/>
+<text x="572" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#0E3A2C" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#197A56"/>
+<text x="572" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Two of six weekly metrics point the wrong way</text>
+<polyline points="240,191 293.33,186.11 346.67,188.56 400,181.22 453.33,176.33 506.67,173.89 560,169" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="169" r="4" fill="#C4001A"/>
+<text x="572" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">87%</text>
+<text x="800" y="180" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+9</text>
+<text x="192" y="180" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<polyline points="240,249 293.33,238 346.67,243.5 400,232.5 453.33,232.5 506.67,227 560,227" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="227" r="4" fill="#C4001A"/>
+<text x="572" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">92</text>
+<text x="800" y="238" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<text x="192" y="238" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<polyline points="240,285 293.33,287.44 346.67,292.33 400,294.78 453.33,299.67 506.67,304.56 560,307" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="307" r="4" fill="#C4001A"/>
+<text x="572" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">71</text>
+<text x="800" y="296" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="296" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<polyline points="240,365 293.33,361.53 346.67,356.89 400,358.05 453.33,352.26 506.67,347.63 560,343" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="343" r="4" fill="#C4001A"/>
+<text x="572" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">74</text>
+<text x="800" y="354" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+19</text>
+<text x="192" y="354" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch closure</text>
+<polyline points="240,401 293.33,401 346.67,408.33 400,408.33 453.33,415.67 506.67,415.67 560,423" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="423" r="4" fill="#C4001A"/>
+<text x="572" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">6</text>
+<text x="800" y="412" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="412" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Rework share</text>
+<polyline points="240,481 293.33,477.33 346.67,477.33 400,473.67 453.33,470 506.67,462.67 560,459" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle cx="560" cy="459" r="4" fill="#C4001A"/>
+<text x="572" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">12</text>
+<text x="800" y="470" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600" text-anchor="end" dominant-baseline="middle">+6</text>
+<text x="192" y="470" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">Overtime share</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>scanning many metrics for direction at a glance</li><li>weekly one-pagers where shape matters, not exact history</li></ul>
+<h2>Do not use when</h2><ul><li>comparing magnitudes across rows (each row has its own scale)</li><li>fewer than 5 points per row</li></ul>
+<h2>See instead</h2><ul><li>exact values must be read: <a href='CH-TAB-03.html'>CH-TAB-03</a></li><li>one metric deserves a full chart: <a href='CH-TIM-01.html'>CH-TIM-01</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-TAB-03 (exact values + deltas)</li><li>CH-TIM-01 (one metric, full size)</li></ul>
+<h2>Rules</h2><ul><li>each row scales to its own min-max: sparklines show shape, never comparable magnitude</li><li>delta colored by the row&#x27;s DECLARED good direction, not by sign</li><li>end dot marks the latest value</li></ul>
+<h2>Never do this</h2><ul><li>shared scale implied across rows</li><li>axes or gridlines on sparklines</li><li>coloring deltas by sign when down is good</li></ul>
+<h2>QA before delivering</h2><ul><li>good direction declared per row</li><li>&gt;= 5 points per row</li><li>unit once</li><li>source present</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>action title with a number</td></tr><tr><td>source</td><td>bottom-left always</td></tr><tr><td>unit</td><td>on first row&#x27;s last value</td></tr><tr><td>rows</td><td>[{label, values, good: up|down}]</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;Two of six weekly metrics point the wrong way&quot;,
+  &quot;eyebrow&quot;: &quot;KPI STRIP . WEEK 28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;unit&quot;: &quot;%&quot;,
+  &quot;rows&quot;: [
+    {
+      &quot;label&quot;: &quot;Delivery OTD&quot;,
+      &quot;good&quot;: &quot;up&quot;,
+      &quot;values&quot;: [
+        78,
+        80,
+        79,
+        82,
+        84,
+        85,
+        87
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Test pass rate&quot;,
+      &quot;good&quot;: &quot;up&quot;,
+      &quot;values&quot;: [
+        88,
+        90,
+        89,
+        91,
+        91,
+        92,
+        92
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Docs on time&quot;,
+      &quot;good&quot;: &quot;up&quot;,
+      &quot;values&quot;: [
+        80,
+        79,
+        77,
+        76,
+        74,
+        72,
+        71
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Punch closure&quot;,
+      &quot;good&quot;: &quot;up&quot;,
+      &quot;values&quot;: [
+        55,
+        58,
+        62,
+        61,
+        66,
+        70,
+        74
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Rework share&quot;,
+      &quot;good&quot;: &quot;down&quot;,
+      &quot;values&quot;: [
+        9,
+        9,
+        8,
+        8,
+        7,
+        7,
+        6
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Overtime share&quot;,
+      &quot;good&quot;: &quot;down&quot;,
+      &quot;values&quot;: [
+        6,
+        7,
+        7,
+        8,
+        9,
+        11,
+        12
+      ]
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP, role-based (themeable) -->\n\n## SPARKLINE STRIP chart (CH-TIM-06)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| line | ink |\n| dot | primary |\n| value_label | ink |\n| delta_pos | positive |\n| delta_neg | negative |\n| category_label | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"Two of six weekly metrics point the wrong way\",\n  \"eyebrow\": \"KPI STRIP . WEEK 28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"unit\": \"%\",\n  \"rows\": [\n    {\n      \"label\": \"Delivery OTD\",\n      \"good\": \"up\",\n      \"values\": [\n        78,\n        80,\n        79,\n        82,\n        84,\n        85,\n        87\n      ]\n    },\n    {\n      \"label\": \"Test pass rate\",\n      \"good\": \"up\",\n      \"values\": [\n        88,\n        90,\n        89,\n        91,\n        91,\n        92,\n        92\n      ]\n    },\n    {\n      \"label\": \"Docs on time\",\n      \"good\": \"up\",\n      \"values\": [\n        80,\n        79,\n        77,\n        76,\n        74,\n        72,\n        71\n      ]\n    },\n    {\n      \"label\": \"Punch closure\",\n      \"good\": \"up\",\n      \"values\": [\n        55,\n        58,\n        62,\n        61,\n        66,\n        70,\n        74\n      ]\n    },\n    {\n      \"label\": \"Rework share\",\n      \"good\": \"down\",\n      \"values\": [\n        9,\n        9,\n        8,\n        8,\n        7,\n        7,\n        6\n      ]\n    },\n    {\n      \"label\": \"Overtime share\",\n      \"good\": \"down\",\n      \"values\": [\n        6,\n        7,\n        7,\n        8,\n        9,\n        11,\n        12\n      ]\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-TIM-06\",\n  \"name\": \"SPARKLINE STRIP\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"sparkline_strip\",\n  \"meta\": {\n    \"intent\": [\n      \"trend\",\n      \"status\"\n    ],\n    \"form\": \"one micro-trend per row: shape, last value, signed change\",\n    \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n    \"relations\": {\n      \"family\": \"TIM\",\n      \"alternatives\": [\n        \"CH-TAB-03 (exact values + deltas)\",\n        \"CH-TIM-01 (one metric, full size)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"exact values must be read\",\n          \"use\": \"CH-TAB-03\"\n        },\n        {\n          \"when\": \"one metric deserves a full chart\",\n          \"use\": \"CH-TIM-01\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"scanning many metrics for direction at a glance\",\n    \"weekly one-pagers where shape matters, not exact history\"\n  ],\n  \"not_when\": [\n    \"comparing magnitudes across rows (each row has its own scale)\",\n    \"fewer than 5 points per row\"\n  ],\n  \"data_shape\": {\n    \"title\": \"action title with a number\",\n    \"source\": \"bottom-left always\",\n    \"unit\": \"on first row's last value\",\n    \"rows\": \"[{label, values, good: up|down}]\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"rules\": [\n    \"each row scales to its own min-max: sparklines show shape, never comparable magnitude\",\n    \"delta colored by the row's DECLARED good direction, not by sign\",\n    \"end dot marks the latest value\"\n  ],\n  \"roles\": {\n    \"line\": [\n      \"ink\"\n    ],\n    \"dot\": [\n      \"primary\"\n    ],\n    \"value_label\": [\n      \"ink\"\n    ],\n    \"delta_pos\": [\n      \"positive\"\n    ],\n    \"delta_neg\": [\n      \"negative\"\n    ],\n    \"category_label\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"shared scale implied across rows\",\n    \"axes or gridlines on sparklines\",\n    \"coloring deltas by sign when down is good\"\n  ],\n  \"qa\": [\n    \"good direction declared per row\",\n    \">= 5 points per row\",\n    \"unit once\",\n    \"source present\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-01 AGRAW -->\n\n## SPARKLINE STRIP chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#1A1A1A` |\n| dot | `#008080` |\n| value_label | `#1A1A1A` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#8B1E1E` |\n| category_label | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-02 KATA -->\n\n## SPARKLINE STRIP chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#222222` |\n| dot | `#008080` |\n| value_label | `#222222` |\n| delta_pos | `#339966` |\n| delta_neg | `#D63A2F` |\n| category_label | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-03 LOGOS -->\n\n## SPARKLINE STRIP chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| line | `#262A33` |\n| dot | `#9E2B25` |\n| value_label | `#262A33` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#9E2B25` |\n| category_label | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-04 SHILPA -->\n\n## SPARKLINE STRIP chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| line | `#143D59` |\n| dot | `#1B6E8F` |\n| value_label | `#143D59` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#9E2B25` |\n| category_label | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-05 OBEYA -->\n\n## SPARKLINE STRIP chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#0F172A` |\n| dot | `#C2410C` |\n| value_label | `#0F172A` |\n| delta_pos | `#1F7A4D` |\n| delta_neg | `#B91C1C` |\n| category_label | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-06 LEX -->\n\n## SPARKLINE STRIP chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#1A1A1A` |\n| dot | `#7A1F1F` |\n| value_label | `#1A1A1A` |\n| delta_pos | `#333333` |\n| delta_neg | `#7A1F1F` |\n| category_label | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-07 SAGA -->\n\n## SPARKLINE STRIP chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#111111` |\n| dot | `#C0182B` |\n| value_label | `#111111` |\n| delta_pos | `#2E2E2E` |\n| delta_neg | `#C0182B` |\n| category_label | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-08 SENTINEL -->\n\n## SPARKLINE STRIP chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| line | `#E6EDF3` |\n| dot | `#F0B429` |\n| value_label | `#E6EDF3` |\n| delta_pos | `#3FB68B` |\n| delta_neg | `#E5534B` |\n| category_label | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-09 ATLAS -->\n\n## SPARKLINE STRIP chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| line | `#2B3A42` |\n| dot | `#0F766E` |\n| value_label | `#2B3A42` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#C2410C` |\n| category_label | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-10 BASIRA -->\n\n## SPARKLINE STRIP chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| line | `#FFFFFF` |\n| dot | `#F0B429` |\n| value_label | `#FFFFFF` |\n| delta_pos | `#3FB68B` |\n| delta_neg | `#E5534B` |\n| category_label | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-11 SUTRA -->\n\n## SPARKLINE STRIP chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#1F3864` |\n| dot | `#1F3864` |\n| value_label | `#1F3864` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#9E2B25` |\n| category_label | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-12 NOROSHI -->\n\n## SPARKLINE STRIP chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#0F172A` |\n| dot | `#D63A2F` |\n| value_label | `#0F172A` |\n| delta_pos | `#1F7A4D` |\n| delta_neg | `#D63A2F` |\n| category_label | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-13 MIZAN -->\n\n## SPARKLINE STRIP chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| line | `#31261D` |\n| dot | `#C4572E` |\n| value_label | `#31261D` |\n| delta_pos | `#3D5A46` |\n| delta_neg | `#7A3B1E` |\n| category_label | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-14 EVIDENTIA -->\n\n## SPARKLINE STRIP chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#0B1F35` |\n| dot | `#2251FF` |\n| value_label | `#0B1F35` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#9E2B25` |\n| category_label | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-15 ABRID -->\n\n## SPARKLINE STRIP chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#0E3A2C` |\n| dot | `#197A56` |\n| value_label | `#0E3A2C` |\n| delta_pos | `#197A56` |\n| delta_neg | `#9E2B25` |\n| category_label | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TIM-06 SPARKLINE STRIP rendered in language DL-16 TELOS -->\n\n## SPARKLINE STRIP chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TIM-06\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"trend\",\n    \"status\"\n  ],\n  \"form\": \"one micro-trend per row: shape, last value, signed change\",\n  \"data_required\": \"3-8 metrics, each with 5+ ordered values and a declared good direction\",\n  \"family\": \"TIM\",\n  \"alternatives\": [\n    \"CH-TAB-03 (exact values + deltas)\",\n    \"CH-TIM-01 (one metric, full size)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"exact values must be read\",\n      \"use\": \"CH-TAB-03\"\n    },\n    {\n      \"when\": \"one metric deserves a full chart\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- scanning many metrics for direction at a glance\n- weekly one-pagers where shape matters, not exact history\n\nDo NOT use when:\n- comparing magnitudes across rows (each row has its own scale)\n- fewer than 5 points per row\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first row's last value\",\n  \"rows\": \"[{label, values, good: up|down}]\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 160\n    },\n    \"row_height\": 40,\n    \"row_gap\": 18,\n    \"spark_left\": 240,\n    \"spark_right\": 560,\n    \"spark_half\": 11,\n    \"delta_x\": 800,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  }\n}\n```\n\n### Rules\n- each row scales to its own min-max: sparklines show shape, never comparable magnitude\n- delta colored by the row's DECLARED good direction, not by sign\n- end dot marks the latest value\n\n### Never do this\n- shared scale implied across rows\n- axes or gridlines on sparklines\n- coloring deltas by sign when down is good\n\n### QA before delivering\n- [ ] good direction declared per row\n- [ ] >= 5 points per row\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| line | `#1A1A1A` |\n| dot | `#C4001A` |\n| value_label | `#1A1A1A` |\n| delta_pos | `#2E6E4E` |\n| delta_neg | `#C4001A` |\n| category_label | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

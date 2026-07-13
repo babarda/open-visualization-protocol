@@ -1,0 +1,32 @@
+{
+  "title": "Q4 spend overran budget by 21 k$, the widest quarterly gap",
+  "eyebrow": "BUDGET VS ACTUAL . 2025",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "k$",
+  "x": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+  ],
+  "series": [
+    {
+      "name": "Budget",
+      "values": [
+        220,
+        240,
+        260,
+        280
+      ]
+    },
+    {
+      "name": "Actual",
+      "values": [
+        214,
+        252,
+        249,
+        301
+      ]
+    }
+  ]
+}

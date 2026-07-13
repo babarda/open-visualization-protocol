@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/column_line.schema.json",
+  "title": "Input data for chart_type column_line",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "x",
+    "bars",
+    "line"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "code": "PT-03",
+  "name": "GAP-TO-PLAN",
+  "ovp_version": "0.1",
+  "recognition": "cumulative actual diverges from cumulative plan; the wedge widens or narrows",
+  "meaning": "execution is ahead or behind commitment",
+  "business_reading": "quantify the gap in units AND time; state the recovery assumption",
+  "show_with": [
+    "CH-TIM-02",
+    "CH-DEV-01"
+  ],
+  "avoid": [
+    "period (non-cumulative) bars that hide accumulated slippage",
+    "truncated baselines"
+  ]
+}

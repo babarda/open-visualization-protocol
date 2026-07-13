@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">KPI BOARD . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Docs on time misses target by 14 points; deliveries close the gap</text>
+<rect x="208" y="155" width="355.2" height="20" fill="#EEE6DD"/>
+<rect x="563.2" y="155" width="148" height="20" fill="#DFD8D0"/>
+<rect x="711.2" y="155" width="88.8" height="20" fill="#D0CAC4"/>
+<rect x="208" y="161" width="515.04" height="8" fill="#262A33"/>
+<line x1="770.4" y1="155" x2="770.4" y2="175" stroke="#9E2B25" stroke-width="2.5"/>
+<text x="192" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<text x="812" y="165" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">87 %</text>
+<rect x="208" y="211" width="414.4" height="20" fill="#EEE6DD"/>
+<rect x="622.4" y="211" width="118.4" height="20" fill="#DFD8D0"/>
+<rect x="740.8" y="211" width="59.2" height="20" fill="#D0CAC4"/>
+<rect x="208" y="217" width="544.64" height="8" fill="#262A33"/>
+<line x1="740.8" y1="211" x2="740.8" y2="231" stroke="#9E2B25" stroke-width="2.5"/>
+<text x="192" y="221" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<text x="812" y="221" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">92</text>
+<rect x="208" y="267" width="296" height="20" fill="#EEE6DD"/>
+<rect x="504" y="267" width="177.6" height="20" fill="#DFD8D0"/>
+<rect x="681.6" y="267" width="118.4" height="20" fill="#D0CAC4"/>
+<rect x="208" y="273" width="420.32" height="8" fill="#262A33"/>
+<line x1="711.2" y1="267" x2="711.2" y2="287" stroke="#9E2B25" stroke-width="2.5"/>
+<text x="192" y="277" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<text x="812" y="277" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">71</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>

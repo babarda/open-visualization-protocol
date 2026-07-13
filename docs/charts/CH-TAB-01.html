@@ -1,0 +1,1190 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-TAB-01 STATUS MATRIX</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-TAB-01</div>
+<div class="kicker">CH-TAB-01 . family TAB</div>
+<h1>STATUS MATRIX</h1>
+<p class="lead">entities x stages grid with status word + color. Needs:
+rows of entities, columns of ordered stages, one status enum per cell.</p>
+<p><span class="tag">status</span><span class="tag">lookup</span><span class="tag">readiness</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#D8D5CE" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#D8D5CE" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#D8D5CE" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#008080"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#C9C6BF"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#D8D5CE"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#D8D5CE" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#8B1E1E"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#D8D5CE"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#D8D5CE"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#D8D5CE" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#008080"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#C9C6BF"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#D8D5CE"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#D8D5CE"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#D8D5CE" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#E2E8E8" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#339966"/>
+<text x="226" y="174" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#339966"/>
+<text x="408" y="174" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#339966"/>
+<text x="590" y="174" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#339966"/>
+<text x="772" y="174" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#E2E8E8" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#339966"/>
+<text x="226" y="218" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#339966"/>
+<text x="408" y="218" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#339966"/>
+<text x="590" y="218" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#339966"/>
+<text x="772" y="218" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#E2E8E8" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#339966"/>
+<text x="226" y="262" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#008080"/>
+<text x="408" y="262" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#E08A00"/>
+<text x="590" y="262" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#E2E8E8"/>
+<text x="772" y="262" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#E2E8E8" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#339966"/>
+<text x="226" y="306" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#D63A2F"/>
+<text x="408" y="306" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#E2E8E8"/>
+<text x="590" y="306" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#E2E8E8"/>
+<text x="772" y="306" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#E2E8E8" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#008080"/>
+<text x="226" y="350" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#E08A00"/>
+<text x="408" y="350" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#E2E8E8"/>
+<text x="590" y="350" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#E2E8E8"/>
+<text x="772" y="350" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#E2E8E8" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">READINESS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#E8E0D4" stroke-width="1"/>
+<text x="184" y="174" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#E8E0D4" stroke-width="1"/>
+<text x="184" y="218" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#E8E0D4" stroke-width="1"/>
+<text x="184" y="262" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B8B2A7"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#E8E0D4"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#E8E0D4" stroke-width="1"/>
+<text x="184" y="306" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#E8E0D4"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#E8E0D4"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#E8E0D4" stroke-width="1"/>
+<text x="184" y="350" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#9E2B25"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B8B2A7"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#E8E0D4"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#E8E0D4"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#E8E0D4" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#C6D5E0" stroke-width="1"/>
+<text x="184" y="174" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#C6D5E0" stroke-width="1"/>
+<text x="184" y="218" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#C6D5E0" stroke-width="1"/>
+<text x="184" y="262" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#1B6E8F"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B54708"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#C6D5E0"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#C6D5E0" stroke-width="1"/>
+<text x="184" y="306" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#C6D5E0"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#C6D5E0"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#C6D5E0" stroke-width="1"/>
+<text x="184" y="350" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#1B6E8F"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B54708"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#C6D5E0"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#C6D5E0"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#C6D5E0" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#C2410C"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#64748B"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#64748B"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#B91C1C"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#64748B"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#64748B"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#C2410C"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#64748B"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#64748B"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#64748B"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#64748B" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#B9B9B9" stroke-width="1"/>
+<text x="184" y="174" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#333333"/>
+<text x="226" y="174" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#333333"/>
+<text x="408" y="174" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#333333"/>
+<text x="590" y="174" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#333333"/>
+<text x="772" y="174" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#B9B9B9" stroke-width="1"/>
+<text x="184" y="218" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#333333"/>
+<text x="226" y="218" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#333333"/>
+<text x="408" y="218" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#333333"/>
+<text x="590" y="218" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#333333"/>
+<text x="772" y="218" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#B9B9B9" stroke-width="1"/>
+<text x="184" y="262" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#333333"/>
+<text x="226" y="262" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#7A1F1F"/>
+<text x="408" y="262" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B9B9B9"/>
+<text x="590" y="262" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#B9B9B9"/>
+<text x="772" y="262" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#B9B9B9" stroke-width="1"/>
+<text x="184" y="306" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#333333"/>
+<text x="226" y="306" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#7A1F1F"/>
+<text x="408" y="306" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#B9B9B9"/>
+<text x="590" y="306" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#B9B9B9"/>
+<text x="772" y="306" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#B9B9B9" stroke-width="1"/>
+<text x="184" y="350" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#7A1F1F"/>
+<text x="226" y="350" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B9B9B9"/>
+<text x="408" y="350" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#B9B9B9"/>
+<text x="590" y="350" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#B9B9B9"/>
+<text x="772" y="350" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#B9B9B9" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#111111" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E2E2E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E2E2E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E2E2E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E2E2E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#111111" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E2E2E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E2E2E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E2E2E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E2E2E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#111111" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E2E2E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#C0182B"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B0B0B0"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#111111"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#111111" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E2E2E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#C0182B"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#111111"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#111111"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#111111" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#C0182B"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B0B0B0"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#111111"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#111111"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#111111" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#2A323A" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#2A323A" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#2A323A" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#F0B429"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#5C6B78"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#2A323A"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#2A323A" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#E5534B"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#2A323A"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#2A323A"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#2A323A" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#F0B429"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#5C6B78"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#2A323A"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#2A323A"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#2A323A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#CDC3AE" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#CDC3AE" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#CDC3AE" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#0F766E"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B9AE9C"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#CDC3AE"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#CDC3AE" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#C2410C"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#CDC3AE"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#CDC3AE"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#CDC3AE" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#0F766E"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B9AE9C"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#CDC3AE"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#CDC3AE"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#CDC3AE" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#F0B429"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#8A9096"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#E5534B"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#3A3F44"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#F0B429"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#8A9096"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#3A3F44"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#3A3F44" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#8EAADB" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#8EAADB" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#8EAADB" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#1F3864"/>
+<text x="408" y="262" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#A9BBD9"/>
+<text x="590" y="262" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#8EAADB"/>
+<text x="772" y="262" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#8EAADB" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="306" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#8EAADB"/>
+<text x="590" y="306" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#8EAADB"/>
+<text x="772" y="306" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#8EAADB" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#1F3864"/>
+<text x="226" y="350" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#A9BBD9"/>
+<text x="408" y="350" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#8EAADB"/>
+<text x="590" y="350" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#8EAADB"/>
+<text x="772" y="350" font-size="10" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#8EAADB" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#E2E8F0" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#E2E8F0" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#E2E8F0" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#D63A2F"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B45309"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#E2E8F0"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#E2E8F0" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#D63A2F"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#E2E8F0"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#E2E8F0"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#E2E8F0" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#D63A2F"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B45309"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#E2E8F0"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#E2E8F0"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#E2E8F0" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#DCCFB6" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#3D5A46"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#3D5A46"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#3D5A46"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#3D5A46"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#DCCFB6" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#3D5A46"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#3D5A46"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#3D5A46"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#3D5A46"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#DCCFB6" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#3D5A46"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#C4572E"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#C9BBA4"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#DCCFB6"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#DCCFB6" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#3D5A46"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#7A3B1E"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#DCCFB6"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#DCCFB6"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#DCCFB6" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#C4572E"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#C9BBA4"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#DCCFB6"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#DCCFB6"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#DCCFB6" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">READINESS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#C7D0D9" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#C7D0D9" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#C7D0D9" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#2251FF"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#A9B4C0"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#C7D0D9"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#C7D0D9" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#C7D0D9"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#C7D0D9"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#C7D0D9" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#2251FF"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#A9B4C0"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#C7D0D9"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#C7D0D9"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#C7D0D9" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#C9D2CC" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#197A56"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#197A56"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#197A56"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#197A56"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#C9D2CC" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#197A56"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#197A56"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#197A56"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#197A56"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#C9D2CC" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#197A56"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#197A56"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#A7C4B5"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#C9D2CC"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#C9D2CC" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#197A56"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#9E2B25"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#C9D2CC"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#C9D2CC"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#C9D2CC" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#197A56"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#A7C4B5"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#C9D2CC"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#C9D2CC"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#C9D2CC" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#D9D6D2" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#D9D6D2" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#2E6E4E"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#D9D6D2" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#C4001A"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#B5B1AB"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#D9D6D2"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#D9D6D2" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#2E6E4E"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#C4001A"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#D9D6D2"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#D9D6D2"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#D9D6D2" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#C4001A"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#B5B1AB"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#D9D6D2"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#D9D6D2"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#D9D6D2" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>readiness tracking: systems x stages, packages x gates, sites x milestones</li><li>the reader looks up THEIR row</li><li>8 rows and 6 stage columns or fewer</li></ul>
+<h2>Do not use when</h2><ul><li>numeric cells (heatmap table when built)</li><li>more than 8 rows (split by area or paginate)</li><li>single-stage status (a list with chips does it)</li></ul>
+<h2>See instead</h2><ul><li>cells are numbers, not statuses: <a href='CH-TAB-02 when built.html'>CH-TAB-02 when built</a></li><li>progress over time per entity: <a href='CH-TIM-02.html'>CH-TIM-02</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-TAB-02 (heatmap table, planned)</li></ul>
+<h2>Rules</h2><ul><li>status is ALWAYS swatch + word, never color alone</li><li>stage columns in process order, never re-sorted</li><li>rows in the reader&#x27;s natural order (system number, site), not by health</li><li>na cells show the nil hyphen with the hairline swatch</li><li>no zebra striping; hairline row rules only</li></ul>
+<h2>Never do this</h2><ul><li>color-only status dots</li><li>zebra striping</li><li>sorting rows by health (readers lose their row)</li><li>traffic-light gradients between statuses</li><li>emoji as status markers</li></ul>
+<h2>QA before delivering</h2><ul><li>every cell carries word + swatch</li><li>cells per row equal column count</li><li>rows &lt;= 8, columns &lt;= 6</li><li>title states the readiness finding with a number</li><li>source line present bottom-left</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>string, action title stating the readiness finding with a number</td></tr><tr><td>eyebrow</td><td>string caps, rendered only when the DL chrome asks for it</td></tr><tr><td>source</td><td>string, rendered bottom-left, always</td></tr><tr><td>columns</td><td>array of ordered stage names, caps</td></tr><tr><td>rows</td><td>array of {label, cells: [status enum per column]}</td></tr><tr><td>statuses</td><td>complete | on_track | watch | critical | na</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;Two of five systems are handover-ready; System D is critical in test&quot;,
+  &quot;eyebrow&quot;: &quot;READINESS . WEEK 28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;columns&quot;: [
+    &quot;INSTALL&quot;,
+    &quot;TEST&quot;,
+    &quot;PUNCH&quot;,
+    &quot;HANDOVER&quot;
+  ],
+  &quot;rows&quot;: [
+    {
+      &quot;label&quot;: &quot;System A&quot;,
+      &quot;cells&quot;: [
+        &quot;complete&quot;,
+        &quot;complete&quot;,
+        &quot;complete&quot;,
+        &quot;complete&quot;
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System B&quot;,
+      &quot;cells&quot;: [
+        &quot;complete&quot;,
+        &quot;complete&quot;,
+        &quot;complete&quot;,
+        &quot;complete&quot;
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System C&quot;,
+      &quot;cells&quot;: [
+        &quot;complete&quot;,
+        &quot;on_track&quot;,
+        &quot;watch&quot;,
+        &quot;na&quot;
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System D&quot;,
+      &quot;cells&quot;: [
+        &quot;complete&quot;,
+        &quot;critical&quot;,
+        &quot;na&quot;,
+        &quot;na&quot;
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System E&quot;,
+      &quot;cells&quot;: [
+        &quot;on_track&quot;,
+        &quot;watch&quot;,
+        &quot;na&quot;,
+        &quot;na&quot;
+      ]
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX, role-based (themeable) -->\n\n## STATUS MATRIX chart (CH-TAB-01)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| header | body |\n| row_label | ink |\n| status_word | body |\n| status_complete | positive |\n| status_on_track | primary |\n| status_watch | warning -> muted |\n| status_critical | negative |\n| status_na | hairline |\n| rule | hairline |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"Two of five systems are handover-ready; System D is critical in test\",\n  \"eyebrow\": \"READINESS . WEEK 28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"columns\": [\n    \"INSTALL\",\n    \"TEST\",\n    \"PUNCH\",\n    \"HANDOVER\"\n  ],\n  \"rows\": [\n    {\n      \"label\": \"System A\",\n      \"cells\": [\n        \"complete\",\n        \"complete\",\n        \"complete\",\n        \"complete\"\n      ]\n    },\n    {\n      \"label\": \"System B\",\n      \"cells\": [\n        \"complete\",\n        \"complete\",\n        \"complete\",\n        \"complete\"\n      ]\n    },\n    {\n      \"label\": \"System C\",\n      \"cells\": [\n        \"complete\",\n        \"on_track\",\n        \"watch\",\n        \"na\"\n      ]\n    },\n    {\n      \"label\": \"System D\",\n      \"cells\": [\n        \"complete\",\n        \"critical\",\n        \"na\",\n        \"na\"\n      ]\n    },\n    {\n      \"label\": \"System E\",\n      \"cells\": [\n        \"on_track\",\n        \"watch\",\n        \"na\",\n        \"na\"\n      ]\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-TAB-01\",\n  \"name\": \"STATUS MATRIX\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"matrix\",\n  \"meta\": {\n    \"intent\": [\n      \"status\",\n      \"lookup\",\n      \"readiness\"\n    ],\n    \"form\": \"entities x stages grid with status word + color\",\n    \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n    \"relations\": {\n      \"family\": \"TAB\",\n      \"alternatives\": [\n        \"CH-TAB-02 (heatmap table, planned)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"cells are numbers, not statuses\",\n          \"use\": \"CH-TAB-02 when built\"\n        },\n        {\n          \"when\": \"progress over time per entity\",\n          \"use\": \"CH-TIM-02\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"readiness tracking: systems x stages, packages x gates, sites x milestones\",\n    \"the reader looks up THEIR row\",\n    \"8 rows and 6 stage columns or fewer\"\n  ],\n  \"not_when\": [\n    \"numeric cells (heatmap table when built)\",\n    \"more than 8 rows (split by area or paginate)\",\n    \"single-stage status (a list with chips does it)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"string, action title stating the readiness finding with a number\",\n    \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n    \"source\": \"string, rendered bottom-left, always\",\n    \"columns\": \"array of ordered stage names, caps\",\n    \"rows\": \"array of {label, cells: [status enum per column]}\",\n    \"statuses\": \"complete | on_track | watch | critical | na\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"display\": {\n    \"complete\": \"COMPLETE\",\n    \"on_track\": \"ON TRACK\",\n    \"watch\": \"WATCH\",\n    \"critical\": \"CRITICAL\",\n    \"na\": \"-\"\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  },\n  \"rules\": [\n    \"status is ALWAYS swatch + word, never color alone\",\n    \"stage columns in process order, never re-sorted\",\n    \"rows in the reader's natural order (system number, site), not by health\",\n    \"na cells show the nil hyphen with the hairline swatch\",\n    \"no zebra striping; hairline row rules only\"\n  ],\n  \"roles\": {\n    \"header\": [\n      \"body\"\n    ],\n    \"row_label\": [\n      \"ink\"\n    ],\n    \"status_word\": [\n      \"body\"\n    ],\n    \"status_complete\": [\n      \"positive\"\n    ],\n    \"status_on_track\": [\n      \"primary\"\n    ],\n    \"status_watch\": [\n      \"warning\",\n      \"muted\"\n    ],\n    \"status_critical\": [\n      \"negative\"\n    ],\n    \"status_na\": [\n      \"hairline\"\n    ],\n    \"rule\": [\n      \"hairline\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"color-only status dots\",\n    \"zebra striping\",\n    \"sorting rows by health (readers lose their row)\",\n    \"traffic-light gradients between statuses\",\n    \"emoji as status markers\"\n  ],\n  \"qa\": [\n    \"every cell carries word + swatch\",\n    \"cells per row equal column count\",\n    \"rows <= 8, columns <= 6\",\n    \"title states the readiness finding with a number\",\n    \"source line present bottom-left\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-01 AGRAW -->\n\n## STATUS MATRIX chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#3D3D3D` |\n| row_label | `#1A1A1A` |\n| status_word | `#3D3D3D` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#008080` |\n| status_watch | `#C9C6BF` |\n| status_critical | `#8B1E1E` |\n| status_na | `#D8D5CE` |\n| rule | `#D8D5CE` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-02 KATA -->\n\n## STATUS MATRIX chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#555555` |\n| row_label | `#222222` |\n| status_word | `#555555` |\n| status_complete | `#339966` |\n| status_on_track | `#008080` |\n| status_watch | `#E08A00` |\n| status_critical | `#D63A2F` |\n| status_na | `#E2E8E8` |\n| rule | `#E2E8E8` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-03 LOGOS -->\n\n## STATUS MATRIX chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| header | `#4A4E57` |\n| row_label | `#262A33` |\n| status_word | `#4A4E57` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#9E2B25` |\n| status_watch | `#B8B2A7` |\n| status_critical | `#9E2B25` |\n| status_na | `#E8E0D4` |\n| rule | `#E8E0D4` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-04 SHILPA -->\n\n## STATUS MATRIX chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| header | `#33424E` |\n| row_label | `#143D59` |\n| status_word | `#33424E` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#1B6E8F` |\n| status_watch | `#B54708` |\n| status_critical | `#9E2B25` |\n| status_na | `#C6D5E0` |\n| rule | `#C6D5E0` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-05 OBEYA -->\n\n## STATUS MATRIX chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#334155` |\n| row_label | `#0F172A` |\n| status_word | `#334155` |\n| status_complete | `#1F7A4D` |\n| status_on_track | `#C2410C` |\n| status_watch | `#64748B` |\n| status_critical | `#B91C1C` |\n| status_na | `#64748B` |\n| rule | `#64748B` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-06 LEX -->\n\n## STATUS MATRIX chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#333333` |\n| row_label | `#1A1A1A` |\n| status_word | `#333333` |\n| status_complete | `#333333` |\n| status_on_track | `#7A1F1F` |\n| status_watch | `#B9B9B9` |\n| status_critical | `#7A1F1F` |\n| status_na | `#B9B9B9` |\n| rule | `#B9B9B9` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-07 SAGA -->\n\n## STATUS MATRIX chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#2E2E2E` |\n| row_label | `#111111` |\n| status_word | `#2E2E2E` |\n| status_complete | `#2E2E2E` |\n| status_on_track | `#C0182B` |\n| status_watch | `#B0B0B0` |\n| status_critical | `#C0182B` |\n| status_na | `#111111` |\n| rule | `#111111` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-08 SENTINEL -->\n\n## STATUS MATRIX chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| header | `#9FB0BE` |\n| row_label | `#E6EDF3` |\n| status_word | `#9FB0BE` |\n| status_complete | `#3FB68B` |\n| status_on_track | `#F0B429` |\n| status_watch | `#5C6B78` |\n| status_critical | `#E5534B` |\n| status_na | `#2A323A` |\n| rule | `#2A323A` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-09 ATLAS -->\n\n## STATUS MATRIX chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| header | `#4A5860` |\n| row_label | `#2B3A42` |\n| status_word | `#4A5860` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#0F766E` |\n| status_watch | `#B9AE9C` |\n| status_critical | `#C2410C` |\n| status_na | `#CDC3AE` |\n| rule | `#CDC3AE` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-10 BASIRA -->\n\n## STATUS MATRIX chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| header | `#D9D9D9` |\n| row_label | `#FFFFFF` |\n| status_word | `#D9D9D9` |\n| status_complete | `#3FB68B` |\n| status_on_track | `#F0B429` |\n| status_watch | `#8A9096` |\n| status_critical | `#E5534B` |\n| status_na | `#3A3F44` |\n| rule | `#3A3F44` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-11 SUTRA -->\n\n## STATUS MATRIX chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#262626` |\n| row_label | `#1F3864` |\n| status_word | `#262626` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#1F3864` |\n| status_watch | `#A9BBD9` |\n| status_critical | `#9E2B25` |\n| status_na | `#8EAADB` |\n| rule | `#8EAADB` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-12 NOROSHI -->\n\n## STATUS MATRIX chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#475569` |\n| row_label | `#0F172A` |\n| status_word | `#475569` |\n| status_complete | `#1F7A4D` |\n| status_on_track | `#D63A2F` |\n| status_watch | `#B45309` |\n| status_critical | `#D63A2F` |\n| status_na | `#E2E8F0` |\n| rule | `#E2E8F0` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-13 MIZAN -->\n\n## STATUS MATRIX chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| header | `#4E4237` |\n| row_label | `#31261D` |\n| status_word | `#4E4237` |\n| status_complete | `#3D5A46` |\n| status_on_track | `#C4572E` |\n| status_watch | `#C9BBA4` |\n| status_critical | `#7A3B1E` |\n| status_na | `#DCCFB6` |\n| rule | `#DCCFB6` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-14 EVIDENTIA -->\n\n## STATUS MATRIX chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#3C4A5A` |\n| row_label | `#0B1F35` |\n| status_word | `#3C4A5A` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#2251FF` |\n| status_watch | `#A9B4C0` |\n| status_critical | `#9E2B25` |\n| status_na | `#C7D0D9` |\n| rule | `#C7D0D9` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-15 ABRID -->\n\n## STATUS MATRIX chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#3E4C46` |\n| row_label | `#0E3A2C` |\n| status_word | `#3E4C46` |\n| status_complete | `#197A56` |\n| status_on_track | `#197A56` |\n| status_watch | `#A7C4B5` |\n| status_critical | `#9E2B25` |\n| status_na | `#C9D2CC` |\n| rule | `#C9D2CC` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-01 STATUS MATRIX rendered in language DL-16 TELOS -->\n\n## STATUS MATRIX chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"readiness\"\n  ],\n  \"form\": \"entities x stages grid with status word + color\",\n  \"data_required\": \"rows of entities, columns of ordered stages, one status enum per cell\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are numbers, not statuses\",\n      \"use\": \"CH-TAB-02 when built\"\n    },\n    {\n      \"when\": \"progress over time per entity\",\n      \"use\": \"CH-TIM-02\"\n    }\n  ]\n}\n```\n\nUse when:\n- readiness tracking: systems x stages, packages x gates, sites x milestones\n- the reader looks up THEIR row\n- 8 rows and 6 stage columns or fewer\n\nDo NOT use when:\n- numeric cells (heatmap table when built)\n- more than 8 rows (split by area or paginate)\n- single-stage status (a list with chips does it)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title stating the readiness finding with a number\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"array of ordered stage names, caps\",\n  \"rows\": \"array of {label, cells: [status enum per column]}\",\n  \"statuses\": \"complete | on_track | watch | critical | na\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 152\n    },\n    \"row_height\": 44,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16,\n      \"gutter\": 168\n    },\n    \"status\": {\n      \"size\": 10\n    }\n  },\n  \"scale\": {\n    \"note\": \"no scale; a matrix is a lookup, not a measurement\"\n  }\n}\n```\n\n### Rules\n- status is ALWAYS swatch + word, never color alone\n- stage columns in process order, never re-sorted\n- rows in the reader's natural order (system number, site), not by health\n- na cells show the nil hyphen with the hairline swatch\n- no zebra striping; hairline row rules only\n\n### Never do this\n- color-only status dots\n- zebra striping\n- sorting rows by health (readers lose their row)\n- traffic-light gradients between statuses\n- emoji as status markers\n\n### QA before delivering\n- [ ] every cell carries word + swatch\n- [ ] cells per row equal column count\n- [ ] rows <= 8, columns <= 6\n- [ ] title states the readiness finding with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| header | `#444444` |\n| row_label | `#1A1A1A` |\n| status_word | `#444444` |\n| status_complete | `#2E6E4E` |\n| status_on_track | `#C4001A` |\n| status_watch | `#B5B1AB` |\n| status_critical | `#C4001A` |\n| status_na | `#D9D6D2` |\n| rule | `#D9D6D2` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

@@ -1,0 +1,41 @@
+{
+  "title": "MST overruns its planned test duration by 3 days",
+  "eyebrow": "TEST DAYS . PLANNED VS ACTUAL",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "days",
+  "series_labels": [
+    "Planned",
+    "Actual"
+  ],
+  "categories": [
+    {
+      "label": "PS1",
+      "values": [
+        5,
+        6
+      ]
+    },
+    {
+      "label": "PS4",
+      "values": [
+        4,
+        5
+      ]
+    },
+    {
+      "label": "MST",
+      "values": [
+        6,
+        9
+      ],
+      "highlight": true
+    },
+    {
+      "label": "PS5",
+      "values": [
+        5,
+        6
+      ]
+    }
+  ]
+}

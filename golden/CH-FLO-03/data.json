@@ -1,0 +1,112 @@
+{
+  "title": "System D touches six of seven systems",
+  "eyebrow": "INTERFACE MAP",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "interfaces",
+  "nodes": [
+    {
+      "id": "D",
+      "at": [
+        50,
+        45
+      ],
+      "value": 24,
+      "highlight": true
+    },
+    {
+      "id": "A",
+      "at": [
+        20,
+        20
+      ],
+      "value": 10
+    },
+    {
+      "id": "B",
+      "at": [
+        75,
+        15
+      ],
+      "value": 12
+    },
+    {
+      "id": "C",
+      "at": [
+        85,
+        55
+      ],
+      "value": 8
+    },
+    {
+      "id": "E",
+      "at": [
+        70,
+        85
+      ],
+      "value": 9
+    },
+    {
+      "id": "F",
+      "at": [
+        25,
+        80
+      ],
+      "value": 7
+    },
+    {
+      "id": "G",
+      "at": [
+        10,
+        50
+      ],
+      "value": 5
+    }
+  ],
+  "edges": [
+    {
+      "a": "D",
+      "b": "A",
+      "weight": 4
+    },
+    {
+      "a": "D",
+      "b": "B",
+      "weight": 6
+    },
+    {
+      "a": "D",
+      "b": "C",
+      "weight": 3
+    },
+    {
+      "a": "D",
+      "b": "E",
+      "weight": 5
+    },
+    {
+      "a": "D",
+      "b": "F",
+      "weight": 2
+    },
+    {
+      "a": "D",
+      "b": "G",
+      "weight": 2
+    },
+    {
+      "a": "A",
+      "b": "B",
+      "weight": 2
+    },
+    {
+      "a": "C",
+      "b": "E",
+      "weight": 1
+    },
+    {
+      "a": "E",
+      "b": "F",
+      "weight": 1
+    }
+  ]
+}

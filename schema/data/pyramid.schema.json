@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/pyramid.schema.json",
+  "title": "Input data for chart_type pyramid",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "series_labels",
+    "bands"
+  ]
+}

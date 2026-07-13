@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/nr.schema.json",
+  "title": "Narrative skeleton",
+  "type": "object",
+  "required": ["code", "name", "ovp_version", "decision_style", "sections", "example", "qa"],
+  "properties": {
+    "code": {"type": "string", "pattern": "^NR-[0-9]{2}$"},
+    "name": {"type": "string", "minLength": 3},
+    "ovp_version": {"type": "string", "pattern": "^[01]\\.[0-9]+$"},
+    "decision_style": {"type": "string", "enum": ["recommendation-with-owner", "options", "evidence-only"]},
+    "sections": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["role", "guidance"],
+        "properties": {
+          "role": {"type": "string", "enum": ["claim", "evidence", "cause", "action", "owner", "context", "question", "options"]},
+          "guidance": {"type": "string", "minLength": 10}
+        }
+      }
+    },
+    "example": {"type": "array", "items": {"type": "string"}, "minItems": 2},
+    "qa": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+  }
+}

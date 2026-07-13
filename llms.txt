@@ -1,0 +1,36 @@
+# Open Visualization Protocol (OVP)
+
+> Deterministic, AI-native visualization skills: 74 chart objects x 16
+> design languages. Same spec + same tokens + same data = the same
+> pixels, from any agent or renderer. Copy-paste blocks give an LLM
+> exact geometry and colors: no adjectives, no improvisation, no lying
+> axes.
+
+## Load these, not the handbook (the runtime contract, PROTOCOL 2.1)
+
+- [REGISTRY.json](REGISTRY.json): every object with id, status, and
+  knowledge-graph relations (answers, recommended_by, used_in).
+  Resolve here first, one lookup, no crawling.
+- [blocks/design-system/](blocks/design-system/): one file per chart
+  per language, colors resolved to hex, zero dependencies. Paste one
+  into a CLAUDE.md, AGENTS.md, or .cursorrules and follow it literally.
+- [blocks/skill/](blocks/skill/): role-based chart blocks plus one
+  token block per language; re-theme by swapping the token block.
+- [QUESTIONS.md](QUESTIONS.md) -> [DECIDER.md](DECIDER.md) ->
+  [PATTERNS.md](PATTERNS.md) -> [CHOOSER.md](CHOOSER.md): the
+  deterministic resolution chain from business question to render.
+- [schema/](schema/): JSON Schemas for every object type and every
+  chart's input data.
+
+## Instruction grammar
+
+Render CH-TIM-02 in DL-03 with data.json
+
+## Human documentation
+
+- [MANIFESTO.md](MANIFESTO.md): the seven laws that never break.
+- [PROTOCOL.md](PROTOCOL.md): the normative reference, v1.0, frozen as
+  [RFC-0001.md](RFC-0001.md).
+- [TAXONOMY.md](TAXONOMY.md): the complete object map.
+- [docs/llms.txt](docs/llms.txt): the site map for agents, with the
+  full chart and language listings.

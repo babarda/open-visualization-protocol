@@ -1,0 +1,29 @@
+{
+  "title": "Vendor P takes 34 days to deliver, nearly four times the fastest",
+  "eyebrow": "LEAD TIMES . H1 AVERAGE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "days",
+  "categories": [
+    {
+      "label": "Vendor P",
+      "value": 34,
+      "highlight": true
+    },
+    {
+      "label": "Vendor D",
+      "value": 28
+    },
+    {
+      "label": "Vendor A",
+      "value": 22
+    },
+    {
+      "label": "Vendor M",
+      "value": 15
+    },
+    {
+      "label": "Vendor K",
+      "value": 9
+    }
+  ]
+}

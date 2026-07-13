@@ -1,0 +1,68 @@
+# Open Visualization Protocol (OVP)
+
+> Deterministic, AI-native visualization skills: 74 chart
+> objects x 16 design languages. Same spec + same tokens +
+> same data = the same pixels, from any agent or renderer.
+> Copy-paste blocks give an LLM exact geometry and colors: no
+> adjectives, no improvisation, no lying axes.
+
+## Machine entry points (load these, not the handbook)
+
+- REGISTRY.json: every object with id, status, relations, reverse
+  edges (answers, recommended_by, used_in). Resolve here first.
+- schemas/: JSON Schemas for every object type and every chart's data.
+- blocks (in the repository): the runtime payloads. Two flavors:
+  blocks/design-system/CH-xxx_DL-yy.md (hex-resolved, zero deps) and
+  blocks/skill/CH-xxx.md + blocks/skill/DL-yy.md (role-based,
+  themeable).
+
+## Resolution order for agents
+
+1. Match the business question (BQ objects, questions.html).
+2. Resolve the design language from audience/purpose/medium
+   (decider.html); its constitution sets density, annotation,
+   highlight, and narrative policy.
+3. Map findings to patterns (patterns.html), disambiguate by intent
+   (charts/), honor every see_instead exit.
+4. Structure the telling with the narrative skeleton (NR objects).
+5. Render: `Render CH-TIM-02 in DL-03 with data.json`. Exact px,
+   exact hex. Run the object's QA checklist.
+
+## Design languages
+
+- DL-01 AGRAW: Leadership and collective governance; speaks on board packs
+- DL-02 KATA: Discipline and continuous practice; speaks on weekly status decks
+- DL-03 LOGOS: Logic and evidence; speaks on deep-dive analysis
+- DL-04 SHILPA: Craftsmanship and structure; speaks on technical packs
+- DL-05 OBEYA: Collaboration and shared visibility; speaks on stand-up boards
+- DL-06 LEX: Law and accountability; speaks on claims
+- DL-07 SAGA: History and continuity; speaks on weekly digests
+- DL-08 SENTINEL: Vigilance; speaks on live dashboards
+- DL-09 ATLAS: Orientation; speaks on route progress
+- DL-10 BASIRA: Insight; speaks on photo progress reports
+- DL-11 SUTRA: Condensed knowledge; speaks on briefing notes
+- DL-12 NOROSHI: Alert and escalation; speaks on escalations
+- DL-13 MIZAN: Balance and harmony; speaks on cultural projects
+- DL-14 EVIDENTIA: Proof; speaks on evidence-led strategy decks
+- DL-15 ABRID: Connection and pathways; speaks on framework decks
+- DL-16 TELOS: Purpose and resolution; speaks on results decks
+
+## Chart objects by family
+
+- Correlation (COR): CH-COR-01, CH-COR-02, CH-COR-03, CH-COR-04, CH-COR-05, CH-COR-06, CH-COR-07
+- Deviation (DEV): CH-DEV-01, CH-DEV-02, CH-DEV-03, CH-DEV-04, CH-DEV-05
+- Distribution (DST): CH-DST-01, CH-DST-02, CH-DST-03, CH-DST-04, CH-DST-05, CH-DST-06, CH-DST-07, CH-DST-08, CH-DST-09, CH-DST-10
+- Flow (FLO): CH-FLO-01, CH-FLO-02, CH-FLO-03, CH-FLO-04
+- Magnitude (MAG): CH-MAG-01, CH-MAG-02, CH-MAG-03, CH-MAG-04, CH-MAG-05, CH-MAG-06, CH-MAG-07, CH-MAG-08, CH-MAG-09
+- Part-to-whole (PTW): CH-PTW-01, CH-PTW-02, CH-PTW-03, CH-PTW-04, CH-PTW-05, CH-PTW-06, CH-PTW-07, CH-PTW-08, CH-PTW-09, CH-PTW-10
+- Ranking (RNK): CH-RNK-01, CH-RNK-02, CH-RNK-03, CH-RNK-04, CH-RNK-05, CH-RNK-06
+- Spatial (SPA): CH-SPA-01, CH-SPA-02, CH-SPA-03, CH-SPA-04, CH-SPA-05
+- Tables (TAB): CH-TAB-01, CH-TAB-02, CH-TAB-03
+- Change over time (TIM): CH-TIM-01, CH-TIM-02, CH-TIM-03, CH-TIM-04, CH-TIM-05, CH-TIM-06, CH-TIM-07, CH-TIM-08, CH-TIM-09, CH-TIM-10, CH-TIM-11, CH-TIM-12, CH-TIM-13, CH-TIM-14, CH-TIM-15
+
+## Pages
+
+- index.html: principles and the six-door map
+- protocol.html: the normative reference (v1.0, frozen as RFC-0001)
+- implement.html: build a conformant renderer without asking anyone
+- ai.html: the runtime contract and copy blocks

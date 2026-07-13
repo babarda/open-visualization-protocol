@@ -1,0 +1,72 @@
+{
+  "code": "RC-003",
+  "name": "READINESS BOARD",
+  "ovp_version": "1.0",
+  "dl": "DL-04",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "title",
+      "x": 48,
+      "y": 72,
+      "data": {
+        "title": "Two of five systems are handover-ready; System D is critical in test",
+        "eyebrow": "READINESS . WEEK 28"
+      }
+    },
+    {
+      "type": "chart",
+      "ref": "CH-TAB-01",
+      "data_ref": "golden/CH-TAB-01/data.json",
+      "x": 48,
+      "y": 130,
+      "w": 900,
+      "h": 397.5,
+      "crop": [
+        0,
+        96,
+        960,
+        424
+      ]
+    },
+    {
+      "type": "chip",
+      "x": 986,
+      "y": 150,
+      "data": {
+        "status": "critical",
+        "word": "CRITICAL . SYS D",
+        "w": 180
+      }
+    },
+    {
+      "type": "callout",
+      "x": 986,
+      "y": 200,
+      "data": {
+        "w": 246,
+        "h": 80,
+        "lines": [
+          "System D quarantined",
+          "pending retest; window",
+          "re-opens Thursday."
+        ]
+      }
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12"
+    }
+  ],
+  "qa": [
+    "status always word + marker",
+    "rows in system order, not health order",
+    "one callout maximum",
+    "source line bottom-left"
+  ]
+}

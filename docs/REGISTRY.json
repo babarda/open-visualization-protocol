@@ -1,0 +1,3555 @@
+{
+  "registry": "Open Visualization Protocol object index",
+  "generated_by": "tools/build_blocks.py, do not hand-edit",
+  "lifecycle_mapping": "PROTOCOL.md section 6.1",
+  "objects": [
+    {
+      "id": "BQ-01",
+      "name": "Why did cost overrun?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "variance-decomposition",
+        "bridge"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-07"
+        ],
+        "charts": [
+          "CH-FLO-01",
+          "CH-MAG-02"
+        ],
+        "narrative": "NR-01"
+      },
+      "source": "questions/BQ-01.json"
+    },
+    {
+      "id": "BQ-02",
+      "name": "Are we on schedule?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "progress",
+        "schedule"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-03"
+        ],
+        "charts": [
+          "CH-TIM-02",
+          "CH-TIM-09",
+          "CH-DEV-01"
+        ],
+        "narrative": "NR-01"
+      },
+      "source": "questions/BQ-02.json"
+    },
+    {
+      "id": "BQ-03",
+      "name": "Where is the backlog concentrated?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "ranking",
+        "composition"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-04"
+        ],
+        "charts": [
+          "CH-RNK-01",
+          "CH-PTW-05",
+          "CH-RNK-06"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-03.json"
+    },
+    {
+      "id": "BQ-04",
+      "name": "Who slips the most?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "ranking",
+        "deviation"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-02"
+        ],
+        "charts": [
+          "CH-DEV-01",
+          "CH-RNK-01",
+          "CH-DST-07"
+        ],
+        "narrative": "NR-01"
+      },
+      "source": "questions/BQ-04.json"
+    },
+    {
+      "id": "BQ-05",
+      "name": "Is it improving?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "trend",
+        "change-over-time"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-01"
+        ],
+        "charts": [
+          "CH-TIM-01",
+          "CH-TIM-14",
+          "CH-TIM-05"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-05.json"
+    },
+    {
+      "id": "BQ-06",
+      "name": "Where is the risk building?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "status",
+        "uncertainty"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-06"
+        ],
+        "charts": [
+          "CH-MAG-04",
+          "CH-TAB-01",
+          "CH-TIM-13"
+        ],
+        "narrative": "NR-04"
+      },
+      "source": "questions/BQ-06.json"
+    },
+    {
+      "id": "BQ-07",
+      "name": "How does the total split?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "part-to-whole",
+        "share"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-05"
+        ],
+        "charts": [
+          "CH-PTW-01",
+          "CH-PTW-02",
+          "CH-PTW-05"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-07.json"
+    },
+    {
+      "id": "BQ-08",
+      "name": "What changed since last period?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "deviation",
+        "change-over-time"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-01",
+          "PT-05"
+        ],
+        "charts": [
+          "CH-DEV-02",
+          "CH-TIM-05",
+          "CH-FLO-01"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-08.json"
+    },
+    {
+      "id": "BQ-09",
+      "name": "Are these two measures related?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "correlation",
+        "outlier-detection"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-02"
+        ],
+        "charts": [
+          "CH-COR-01",
+          "CH-COR-02",
+          "CH-COR-03"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-09.json"
+    },
+    {
+      "id": "BQ-10",
+      "name": "How long do things take, and how spread out is it?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "distribution"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-02"
+        ],
+        "charts": [
+          "CH-DST-01",
+          "CH-DST-04",
+          "CH-DST-06"
+        ],
+        "narrative": "NR-02"
+      },
+      "source": "questions/BQ-10.json"
+    },
+    {
+      "id": "BQ-11",
+      "name": "Will we hit the target?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "progress",
+        "uncertainty"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-03"
+        ],
+        "charts": [
+          "CH-TIM-02",
+          "CH-MAG-04"
+        ],
+        "narrative": "NR-01"
+      },
+      "source": "questions/BQ-11.json"
+    },
+    {
+      "id": "BQ-12",
+      "name": "Which option should we choose?",
+      "type": "question",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "intent": [
+        "comparison",
+        "magnitude"
+      ],
+      "relations": {
+        "patterns": [
+          "PT-07"
+        ],
+        "charts": [
+          "CH-MAG-02",
+          "CH-MAG-03",
+          "CH-RNK-06"
+        ],
+        "narrative": "NR-03"
+      },
+      "source": "questions/BQ-12.json"
+    },
+    {
+      "id": "CH-COR-01",
+      "name": "SCATTER",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "outlier-detection"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-02 (bubble, adds a size measure)",
+          "CH-COR-03 (XY heatmap for dense grids)"
+        ],
+        "see_instead": [
+          {
+            "when": "a third measure matters",
+            "use": "CH-COR-02"
+          },
+          {
+            "when": "hundreds of points",
+            "use": "CH-COR-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-09"
+        ],
+        "recommended_by": [
+          "PT-02"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-01.json"
+    },
+    {
+      "id": "CH-COR-02",
+      "name": "BUBBLE",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "magnitude",
+        "outlier-detection"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-01 (drop the size measure)"
+        ],
+        "see_instead": [
+          {
+            "when": "the third measure adds nothing to the story",
+            "use": "CH-COR-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-09"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-02.json"
+    },
+    {
+      "id": "CH-COR-03",
+      "name": "XY HEATMAP",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "pattern",
+        "density"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TAB-02 (heatmap table for entity rows)",
+          "CH-TIM-07 (calendar heatmap, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "rows are entities, not an ordered dimension",
+            "use": "CH-TAB-02"
+          },
+          {
+            "when": "few points",
+            "use": "CH-COR-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-09"
+        ],
+        "recommended_by": [
+          "PT-08"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-03.json"
+    },
+    {
+      "id": "CH-COR-04",
+      "name": "COLUMN + LINE",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (same units: two lines)",
+          "CH-COR-01 (relationship itself)"
+        ],
+        "see_instead": [
+          {
+            "when": "both measures share a unit",
+            "use": "CH-TIM-01"
+          },
+          {
+            "when": "the relationship, not time, is the question",
+            "use": "CH-COR-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-04.json"
+    },
+    {
+      "id": "CH-COR-05",
+      "name": "HEXBIN",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "density"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-01 (few enough points to draw raw)",
+          "CH-COR-03 (categorical axes)"
+        ],
+        "see_instead": [
+          {
+            "when": "under ~50 points",
+            "use": "CH-COR-01"
+          },
+          {
+            "when": "axes are categories, not measures",
+            "use": "CH-COR-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-05.json"
+    },
+    {
+      "id": "CH-COR-06",
+      "name": "PARALLEL COORDINATES",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-01 (two dimensions)",
+          "CH-TAB-02 (exact values per cell)"
+        ],
+        "see_instead": [
+          {
+            "when": "two dimensions suffice",
+            "use": "CH-COR-01"
+          },
+          {
+            "when": "exact per-cell reading",
+            "use": "CH-TAB-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-06.json"
+    },
+    {
+      "id": "CH-COR-07",
+      "name": "SCATTERPLOT MATRIX",
+      "type": "chart",
+      "family": "COR",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "correlation",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-01 (the one pair that matters)",
+          "CH-COR-05 (many points, one pair)"
+        ],
+        "see_instead": [
+          {
+            "when": "one pair is already known to matter",
+            "use": "CH-COR-01"
+          },
+          {
+            "when": "hundreds of points",
+            "use": "CH-COR-05"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-COR-07.json"
+    },
+    {
+      "id": "CH-DEV-01",
+      "name": "DIVERGING BAR",
+      "type": "chart",
+      "family": "DEV",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "deviation",
+        "variance",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DEV-02 (dumbbell, planned)",
+          "CH-DEV-03 (spine, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "deltas chain into a running total",
+            "use": "CH-FLO-01"
+          },
+          {
+            "when": "all values share one sign",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-02",
+          "BQ-04"
+        ],
+        "recommended_by": [
+          "PT-03",
+          "PT-06"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-DEV-01.json"
+    },
+    {
+      "id": "CH-DEV-02",
+      "name": "DUMBBELL",
+      "type": "chart",
+      "family": "DEV",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "deviation",
+        "change-over-time",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-05 (few categories, slope reads better)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than 2 time points",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-08"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DEV-02.json"
+    },
+    {
+      "id": "CH-DEV-03",
+      "name": "SPINE",
+      "type": "chart",
+      "family": "DEV",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-02 (100% stacked for 3-4 parts)",
+          "CH-DEV-05 (agreement scales with 4 levels)"
+        ],
+        "see_instead": [
+          {
+            "when": "3 or more parts per category",
+            "use": "CH-PTW-02"
+          },
+          {
+            "when": "graded agreement levels",
+            "use": "CH-DEV-05"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DEV-03.json"
+    },
+    {
+      "id": "CH-DEV-04",
+      "name": "SURPLUS/DEFICIT AREA",
+      "type": "chart",
+      "family": "DEV",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "deviation",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (no sign story)",
+          "CH-FLO-01 (period deltas as a bridge)"
+        ],
+        "see_instead": [
+          {
+            "when": "the series never crosses zero",
+            "use": "CH-TIM-03"
+          },
+          {
+            "when": "explaining one period's change by driver",
+            "use": "CH-FLO-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DEV-04.json"
+    },
+    {
+      "id": "CH-DEV-05",
+      "name": "DIVERGING STACKED",
+      "type": "chart",
+      "family": "DEV",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "deviation",
+        "composition"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-02 (no natural center)",
+          "CH-DEV-03 (two parts only)"
+        ],
+        "see_instead": [
+          {
+            "when": "levels have no negative/positive split",
+            "use": "CH-PTW-02"
+          },
+          {
+            "when": "only two parts per row",
+            "use": "CH-DEV-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DEV-05.json"
+    },
+    {
+      "id": "CH-DST-01",
+      "name": "HISTOGRAM",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-06 (service-level reading)",
+          "CH-DST-09 (smooth shape)"
+        ],
+        "see_instead": [
+          {
+            "when": "the question is what share clears a threshold",
+            "use": "CH-DST-06"
+          },
+          {
+            "when": "comparing shapes across groups",
+            "use": "CH-DST-09"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-10"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-01.json"
+    },
+    {
+      "id": "CH-DST-02",
+      "name": "DOT PLOT",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "comparison",
+        "distribution"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DEV-02 (change over time reading)"
+        ],
+        "see_instead": [
+          {
+            "when": "the two values are before/after",
+            "use": "CH-DEV-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-02.json"
+    },
+    {
+      "id": "CH-DST-03",
+      "name": "DOT STRIP",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-07 (one pooled swarm)",
+          "CH-DST-04 (5-number summary)"
+        ],
+        "see_instead": [
+          {
+            "when": "one pooled group, outliers by name",
+            "use": "CH-DST-07"
+          },
+          {
+            "when": "too many points to draw raw",
+            "use": "CH-DST-04"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-03.json"
+    },
+    {
+      "id": "CH-DST-04",
+      "name": "BOXPLOT",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-03 (few raw values)",
+          "CH-DST-08 (shape beyond quartiles, warn)"
+        ],
+        "see_instead": [
+          {
+            "when": "few enough values to show raw",
+            "use": "CH-DST-03"
+          },
+          {
+            "when": "the audience reads quartiles poorly",
+            "use": "CH-DST-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-10"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-04.json"
+    },
+    {
+      "id": "CH-DST-05",
+      "name": "POPULATION PYRAMID",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-MAG-03 (unordered categories)",
+          "CH-DEV-03 (two-part shares)"
+        ],
+        "see_instead": [
+          {
+            "when": "categories have no natural band order",
+            "use": "CH-MAG-03"
+          },
+          {
+            "when": "the two parts share one whole",
+            "use": "CH-DEV-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-05.json"
+    },
+    {
+      "id": "CH-DST-06",
+      "name": "CUMULATIVE CURVE",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "share"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-01 (histogram shows the shape directly, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "the shape of the spread matters",
+            "use": "CH-DST-10"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-10"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-06.json"
+    },
+    {
+      "id": "CH-DST-07",
+      "name": "BEESWARM",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "outlier-detection"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-03 (values split by category)",
+          "CH-DST-01 (larger samples)"
+        ],
+        "see_instead": [
+          {
+            "when": "values split across categories",
+            "use": "CH-DST-03"
+          },
+          {
+            "when": "too many items to name",
+            "use": "CH-DST-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-04"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-07.json"
+    },
+    {
+      "id": "CH-DST-08",
+      "name": "VIOLIN",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-04 (quartile summary)",
+          "CH-DST-03 (raw values)",
+          "CH-DST-09 (one unmirrored curve)"
+        ],
+        "see_instead": [
+          {
+            "when": "the audience is not statistical",
+            "use": "CH-DST-04"
+          },
+          {
+            "when": "few enough values to show raw",
+            "use": "CH-DST-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-08.json"
+    },
+    {
+      "id": "CH-DST-09",
+      "name": "DENSITY CURVE",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "distribution",
+        "density"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-01 (honest bins, no smoothing)",
+          "CH-DST-08 (mirrored, per category)"
+        ],
+        "see_instead": [
+          {
+            "when": "bins are honest enough",
+            "use": "CH-DST-01"
+          },
+          {
+            "when": "comparing shapes across categories",
+            "use": "CH-DST-08"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-09.json"
+    },
+    {
+      "id": "CH-DST-10",
+      "name": "ERROR BARS",
+      "type": "chart",
+      "family": "DST",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "uncertainty",
+        "comparison",
+        "variance"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-04 (full distribution shape, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "only the central value matters",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-DST-10.json"
+    },
+    {
+      "id": "CH-FLO-01",
+      "name": "WATERFALL",
+      "type": "chart",
+      "family": "FLO",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "bridge",
+        "variance-decomposition"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DEV-01 (diverging bar, when steps are independent)"
+        ],
+        "see_instead": [
+          {
+            "when": "deltas are independent, not sequential",
+            "use": "CH-DEV-01"
+          },
+          {
+            "when": "composition of a static total",
+            "use": "CH-PTW-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-01",
+          "BQ-08"
+        ],
+        "recommended_by": [
+          "PT-07"
+        ],
+        "used_in": [
+          "RC-002",
+          "RC-004"
+        ]
+      },
+      "source": "specs/CH-FLO-01.json"
+    },
+    {
+      "id": "CH-FLO-02",
+      "name": "SANKEY",
+      "type": "chart",
+      "family": "FLO",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "composition",
+        "variance-decomposition"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-FLO-01 (one total changing through steps)",
+          "CH-PTW-01 (composition without flow)"
+        ],
+        "see_instead": [
+          {
+            "when": "one quantity bridges start to end",
+            "use": "CH-FLO-01"
+          },
+          {
+            "when": "no movement between states",
+            "use": "CH-PTW-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-FLO-02.json"
+    },
+    {
+      "id": "CH-FLO-03",
+      "name": "NETWORK",
+      "type": "chart",
+      "family": "FLO",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "pattern",
+        "correlation"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-FLO-02 (directional volumes)",
+          "CH-TAB-02 (exact adjacency)"
+        ],
+        "see_instead": [
+          {
+            "when": "flows have direction and volume",
+            "use": "CH-FLO-02"
+          },
+          {
+            "when": "exact pairwise values",
+            "use": "CH-TAB-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-FLO-03.json"
+    },
+    {
+      "id": "CH-FLO-04",
+      "name": "CHORD",
+      "type": "chart",
+      "family": "FLO",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-FLO-02 (readable flows, planned/built as sankey)",
+          "CH-TAB-02 (exact matrix values)"
+        ],
+        "see_instead": [
+          {
+            "when": "flows must be read",
+            "use": "CH-FLO-02"
+          },
+          {
+            "when": "exact values per pair",
+            "use": "CH-TAB-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-FLO-04.json"
+    },
+    {
+      "id": "CH-MAG-01",
+      "name": "COLUMN",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-MAG-04 (bullet, planned)",
+          "CH-MAG-02 (paired column, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "the message is rank",
+            "use": "CH-RNK-01"
+          },
+          {
+            "when": "the data is a time series",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-01.json"
+    },
+    {
+      "id": "CH-MAG-02",
+      "name": "PAIRED COLUMN",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DST-02 (dots when columns crowd)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than two series",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-01",
+          "BQ-12"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-02.json"
+    },
+    {
+      "id": "CH-MAG-03",
+      "name": "PAIRED BAR",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-MAG-02 (vertical pairs for short labels)",
+          "CH-DST-02 (dots when the gap is the story)"
+        ],
+        "see_instead": [
+          {
+            "when": "the gap between the two measures is the story",
+            "use": "CH-DST-02"
+          },
+          {
+            "when": "labels are short and periods few",
+            "use": "CH-MAG-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-12"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-03.json"
+    },
+    {
+      "id": "CH-MAG-04",
+      "name": "BULLET",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "variance",
+        "progress"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DEV-01 (signed variance only)"
+        ],
+        "see_instead": [
+          {
+            "when": "no meaningful target exists",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-06",
+          "BQ-11"
+        ],
+        "recommended_by": [],
+        "used_in": [
+          "RC-005"
+        ]
+      },
+      "source": "specs/CH-MAG-04.json"
+    },
+    {
+      "id": "CH-MAG-05",
+      "name": "PROPORTIONAL SYMBOL",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (precise comparison)",
+          "CH-MAG-01 (similar magnitudes)"
+        ],
+        "see_instead": [
+          {
+            "when": "values are within one order of magnitude",
+            "use": "CH-MAG-01"
+          },
+          {
+            "when": "precise reading matters",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-05.json"
+    },
+    {
+      "id": "CH-MAG-06",
+      "name": "PICTOGRAM",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (no unit metaphor needed)",
+          "CH-PTW-06 (share of 100)"
+        ],
+        "see_instead": [
+          {
+            "when": "the share of a whole is the message",
+            "use": "CH-PTW-06"
+          },
+          {
+            "when": "no countable-units story",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-06.json"
+    },
+    {
+      "id": "CH-MAG-07",
+      "name": "RADAR",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-MAG-02 (paired bars read better)",
+          "CH-RNK-01 (single series)"
+        ],
+        "see_instead": [
+          {
+            "when": "axes have different units",
+            "use": "CH-MAG-02"
+          },
+          {
+            "when": "one series only",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-07.json"
+    },
+    {
+      "id": "CH-MAG-08",
+      "name": "PARLIAMENT",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "composition"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-01 (shares without the seat metaphor)",
+          "CH-PTW-06 (percent of 100)"
+        ],
+        "see_instead": [
+          {
+            "when": "values are not countable seats",
+            "use": "CH-PTW-01"
+          },
+          {
+            "when": "a share of 100",
+            "use": "CH-PTW-06"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-08.json"
+    },
+    {
+      "id": "CH-MAG-09",
+      "name": "GAUGE",
+      "type": "chart",
+      "family": "MAG",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "status"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-MAG-04 (several metrics, honest bands)",
+          "CH-PTW-06 (share of 100)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than one metric",
+            "use": "CH-MAG-04"
+          },
+          {
+            "when": "no dial expectation exists",
+            "use": "CH-MAG-04"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-MAG-09.json"
+    },
+    {
+      "id": "CH-PTW-01",
+      "name": "STACKED BAR",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "composition",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-02 (100% stacked)",
+          "CH-PTW-05 (treemap, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "shares matter more than totals",
+            "use": "CH-PTW-02"
+          },
+          {
+            "when": "only one measure per category",
+            "use": "CH-MAG-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-07"
+        ],
+        "recommended_by": [
+          "PT-05"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-01.json"
+    },
+    {
+      "id": "CH-PTW-02",
+      "name": "STACKED BAR 100%",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "share",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-01 (absolute stacked)",
+          "CH-PTW-06 (waffle, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "the total itself matters",
+            "use": "CH-PTW-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-07"
+        ],
+        "recommended_by": [
+          "PT-05"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-02.json"
+    },
+    {
+      "id": "CH-PTW-03",
+      "name": "PIE",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "share"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-01 (stacked bar)",
+          "CH-PTW-06 (waffle, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than 3 parts",
+            "use": "CH-RNK-01"
+          },
+          {
+            "when": "shares tracked over time",
+            "use": "CH-PTW-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-03.json"
+    },
+    {
+      "id": "CH-PTW-04",
+      "name": "DONUT",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "share"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-03 (pie)",
+          "CH-PTW-01 (stacked bar)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than 3 parts",
+            "use": "CH-RNK-01"
+          },
+          {
+            "when": "the hole would stay empty",
+            "use": "CH-PTW-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-04.json"
+    },
+    {
+      "id": "CH-PTW-05",
+      "name": "TREEMAP",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "composition",
+        "magnitude"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-01 (stacked bar)",
+          "CH-RNK-01 (when order matters more than area)"
+        ],
+        "see_instead": [
+          {
+            "when": "under 4 categories",
+            "use": "CH-PTW-03"
+          },
+          {
+            "when": "precise comparison matters",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-03",
+          "BQ-07"
+        ],
+        "recommended_by": [
+          "PT-04"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-05.json"
+    },
+    {
+      "id": "CH-PTW-06",
+      "name": "WAFFLE",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "share",
+        "part-to-whole"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-03 (two or three shares)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than one share",
+            "use": "CH-PTW-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-06.json"
+    },
+    {
+      "id": "CH-PTW-07",
+      "name": "MARIMEKKO",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "composition",
+        "magnitude"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-02 (equal widths)",
+          "CH-PTW-05 (one level, area only)"
+        ],
+        "see_instead": [
+          {
+            "when": "column totals are close to equal",
+            "use": "CH-PTW-02"
+          },
+          {
+            "when": "only one dimension splits",
+            "use": "CH-PTW-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-07.json"
+    },
+    {
+      "id": "CH-PTW-08",
+      "name": "FUNNEL",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "share"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-FLO-01 (gains and losses, not pure attrition)"
+        ],
+        "see_instead": [
+          {
+            "when": "steps can gain as well as lose",
+            "use": "CH-FLO-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-08.json"
+    },
+    {
+      "id": "CH-PTW-09",
+      "name": "SUNBURST",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "composition"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-05 (one level, honest areas)",
+          "CH-PTW-01 (few parts, exact)"
+        ],
+        "see_instead": [
+          {
+            "when": "one level of hierarchy",
+            "use": "CH-PTW-05"
+          },
+          {
+            "when": "shares must be compared precisely",
+            "use": "CH-PTW-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-09.json"
+    },
+    {
+      "id": "CH-PTW-10",
+      "name": "CIRCLE PACK",
+      "type": "chart",
+      "family": "PTW",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "part-to-whole",
+        "magnitude"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-PTW-05 (same data, readable rectangles)",
+          "CH-RNK-01 (exact ranking)"
+        ],
+        "see_instead": [
+          {
+            "when": "areas must be compared",
+            "use": "CH-PTW-05"
+          },
+          {
+            "when": "rank matters",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-PTW-10.json"
+    },
+    {
+      "id": "CH-RNK-01",
+      "name": "BAR-H",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-03 (lollipop, planned)",
+          "CH-RNK-06 (table with bars, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "natural category order matters",
+            "use": "CH-MAG-01"
+          },
+          {
+            "when": "the data is a time series",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-03",
+          "BQ-04"
+        ],
+        "recommended_by": [
+          "PT-02",
+          "PT-04",
+          "PT-07"
+        ],
+        "used_in": [
+          "RC-006"
+        ]
+      },
+      "source": "specs/CH-RNK-01.json"
+    },
+    {
+      "id": "CH-RNK-02",
+      "name": "ORDERED COLUMN",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (long names)"
+        ],
+        "see_instead": [
+          {
+            "when": "natural order matters",
+            "use": "CH-MAG-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-RNK-02.json"
+    },
+    {
+      "id": "CH-RNK-03",
+      "name": "LOLLIPOP",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (denser data)"
+        ],
+        "see_instead": [
+          {
+            "when": "many close values",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-RNK-03.json"
+    },
+    {
+      "id": "CH-RNK-04",
+      "name": "BUMP",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (values matter more than positions)"
+        ],
+        "see_instead": [
+          {
+            "when": "the metric value itself is the story",
+            "use": "CH-TIM-01"
+          },
+          {
+            "when": "only two periods",
+            "use": "CH-TIM-05"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-RNK-04.json"
+    },
+    {
+      "id": "CH-RNK-05",
+      "name": "DOT STRIP",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-03 (adds the zero anchor)"
+        ],
+        "see_instead": [
+          {
+            "when": "the zero anchor matters",
+            "use": "CH-RNK-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-RNK-05.json"
+    },
+    {
+      "id": "CH-RNK-06",
+      "name": "TABLE WITH BARS",
+      "type": "chart",
+      "family": "RNK",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "ranking",
+        "lookup"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (bar alone when exact lookup is secondary)",
+          "CH-TAB-03 (KPI table, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "no delta column is needed",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-03",
+          "BQ-12"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-RNK-06.json"
+    },
+    {
+      "id": "CH-SPA-01",
+      "name": "CHOROPLETH",
+      "type": "chart",
+      "family": "SPA",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-RNK-01 (values without geography)",
+          "CH-SPA-02 (absolute counts)"
+        ],
+        "see_instead": [
+          {
+            "when": "geography adds nothing to the message",
+            "use": "CH-RNK-01"
+          },
+          {
+            "when": "absolute counts, not rates",
+            "use": "CH-SPA-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-SPA-01.json"
+    },
+    {
+      "id": "CH-SPA-02",
+      "name": "PROPORTIONAL SYMBOL MAP",
+      "type": "chart",
+      "family": "SPA",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "magnitude",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-SPA-01 (rates)",
+          "CH-MAG-05 (no geography)"
+        ],
+        "see_instead": [
+          {
+            "when": "rates or intensities",
+            "use": "CH-SPA-01"
+          },
+          {
+            "when": "geography adds nothing",
+            "use": "CH-MAG-05"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-SPA-02.json"
+    },
+    {
+      "id": "CH-SPA-03",
+      "name": "ROUTE PROGRESS",
+      "type": "chart",
+      "family": "SPA",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "progress",
+        "schedule"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-02 (progress without geography)",
+          "CH-TIM-09 (task schedule)"
+        ],
+        "see_instead": [
+          {
+            "when": "no corridor exists",
+            "use": "CH-TIM-02"
+          },
+          {
+            "when": "many parallel tasks",
+            "use": "CH-TIM-09"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-SPA-03.json"
+    },
+    {
+      "id": "CH-SPA-04",
+      "name": "DOT DENSITY",
+      "type": "chart",
+      "family": "SPA",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "density",
+        "distribution",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-SPA-01 (rates by region)",
+          "CH-COR-05 (abstract xy density)"
+        ],
+        "see_instead": [
+          {
+            "when": "region-level rates suffice",
+            "use": "CH-SPA-01"
+          },
+          {
+            "when": "no geography",
+            "use": "CH-COR-05"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-SPA-04.json"
+    },
+    {
+      "id": "CH-SPA-05",
+      "name": "FLOW MAP",
+      "type": "chart",
+      "family": "SPA",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "flow",
+        "magnitude"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-FLO-02 (flows without geography)",
+          "CH-FLO-04 (dense mutual exchange)"
+        ],
+        "see_instead": [
+          {
+            "when": "geography adds nothing",
+            "use": "CH-FLO-02"
+          },
+          {
+            "when": "everything flows to everything",
+            "use": "CH-FLO-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-SPA-05.json"
+    },
+    {
+      "id": "CH-TAB-01",
+      "name": "STATUS MATRIX",
+      "type": "chart",
+      "family": "TAB",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "status",
+        "lookup",
+        "readiness"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TAB-02 (heatmap table, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "cells are numbers, not statuses",
+            "use": "CH-TAB-02 when built"
+          },
+          {
+            "when": "progress over time per entity",
+            "use": "CH-TIM-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-06"
+        ],
+        "recommended_by": [
+          "PT-06"
+        ],
+        "used_in": [
+          "RC-003"
+        ]
+      },
+      "source": "specs/CH-TAB-01.json"
+    },
+    {
+      "id": "CH-TAB-02",
+      "name": "HEATMAP TABLE",
+      "type": "chart",
+      "family": "TAB",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "status",
+        "lookup",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TAB-01 (status enums instead of numbers)",
+          "CH-COR-03 (two ordered dimensions)"
+        ],
+        "see_instead": [
+          {
+            "when": "cells are statuses, not numbers",
+            "use": "CH-TAB-01"
+          },
+          {
+            "when": "both dimensions are ordered",
+            "use": "CH-COR-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TAB-02.json"
+    },
+    {
+      "id": "CH-TAB-03",
+      "name": "KPI TABLE",
+      "type": "chart",
+      "family": "TAB",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "lookup",
+        "status",
+        "trend"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-06 (shape only, no exact lookup)",
+          "CH-RNK-06 (one comparable measure with bars)"
+        ],
+        "see_instead": [
+          {
+            "when": "rows share one unit and rank matters",
+            "use": "CH-RNK-06"
+          },
+          {
+            "when": "only direction matters",
+            "use": "CH-TIM-06"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TAB-03.json"
+    },
+    {
+      "id": "CH-TIM-01",
+      "name": "LINE",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-03 (area, planned)",
+          "CH-TIM-05 (slope, planned)",
+          "CH-TIM-06 (sparkline, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "values are cumulative progress vs plan",
+            "use": "CH-TIM-02"
+          },
+          {
+            "when": "comparison across categories",
+            "use": "CH-RNK-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-05"
+        ],
+        "recommended_by": [
+          "PT-01",
+          "PT-08"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-01.json"
+    },
+    {
+      "id": "CH-TIM-02",
+      "name": "S-CURVE",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "schedule",
+        "progress",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-08 (fan with uncertainty, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "values are per-period, not cumulative",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-02",
+          "BQ-11"
+        ],
+        "recommended_by": [
+          "PT-03"
+        ],
+        "used_in": [
+          "RC-001"
+        ]
+      },
+      "source": "specs/CH-TIM-02.json"
+    },
+    {
+      "id": "CH-TIM-03",
+      "name": "AREA",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "volume",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (line)",
+          "CH-TIM-04 (stacked area, planned)"
+        ],
+        "see_instead": [
+          {
+            "when": "2+ series compared",
+            "use": "CH-TIM-01"
+          },
+          {
+            "when": "cumulative progress vs plan",
+            "use": "CH-TIM-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [
+          "PT-01"
+        ],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-03.json"
+    },
+    {
+      "id": "CH-TIM-04",
+      "name": "STACKED AREA",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "composition",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-03 (one series)",
+          "CH-PTW-01 (few periods)"
+        ],
+        "see_instead": [
+          {
+            "when": "single quantity",
+            "use": "CH-TIM-03"
+          },
+          {
+            "when": "shares matter more than levels",
+            "use": "CH-PTW-02"
+          },
+          {
+            "when": "series cross and levels must be read exactly",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-04.json"
+    },
+    {
+      "id": "CH-TIM-05",
+      "name": "SLOPE",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "change-over-time",
+        "comparison"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-DEV-02 (horizontal reading)"
+        ],
+        "see_instead": [
+          {
+            "when": "more than two periods",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-05",
+          "BQ-08"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-05.json"
+    },
+    {
+      "id": "CH-TIM-06",
+      "name": "SPARKLINE STRIP",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "status"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TAB-03 (exact values + deltas)",
+          "CH-TIM-01 (one metric, full size)"
+        ],
+        "see_instead": [
+          {
+            "when": "exact values must be read",
+            "use": "CH-TAB-03"
+          },
+          {
+            "when": "one metric deserves a full chart",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-06.json"
+    },
+    {
+      "id": "CH-TIM-07",
+      "name": "CALENDAR HEATMAP",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "pattern",
+        "change-over-time",
+        "density"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-COR-03 (generic two-dimension grids)"
+        ],
+        "see_instead": [
+          {
+            "when": "dimensions are not calendar units",
+            "use": "CH-COR-03"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-07.json"
+    },
+    {
+      "id": "CH-TIM-08",
+      "name": "FAN",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "uncertainty"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-02 (progress vs plan, no uncertainty)",
+          "CH-DST-10 (uncertainty on categories)"
+        ],
+        "see_instead": [
+          {
+            "when": "no uncertainty statement exists",
+            "use": "CH-TIM-01"
+          },
+          {
+            "when": "commitment vs plan is the story",
+            "use": "CH-TIM-02"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-08.json"
+    },
+    {
+      "id": "CH-TIM-09",
+      "name": "GANTT",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "schedule",
+        "progress"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-15 (moments, not durations)",
+          "CH-TIM-02 (overall progress vs plan)"
+        ],
+        "see_instead": [
+          {
+            "when": "only dated moments matter",
+            "use": "CH-TIM-15"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-02"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-09.json"
+    },
+    {
+      "id": "CH-TIM-10",
+      "name": "CONNECTED SCATTER",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "change-over-time",
+        "correlation"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (one measure over time)"
+        ],
+        "see_instead": [
+          {
+            "when": "many entities at one moment",
+            "use": "CH-COR-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-10.json"
+    },
+    {
+      "id": "CH-TIM-11",
+      "name": "STREAMGRAPH",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "composition",
+        "volume"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-04 (readable baselines)",
+          "CH-TIM-01 (exact levels)"
+        ],
+        "see_instead": [
+          {
+            "when": "any value must be read",
+            "use": "CH-TIM-04"
+          },
+          {
+            "when": "levels matter",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-11.json"
+    },
+    {
+      "id": "CH-TIM-12",
+      "name": "HORIZON",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "pattern"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-06 (fewer rows, simpler)",
+          "CH-TIM-01 (few series, exact)"
+        ],
+        "see_instead": [
+          {
+            "when": "under ~6 series",
+            "use": "CH-TIM-06"
+          },
+          {
+            "when": "values must be read",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-12.json"
+    },
+    {
+      "id": "CH-TIM-13",
+      "name": "STEP",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "change-over-time",
+        "trend"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (continuous change)"
+        ],
+        "see_instead": [
+          {
+            "when": "values change continuously",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-06"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-13.json"
+    },
+    {
+      "id": "CH-TIM-14",
+      "name": "INDEXED LINE",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "trend",
+        "comparison",
+        "change-over-time"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-01 (same-unit series)"
+        ],
+        "see_instead": [
+          {
+            "when": "series share one unit and scale",
+            "use": "CH-TIM-01"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [
+          "BQ-05"
+        ],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-14.json"
+    },
+    {
+      "id": "CH-TIM-15",
+      "name": "EVENT TIMELINE",
+      "type": "chart",
+      "family": "TIM",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "intent": [
+        "schedule",
+        "status"
+      ],
+      "relations": {
+        "alternatives": [
+          "CH-TIM-09 (durations, not moments)"
+        ],
+        "see_instead": [
+          {
+            "when": "events have durations",
+            "use": "CH-TIM-09"
+          }
+        ],
+        "implemented_by": [
+          "svg",
+          "pptx"
+        ],
+        "answers": [],
+        "recommended_by": [],
+        "used_in": []
+      },
+      "source": "specs/CH-TIM-15.json"
+    },
+    {
+      "id": "CP-CAL-01",
+      "name": "INSIGHT CALLOUT",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-CAL-01.json"
+    },
+    {
+      "id": "CP-CAL-02",
+      "name": "EXCEPTION ROW",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-CAL-02.json"
+    },
+    {
+      "id": "CP-KPI-01",
+      "name": "KPI CARD",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-KPI-01.json"
+    },
+    {
+      "id": "CP-KPI-02",
+      "name": "BIG NUMBER",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-KPI-02.json"
+    },
+    {
+      "id": "CP-LAB-01",
+      "name": "LEADER-LINE ANNOTATION",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-LAB-01.json"
+    },
+    {
+      "id": "CP-STA-01",
+      "name": "STATUS CHIP",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-STA-01.json"
+    },
+    {
+      "id": "CP-STA-02",
+      "name": "OUTLINED STAMP",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-STA-02.json"
+    },
+    {
+      "id": "CP-STR-01",
+      "name": "HEADER BAND",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-STR-01.json"
+    },
+    {
+      "id": "CP-STR-02",
+      "name": "DRAWING TITLE BLOCK",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-STR-02.json"
+    },
+    {
+      "id": "CP-TXT-01",
+      "name": "ACTION TITLE",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-TXT-01.json"
+    },
+    {
+      "id": "CP-TXT-02",
+      "name": "SOURCE LINE",
+      "type": "component",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "source": "components/CP-TXT-02.json"
+    },
+    {
+      "id": "DL-01",
+      "name": "AGRAW",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "board packs",
+        "steering committees",
+        "shareholder reviews",
+        "exec monthlies"
+      ],
+      "source": "tokens/DL-01.json"
+    },
+    {
+      "id": "DL-02",
+      "name": "KATA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "weekly status decks",
+        "progress dashboards",
+        "PMO reporting"
+      ],
+      "source": "tokens/DL-02.json"
+    },
+    {
+      "id": "DL-03",
+      "name": "LOGOS",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "deep-dive analysis",
+        "monthly chartbooks",
+        "advisory notes"
+      ],
+      "source": "tokens/DL-03.json"
+    },
+    {
+      "id": "DL-04",
+      "name": "SHILPA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "technical packs",
+        "procedures",
+        "job cards",
+        "commissioning annexes"
+      ],
+      "source": "tokens/DL-04.json"
+    },
+    {
+      "id": "DL-05",
+      "name": "OBEYA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "stand-up boards",
+        "site wall prints",
+        "war rooms",
+        "A3 posters"
+      ],
+      "source": "tokens/DL-05.json"
+    },
+    {
+      "id": "DL-06",
+      "name": "LEX",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "adopted",
+      "occasions": [
+        "claims",
+        "mediation",
+        "arbitration decks",
+        "contractual correspondence"
+      ],
+      "source": "tokens/DL-06.json"
+    },
+    {
+      "id": "DL-07",
+      "name": "SAGA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "weekly digests",
+        "bulletins",
+        "newsletters",
+        "reading pages"
+      ],
+      "source": "tokens/DL-07.json"
+    },
+    {
+      "id": "DL-08",
+      "name": "SENTINEL",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "live dashboards",
+        "control-room screens",
+        "dark BI pages",
+        "monitoring walls"
+      ],
+      "source": "tokens/DL-08.json"
+    },
+    {
+      "id": "DL-09",
+      "name": "ATLAS",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "route progress",
+        "section and site status maps",
+        "logistics corridors",
+        "geo overviews"
+      ],
+      "source": "tokens/DL-09.json"
+    },
+    {
+      "id": "DL-10",
+      "name": "BASIRA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "photo progress reports",
+        "drone updates",
+        "milestone records",
+        "before and after"
+      ],
+      "source": "tokens/DL-10.json"
+    },
+    {
+      "id": "DL-11",
+      "name": "SUTRA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "briefing notes",
+        "position papers",
+        "board memos",
+        "formal letters"
+      ],
+      "source": "tokens/DL-11.json"
+    },
+    {
+      "id": "DL-12",
+      "name": "NOROSHI",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "escalations",
+        "flash reports",
+        "exception one-pagers",
+        "morning briefs"
+      ],
+      "source": "tokens/DL-12.json"
+    },
+    {
+      "id": "DL-13",
+      "name": "MIZAN",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "cultural projects",
+        "personal-brand material",
+        "book promotion",
+        "artisan commerce"
+      ],
+      "source": "tokens/DL-13.json"
+    },
+    {
+      "id": "DL-14",
+      "name": "EVIDENTIA",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "evidence-led strategy decks",
+        "diagnostic readouts",
+        "cost and value driver analyses"
+      ],
+      "source": "tokens/DL-14.json"
+    },
+    {
+      "id": "DL-15",
+      "name": "ABRID",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "framework decks",
+        "portfolio reviews",
+        "strategy workshops"
+      ],
+      "source": "tokens/DL-15.json"
+    },
+    {
+      "id": "DL-16",
+      "name": "TELOS",
+      "type": "design-language",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "occasions": [
+        "results decks",
+        "due-diligence readouts",
+        "performance reviews"
+      ],
+      "source": "tokens/DL-16.json"
+    },
+    {
+      "id": "FN-01",
+      "name": "Token contract",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-01-token-contract.md"
+    },
+    {
+      "id": "FN-02",
+      "name": "Canvas and spacing grid",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-02-canvas-and-grid.md"
+    },
+    {
+      "id": "FN-03",
+      "name": "Type scale",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-03-type-scale.md"
+    },
+    {
+      "id": "FN-04",
+      "name": "Contrast and color use",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-04-contrast-and-color-use.md"
+    },
+    {
+      "id": "FN-05",
+      "name": "Numbers, units, and scales",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-05-numbers-and-scales.md"
+    },
+    {
+      "id": "FN-06",
+      "name": "Perceptual foundations",
+      "type": "foundation",
+      "status": "stable",
+      "source": "catalogue/foundations/FN-06-perceptual-foundations.md"
+    },
+    {
+      "id": "MX-01",
+      "name": "Small multiples",
+      "type": "mechanism",
+      "status": "candidate",
+      "source": "catalogue/mechanisms/MX-01-small-multiples.md"
+    },
+    {
+      "id": "MX-02",
+      "name": "Fit overlays",
+      "type": "mechanism",
+      "status": "candidate",
+      "source": "catalogue/mechanisms/MX-02-fit-overlays.md"
+    },
+    {
+      "id": "NR-01",
+      "name": "THE EXECUTIVE BRIEF",
+      "type": "narrative",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "relations": {
+        "decision_style": "recommendation-with-owner"
+      },
+      "source": "narratives/NR-01.json"
+    },
+    {
+      "id": "NR-02",
+      "name": "THE ANALYST READOUT",
+      "type": "narrative",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "relations": {
+        "decision_style": "evidence-only"
+      },
+      "source": "narratives/NR-02.json"
+    },
+    {
+      "id": "NR-03",
+      "name": "THE DECISION MEMO",
+      "type": "narrative",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "relations": {
+        "decision_style": "options"
+      },
+      "source": "narratives/NR-03.json"
+    },
+    {
+      "id": "NR-04",
+      "name": "THE EXCEPTION FLASH",
+      "type": "narrative",
+      "ovp_version": "1.0",
+      "status": "experimental",
+      "relations": {
+        "decision_style": "recommendation-with-owner"
+      },
+      "source": "narratives/NR-04.json"
+    },
+    {
+      "id": "PT-01",
+      "name": "TREND",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-TIM-01",
+          "CH-TIM-03"
+        ]
+      },
+      "source": "patterns/PT-01.json"
+    },
+    {
+      "id": "PT-02",
+      "name": "OUTLIER",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-COR-01",
+          "CH-RNK-01"
+        ]
+      },
+      "source": "patterns/PT-02.json"
+    },
+    {
+      "id": "PT-03",
+      "name": "GAP-TO-PLAN",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-TIM-02",
+          "CH-DEV-01"
+        ]
+      },
+      "source": "patterns/PT-03.json"
+    },
+    {
+      "id": "PT-04",
+      "name": "CONCENTRATION",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-PTW-05",
+          "CH-RNK-01"
+        ]
+      },
+      "source": "patterns/PT-04.json"
+    },
+    {
+      "id": "PT-05",
+      "name": "MIX-SHIFT",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-PTW-02",
+          "CH-PTW-01"
+        ]
+      },
+      "source": "patterns/PT-05.json"
+    },
+    {
+      "id": "PT-06",
+      "name": "THRESHOLD-BREACH",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-TAB-01",
+          "CH-DEV-01"
+        ]
+      },
+      "source": "patterns/PT-06.json"
+    },
+    {
+      "id": "PT-07",
+      "name": "DRIVER-DECOMPOSITION",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-FLO-01",
+          "CH-RNK-01"
+        ]
+      },
+      "source": "patterns/PT-07.json"
+    },
+    {
+      "id": "PT-08",
+      "name": "CYCLE",
+      "type": "pattern",
+      "status": "candidate",
+      "relations": {
+        "show_with": [
+          "CH-COR-03",
+          "CH-TIM-01"
+        ]
+      },
+      "source": "patterns/PT-08.json"
+    },
+    {
+      "id": "RC-001",
+      "name": "WEEKLY PROGRESS PAGE",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-02",
+        "charts": [
+          "CH-TIM-02"
+        ]
+      },
+      "source": "recipes/RC-001.json"
+    },
+    {
+      "id": "RC-002",
+      "name": "ANALYSIS PAGE",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-03",
+        "charts": [
+          "CH-FLO-01"
+        ]
+      },
+      "source": "recipes/RC-002.json"
+    },
+    {
+      "id": "RC-003",
+      "name": "READINESS BOARD",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-04",
+        "charts": [
+          "CH-TAB-01"
+        ]
+      },
+      "source": "recipes/RC-003.json"
+    },
+    {
+      "id": "RC-004",
+      "name": "EXECUTIVE BRIEF",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-01",
+        "charts": [
+          "CH-FLO-01"
+        ]
+      },
+      "source": "recipes/RC-004.json"
+    },
+    {
+      "id": "RC-005",
+      "name": "EXCEPTION FLASH",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-12",
+        "charts": [
+          "CH-MAG-04"
+        ]
+      },
+      "source": "recipes/RC-005.json"
+    },
+    {
+      "id": "RC-006",
+      "name": "EVIDENCE READOUT",
+      "type": "recipe",
+      "ovp_version": "1.0",
+      "status": "candidate",
+      "relations": {
+        "dl": "DL-14",
+        "charts": [
+          "CH-RNK-01"
+        ]
+      },
+      "source": "recipes/RC-006.json"
+    }
+  ]
+}

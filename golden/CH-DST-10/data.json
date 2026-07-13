@@ -1,0 +1,33 @@
+{
+  "title": "MST loop tests run longest: 7 days typical, up to 11",
+  "eyebrow": "TEST DURATIONS . SPREAD",
+  "source": "Source: sample dataset v1 (min-max range), 2026-07-12",
+  "unit": "days",
+  "categories": [
+    {
+      "label": "MST",
+      "value": 7,
+      "low": 5,
+      "high": 11,
+      "highlight": true
+    },
+    {
+      "label": "PS1",
+      "value": 6,
+      "low": 4,
+      "high": 9
+    },
+    {
+      "label": "PS5",
+      "value": 6,
+      "low": 4,
+      "high": 9
+    },
+    {
+      "label": "PS4",
+      "value": 5,
+      "low": 3,
+      "high": 8
+    }
+  ]
+}

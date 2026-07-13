@@ -1,0 +1,50 @@
+{
+  "title": "System D pairs 41% progress with 63 open punch items",
+  "eyebrow": "READINESS . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit_x": "%",
+  "unit_y": "",
+  "points": [
+    {
+      "label": "A",
+      "x": 92,
+      "y": 12
+    },
+    {
+      "label": "B",
+      "x": 88,
+      "y": 18
+    },
+    {
+      "label": "C",
+      "x": 74,
+      "y": 25
+    },
+    {
+      "label": "D",
+      "x": 41,
+      "y": 63,
+      "highlight": true
+    },
+    {
+      "label": "E",
+      "x": 66,
+      "y": 31
+    },
+    {
+      "label": "F",
+      "x": 80,
+      "y": 22
+    },
+    {
+      "label": "G",
+      "x": 58,
+      "y": 38
+    },
+    {
+      "label": "H",
+      "x": 70,
+      "y": 26
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "code": "CP-LAB-01",
+  "name": "LEADER-LINE ANNOTATION",
+  "ovp_version": "1.0",
+  "purpose": "The standalone annotation: dot on the fact, elbow leader, italic note. The house style for pointing at evidence.",
+  "params": {
+    "dot_r": 3.5,
+    "text_size": 12,
+    "style": "italic"
+  },
+  "roles": {
+    "dot": [
+      "primary"
+    ],
+    "leader": [
+      "body"
+    ],
+    "text": [
+      "body"
+    ]
+  },
+  "sample": {
+    "px": 60,
+    "py": 96,
+    "text": "gap widens from April",
+    "anchor": "start"
+  },
+  "golden_canvas": {
+    "w": 360,
+    "h": 140
+  },
+  "golden_origin": {
+    "x": 150,
+    "y": 40
+  },
+  "rules": [
+    "the dot sits ON the fact; the leader never crosses other marks",
+    "italic body role: annotations comment, they do not shout",
+    "anchor start or end, chosen so text grows away from the chart"
+  ],
+  "qa": [
+    "dot on the fact",
+    "italic",
+    "no mark crossings"
+  ]
+}

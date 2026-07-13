@@ -1,0 +1,16 @@
+{
+  "code": "PT-01",
+  "name": "TREND",
+  "ovp_version": "0.1",
+  "recognition": "a measure moves in one direction across ordered periods; slope is the signal",
+  "meaning": "the process has momentum, up or down",
+  "business_reading": "extrapolate cautiously; name the driver before promising continuation",
+  "show_with": [
+    "CH-TIM-01",
+    "CH-TIM-03"
+  ],
+  "avoid": [
+    "pie snapshots of single periods",
+    "bar-per-period when the line IS the story"
+  ]
+}

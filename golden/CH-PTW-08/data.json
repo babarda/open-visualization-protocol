@@ -1,0 +1,24 @@
+{
+  "title": "74% of ordered items reached site; customs is the widest drop",
+  "eyebrow": "PIPELINE . ORDER TO SITE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "stages": [
+    {
+      "label": "Ordered",
+      "value": 1600
+    },
+    {
+      "label": "Shipped",
+      "value": 1421
+    },
+    {
+      "label": "Cleared",
+      "value": 1284
+    },
+    {
+      "label": "Delivered",
+      "value": 1180
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="248" height="140" viewBox="0 0 248 140">
+<rect width="248" height="140" fill="#FFFFFF"/>
+<rect x="24" y="24" width="200" height="92" fill="#FFFFFF" stroke="#D9D6D2" stroke-width="1"/>
+<text x="38" y="48" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">DELIVERED</text>
+<text x="38" y="82" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600">1,284</text>
+<text x="38" y="102" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E6E4E" font-weight="400">+179 vs W27</text>
+</svg>

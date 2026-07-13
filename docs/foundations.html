@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Foundations</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item on" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+<h1>Foundations</h1>
+<p class='lead'>The rule sets every language, chart, and page builds on. Numbered, permanent, cited where perception research backs a law.</p>
+<div class='tocbox'><a href="#fn-01-token-contract">FN-01 . Token contract</a> &nbsp;|&nbsp; <a href="#fn-02-canvas-and-grid">FN-02 . Canvas and spacing grid</a> &nbsp;|&nbsp; <a href="#fn-03-type-scale">FN-03 . Type scale</a> &nbsp;|&nbsp; <a href="#fn-04-contrast-and-color-use">FN-04 . Contrast and color use</a> &nbsp;|&nbsp; <a href="#fn-05-numbers-and-scales">FN-05 . Numbers, units, and scales</a> &nbsp;|&nbsp; <a href="#fn-06-perceptual-foundations">FN-06 . Perceptual foundations</a></div>
+<div id='fn-01-token-contract'></div><hr>
+<h1>FN-01 . Token contract</h1>
+<p>The rule that makes the whole catalogue themeable and deterministic:</p>
+<p><b>Chart and component specs reference color ROLES, never hex values. Design languages (DL files) bind roles to hex. Rebranding = swapping the DL token file. No spec changes, no re-authoring.</b></p>
+<h2>Required roles (every DL must bind all of these)</h2>
+<table><tr><th>Role</th><th>Meaning</th></tr>
+<tr><td><code>background</code></td><td>page/canvas fill</td></tr>
+<tr><td><code>ink</code></td><td>headings, key numbers, strongest text</td></tr>
+<tr><td><code>body</code></td><td>supporting text, labels, sources</td></tr>
+<tr><td><code>primary</code></td><td>the one accent; highlights, key series</td></tr>
+<tr><td><code>muted</code></td><td>context series, de-emphasized marks</td></tr>
+<tr><td><code>gridline</code></td><td>chart gridlines</td></tr>
+<tr><td><code>hairline</code></td><td>rules, baselines, separators</td></tr>
+<tr><td><code>positive</code></td><td>good deltas (always paired with a word, never alone)</td></tr>
+<tr><td><code>negative</code></td><td>bad deltas (same)</td></tr>
+</table>
+<p>Optional roles a DL may add: <code>panel</code>, <code>benchmark</code>, <code>warning</code>, <code>primaryDark</code>, and others. Specs that want an optional role declare a fallback chain, for example <code>&quot;context&quot;: [&quot;benchmark&quot;, &quot;muted&quot;]</code>: first role present in the palette wins. The renderer resolves the chain, so a spec never breaks on a DL that lacks an optional role.</p>
+<h2>Rules</h2>
+<ol>
+<li>Hex values live in <code>tokens/DL-xx.json</code> only. A hex value inside a chart spec or component spec fails validation on sight.</li>
+<li>All hex is <code>#RRGGBB</code> uppercase. Enforced by <code>schema/dl.schema.json</code> and <code>tools/validate.py</code>.</li>
+<li><code>ink</code> and <code>body</code> must reach 4.5:1 contrast on <code>background</code> (WCAG AA). Enforced by <code>tools/validate.py</code>.</li>
+<li>Fonts follow the same contract: specs reference <code>display</code> or <code>body</code>, the DL binds each to a family stack whose last entries are installed-everywhere fallbacks.</li>
+</ol>
+<div id='fn-02-canvas-and-grid'></div><hr>
+<h1>FN-02 . Canvas and spacing grid</h1>
+<h2>Canvases</h2>
+<table><tr><th>Target</th><th>Size</th><th>Use</th></tr>
+<tr><td>Chart entry golden render</td><td>960 x 540 px</td><td>every CH-xx golden</td></tr>
+<tr><td>Full slide (16:9)</td><td>1280 x 720 px</td><td>recipes (DL/CH/CP combinations)</td></tr>
+</table>
+<p>All positions and sizes in specs are exact pixels on these canvases. Adjectives (&quot;comfortable margin&quot;, &quot;medium bar&quot;) are banned in specs; a value the renderer cannot consume is not a spec.</p>
+<h2>The 8px grid</h2>
+<p>Every structural distance is a multiple of 8: margins, offsets, bar heights, gaps, plot bounds.</p>
+<table><tr><th>Distance</th><th>Value</th></tr>
+<tr><td>Canvas edge to content</td><td>32 px</td></tr>
+<tr><td>Title block to plot area</td><td>&gt;= 40 px</td></tr>
+<tr><td>Bar height / bar gap (CH-01)</td><td>32 / 16 px</td></tr>
+<tr><td>Label offset from mark</td><td>8 or 16 px</td></tr>
+</table>
+<p>Text sizes are exempt from the 8-multiple (they follow FN-03) but their anchor positions are not.</p>
+<h2>Fixed furniture on every chart canvas</h2>
+<ul>
+<li>Title: x=32, baseline y=56 (y=88 when the DL chrome adds an eyebrow).</li>
+<li>Source line: x=32, baseline y=516, always present, always bottom-left.</li>
+<li>Kicker + eyebrow: only when the DL&#x27;s <code>chrome</code> block asks for them; kicker 24x4 px at (32, 28), eyebrow 11 px caps at (32, 52).</li>
+</ul>
+<div id='fn-03-type-scale'></div><hr>
+<h1>FN-03 . Type scale</h1>
+<p>Sizes are fixed per text role on the 960x540 chart canvas. A DL changes the family and weight, never the size or position (those belong to the chart spec).</p>
+<table><tr><th>Text role</th><th>Size</th><th>Font slot</th><th>Notes</th></tr>
+<tr><td>Title</td><td>24 px</td><td>display</td><td>full sentence, states the finding with a number</td></tr>
+<tr><td>Eyebrow</td><td>11 px</td><td>body, weight 600</td><td>CAPS, letter-spacing 2, only if DL chrome</td></tr>
+<tr><td>Category / series label</td><td>13 px</td><td>body</td><td>weight 600 only on the highlighted item</td></tr>
+<tr><td>Value label</td><td>13 px</td><td>body</td><td>weight 600 only on the highlighted item</td></tr>
+<tr><td>Tick label</td><td>11 px</td><td>body</td><td></td></tr>
+<tr><td>X-axis label</td><td>11 px</td><td>body</td><td></td></tr>
+<tr><td>Annotation</td><td>12 px</td><td>body, italic</td><td></td></tr>
+<tr><td>Source line</td><td>11 px</td><td>body</td><td></td></tr>
+</table>
+<h2>Rules</h2>
+<ol>
+<li>Two font slots only: <code>display</code> (titles) and <code>body</code> (everything else). A third slot (<code>mono</code> for IDs and timestamps) is reserved for DLs that declare it; no spec may require it.</li>
+<li>Every DL family stack ends in an installed-everywhere fallback (Segoe UI, Arial, Georgia, Consolas). Silent substitution with a different metric font is the failure mode this prevents.</li>
+<li>Nothing below 11 px on the 960x540 canvas. On the 1280x720 slide canvas the floor is 12 px.</li>
+<li>Emphasis is weight (400 to 600), never a size bump, never underline.</li>
+</ol>
+<div id='fn-04-contrast-and-color-use'></div><hr>
+<h1>FN-04 . Contrast and color use</h1>
+<h2>Hard limits (validated, not advisory)</h2>
+<ol>
+<li><code>ink</code> and <code>body</code> reach 4.5:1 on <code>background</code> (WCAG AA body text). <code>tools/validate.py</code> computes this from the DL token file and blocks on failure.</li>
+<li>Meaning is never carried by color alone. Status, deltas, and exceptions always pair color with a word or a number.</li>
+<li>One saturated highlight per chart. The <code>primary</code> role appears on the one mark the title talks about; everything else uses <code>muted</code> or <code>benchmark</code>.</li>
+</ol>
+<h2>Discipline</h2>
+<ul>
+<li>Series count before color count: if a chart needs more than 4 colors, the chart is wrong (split into small multiples), not the palette.</li>
+<li><code>positive</code> and <code>negative</code> mark deltas and status, never decorate.</li>
+<li>Charts must survive grayscale: the highlighted mark must still read as the highlight through weight, position, or label emphasis.</li>
+</ul>
+<h2>The banned list (applies to every DL, every chart)</h2>
+<ul>
+<li>Purple/blue gradient backgrounds, &quot;hero&quot; gradient bands</li>
+<li>Rainbow categorical palettes (one hue per bar)</li>
+<li>Color-only status dots</li>
+<li>Anything below AA contrast, including gray-on-gray captions</li>
+<li>3D depth, glassmorphism, heavy drop shadows</li>
+</ul>
+<div id='fn-05-numbers-and-scales'></div><hr>
+<h1>FN-05 . Numbers, units, and scales</h1>
+<h2>Numbers</h2>
+<ol>
+<li>Tabular (monospaced-figure) rendering wherever numbers stack in columns; right-aligned in tables.</li>
+<li>Units appear ONCE per chart, not per value: - bar charts: on the first (largest) value label (&quot;34 items&quot;, then &quot;28&quot;, &quot;21&quot;, ...) - line charts: on the top y tick label (&quot;80%&quot;, then &quot;60&quot;, &quot;40&quot;, ...)</li>
+<li>Missing value = &quot;-&quot; (hyphen nil marker), never zero, never a guess.</li>
+<li>Titles state the finding with a number. &quot;Backlog overview&quot; fails QA; &quot;Electrical holds 34 of 109 open items&quot; passes.</li>
+</ol>
+<h2>Scales (deterministic by construction)</h2>
+<p>Bars start at zero, always, no exceptions. Line charts start at zero by default; a non-zero baseline requires a written justification in the entry that uses it.</p>
+<p>Tick generation is an algorithm, not taste, so two renders can never disagree:</p>
+<pre><code>raw  = max_value / target_ticks        (target_ticks = 5)
+mag  = 10 ^ floor(log10(raw))
+step = first of {1, 2, 5, 10} * mag that is &gt;= raw
+top  = ceil(max_value / step) * step
+ticks = 0, step, 2*step, ... top</code></pre>
+<p>Direct-label bar charts skip the axis entirely and scale bars to the max value; the labels carry the numbers.</p>
+<h2>Float formatting in renders</h2>
+<p>All coordinates format as max-2-decimal, trailing zeros stripped, &quot;-0&quot; normalized to &quot;0&quot;. This is what makes byte-identical re-renders possible across machines.</p>
+<div id='fn-06-perceptual-foundations'></div><hr>
+<h1>FN-06 . Perceptual foundations</h1>
+<p>Every OVP rule traces to a named finding in visual perception research, not to taste. This entry is the trace, one line per rule family. It is deliberately one page: OVP cites the science, it does not rewrite it.</p>
+<table><tr><th>OVP rule</th><th>Perceptual basis</th></tr>
+<tr><td>One <code>primary</code> highlight per chart (FN-04)</td><td>Preattentive pop-out: one distinct hue is found in constant time; two or more force serial search (Treisman; Ware)</td></tr>
+<tr><td>Bars and positions over pies and areas (CH family design)</td><td>Graphical perception hierarchy: position and length are decoded far more accurately than angle and area (Cleveland &amp; McGill)</td></tr>
+<tr><td>Pie capped at 3 slices, <code>warn</code> status (CH-PTW-03/04)</td><td>Angle judgment error grows with slice count; under ~15% differences angles are unreadable (Cleveland &amp; McGill)</td></tr>
+<tr><td>Max 4 stacked segments, max 5 KPI cards</td><td>Working-memory span: ~4 chunks held reliably (Cowan; Miller)</td></tr>
+<tr><td>Direct labels and line-end labels, never legends</td><td>Every legend lookup is a saccade round-trip that reloads working memory (Ware; Few)</td></tr>
+<tr><td>Annotation anchored at the data (CH-TIM rules)</td><td>Attention follows pointers; unanchored commentary is ignored under load (Ware)</td></tr>
+<tr><td>8px grid, gaps group related elements (FN-02)</td><td>Gestalt proximity and common region: spacing IS structure</td></tr>
+<tr><td>Status word + color, never color alone (FN-04)</td><td>~8% of men have deficient color vision; hue is not a channel you can require (accessibility canon)</td></tr>
+<tr><td>Zero baselines on bars and areas (FN-05)</td><td>Length encoding lies when truncated; the lie compounds with fill (Tufte&#x27;s lie factor)</td></tr>
+<tr><td>Muted context + one saturated series</td><td>Contrast drives salience; salience should follow the message, not the palette (Ware; Few)</td></tr>
+<tr><td>Action titles stating the finding (CORE rule 1)</td><td>Assertion-evidence structure improves recall and decision agreement versus topic titles (presentation research canon)</td></tr>
+<tr><td>Tabular figures, right-aligned numbers (FN-05)</td><td>Digit alignment enables column scanning as a single visual object</td></tr>
+</table>
+<p>Canon referenced: Bertin (Semiologie graphique), Cleveland &amp; McGill (graphical perception experiments), Ware (Information Visualization), Munzner (Visualization Analysis and Design), Tufte (VDQI), Few (Show Me the Numbers), Treisman (preattentive processing), Cowan/Miller (working memory), Kahneman (attention and effort).</p>
+<p>Rule for extending OVP: a new rule that cannot cite a row here, or add one, is a preference, and preferences do not enter the protocol.</p>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

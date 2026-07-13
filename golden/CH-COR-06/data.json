@@ -1,0 +1,98 @@
+{
+  "title": "System D pairs low progress with every other deficit",
+  "eyebrow": "SYSTEM PROFILES . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "axes": [
+    {
+      "name": "Progress",
+      "unit": "%"
+    },
+    {
+      "name": "Punch",
+      "unit": ""
+    },
+    {
+      "name": "Docs",
+      "unit": "%"
+    },
+    {
+      "name": "Staff",
+      "unit": ""
+    }
+  ],
+  "items": [
+    {
+      "label": "A",
+      "values": [
+        92,
+        12,
+        95,
+        40
+      ]
+    },
+    {
+      "label": "B",
+      "values": [
+        88,
+        18,
+        90,
+        38
+      ]
+    },
+    {
+      "label": "C",
+      "values": [
+        74,
+        25,
+        80,
+        30
+      ]
+    },
+    {
+      "label": "D",
+      "values": [
+        41,
+        63,
+        55,
+        45
+      ],
+      "highlight": true
+    },
+    {
+      "label": "E",
+      "values": [
+        66,
+        31,
+        75,
+        28
+      ]
+    },
+    {
+      "label": "F",
+      "values": [
+        80,
+        22,
+        85,
+        33
+      ]
+    },
+    {
+      "label": "G",
+      "values": [
+        70,
+        28,
+        78,
+        26
+      ]
+    },
+    {
+      "label": "H",
+      "values": [
+        85,
+        15,
+        88,
+        35
+      ]
+    }
+  ]
+}

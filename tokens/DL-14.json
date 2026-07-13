@@ -1,0 +1,64 @@
+{
+  "code": "DL-14",
+  "name": "EVIDENTIA",
+  "aka": "EXHIBIT",
+  "ovp_version": "1.0",
+  "status": "candidate",
+  "philosophy": {
+    "civilization": "Ancient Rome",
+    "principle": "Proof",
+    "motto": "Proof over persuasion.",
+    "laws": [
+      "Every exhibit answers one question",
+      "Sources are mandatory",
+      "Footnotes are integral",
+      "Quantitative proof dominates",
+      "Conclusions follow evidence"
+    ],
+    "related": [
+      "Burhan",
+      "Tekmerion"
+    ]
+  },
+  "constitution": {
+    "narrative_style": "evidence-first",
+    "density": "operational",
+    "annotation_policy": "guided",
+    "legend_policy": "direct-labels-only",
+    "highlight_policy": "single",
+    "decision_style": "recommendation-with-owner",
+    "reading_time": "minute",
+    "charts_per_page": 1
+  },
+  "occasions": [
+    "evidence-led strategy decks",
+    "diagnostic readouts",
+    "cost and value driver analyses"
+  ],
+  "palette": {
+    "background": "#FFFFFF",
+    "ink": "#0B1F35",
+    "body": "#3C4A5A",
+    "hairline": "#C7D0D9",
+    "gridline": "#E3E8ED",
+    "primary": "#2251FF",
+    "muted": "#A9B4C0",
+    "benchmark": "#6E7E8E",
+    "positive": "#2E6E4E",
+    "negative": "#9E2B25"
+  },
+  "fonts": {
+    "display": {
+      "family": "Georgia,serif",
+      "weight": 700
+    },
+    "body": {
+      "family": "'Segoe UI',Arial,sans-serif",
+      "weight": 400
+    }
+  },
+  "chrome": {
+    "kicker": false,
+    "eyebrow": true
+  }
+}

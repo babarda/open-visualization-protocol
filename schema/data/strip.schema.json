@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/strip.schema.json",
+  "title": "Input data for chart_type strip",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "categories"
+  ]
+}

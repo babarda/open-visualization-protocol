@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/area_stacked.schema.json",
+  "title": "Input data for chart_type area_stacked",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "x",
+    "series"
+  ]
+}

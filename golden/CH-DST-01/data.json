@@ -1,0 +1,27 @@
+{
+  "title": "Two thirds of lots clear customs within 15 days",
+  "eyebrow": "CLEARANCE TIME",
+  "source": "Source: customs log, H1",
+  "unit": "lots",
+  "edges": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40
+  ],
+  "counts": [
+    18,
+    42,
+    31,
+    17,
+    9,
+    5,
+    3,
+    1
+  ]
+}

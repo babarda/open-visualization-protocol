@@ -1,0 +1,62 @@
+{
+  "code": "CP-CAL-02",
+  "name": "EXCEPTION ROW",
+  "ovp_version": "1.0",
+  "purpose": "One exception, one line: status bar + dot, bold claim, owner and due date right. Stacked into exception lists on one-pagers.",
+  "params": {
+    "h": 36,
+    "bar_w": 4,
+    "pad": 14,
+    "claim_size": 13,
+    "meta_size": 10
+  },
+  "roles": {
+    "row_bg": [
+      "panel",
+      "background"
+    ],
+    "rule": [
+      "hairline"
+    ],
+    "status_critical": [
+      "negative"
+    ],
+    "status_watch": [
+      "primary"
+    ],
+    "status_resolved": [
+      "positive"
+    ],
+    "claim": [
+      "ink"
+    ],
+    "meta": [
+      "body"
+    ]
+  },
+  "sample": {
+    "status": "critical",
+    "claim": "Docs on-time missed target by 14 points",
+    "owner": "DOC CONTROL",
+    "due": "FRI 12:00",
+    "w": 560
+  },
+  "golden_canvas": {
+    "w": 608,
+    "h": 84
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "one exception per row; the claim carries a number",
+    "owner and due in caps, right-aligned: every exception is owned",
+    "status colors the bar and dot only, never the whole row"
+  ],
+  "qa": [
+    "claim has a number",
+    "owner and due present",
+    "status semantic"
+  ]
+}

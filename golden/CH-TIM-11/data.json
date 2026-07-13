@@ -1,0 +1,73 @@
+{
+  "title": "Total flow tripled; the mix barely moved",
+  "eyebrow": "FLOW BY ROUTE . 12 MONTHS",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "loads",
+  "x": [
+    "J",
+    "F",
+    "M",
+    "A",
+    "M",
+    "J",
+    "J",
+    "A",
+    "S",
+    "O",
+    "N",
+    "D"
+  ],
+  "series": [
+    {
+      "name": "Road",
+      "values": [
+        8,
+        9,
+        11,
+        13,
+        15,
+        18,
+        20,
+        22,
+        24,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "name": "Rail",
+      "values": [
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "name": "Barge",
+      "values": [
+        2,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ]
+}

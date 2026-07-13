@@ -1,0 +1,106 @@
+{
+  "code": "RC-005",
+  "name": "EXCEPTION FLASH",
+  "ovp_version": "1.0",
+  "dl": "DL-12",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "header_band",
+      "x": 48,
+      "y": 36,
+      "data": {
+        "title": "Morning exception flash",
+        "meta": "07:00 . WEEK 28",
+        "w": 1184
+      }
+    },
+    {
+      "type": "title",
+      "x": 48,
+      "y": 150,
+      "data": {
+        "title": "Docs on-time missed target by 14 points",
+        "eyebrow": "KPI BOARD . WEEK 28"
+      }
+    },
+    {
+      "type": "chart",
+      "ref": "CH-MAG-04",
+      "data_ref": "golden/CH-MAG-04/data.json",
+      "x": 48,
+      "y": 190,
+      "w": 700,
+      "h": 140,
+      "crop": [
+        0,
+        124,
+        960,
+        192
+      ]
+    },
+    {
+      "type": "exception_row",
+      "x": 48,
+      "y": 380,
+      "data": {
+        "status": "critical",
+        "claim": "Docs on time at 71%, target 85%",
+        "owner": "DOC CONTROL",
+        "due": "12:00",
+        "w": 700
+      }
+    },
+    {
+      "type": "exception_row",
+      "x": 48,
+      "y": 424,
+      "data": {
+        "status": "watch",
+        "claim": "Delivery OTD at 87%, target 95%",
+        "owner": "LOGISTICS",
+        "due": "17:00",
+        "w": 700
+      }
+    },
+    {
+      "type": "callout",
+      "x": 790,
+      "y": 190,
+      "data": {
+        "w": 442,
+        "h": 72,
+        "lines": [
+          "Escalated 07:00.",
+          "Responses due at the hours named;",
+          "escalate to PMO at 14:00."
+        ]
+      }
+    },
+    {
+      "type": "stamp",
+      "x": 790,
+      "y": 300,
+      "data": {
+        "word": "ESCALATED",
+        "tone": "negative",
+        "w": 200
+      }
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12 . told as NR-04 exception flash"
+    }
+  ],
+  "qa": [
+    "one chart (NOROSHI charts_per_page = 1)",
+    "every exception row has a number, an owner, and an hour (NR-04)",
+    "escalation path named",
+    "source line present"
+  ]
+}

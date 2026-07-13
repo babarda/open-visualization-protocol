@@ -1,0 +1,743 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-DST-01 HISTOGRAM</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-DST-01</div>
+<div class="kicker">CH-DST-01 . family DST</div>
+<h1>HISTOGRAM</h1>
+<p class="lead">contiguous columns counting values per equal bin. Needs:
+one numeric measure binned into equal intervals with counts.</p>
+<p><span class="tag">distribution</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#D8D5CE" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#EFEDE8" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#EFEDE8" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#EFEDE8" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#EFEDE8" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#EFEDE8" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#008080"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#008080"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#008080"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#008080"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#008080"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#008080"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#008080"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#008080"/>
+<text x="110" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#E2E8E8" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#EAEAEA" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#EAEAEA" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#EAEAEA" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#EAEAEA" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#EAEAEA" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#008080"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#008080"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#008080"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#008080"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#008080"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#008080"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#008080"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#008080"/>
+<text x="110" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">CLEARANCE TIME</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="430" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="372" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="314" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="256" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="198" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E8E0D4" stroke-width="1"/>
+<text x="98" y="140" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#9E2B25"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#9E2B25"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#9E2B25"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#9E2B25"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#9E2B25"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#9E2B25"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#9E2B25"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#9E2B25"/>
+<text x="110" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#C6D5E0" stroke-width="1"/>
+<text x="98" y="430" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E7EEF4" stroke-width="1"/>
+<text x="98" y="372" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E7EEF4" stroke-width="1"/>
+<text x="98" y="314" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E7EEF4" stroke-width="1"/>
+<text x="98" y="256" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E7EEF4" stroke-width="1"/>
+<text x="98" y="198" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E7EEF4" stroke-width="1"/>
+<text x="98" y="140" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#1B6E8F"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#1B6E8F"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#1B6E8F"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#1B6E8F"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#1B6E8F"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#1B6E8F"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#1B6E8F"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#1B6E8F"/>
+<text x="110" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#64748B" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#CBD5E1" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#CBD5E1" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#CBD5E1" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#CBD5E1" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#CBD5E1" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#C2410C"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#C2410C"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#C2410C"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#C2410C"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#C2410C"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#C2410C"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#C2410C"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#C2410C"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#B9B9B9" stroke-width="1"/>
+<text x="98" y="430" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#CCCCCC" stroke-width="1"/>
+<text x="98" y="372" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#CCCCCC" stroke-width="1"/>
+<text x="98" y="314" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#CCCCCC" stroke-width="1"/>
+<text x="98" y="256" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#CCCCCC" stroke-width="1"/>
+<text x="98" y="198" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#CCCCCC" stroke-width="1"/>
+<text x="98" y="140" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#7A1F1F"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#7A1F1F"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#7A1F1F"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#7A1F1F"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#7A1F1F"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#7A1F1F"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#7A1F1F"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#7A1F1F"/>
+<text x="110" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#111111" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E4E4E4" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E4E4E4" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E4E4E4" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E4E4E4" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E4E4E4" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#C0182B"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#C0182B"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#C0182B"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#C0182B"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#C0182B"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#C0182B"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#C0182B"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#C0182B"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#2A323A" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#F0B429"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#F0B429"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#F0B429"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#F0B429"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#F0B429"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#F0B429"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#F0B429"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#F0B429"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#CDC3AE" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E3DCCB" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E3DCCB" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E3DCCB" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E3DCCB" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E3DCCB" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#0F766E"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#0F766E"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#0F766E"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#0F766E"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#0F766E"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#0F766E"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#0F766E"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#0F766E"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#F0B429"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#F0B429"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#F0B429"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#F0B429"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#F0B429"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#F0B429"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#F0B429"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#F0B429"/>
+<text x="110" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#8EAADB" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#C9D6EE" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#C9D6EE" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#C9D6EE" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#C9D6EE" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#C9D6EE" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#1F3864"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#1F3864"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#1F3864"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#1F3864"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#1F3864"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#1F3864"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#1F3864"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#1F3864"/>
+<text x="110" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E2E8F0" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#D63A2F"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#D63A2F"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#D63A2F"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#D63A2F"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#D63A2F"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#D63A2F"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#D63A2F"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#D63A2F"/>
+<text x="110" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#DCCFB6" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E5D9C2" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E5D9C2" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E5D9C2" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E5D9C2" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E5D9C2" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#C4572E"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#C4572E"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#C4572E"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#C4572E"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#C4572E"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#C4572E"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#C4572E"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#C4572E"/>
+<text x="110" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">CLEARANCE TIME</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#C7D0D9" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E3E8ED" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E3E8ED" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E3E8ED" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E3E8ED" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E3E8ED" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#2251FF"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#2251FF"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#2251FF"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#2251FF"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#2251FF"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#2251FF"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#2251FF"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#2251FF"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#C9D2CC" stroke-width="1"/>
+<text x="98" y="430" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E5E7E2" stroke-width="1"/>
+<text x="98" y="372" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E5E7E2" stroke-width="1"/>
+<text x="98" y="314" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E5E7E2" stroke-width="1"/>
+<text x="98" y="256" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E5E7E2" stroke-width="1"/>
+<text x="98" y="198" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E5E7E2" stroke-width="1"/>
+<text x="98" y="140" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#197A56"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#197A56"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#197A56"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#197A56"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#197A56"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#197A56"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#197A56"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#197A56"/>
+<text x="110" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Two thirds of lots clear customs within 15 days</text>
+<line x1="110" y1="430" x2="820" y2="430" stroke="#D9D6D2" stroke-width="1"/>
+<text x="98" y="430" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="110" y1="372" x2="820" y2="372" stroke="#E8E6E2" stroke-width="1"/>
+<text x="98" y="372" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">10</text>
+<line x1="110" y1="314" x2="820" y2="314" stroke="#E8E6E2" stroke-width="1"/>
+<text x="98" y="314" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="110" y1="256" x2="820" y2="256" stroke="#E8E6E2" stroke-width="1"/>
+<text x="98" y="256" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="110" y1="198" x2="820" y2="198" stroke="#E8E6E2" stroke-width="1"/>
+<text x="98" y="198" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="110" y1="140" x2="820" y2="140" stroke="#E8E6E2" stroke-width="1"/>
+<text x="98" y="140" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">50 lots</text>
+<rect x="110.5" y="325.6" width="87.75" height="104.4" fill="#C4001A"/>
+<rect x="199.25" y="186.4" width="87.75" height="243.6" fill="#C4001A"/>
+<rect x="288" y="250.2" width="87.75" height="179.8" fill="#C4001A"/>
+<rect x="376.75" y="331.4" width="87.75" height="98.6" fill="#C4001A"/>
+<rect x="465.5" y="377.8" width="87.75" height="52.2" fill="#C4001A"/>
+<rect x="554.25" y="401" width="87.75" height="29" fill="#C4001A"/>
+<rect x="643" y="412.6" width="87.75" height="17.4" fill="#C4001A"/>
+<rect x="731.75" y="424.2" width="87.75" height="5.8" fill="#C4001A"/>
+<text x="110" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">0</text>
+<text x="198.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">5</text>
+<text x="287.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">10</text>
+<text x="376.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">15</text>
+<text x="465" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">20</text>
+<text x="553.75" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">25</text>
+<text x="642.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">30</text>
+<text x="731.25" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">35</text>
+<text x="820" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">40</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: customs log, H1</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>showing the shape of one distribution: skew, mode, outliers</li><li>first look at any new numeric measure</li></ul>
+<h2>Do not use when</h2><ul><li>comparing several distributions (CH-DST-04 or CH-DST-09)</li><li>categorical counts (CH-RNK-01; bins must be numeric intervals)</li></ul>
+<h2>See instead</h2><ul><li>the question is what share clears a threshold: <a href='CH-DST-06.html'>CH-DST-06</a></li><li>comparing shapes across groups: <a href='CH-DST-09.html'>CH-DST-09</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-DST-06 (service-level reading)</li><li>CH-DST-09 (smooth shape)</li></ul>
+<h2>Rules</h2><ul><li>bars touch: 1px seam only, the variable is continuous</li><li>equal bin widths, edges labeled at the boundaries, not centers</li><li>counts on the y axis start at zero</li></ul>
+<h2>Never do this</h2><ul><li>gaps between bars</li><li>unequal bins without width-proportional areas</li><li>labeling bin centers</li><li>more than 20 bins</li></ul>
+<h2>QA before delivering</h2><ul><li>bars contiguous</li><li>edges ascending and labeled</li><li>y starts at zero</li><li>unit once</li><li>source present</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>action title with a number</td></tr><tr><td>source</td><td>bottom-left always</td></tr><tr><td>unit</td><td>on the top count tick</td></tr><tr><td>edges</td><td>n+1 ascending bin edges, labeled under the boundaries</td></tr><tr><td>counts</td><td>n non-negative counts</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;Two thirds of lots clear customs within 15 days&quot;,
+  &quot;eyebrow&quot;: &quot;CLEARANCE TIME&quot;,
+  &quot;source&quot;: &quot;Source: customs log, H1&quot;,
+  &quot;unit&quot;: &quot;lots&quot;,
+  &quot;edges&quot;: [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40
+  ],
+  &quot;counts&quot;: [
+    18,
+    42,
+    31,
+    17,
+    9,
+    5,
+    3,
+    1
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM, role-based (themeable) -->\n\n## HISTOGRAM chart (CH-DST-01)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| bar | primary |\n| gridline | gridline |\n| zero_line | hairline |\n| tick_label | body |\n| x_label | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"Two thirds of lots clear customs within 15 days\",\n  \"eyebrow\": \"CLEARANCE TIME\",\n  \"source\": \"Source: customs log, H1\",\n  \"unit\": \"lots\",\n  \"edges\": [\n    0,\n    5,\n    10,\n    15,\n    20,\n    25,\n    30,\n    35,\n    40\n  ],\n  \"counts\": [\n    18,\n    42,\n    31,\n    17,\n    9,\n    5,\n    3,\n    1\n  ]\n}", "spec": "{\n  \"code\": \"CH-DST-01\",\n  \"name\": \"HISTOGRAM\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"histogram\",\n  \"meta\": {\n    \"intent\": [\n      \"distribution\"\n    ],\n    \"form\": \"contiguous columns counting values per equal bin\",\n    \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n    \"relations\": {\n      \"family\": \"DST\",\n      \"alternatives\": [\n        \"CH-DST-06 (service-level reading)\",\n        \"CH-DST-09 (smooth shape)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"the question is what share clears a threshold\",\n          \"use\": \"CH-DST-06\"\n        },\n        {\n          \"when\": \"comparing shapes across groups\",\n          \"use\": \"CH-DST-09\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"showing the shape of one distribution: skew, mode, outliers\",\n    \"first look at any new numeric measure\"\n  ],\n  \"not_when\": [\n    \"comparing several distributions (CH-DST-04 or CH-DST-09)\",\n    \"categorical counts (CH-RNK-01; bins must be numeric intervals)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"action title with a number\",\n    \"source\": \"bottom-left always\",\n    \"unit\": \"on the top count tick\",\n    \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n    \"counts\": \"n non-negative counts\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  },\n  \"rules\": [\n    \"bars touch: 1px seam only, the variable is continuous\",\n    \"equal bin widths, edges labeled at the boundaries, not centers\",\n    \"counts on the y axis start at zero\"\n  ],\n  \"roles\": {\n    \"bar\": [\n      \"primary\"\n    ],\n    \"gridline\": [\n      \"gridline\"\n    ],\n    \"zero_line\": [\n      \"hairline\"\n    ],\n    \"tick_label\": [\n      \"body\"\n    ],\n    \"x_label\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"gaps between bars\",\n    \"unequal bins without width-proportional areas\",\n    \"labeling bin centers\",\n    \"more than 20 bins\"\n  ],\n  \"qa\": [\n    \"bars contiguous\",\n    \"edges ascending and labeled\",\n    \"y starts at zero\",\n    \"unit once\",\n    \"source present\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-01 AGRAW -->\n\n## HISTOGRAM chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#008080` |\n| gridline | `#EFEDE8` |\n| zero_line | `#D8D5CE` |\n| tick_label | `#3D3D3D` |\n| x_label | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-02 KATA -->\n\n## HISTOGRAM chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#008080` |\n| gridline | `#EAEAEA` |\n| zero_line | `#E2E8E8` |\n| tick_label | `#555555` |\n| x_label | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-03 LOGOS -->\n\n## HISTOGRAM chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| bar | `#9E2B25` |\n| gridline | `#E8E0D4` |\n| zero_line | `#E8E0D4` |\n| tick_label | `#4A4E57` |\n| x_label | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-04 SHILPA -->\n\n## HISTOGRAM chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| bar | `#1B6E8F` |\n| gridline | `#E7EEF4` |\n| zero_line | `#C6D5E0` |\n| tick_label | `#33424E` |\n| x_label | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-05 OBEYA -->\n\n## HISTOGRAM chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#C2410C` |\n| gridline | `#CBD5E1` |\n| zero_line | `#64748B` |\n| tick_label | `#334155` |\n| x_label | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-06 LEX -->\n\n## HISTOGRAM chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#7A1F1F` |\n| gridline | `#CCCCCC` |\n| zero_line | `#B9B9B9` |\n| tick_label | `#333333` |\n| x_label | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-07 SAGA -->\n\n## HISTOGRAM chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#C0182B` |\n| gridline | `#E4E4E4` |\n| zero_line | `#111111` |\n| tick_label | `#2E2E2E` |\n| x_label | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-08 SENTINEL -->\n\n## HISTOGRAM chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| bar | `#F0B429` |\n| gridline | `#2A323A` |\n| zero_line | `#2A323A` |\n| tick_label | `#9FB0BE` |\n| x_label | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-09 ATLAS -->\n\n## HISTOGRAM chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| bar | `#0F766E` |\n| gridline | `#E3DCCB` |\n| zero_line | `#CDC3AE` |\n| tick_label | `#4A5860` |\n| x_label | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-10 BASIRA -->\n\n## HISTOGRAM chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| bar | `#F0B429` |\n| gridline | `#3A3F44` |\n| zero_line | `#3A3F44` |\n| tick_label | `#D9D9D9` |\n| x_label | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-11 SUTRA -->\n\n## HISTOGRAM chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#1F3864` |\n| gridline | `#C9D6EE` |\n| zero_line | `#8EAADB` |\n| tick_label | `#262626` |\n| x_label | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-12 NOROSHI -->\n\n## HISTOGRAM chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#D63A2F` |\n| gridline | `#E2E8F0` |\n| zero_line | `#E2E8F0` |\n| tick_label | `#475569` |\n| x_label | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-13 MIZAN -->\n\n## HISTOGRAM chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| bar | `#C4572E` |\n| gridline | `#E5D9C2` |\n| zero_line | `#DCCFB6` |\n| tick_label | `#4E4237` |\n| x_label | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-14 EVIDENTIA -->\n\n## HISTOGRAM chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#2251FF` |\n| gridline | `#E3E8ED` |\n| zero_line | `#C7D0D9` |\n| tick_label | `#3C4A5A` |\n| x_label | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-15 ABRID -->\n\n## HISTOGRAM chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#197A56` |\n| gridline | `#E5E7E2` |\n| zero_line | `#C9D2CC` |\n| tick_label | `#3E4C46` |\n| x_label | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-01 HISTOGRAM rendered in language DL-16 TELOS -->\n\n## HISTOGRAM chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\"\n  ],\n  \"form\": \"contiguous columns counting values per equal bin\",\n  \"data_required\": \"one numeric measure binned into equal intervals with counts\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-DST-06 (service-level reading)\",\n    \"CH-DST-09 (smooth shape)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"the question is what share clears a threshold\",\n      \"use\": \"CH-DST-06\"\n    },\n    {\n      \"when\": \"comparing shapes across groups\",\n      \"use\": \"CH-DST-09\"\n    }\n  ]\n}\n```\n\nUse when:\n- showing the shape of one distribution: skew, mode, outliers\n- first look at any new numeric measure\n\nDo NOT use when:\n- comparing several distributions (CH-DST-04 or CH-DST-09)\n- categorical counts (CH-RNK-01; bins must be numeric intervals)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title with a number\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on the top count tick\",\n  \"edges\": \"n+1 ascending bin edges, labeled under the boundaries\",\n  \"counts\": \"n non-negative counts\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 110,\n      \"right\": 820,\n      \"top\": 140,\n      \"bottom\": 430\n    },\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 22\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"FN-05 nice scale\"\n  }\n}\n```\n\n### Rules\n- bars touch: 1px seam only, the variable is continuous\n- equal bin widths, edges labeled at the boundaries, not centers\n- counts on the y axis start at zero\n\n### Never do this\n- gaps between bars\n- unequal bins without width-proportional areas\n- labeling bin centers\n- more than 20 bins\n\n### QA before delivering\n- [ ] bars contiguous\n- [ ] edges ascending and labeled\n- [ ] y starts at zero\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| bar | `#C4001A` |\n| gridline | `#E8E6E2` |\n| zero_line | `#D9D6D2` |\n| tick_label | `#444444` |\n| x_label | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

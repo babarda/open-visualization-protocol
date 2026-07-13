@@ -1,0 +1,12 @@
+{
+  "title": "Actual progress reached 62% in June, 9 points behind plan",
+  "eyebrow": "PROGRESS . H1 2026",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  "series": [
+    {"name": "Plan", "values": [10, 25, 40, 52, 63, 71], "role": "context"},
+    {"name": "Actual", "values": [8, 20, 33, 45, 55, 62], "role": "key"}
+  ],
+  "annotation": {"text": "gap widens from April", "series": "Actual", "index": 3, "tx": 470, "ty": 340, "anchor": "end"}
+}

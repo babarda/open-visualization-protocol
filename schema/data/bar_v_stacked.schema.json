@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/bar_v_stacked.schema.json",
+  "title": "Input data for chart_type bar_v_stacked",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "x",
+    "series"
+  ]
+}

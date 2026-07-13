@@ -1,0 +1,38 @@
+{
+  "title": "Docs on time misses target by 14 points; deliveries close the gap",
+  "eyebrow": "KPI BOARD . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "categories": [
+    {
+      "label": "Delivery OTD",
+      "value": 87,
+      "target": 95,
+      "bands": [
+        60,
+        85,
+        100
+      ]
+    },
+    {
+      "label": "Test pass rate",
+      "value": 92,
+      "target": 90,
+      "bands": [
+        70,
+        90,
+        100
+      ]
+    },
+    {
+      "label": "Docs on time",
+      "value": 71,
+      "target": 85,
+      "bands": [
+        50,
+        80,
+        100
+      ]
+    }
+  ]
+}

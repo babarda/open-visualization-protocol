@@ -1,0 +1,41 @@
+{
+  "title": "RFSU holds on 30 November; grid energization is the critical driver",
+  "eyebrow": "MILESTONES . 2026",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "axis": {
+    "start_label": "JAN 2026",
+    "end_label": "NOV 2026"
+  },
+  "events": [
+    {
+      "label": "Kickoff",
+      "sub": "12 Jan",
+      "pos": 4,
+      "kind": "event"
+    },
+    {
+      "label": "Mechanical completion S3",
+      "sub": "15 Jun",
+      "pos": 50,
+      "kind": "milestone"
+    },
+    {
+      "label": "Grid energization",
+      "sub": "22 Aug",
+      "pos": 70,
+      "kind": "critical"
+    },
+    {
+      "label": "Loop tests complete",
+      "sub": "30 Sep",
+      "pos": 82,
+      "kind": "milestone"
+    },
+    {
+      "label": "RFSU",
+      "sub": "30 Nov",
+      "pos": 100,
+      "kind": "milestone"
+    }
+  ]
+}

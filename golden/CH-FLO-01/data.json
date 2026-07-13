@@ -1,0 +1,14 @@
+{
+  "title": "Forecast lands 18 points over budget; logistics drives two thirds of the overrun",
+  "eyebrow": "COST BRIDGE . JUNE UPDATE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "pts",
+  "start": {"label": "Budget", "value": 100},
+  "steps": [
+    {"label": "Logistics", "delta": 12},
+    {"label": "Rework", "delta": 8},
+    {"label": "FX", "delta": 4},
+    {"label": "Scope savings", "delta": -6}
+  ],
+  "end_label": "Forecast"
+}

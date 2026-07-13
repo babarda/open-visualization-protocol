@@ -1,0 +1,912 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-TAB-02 HEATMAP TABLE</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-TAB-02</div>
+<div class="kicker">CH-TAB-02 . family TAB</div>
+<h1>HEATMAP TABLE</h1>
+<p class="lead">entities x metrics table, cells shaded per column and numbered. Needs:
+entity rows x numeric metric columns with different scales.</p>
+<p><span class="tag">status</span><span class="tag">lookup</span><span class="tag">comparison</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#008080"/>
+<text x="321.33" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#CAE3E0"/>
+<text x="564" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#D6E9E6"/>
+<text x="806.67" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#0B8585"/>
+<text x="321.33" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#B3D7D5"/>
+<text x="564" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#C4E0DE"/>
+<text x="806.67" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#319897"/>
+<text x="321.33" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#97CAC8"/>
+<text x="564" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#98CAC8"/>
+<text x="806.67" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#8BC4C2"/>
+<text x="321.33" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#008080"/>
+<text x="564" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#008080"/>
+<text x="806.67" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#47A2A2"/>
+<text x="321.33" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#7FBEBC"/>
+<text x="564" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#74B9B7"/>
+<text x="806.67" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#008080"/>
+<text x="321.33" y="192" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#C8E3E3"/>
+<text x="564" y="192" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#D4E9E9"/>
+<text x="806.67" y="192" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#0B8585"/>
+<text x="321.33" y="240" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#B0D7D7"/>
+<text x="564" y="240" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#C2E0E0"/>
+<text x="806.67" y="240" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#309898"/>
+<text x="321.33" y="288" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#95CACA"/>
+<text x="564" y="288" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#96CACA"/>
+<text x="806.67" y="288" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#89C4C4"/>
+<text x="321.33" y="336" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#008080"/>
+<text x="564" y="336" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#008080"/>
+<text x="806.67" y="336" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#46A2A2"/>
+<text x="321.33" y="384" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#7DBEBE"/>
+<text x="564" y="384" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#73B9B9"/>
+<text x="806.67" y="384" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">READINESS METRICS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#9E2B25"/>
+<text x="321.33" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#EBCEC4"/>
+<text x="564" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#EFD7CE"/>
+<text x="806.67" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#A2342E"/>
+<text x="321.33" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#E2BBB2"/>
+<text x="564" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#E9C9C0"/>
+<text x="806.67" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#B1524C"/>
+<text x="321.33" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#D7A49C"/>
+<text x="564" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#D8A59D"/>
+<text x="806.67" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#D39A92"/>
+<text x="321.33" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#9E2B25"/>
+<text x="564" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#9E2B25"/>
+<text x="806.67" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#B9645D"/>
+<text x="321.33" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#CE9189"/>
+<text x="564" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#CA8880"/>
+<text x="806.67" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#1B6E8F"/>
+<text x="321.33" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#C5DAE3"/>
+<text x="564" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#CFE0E8"/>
+<text x="806.67" y="192" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#247494"/>
+<text x="321.33" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#B1CDD9"/>
+<text x="564" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#C0D6E1"/>
+<text x="806.67" y="240" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#4488A3"/>
+<text x="321.33" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#9ABECE"/>
+<text x="564" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#9ABFCE"/>
+<text x="806.67" y="288" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#8FB8C9"/>
+<text x="321.33" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#1B6E8F"/>
+<text x="564" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#1B6E8F"/>
+<text x="806.67" y="336" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#5694AC"/>
+<text x="321.33" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#86B2C4"/>
+<text x="564" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#7CACBF"/>
+<text x="806.67" y="384" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#C2410C"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#F3DBD1"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#F6E4DC"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#C54917"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#EEC9BA"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#F2D6CB"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#CE663C"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#E7B49F"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#E7B4A0"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#E4AA93"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#C2410C"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#C2410C"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#D37751"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#E1A287"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#DE997D"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#7A1F1F"/>
+<text x="321.33" y="192" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#E6D4D4"/>
+<text x="564" y="192" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#ECDFDF"/>
+<text x="806.67" y="192" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#802929"/>
+<text x="321.33" y="240" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#D9BFBF"/>
+<text x="564" y="240" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#E2CFCF"/>
+<text x="806.67" y="240" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#944B4B"/>
+<text x="321.33" y="288" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#CAA6A6"/>
+<text x="564" y="288" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#CBA7A7"/>
+<text x="806.67" y="288" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#C49B9B"/>
+<text x="321.33" y="336" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#7A1F1F"/>
+<text x="564" y="336" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#7A1F1F"/>
+<text x="806.67" y="336" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#A05E5E"/>
+<text x="321.33" y="384" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#BE9191"/>
+<text x="564" y="384" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#B88787"/>
+<text x="806.67" y="384" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#C0182B"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#F3D3D7"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#F6DEE1"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#C32234"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#EDBDC2"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#F2CED2"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#CC4554"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#E6A3AB"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#E6A4AC"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#E398A1"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#C0182B"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#C0182B"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#D25967"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#E08D97"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#DD838D"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#F0B429"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#433C27"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#393526"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#E7AE29"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#574A27"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#484027"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#C69728"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#6F5B27"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#6E5A27"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#796227"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#F0B429"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#F0B429"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#B48A28"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#836927"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#8D6F28"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#0F766E"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#C0CEC1"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#CBD3C6"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#197B72"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#ABC4B8"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#BBCCBF"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#3A8B82"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#93B8AC"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#94B8AD"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#88B2A7"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#0F766E"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#0F766E"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#4D958B"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#7EADA2"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#75A99E"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#F0B429"/>
+<text x="321.33" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#443B23"/>
+<text x="564" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#3A3423"/>
+<text x="806.67" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#E7AE29"/>
+<text x="321.33" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#594A24"/>
+<text x="564" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#493F24"/>
+<text x="806.67" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#C79728"/>
+<text x="321.33" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#705A25"/>
+<text x="564" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#6F5A25"/>
+<text x="806.67" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#7A6125"/>
+<text x="321.33" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#F0B429"/>
+<text x="564" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#F0B429"/>
+<text x="806.67" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#B48A27"/>
+<text x="321.33" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#846825"/>
+<text x="564" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#8E6F26"/>
+<text x="806.67" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#1F3864"/>
+<text x="321.33" y="192" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#D4D9E1"/>
+<text x="564" y="192" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#DFE3E9"/>
+<text x="806.67" y="192" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#29416B"/>
+<text x="321.33" y="240" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#BFC6D3"/>
+<text x="564" y="240" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#CFD4DE"/>
+<text x="806.67" y="240" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#4B5F82"/>
+<text x="321.33" y="288" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#A6B0C1"/>
+<text x="564" y="288" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#A7B1C2"/>
+<text x="806.67" y="288" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#9BA6BA"/>
+<text x="321.33" y="336" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#1F3864"/>
+<text x="564" y="336" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#1F3864"/>
+<text x="806.67" y="336" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#5E7090"/>
+<text x="321.33" y="384" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#919DB3"/>
+<text x="564" y="384" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#8794AC"/>
+<text x="806.67" y="384" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#D63A2F"/>
+<text x="321.33" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#F7D9D7"/>
+<text x="564" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#F9E3E1"/>
+<text x="806.67" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#D84338"/>
+<text x="321.33" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#F3C7C4"/>
+<text x="564" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#F6D5D2"/>
+<text x="806.67" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#DE6158"/>
+<text x="321.33" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#EFB1AC"/>
+<text x="564" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#EFB2AD"/>
+<text x="806.67" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#EDA7A2"/>
+<text x="321.33" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#D63A2F"/>
+<text x="564" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#D63A2F"/>
+<text x="806.67" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#E2726A"/>
+<text x="321.33" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#EB9E99"/>
+<text x="564" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#E99590"/>
+<text x="806.67" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#C4572E"/>
+<text x="321.33" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#E8CAB4"/>
+<text x="564" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#EBD1BB"/>
+<text x="806.67" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#C65D35"/>
+<text x="321.33" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#E4BCA4"/>
+<text x="564" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#E7C7B0"/>
+<text x="806.67" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#CD734E"/>
+<text x="321.33" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#DFAD92"/>
+<text x="564" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#DFAD92"/>
+<text x="806.67" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#DDA689"/>
+<text x="321.33" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#C4572E"/>
+<text x="564" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#C4572E"/>
+<text x="806.67" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#D17F5D"/>
+<text x="321.33" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#DB9F82"/>
+<text x="564" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#D9997B"/>
+<text x="806.67" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">READINESS METRICS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#2251FF"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#D5DEFF"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#DFE6FF"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#2C59FF"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#C0CDFF"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#D0DAFF"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#4D73FF"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#A7BAFF"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#A8BBFF"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#9DB1FF"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#2251FF"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#2251FF"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#6082FF"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#92A9FF"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#89A2FF"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#197A56"/>
+<text x="321.33" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#D3E6DF"/>
+<text x="564" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#DEECE7"/>
+<text x="806.67" y="192" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#23805D"/>
+<text x="321.33" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#BDD9CF"/>
+<text x="564" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#CEE2DB"/>
+<text x="806.67" y="240" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#469477"/>
+<text x="321.33" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#A4CABC"/>
+<text x="564" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#A5CBBD"/>
+<text x="806.67" y="288" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#98C4B4"/>
+<text x="321.33" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#197A56"/>
+<text x="564" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#197A56"/>
+<text x="806.67" y="336" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#5AA086"/>
+<text x="321.33" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#8EBEAC"/>
+<text x="564" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#84B8A4"/>
+<text x="806.67" y="384" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">System D trails on every metric of the readiness set</text>
+<text x="321.33" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">PROGRESS %</text>
+<text x="564" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">OPEN PUNCH</text>
+<text x="806.67" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">TESTS LEFT</text>
+<text x="184" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="201" y="169" width="240.67" height="46" fill="#C4001A"/>
+<text x="321.33" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">92</text>
+<rect x="443.67" y="169" width="240.67" height="46" fill="#F4CED3"/>
+<text x="564" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="686.33" y="169" width="240.67" height="46" fill="#F7DBDE"/>
+<text x="806.67" y="192" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">4</text>
+<text x="184" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="201" y="217" width="240.67" height="46" fill="#C70B24"/>
+<text x="321.33" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">88</text>
+<rect x="443.67" y="217" width="240.67" height="46" fill="#EEB6BE"/>
+<text x="564" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="686.33" y="217" width="240.67" height="46" fill="#F2C8CE"/>
+<text x="806.67" y="240" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">6</text>
+<text x="184" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="201" y="265" width="240.67" height="46" fill="#D03247"/>
+<text x="321.33" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">74</text>
+<rect x="443.67" y="265" width="240.67" height="46" fill="#E89AA4"/>
+<text x="564" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="686.33" y="265" width="240.67" height="46" fill="#E89BA5"/>
+<text x="806.67" y="288" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<text x="184" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="201" y="313" width="240.67" height="46" fill="#E58D99"/>
+<text x="321.33" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="443.67" y="313" width="240.67" height="46" fill="#C4001A"/>
+<text x="564" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">63</text>
+<rect x="686.33" y="313" width="240.67" height="46" fill="#C4001A"/>
+<text x="806.67" y="336" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">28</text>
+<text x="184" y="384" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="201" y="361" width="240.67" height="46" fill="#D5485B"/>
+<text x="321.33" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">66</text>
+<rect x="443.67" y="361" width="240.67" height="46" fill="#E2828E"/>
+<text x="564" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">31</text>
+<rect x="686.33" y="361" width="240.67" height="46" fill="#DF7684"/>
+<text x="806.67" y="384" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>entities compared across metrics with different scales (progress %, punch count, tests left)</li><li>the reader looks up their row but the pattern should jump out</li></ul>
+<h2>Do not use when</h2><ul><li>one shared scale across all columns (use CH-COR-03&#x27;s global mode)</li><li>status enums (CH-TAB-01)</li><li>more than 8 rows or 6 metric columns</li></ul>
+<h2>See instead</h2><ul><li>cells are statuses, not numbers: <a href='CH-TAB-01.html'>CH-TAB-01</a></li><li>both dimensions are ordered: <a href='CH-COR-03.html'>CH-COR-03</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-TAB-01 (status enums instead of numbers)</li><li>CH-COR-03 (two ordered dimensions)</li></ul>
+<h2>Rules</h2><ul><li>per-column normalization; the spec&#x27;s one job is making mixed scales comparable</li><li>intensity encodes magnitude, not judgment: the title says whether high is good or bad</li><li>values printed in every cell</li><li>rows in the reader&#x27;s natural order, never sorted by health</li><li>single-hue ramp</li></ul>
+<h2>Never do this</h2><ul><li>red-green judgment coloring on magnitude data</li><li>global normalization across mixed units</li><li>cells without printed values</li><li>sorting rows by intensity</li></ul>
+<h2>QA before delivering</h2><ul><li>per-column normalization verified</li><li>every cell prints its value</li><li>rows in natural order</li><li>title names the standout row with a number</li><li>source line present bottom-left</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>string, action title naming the row that stands out</td></tr><tr><td>eyebrow</td><td>string caps, rendered only when the DL chrome asks for it</td></tr><tr><td>source</td><td>string, rendered bottom-left, always</td></tr><tr><td>columns</td><td>metric names, caps</td></tr><tr><td>rows</td><td>array of {label, values[] same length as columns}</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;System D trails on every metric of the readiness set&quot;,
+  &quot;eyebrow&quot;: &quot;READINESS METRICS . WEEK 28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;columns&quot;: [
+    &quot;PROGRESS %&quot;,
+    &quot;OPEN PUNCH&quot;,
+    &quot;TESTS LEFT&quot;
+  ],
+  &quot;rows&quot;: [
+    {
+      &quot;label&quot;: &quot;System A&quot;,
+      &quot;values&quot;: [
+        92,
+        12,
+        4
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System B&quot;,
+      &quot;values&quot;: [
+        88,
+        18,
+        6
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System C&quot;,
+      &quot;values&quot;: [
+        74,
+        25,
+        11
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System D&quot;,
+      &quot;values&quot;: [
+        41,
+        63,
+        28
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System E&quot;,
+      &quot;values&quot;: [
+        66,
+        31,
+        15
+      ]
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE, role-based (themeable) -->\n\n## HEATMAP TABLE chart (CH-TAB-02)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| cell_low | panel -> background |\n| cell_high | primary |\n| header | body |\n| row_label | ink |\n| value | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"System D trails on every metric of the readiness set\",\n  \"eyebrow\": \"READINESS METRICS . WEEK 28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"columns\": [\n    \"PROGRESS %\",\n    \"OPEN PUNCH\",\n    \"TESTS LEFT\"\n  ],\n  \"rows\": [\n    {\n      \"label\": \"System A\",\n      \"values\": [\n        92,\n        12,\n        4\n      ]\n    },\n    {\n      \"label\": \"System B\",\n      \"values\": [\n        88,\n        18,\n        6\n      ]\n    },\n    {\n      \"label\": \"System C\",\n      \"values\": [\n        74,\n        25,\n        11\n      ]\n    },\n    {\n      \"label\": \"System D\",\n      \"values\": [\n        41,\n        63,\n        28\n      ]\n    },\n    {\n      \"label\": \"System E\",\n      \"values\": [\n        66,\n        31,\n        15\n      ]\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-TAB-02\",\n  \"name\": \"HEATMAP TABLE\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"heatmap\",\n  \"meta\": {\n    \"intent\": [\n      \"status\",\n      \"lookup\",\n      \"comparison\"\n    ],\n    \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n    \"data_required\": \"entity rows x numeric metric columns with different scales\",\n    \"relations\": {\n      \"family\": \"TAB\",\n      \"alternatives\": [\n        \"CH-TAB-01 (status enums instead of numbers)\",\n        \"CH-COR-03 (two ordered dimensions)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"cells are statuses, not numbers\",\n          \"use\": \"CH-TAB-01\"\n        },\n        {\n          \"when\": \"both dimensions are ordered\",\n          \"use\": \"CH-COR-03\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"entities compared across metrics with different scales (progress %, punch count, tests left)\",\n    \"the reader looks up their row but the pattern should jump out\"\n  ],\n  \"not_when\": [\n    \"one shared scale across all columns (use CH-COR-03's global mode)\",\n    \"status enums (CH-TAB-01)\",\n    \"more than 8 rows or 6 metric columns\"\n  ],\n  \"data_shape\": {\n    \"title\": \"string, action title naming the row that stands out\",\n    \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n    \"source\": \"string, rendered bottom-left, always\",\n    \"columns\": \"metric names, caps\",\n    \"rows\": \"array of {label, values[] same length as columns}\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  },\n  \"rules\": [\n    \"per-column normalization; the spec's one job is making mixed scales comparable\",\n    \"intensity encodes magnitude, not judgment: the title says whether high is good or bad\",\n    \"values printed in every cell\",\n    \"rows in the reader's natural order, never sorted by health\",\n    \"single-hue ramp\"\n  ],\n  \"roles\": {\n    \"cell_low\": [\n      \"panel\",\n      \"background\"\n    ],\n    \"cell_high\": [\n      \"primary\"\n    ],\n    \"header\": [\n      \"body\"\n    ],\n    \"row_label\": [\n      \"ink\"\n    ],\n    \"value\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"red-green judgment coloring on magnitude data\",\n    \"global normalization across mixed units\",\n    \"cells without printed values\",\n    \"sorting rows by intensity\"\n  ],\n  \"qa\": [\n    \"per-column normalization verified\",\n    \"every cell prints its value\",\n    \"rows in natural order\",\n    \"title names the standout row with a number\",\n    \"source line present bottom-left\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-01 AGRAW -->\n\n## HEATMAP TABLE chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FAFAF7` |\n| cell_high | `#008080` |\n| header | `#3D3D3D` |\n| row_label | `#1A1A1A` |\n| value | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-02 KATA -->\n\n## HEATMAP TABLE chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#F7FAFA` |\n| cell_high | `#008080` |\n| header | `#555555` |\n| row_label | `#222222` |\n| value | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-03 LOGOS -->\n\n## HEATMAP TABLE chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| cell_low | `#FDF4EA` |\n| cell_high | `#9E2B25` |\n| header | `#4A4E57` |\n| row_label | `#262A33` |\n| value | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-04 SHILPA -->\n\n## HEATMAP TABLE chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| cell_low | `#EDF3F7` |\n| cell_high | `#1B6E8F` |\n| header | `#33424E` |\n| row_label | `#143D59` |\n| value | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-05 OBEYA -->\n\n## HEATMAP TABLE chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C2410C` |\n| header | `#334155` |\n| row_label | `#0F172A` |\n| value | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-06 LEX -->\n\n## HEATMAP TABLE chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#7A1F1F` |\n| header | `#333333` |\n| row_label | `#1A1A1A` |\n| value | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-07 SAGA -->\n\n## HEATMAP TABLE chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C0182B` |\n| header | `#2E2E2E` |\n| row_label | `#111111` |\n| value | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-08 SENTINEL -->\n\n## HEATMAP TABLE chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| cell_low | `#1A2026` |\n| cell_high | `#F0B429` |\n| header | `#9FB0BE` |\n| row_label | `#E6EDF3` |\n| value | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-09 ATLAS -->\n\n## HEATMAP TABLE chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| cell_low | `#EAE3D5` |\n| cell_high | `#0F766E` |\n| header | `#4A5860` |\n| row_label | `#2B3A42` |\n| value | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-10 BASIRA -->\n\n## HEATMAP TABLE chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| cell_low | `#1C1F22` |\n| cell_high | `#F0B429` |\n| header | `#D9D9D9` |\n| row_label | `#FFFFFF` |\n| value | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-11 SUTRA -->\n\n## HEATMAP TABLE chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#1F3864` |\n| header | `#262626` |\n| row_label | `#1F3864` |\n| value | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-12 NOROSHI -->\n\n## HEATMAP TABLE chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#D63A2F` |\n| header | `#475569` |\n| row_label | `#0F172A` |\n| value | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-13 MIZAN -->\n\n## HEATMAP TABLE chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| cell_low | `#F1E5D3` |\n| cell_high | `#C4572E` |\n| header | `#4E4237` |\n| row_label | `#31261D` |\n| value | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-14 EVIDENTIA -->\n\n## HEATMAP TABLE chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#2251FF` |\n| header | `#3C4A5A` |\n| row_label | `#0B1F35` |\n| value | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-15 ABRID -->\n\n## HEATMAP TABLE chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#197A56` |\n| header | `#3E4C46` |\n| row_label | `#0E3A2C` |\n| value | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-TAB-02 HEATMAP TABLE rendered in language DL-16 TELOS -->\n\n## HEATMAP TABLE chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-TAB-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"status\",\n    \"lookup\",\n    \"comparison\"\n  ],\n  \"form\": \"entities x metrics table, cells shaded per column and numbered\",\n  \"data_required\": \"entity rows x numeric metric columns with different scales\",\n  \"family\": \"TAB\",\n  \"alternatives\": [\n    \"CH-TAB-01 (status enums instead of numbers)\",\n    \"CH-COR-03 (two ordered dimensions)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"cells are statuses, not numbers\",\n      \"use\": \"CH-TAB-01\"\n    },\n    {\n      \"when\": \"both dimensions are ordered\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- entities compared across metrics with different scales (progress %, punch count, tests left)\n- the reader looks up their row but the pattern should jump out\n\nDo NOT use when:\n- one shared scale across all columns (use CH-COR-03's global mode)\n- status enums (CH-TAB-01)\n- more than 8 rows or 6 metric columns\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the row that stands out\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"metric names, caps\",\n  \"rows\": \"array of {label, values[] same length as columns}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 200,\n      \"right\": 928,\n      \"top\": 168\n    },\n    \"row_height\": 48,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"column\",\n    \"note\": \"each column normalized to its own max: intensity means 'high for this metric', not absolute size\"\n  }\n}\n```\n\n### Rules\n- per-column normalization; the spec's one job is making mixed scales comparable\n- intensity encodes magnitude, not judgment: the title says whether high is good or bad\n- values printed in every cell\n- rows in the reader's natural order, never sorted by health\n- single-hue ramp\n\n### Never do this\n- red-green judgment coloring on magnitude data\n- global normalization across mixed units\n- cells without printed values\n- sorting rows by intensity\n\n### QA before delivering\n- [ ] per-column normalization verified\n- [ ] every cell prints its value\n- [ ] rows in natural order\n- [ ] title names the standout row with a number\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C4001A` |\n| header | `#444444` |\n| row_label | `#1A1A1A` |\n| value | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

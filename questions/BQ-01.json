@@ -1,0 +1,25 @@
+{
+  "code": "BQ-01",
+  "question": "Why did cost overrun?",
+  "ovp_version": "1.0",
+  "intent": [
+    "variance-decomposition",
+    "bridge"
+  ],
+  "observations": [
+    "actual above budget",
+    "a small set of drivers explains most of the gap"
+  ],
+  "patterns": [
+    "PT-07"
+  ],
+  "charts": [
+    "CH-FLO-01",
+    "CH-MAG-02"
+  ],
+  "narrative": "NR-01",
+  "decider_hint": {
+    "audience": "executive",
+    "purpose": "explain"
+  }
+}

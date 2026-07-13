@@ -1,0 +1,56 @@
+{
+  "code": "CP-STA-01",
+  "name": "STATUS CHIP",
+  "ovp_version": "1.0",
+  "purpose": "A status marker that survives color-blindness and bad projectors: outlined chip, status-colored dot, the status word in ink.",
+  "params": {
+    "h": 24,
+    "radius": 4,
+    "pad_x": 10,
+    "dot_r": 3,
+    "text_size": 10
+  },
+  "roles": {
+    "text": [
+      "ink"
+    ],
+    "status_complete": [
+      "positive"
+    ],
+    "status_on_track": [
+      "primary"
+    ],
+    "status_watch": [
+      "warning",
+      "muted"
+    ],
+    "status_critical": [
+      "negative"
+    ],
+    "status_na": [
+      "hairline"
+    ]
+  },
+  "sample": {
+    "status": "watch",
+    "word": "WATCH . CUSTOMS",
+    "w": 150
+  },
+  "golden_canvas": {
+    "w": 240,
+    "h": 72
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "the word is mandatory; the dot and border alone are never a status",
+    "text in ink on the page background, so contrast never depends on the status color",
+    "width is set by the caller (deterministic), not measured from text"
+  ],
+  "qa": [
+    "every chip carries a word",
+    "text contrast is the page's ink contrast, independent of status hue"
+  ]
+}

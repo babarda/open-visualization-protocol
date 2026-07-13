@@ -1,0 +1,48 @@
+{
+  "code": "RC-002",
+  "name": "ANALYSIS PAGE",
+  "ovp_version": "1.0",
+  "dl": "DL-03",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "title",
+      "x": 48,
+      "y": 96,
+      "data": {
+        "title": "Forecast lands 18 points over budget; logistics drives two thirds",
+        "eyebrow": "COST BRIDGE . JUNE"
+      }
+    },
+    {
+      "type": "chart",
+      "ref": "CH-FLO-01",
+      "data_ref": "golden/CH-FLO-01/data.json",
+      "x": 100,
+      "y": 150,
+      "w": 1080,
+      "h": 477,
+      "crop": [
+        0,
+        96,
+        960,
+        424
+      ]
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12"
+    }
+  ],
+  "qa": [
+    "the chart occupies 65-75% of the page",
+    "kicker + eyebrow present (DL-03 chrome)",
+    "no second visual on the page",
+    "source line bottom-left"
+  ]
+}

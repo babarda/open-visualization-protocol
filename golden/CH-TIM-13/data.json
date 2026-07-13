@@ -1,0 +1,42 @@
+{
+  "title": "Stock held at 41 units for three weeks after the June draw-down",
+  "eyebrow": "WAREHOUSE STOCK . W20-W28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": " units",
+  "x": [
+    "W20",
+    "W21",
+    "W22",
+    "W23",
+    "W24",
+    "W25",
+    "W26",
+    "W27",
+    "W28"
+  ],
+  "series": [
+    {
+      "name": "Stock",
+      "values": [
+        64,
+        64,
+        64,
+        58,
+        58,
+        49,
+        41,
+        41,
+        41
+      ],
+      "role": "key"
+    }
+  ],
+  "annotation": {
+    "text": "June draw-down: -23 in three weeks",
+    "series": "Stock",
+    "index": 5,
+    "tx": 470,
+    "ty": 200,
+    "anchor": "start"
+  }
+}

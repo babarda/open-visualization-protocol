@@ -1,0 +1,16 @@
+{
+  "code": "PT-08",
+  "name": "CYCLE",
+  "ovp_version": "0.1",
+  "recognition": "values repeat by weekday, month, shift, or season across periods",
+  "meaning": "the pattern is structural, not noise",
+  "business_reading": "plan capacity around the peak, do not chase it as an anomaly",
+  "show_with": [
+    "CH-COR-03",
+    "CH-TIM-01"
+  ],
+  "avoid": [
+    "averaging across the cycle (kills the pattern)",
+    "treating a seasonal peak as a trend"
+  ]
+}

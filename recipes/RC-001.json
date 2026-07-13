@@ -1,0 +1,108 @@
+{
+  "code": "RC-001",
+  "name": "WEEKLY PROGRESS PAGE",
+  "ovp_version": "1.0",
+  "dl": "DL-02",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "title",
+      "x": 48,
+      "y": 72,
+      "data": {
+        "title": "Delivered goods reached 1,284 in week 28, 90% of all items",
+        "eyebrow": "WEEKLY LOGISTICS . WEEK 28"
+      }
+    },
+    {
+      "type": "kpi_strip",
+      "x": 48,
+      "y": 104,
+      "gap": 20,
+      "cards": [
+        {
+          "label": "DELIVERED",
+          "value": "1,284",
+          "delta": "+179 vs W27",
+          "tone": "positive"
+        },
+        {
+          "label": "IN TRANSIT",
+          "value": "96",
+          "delta": "-2 vs W27",
+          "tone": "neutral"
+        },
+        {
+          "label": "PENDING",
+          "value": "41",
+          "delta": "-13 vs W27",
+          "tone": "positive"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "ref": "CH-TIM-02",
+      "data_ref": "golden/CH-TIM-02/data.json",
+      "x": 48,
+      "y": 236,
+      "w": 768,
+      "h": 339.2,
+      "crop": [
+        0,
+        96,
+        960,
+        424
+      ]
+    },
+    {
+      "type": "chip",
+      "x": 860,
+      "y": 252,
+      "data": {
+        "status": "watch",
+        "word": "WATCH . CUSTOMS",
+        "w": 170
+      }
+    },
+    {
+      "type": "chip",
+      "x": 860,
+      "y": 288,
+      "data": {
+        "status": "on_track",
+        "word": "ON TRACK . EHT",
+        "w": 170
+      }
+    },
+    {
+      "type": "callout",
+      "x": 860,
+      "y": 336,
+      "data": {
+        "w": 372,
+        "h": 80,
+        "lines": [
+          "Slippage steady since May.",
+          "Recovery plan due Wednesday",
+          "with the logistics contractor."
+        ]
+      }
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12"
+    }
+  ],
+  "qa": [
+    "KPI strip <= 5 cards",
+    "every chip carries a word",
+    "one chart, one message, one action title",
+    "source line bottom-left"
+  ]
+}

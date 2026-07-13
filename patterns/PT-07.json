@@ -1,0 +1,16 @@
+{
+  "code": "PT-07",
+  "name": "DRIVER-DECOMPOSITION",
+  "ovp_version": "0.1",
+  "recognition": "a total moved and several named factors explain the move",
+  "meaning": "the delta has an anatomy; drivers are additive",
+  "business_reading": "rank drivers by contribution; act on the top one first",
+  "show_with": [
+    "CH-FLO-01",
+    "CH-RNK-01"
+  ],
+  "avoid": [
+    "before/after bars with no bridge",
+    "unquantified 'multiple factors' narratives"
+  ]
+}

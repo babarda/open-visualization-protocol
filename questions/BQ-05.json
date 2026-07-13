@@ -1,0 +1,26 @@
+{
+  "code": "BQ-05",
+  "question": "Is it improving?",
+  "ovp_version": "1.0",
+  "intent": [
+    "trend",
+    "change-over-time"
+  ],
+  "observations": [
+    "direction holds across periods",
+    "two-point change per entity"
+  ],
+  "patterns": [
+    "PT-01"
+  ],
+  "charts": [
+    "CH-TIM-01",
+    "CH-TIM-14",
+    "CH-TIM-05"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "executive",
+    "purpose": "brief"
+  }
+}

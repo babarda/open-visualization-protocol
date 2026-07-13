@@ -1,0 +1,7 @@
+seed/
+research/
+PROJECT_BRIEF.md
+STATUS.md
+__pycache__/
+*.pyc
+CLAUDE.md

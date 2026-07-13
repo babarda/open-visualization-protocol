@@ -1,0 +1,36 @@
+{
+  "code": "NR-03",
+  "name": "THE DECISION MEMO",
+  "ovp_version": "1.0",
+  "decision_style": "options",
+  "sections": [
+    {
+      "role": "question",
+      "guidance": "The decision to be made, phrased as a choice."
+    },
+    {
+      "role": "evidence",
+      "guidance": "The comparison chart(s) that make the options commensurable."
+    },
+    {
+      "role": "options",
+      "guidance": "2 to 4 options, each with cost, benefit, and risk in the same units."
+    },
+    {
+      "role": "action",
+      "guidance": "The decision mechanics: who chooses, by when, what happens on no decision."
+    }
+  ],
+  "example": [
+    "Which routing do we commit for Q4?",
+    "Cost and duration per option CH-MAG-02",
+    "Option A faster but 21 k$ over; option B on budget, 2 weeks slower",
+    "Steering committee decides Thursday; default is B"
+  ],
+  "qa": [
+    "options in identical units",
+    "no hidden favorite in the wording",
+    "default named",
+    "decision date set"
+  ]
+}

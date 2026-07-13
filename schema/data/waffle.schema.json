@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/waffle.schema.json",
+  "title": "Input data for chart_type waffle",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "percent",
+    "label"
+  ]
+}

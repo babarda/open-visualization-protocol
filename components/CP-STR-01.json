@@ -1,0 +1,52 @@
+{
+  "code": "CP-STR-01",
+  "name": "HEADER BAND",
+  "ovp_version": "1.0",
+  "purpose": "Full-width page header: title left, meta (date, page, reference) right, ruled base.",
+  "params": {
+    "h": 52,
+    "pad": 16,
+    "title_size": 18,
+    "title_dy": 33,
+    "meta_size": 10,
+    "rule_h": 2
+  },
+  "roles": {
+    "band_bg": [
+      "panel",
+      "background"
+    ],
+    "rule": [
+      "primary"
+    ],
+    "title": [
+      "ink"
+    ],
+    "meta": [
+      "body"
+    ]
+  },
+  "sample": {
+    "title": "Weekly progress review",
+    "meta": "WEEK 28 . PAGE 1 OF 6",
+    "w": 560
+  },
+  "golden_canvas": {
+    "w": 608,
+    "h": 100
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "meta in caps, right-aligned, letter-spaced",
+    "the primary rule anchors the band to the page",
+    "title in the display font"
+  ],
+  "qa": [
+    "meta caps right",
+    "rule present",
+    "one band per page"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "title": "Gate B hides two clusters behind one median",
+  "eyebrow": "REVIEW TIME SHAPES",
+  "source": "Source: document register, H1; KDE bandwidth 2.5 days",
+  "unit": "days",
+  "categories": [
+    {
+      "label": "Gate A",
+      "grid": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "density": [
+        1,
+        3,
+        8,
+        14,
+        9,
+        4,
+        2,
+        1,
+        0
+      ],
+      "median": 15
+    },
+    {
+      "label": "Gate B",
+      "grid": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "density": [
+        6,
+        10,
+        4,
+        2,
+        3,
+        5,
+        9,
+        6,
+        1
+      ],
+      "median": 15
+    },
+    {
+      "label": "Gate C",
+      "grid": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40
+      ],
+      "density": [
+        2,
+        4,
+        6,
+        8,
+        8,
+        8,
+        6,
+        4,
+        2
+      ],
+      "median": 20
+    }
+  ]
+}

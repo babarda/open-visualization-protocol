@@ -1,0 +1,29 @@
+{
+  "title": "One yard holds 6,400 items, four times any other",
+  "eyebrow": "STOCK BY YARD",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "categories": [
+    {
+      "label": "Yard A",
+      "value": 6400,
+      "highlight": true
+    },
+    {
+      "label": "Yard B",
+      "value": 1500
+    },
+    {
+      "label": "Yard C",
+      "value": 900
+    },
+    {
+      "label": "Port store",
+      "value": 450
+    },
+    {
+      "label": "Site bins",
+      "value": 120
+    }
+  ]
+}

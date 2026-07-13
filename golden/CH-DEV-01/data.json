@@ -1,0 +1,13 @@
+{
+  "title": "Electrical runs 14 days behind plan, the deepest slip of five disciplines",
+  "eyebrow": "SCHEDULE VARIANCE . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "days",
+  "categories": [
+    {"label": "Mechanical", "value": 7},
+    {"label": "Instrumentation", "value": 4},
+    {"label": "Civil", "value": -3},
+    {"label": "Piping", "value": -9},
+    {"label": "Electrical", "value": -14}
+  ]
+}

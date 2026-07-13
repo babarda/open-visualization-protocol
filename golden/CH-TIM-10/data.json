@@ -1,0 +1,45 @@
+{
+  "title": "Unit cost fell 34% while output doubled since 2020",
+  "eyebrow": "COST VS OUTPUT . 2020-2026",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit_x": " units",
+  "unit_y": " $",
+  "points": [
+    {
+      "label": "2020",
+      "x": 210,
+      "y": 148
+    },
+    {
+      "label": "2021",
+      "x": 240,
+      "y": 141
+    },
+    {
+      "label": "2022",
+      "x": 268,
+      "y": 133
+    },
+    {
+      "label": "2023",
+      "x": 305,
+      "y": 124
+    },
+    {
+      "label": "2024",
+      "x": 348,
+      "y": 116
+    },
+    {
+      "label": "2025",
+      "x": 390,
+      "y": 104
+    },
+    {
+      "label": "2026",
+      "x": 424,
+      "y": 98,
+      "highlight": true
+    }
+  ]
+}

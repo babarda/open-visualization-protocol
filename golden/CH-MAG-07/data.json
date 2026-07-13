@@ -1,0 +1,35 @@
+{
+  "title": "The profile gap is discipline coverage, not depth",
+  "eyebrow": "CAPABILITY PROFILE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "%",
+  "axes": [
+    "Mechanical",
+    "Electrical",
+    "Instrumentation",
+    "Civil",
+    "HSE"
+  ],
+  "series": [
+    {
+      "name": "Crew A",
+      "values": [
+        85,
+        70,
+        60,
+        80,
+        90
+      ]
+    },
+    {
+      "name": "Crew B",
+      "values": [
+        60,
+        75,
+        80,
+        45,
+        70
+      ]
+    }
+  ]
+}

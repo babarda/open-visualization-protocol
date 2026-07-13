@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/slope.schema.json",
+  "title": "Input data for chart_type slope",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "periods",
+    "categories"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/bar_paired.schema.json",
+  "title": "Input data for chart_type bar_paired",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "x",
+    "series"
+  ]
+}

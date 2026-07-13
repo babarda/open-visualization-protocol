@@ -1,0 +1,1094 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-COR-03 XY HEATMAP</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-COR-03</div>
+<div class="kicker">CH-COR-03 . family COR</div>
+<h1>XY HEATMAP</h1>
+<p class="lead">two ordered dimensions x one measure, cells shaded and numbered. Needs:
+grid of values over two ordered dimensions (weekday x week, hour x day).</p>
+<p><span class="tag">correlation</span><span class="tag">pattern</span><span class="tag">density</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#BADBD9"/>
+<text x="234.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#B0D6D4"/>
+<text x="423.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#BFDDDB"/>
+<text x="612.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#B5D8D6"/>
+<text x="801.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#9ACBC9"/>
+<text x="234.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#A5D0CE"/>
+<text x="423.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#A0CECC"/>
+<text x="612.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#95C9C7"/>
+<text x="801.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#85C1BF"/>
+<text x="234.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#75B9B8"/>
+<text x="423.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#8AC3C2"/>
+<text x="612.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#7ABCBA"/>
+<text x="801.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#309797"/>
+<text x="234.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#20908F"/>
+<text x="423.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#108888"/>
+<text x="612.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#008080"/>
+<text x="801.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FAFAF7" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#A5D0CE"/>
+<text x="234.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#AAD3D1"/>
+<text x="423.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#9ACBC9"/>
+<text x="612.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#A0CECC"/>
+<text x="801.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#B8DBDB"/>
+<text x="234.5" y="196" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#ADD6D6"/>
+<text x="423.5" y="196" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#BDDDDD"/>
+<text x="612.5" y="196" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#B3D8D8"/>
+<text x="801.5" y="196" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#98CBCB"/>
+<text x="234.5" y="252" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#A3D0D0"/>
+<text x="423.5" y="252" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#9ECECE"/>
+<text x="612.5" y="252" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#93C9C9"/>
+<text x="801.5" y="252" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#83C1C1"/>
+<text x="234.5" y="308" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#74B9B9"/>
+<text x="423.5" y="308" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#89C3C3"/>
+<text x="612.5" y="308" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#79BCBC"/>
+<text x="801.5" y="308" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#2F9797"/>
+<text x="234.5" y="364" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#209090"/>
+<text x="423.5" y="364" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#108888"/>
+<text x="612.5" y="364" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#008080"/>
+<text x="801.5" y="364" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#F7FAFA" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#A3D0D0"/>
+<text x="234.5" y="420" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#A8D3D3"/>
+<text x="423.5" y="420" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#98CBCB"/>
+<text x="612.5" y="420" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#9ECECE"/>
+<text x="801.5" y="420" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">DELIVERIES . WEEKS 25-28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#E5C1B8"/>
+<text x="234.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#E1B8AF"/>
+<text x="423.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#E7C5BC"/>
+<text x="612.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#E3BCB4"/>
+<text x="801.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#D9A79F"/>
+<text x="234.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#DDB0A7"/>
+<text x="423.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#DBABA3"/>
+<text x="612.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#D7A39A"/>
+<text x="801.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#D1968E"/>
+<text x="234.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#CA8981"/>
+<text x="423.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#D39A92"/>
+<text x="612.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#CC8D85"/>
+<text x="801.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#B0514B"/>
+<text x="234.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#AA453E"/>
+<text x="423.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#A43832"/>
+<text x="612.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#9E2B25"/>
+<text x="801.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#FDF4EA" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#DDB0A7"/>
+<text x="234.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#DFB4AB"/>
+<text x="423.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#D9A79F"/>
+<text x="612.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#DBABA3"/>
+<text x="801.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#B7D1DC"/>
+<text x="234.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#AECBD8"/>
+<text x="423.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#BCD4DF"/>
+<text x="612.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#B3CEDA"/>
+<text x="801.5" y="196" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#9DC0CF"/>
+<text x="234.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#A6C6D4"/>
+<text x="423.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#A1C3D1"/>
+<text x="612.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#98BDCD"/>
+<text x="801.5" y="252" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#8BB5C6"/>
+<text x="234.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#7DACC0"/>
+<text x="423.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#8FB8C9"/>
+<text x="612.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#82AFC2"/>
+<text x="801.5" y="308" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#4387A3"/>
+<text x="234.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#367F9C"/>
+<text x="423.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#287696"/>
+<text x="612.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#1B6E8F"/>
+<text x="801.5" y="364" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#EDF3F7" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#A6C6D4"/>
+<text x="234.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#AAC9D6"/>
+<text x="423.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#9DC0CF"/>
+<text x="612.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#A1C3D1"/>
+<text x="801.5" y="420" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#EFCEC1"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#EDC6B7"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#F1D3C6"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#EECABC"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#E8B6A2"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#EABEAC"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#E9BAA7"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#E6B29D"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#E2A68D"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#DF9A7E"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#E4AA92"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#E09E83"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#CE653B"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#CA592B"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#C64D1C"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#C2410C"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#EABEAC"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#ECC2B1"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#E8B6A2"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#E9BAA7"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#DDC6C6"/>
+<text x="234.5" y="196" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#D7BCBC"/>
+<text x="423.5" y="196" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#E0CBCB"/>
+<text x="612.5" y="196" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#DAC1C1"/>
+<text x="801.5" y="196" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#CCA9A9"/>
+<text x="234.5" y="252" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#D2B3B3"/>
+<text x="423.5" y="252" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#CFAEAE"/>
+<text x="612.5" y="252" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#C9A4A4"/>
+<text x="801.5" y="252" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#C19696"/>
+<text x="234.5" y="308" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#B88888"/>
+<text x="423.5" y="308" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#C49B9B"/>
+<text x="612.5" y="308" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#BB8D8D"/>
+<text x="801.5" y="308" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#934A4A"/>
+<text x="234.5" y="364" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#8B3C3C"/>
+<text x="423.5" y="364" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#822D2D"/>
+<text x="612.5" y="364" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#7A1F1F"/>
+<text x="801.5" y="364" font-size="10" font-family="Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#D2B3B3"/>
+<text x="234.5" y="420" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#D5B8B8"/>
+<text x="423.5" y="420" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#CCA9A9"/>
+<text x="612.5" y="420" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#CFAEAE"/>
+<text x="801.5" y="420" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#EFC4C9"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#ECBAC0"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#F0C9CD"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#EEBFC4"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#E7A7AE"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#EAB0B7"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#E8ABB2"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#E6A2A9"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#E2939C"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#DD848E"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#E398A0"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#DF8993"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#CC4454"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#C83546"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#C42739"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#C0182B"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#EAB0B7"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#EBB5BB"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#E7A7AE"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#E8ABB2"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#514627"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#5A4C27"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#4C4327"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#554927"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#6C5927"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#635227"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#675627"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#715C27"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#7E6527"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#8C6F28"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#7A6227"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#876C28"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#C79828"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#D5A129"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#E2AB29"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#F0B429"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A2026" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#635227"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#5E4F27"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#6C5927"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#675627"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#B2C7BB"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#A9C3B6"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#B7C9BD"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#ADC5B9"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#96B9AE"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#9FBEB2"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#9BBCB0"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#91B7AB"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#83B0A5"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#76A99E"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#88B2A7"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#7AABA0"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#398B82"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#2B847B"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#1D7D75"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#0F766E"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#EAE3D5" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#9FBEB2"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#A4C0B4"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#96B9AE"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#9BBCB0"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#524524"/>
+<text x="234.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#5B4B24"/>
+<text x="423.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#4E4224"/>
+<text x="612.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#574824"/>
+<text x="801.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#6D5825"/>
+<text x="234.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#645224"/>
+<text x="423.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#695525"/>
+<text x="612.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#725B25"/>
+<text x="801.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#7F6525"/>
+<text x="234.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#8D6E26"/>
+<text x="423.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#7B6225"/>
+<text x="612.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#886B26"/>
+<text x="801.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#C79728"/>
+<text x="234.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#D5A128"/>
+<text x="423.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#E2AA29"/>
+<text x="612.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#F0B429"/>
+<text x="801.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1C1F22" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#645224"/>
+<text x="234.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#604F24"/>
+<text x="423.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#6D5825"/>
+<text x="612.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#695525"/>
+<text x="801.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#C6CCD7"/>
+<text x="234.5" y="196" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#BCC4D1"/>
+<text x="423.5" y="196" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#CBD0DB"/>
+<text x="612.5" y="196" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#C1C8D4"/>
+<text x="801.5" y="196" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#A9B3C4"/>
+<text x="234.5" y="252" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#B3BBCA"/>
+<text x="423.5" y="252" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#AEB7C7"/>
+<text x="612.5" y="252" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#A4AFC0"/>
+<text x="801.5" y="252" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#96A2B6"/>
+<text x="234.5" y="308" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#8895AD"/>
+<text x="423.5" y="308" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#9BA6BA"/>
+<text x="612.5" y="308" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#8D99B0"/>
+<text x="801.5" y="308" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#4A5E82"/>
+<text x="234.5" y="364" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#3C5178"/>
+<text x="423.5" y="364" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#2D456E"/>
+<text x="612.5" y="364" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#1F3864"/>
+<text x="801.5" y="364" font-size="12" font-family="Cambria,Georgia,serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#B3BBCA"/>
+<text x="234.5" y="420" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#B8BFCE"/>
+<text x="423.5" y="420" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#A9B3C4"/>
+<text x="612.5" y="420" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#AEB7C7"/>
+<text x="801.5" y="420" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#F5CDCA"/>
+<text x="234.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#F3C4C1"/>
+<text x="423.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#F5D1CE"/>
+<text x="612.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#F4C9C5"/>
+<text x="801.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#EFB4AF"/>
+<text x="234.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#F1BCB8"/>
+<text x="423.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#F0B8B4"/>
+<text x="612.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#EEAFAB"/>
+<text x="801.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#ECA39E"/>
+<text x="234.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#E99690"/>
+<text x="423.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#EDA7A2"/>
+<text x="612.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#EA9A95"/>
+<text x="801.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#DE6057"/>
+<text x="234.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#DB534A"/>
+<text x="423.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#D9473C"/>
+<text x="612.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#D63A2F"/>
+<text x="801.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#F1BCB8"/>
+<text x="234.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#F2C0BD"/>
+<text x="423.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#EFB4AF"/>
+<text x="612.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#F0B8B4"/>
+<text x="801.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#E6C1A9"/>
+<text x="234.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#E4BBA2"/>
+<text x="423.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#E6C4AC"/>
+<text x="612.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#E5BEA5"/>
+<text x="801.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#E0AF94"/>
+<text x="234.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#E2B59B"/>
+<text x="423.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#E1B297"/>
+<text x="612.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#DFAC90"/>
+<text x="801.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#DCA386"/>
+<text x="234.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#D9997B"/>
+<text x="423.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#DDA689"/>
+<text x="612.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#DA9C7F"/>
+<text x="801.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#CD724E"/>
+<text x="234.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#CA6943"/>
+<text x="423.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#C76039"/>
+<text x="612.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#C4572E"/>
+<text x="801.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F1E5D3" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#E2B59B"/>
+<text x="234.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#E3B89E"/>
+<text x="423.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#E0AF94"/>
+<text x="612.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#E1B297"/>
+<text x="801.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">DELIVERIES . WEEKS 25-28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#C7D3FF"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#BDCBFF"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#CBD6FF"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#C2CFFF"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#AABCFF"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#B4C4FF"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#AFC0FF"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#A6B9FF"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#98AEFF"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#89A2FF"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#9CB1FF"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#8EA6FF"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#4C72FF"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#3E67FF"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#305CFF"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#2251FF"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#B4C4FF"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#B8C7FF"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#AABCFF"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#AFC0FF"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#C4DDD4"/>
+<text x="234.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#BAD7CD"/>
+<text x="423.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#C9E0D7"/>
+<text x="612.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#BFDAD0"/>
+<text x="801.5" y="196" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#A7CCBE"/>
+<text x="234.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#B1D2C5"/>
+<text x="423.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#ACCFC2"/>
+<text x="612.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#A2C9BB"/>
+<text x="801.5" y="252" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#93C1B0"/>
+<text x="234.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#85B8A5"/>
+<text x="423.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#98C4B3"/>
+<text x="612.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#8ABBA9"/>
+<text x="801.5" y="308" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#459376"/>
+<text x="234.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#368B6C"/>
+<text x="423.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#288261"/>
+<text x="612.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#197A56"/>
+<text x="801.5" y="364" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#B1D2C5"/>
+<text x="234.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#B6D5C9"/>
+<text x="423.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#A7CCBE"/>
+<text x="612.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#ACCFC2"/>
+<text x="801.5" y="420" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Thursday is the heaviest delivery day in all four weeks</text>
+<text x="234.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">W25</text>
+<text x="423.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">W26</text>
+<text x="612.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">W27</text>
+<text x="801.5" y="154" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="middle" letter-spacing="1">W28</text>
+<text x="124" y="196" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Mon</text>
+<rect x="141" y="169" width="187" height="54" fill="#F0BEC5"/>
+<text x="234.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">12</text>
+<rect x="330" y="169" width="187" height="54" fill="#EDB3BB"/>
+<text x="423.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">14</text>
+<rect x="519" y="169" width="187" height="54" fill="#F1C3C9"/>
+<text x="612.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">11</text>
+<rect x="708" y="169" width="187" height="54" fill="#EFB8C0"/>
+<text x="801.5" y="196" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">13</text>
+<text x="124" y="252" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Tue</text>
+<rect x="141" y="225" width="187" height="54" fill="#E89DA7"/>
+<text x="234.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="330" y="225" width="187" height="54" fill="#EBA8B1"/>
+<text x="423.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="519" y="225" width="187" height="54" fill="#EAA3AC"/>
+<text x="612.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<rect x="708" y="225" width="187" height="54" fill="#E798A2"/>
+<text x="801.5" y="252" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">19</text>
+<text x="124" y="308" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Wed</text>
+<rect x="141" y="281" width="187" height="54" fill="#E38894"/>
+<text x="234.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">22</text>
+<rect x="330" y="281" width="187" height="54" fill="#E07785"/>
+<text x="423.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">25</text>
+<rect x="519" y="281" width="187" height="54" fill="#E58D99"/>
+<text x="612.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">21</text>
+<rect x="708" y="281" width="187" height="54" fill="#E17D8A"/>
+<text x="801.5" y="308" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">24</text>
+<text x="124" y="364" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Thu</text>
+<rect x="141" y="337" width="187" height="54" fill="#CF3146"/>
+<text x="234.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">38</text>
+<rect x="330" y="337" width="187" height="54" fill="#CC2137"/>
+<text x="423.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">41</text>
+<rect x="519" y="337" width="187" height="54" fill="#C81029"/>
+<text x="612.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">44</text>
+<rect x="708" y="337" width="187" height="54" fill="#C4001A"/>
+<text x="801.5" y="364" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle" dominant-baseline="middle">47</text>
+<text x="124" y="420" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="end" dominant-baseline="middle">Fri</text>
+<rect x="141" y="393" width="187" height="54" fill="#EBA8B1"/>
+<text x="234.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">16</text>
+<rect x="330" y="393" width="187" height="54" fill="#ECAEB6"/>
+<text x="423.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">15</text>
+<rect x="519" y="393" width="187" height="54" fill="#E89DA7"/>
+<text x="612.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">18</text>
+<rect x="708" y="393" width="187" height="54" fill="#EAA3AC"/>
+<text x="801.5" y="420" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">17</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>patterns across two ordered dimensions: weekday x week, hour x day, section x month</li><li>dense grids where a scatter would be unreadable</li></ul>
+<h2>Do not use when</h2><ul><li>entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)</li><li>exact value lookup as the primary job (a plain table wins)</li><li>diverging data around a midpoint (needs a diverging scale entry, planned)</li></ul>
+<h2>See instead</h2><ul><li>rows are entities, not an ordered dimension: <a href='CH-TAB-02.html'>CH-TAB-02</a></li><li>few points: <a href='CH-COR-01.html'>CH-COR-01</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-TAB-02 (heatmap table for entity rows)</li><li>CH-TIM-07 (calendar heatmap, planned)</li></ul>
+<h2>Rules</h2><ul><li>single-hue ramp from cell_low to cell_high (primary); never a rainbow</li><li>the value is printed in every cell; color alone never carries the number</li><li>cell text flips to the low color above 55% intensity, deterministically</li><li>both dimensions keep their natural order</li><li>global normalization: one scale for the whole grid</li></ul>
+<h2>Never do this</h2><ul><li>rainbow color scales</li><li>cells without printed values</li><li>sorting an ordered dimension by value</li><li>diverging data on a sequential ramp</li></ul>
+<h2>QA before delivering</h2><ul><li>every cell prints its value</li><li>single-hue ramp</li><li>dimensions in natural order</li><li>title names the pattern</li><li>source line present bottom-left</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>string, action title naming the pattern</td></tr><tr><td>eyebrow</td><td>string caps, rendered only when the DL chrome asks for it</td></tr><tr><td>source</td><td>string, rendered bottom-left, always</td></tr><tr><td>columns</td><td>ordered dimension labels (x)</td></tr><tr><td>rows</td><td>array of {label, values[] same length as columns}, ordered dimension (y)</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;Thursday is the heaviest delivery day in all four weeks&quot;,
+  &quot;eyebrow&quot;: &quot;DELIVERIES . WEEKS 25-28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;columns&quot;: [
+    &quot;W25&quot;,
+    &quot;W26&quot;,
+    &quot;W27&quot;,
+    &quot;W28&quot;
+  ],
+  &quot;rows&quot;: [
+    {
+      &quot;label&quot;: &quot;Mon&quot;,
+      &quot;values&quot;: [
+        12,
+        14,
+        11,
+        13
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Tue&quot;,
+      &quot;values&quot;: [
+        18,
+        16,
+        17,
+        19
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Wed&quot;,
+      &quot;values&quot;: [
+        22,
+        25,
+        21,
+        24
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Thu&quot;,
+      &quot;values&quot;: [
+        38,
+        41,
+        44,
+        47
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;Fri&quot;,
+      &quot;values&quot;: [
+        16,
+        15,
+        18,
+        17
+      ]
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP, role-based (themeable) -->\n\n## XY HEATMAP chart (CH-COR-03)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| cell_low | panel -> background |\n| cell_high | primary |\n| header | body |\n| row_label | ink |\n| value | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"Thursday is the heaviest delivery day in all four weeks\",\n  \"eyebrow\": \"DELIVERIES . WEEKS 25-28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"columns\": [\n    \"W25\",\n    \"W26\",\n    \"W27\",\n    \"W28\"\n  ],\n  \"rows\": [\n    {\n      \"label\": \"Mon\",\n      \"values\": [\n        12,\n        14,\n        11,\n        13\n      ]\n    },\n    {\n      \"label\": \"Tue\",\n      \"values\": [\n        18,\n        16,\n        17,\n        19\n      ]\n    },\n    {\n      \"label\": \"Wed\",\n      \"values\": [\n        22,\n        25,\n        21,\n        24\n      ]\n    },\n    {\n      \"label\": \"Thu\",\n      \"values\": [\n        38,\n        41,\n        44,\n        47\n      ]\n    },\n    {\n      \"label\": \"Fri\",\n      \"values\": [\n        16,\n        15,\n        18,\n        17\n      ]\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-COR-03\",\n  \"name\": \"XY HEATMAP\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"heatmap\",\n  \"meta\": {\n    \"intent\": [\n      \"correlation\",\n      \"pattern\",\n      \"density\"\n    ],\n    \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n    \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n    \"relations\": {\n      \"family\": \"COR\",\n      \"alternatives\": [\n        \"CH-TAB-02 (heatmap table for entity rows)\",\n        \"CH-TIM-07 (calendar heatmap, planned)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"rows are entities, not an ordered dimension\",\n          \"use\": \"CH-TAB-02\"\n        },\n        {\n          \"when\": \"few points\",\n          \"use\": \"CH-COR-01\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"patterns across two ordered dimensions: weekday x week, hour x day, section x month\",\n    \"dense grids where a scatter would be unreadable\"\n  ],\n  \"not_when\": [\n    \"entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\",\n    \"exact value lookup as the primary job (a plain table wins)\",\n    \"diverging data around a midpoint (needs a diverging scale entry, planned)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"string, action title naming the pattern\",\n    \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n    \"source\": \"string, rendered bottom-left, always\",\n    \"columns\": \"ordered dimension labels (x)\",\n    \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  },\n  \"rules\": [\n    \"single-hue ramp from cell_low to cell_high (primary); never a rainbow\",\n    \"the value is printed in every cell; color alone never carries the number\",\n    \"cell text flips to the low color above 55% intensity, deterministically\",\n    \"both dimensions keep their natural order\",\n    \"global normalization: one scale for the whole grid\"\n  ],\n  \"roles\": {\n    \"cell_low\": [\n      \"panel\",\n      \"background\"\n    ],\n    \"cell_high\": [\n      \"primary\"\n    ],\n    \"header\": [\n      \"body\"\n    ],\n    \"row_label\": [\n      \"ink\"\n    ],\n    \"value\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"rainbow color scales\",\n    \"cells without printed values\",\n    \"sorting an ordered dimension by value\",\n    \"diverging data on a sequential ramp\"\n  ],\n  \"qa\": [\n    \"every cell prints its value\",\n    \"single-hue ramp\",\n    \"dimensions in natural order\",\n    \"title names the pattern\",\n    \"source line present bottom-left\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-01 AGRAW -->\n\n## XY HEATMAP chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FAFAF7` |\n| cell_high | `#008080` |\n| header | `#3D3D3D` |\n| row_label | `#1A1A1A` |\n| value | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-02 KATA -->\n\n## XY HEATMAP chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#F7FAFA` |\n| cell_high | `#008080` |\n| header | `#555555` |\n| row_label | `#222222` |\n| value | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-03 LOGOS -->\n\n## XY HEATMAP chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| cell_low | `#FDF4EA` |\n| cell_high | `#9E2B25` |\n| header | `#4A4E57` |\n| row_label | `#262A33` |\n| value | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-04 SHILPA -->\n\n## XY HEATMAP chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| cell_low | `#EDF3F7` |\n| cell_high | `#1B6E8F` |\n| header | `#33424E` |\n| row_label | `#143D59` |\n| value | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-05 OBEYA -->\n\n## XY HEATMAP chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C2410C` |\n| header | `#334155` |\n| row_label | `#0F172A` |\n| value | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-06 LEX -->\n\n## XY HEATMAP chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#7A1F1F` |\n| header | `#333333` |\n| row_label | `#1A1A1A` |\n| value | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-07 SAGA -->\n\n## XY HEATMAP chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C0182B` |\n| header | `#2E2E2E` |\n| row_label | `#111111` |\n| value | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-08 SENTINEL -->\n\n## XY HEATMAP chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| cell_low | `#1A2026` |\n| cell_high | `#F0B429` |\n| header | `#9FB0BE` |\n| row_label | `#E6EDF3` |\n| value | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-09 ATLAS -->\n\n## XY HEATMAP chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| cell_low | `#EAE3D5` |\n| cell_high | `#0F766E` |\n| header | `#4A5860` |\n| row_label | `#2B3A42` |\n| value | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-10 BASIRA -->\n\n## XY HEATMAP chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| cell_low | `#1C1F22` |\n| cell_high | `#F0B429` |\n| header | `#D9D9D9` |\n| row_label | `#FFFFFF` |\n| value | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-11 SUTRA -->\n\n## XY HEATMAP chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#1F3864` |\n| header | `#262626` |\n| row_label | `#1F3864` |\n| value | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-12 NOROSHI -->\n\n## XY HEATMAP chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#D63A2F` |\n| header | `#475569` |\n| row_label | `#0F172A` |\n| value | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-13 MIZAN -->\n\n## XY HEATMAP chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| cell_low | `#F1E5D3` |\n| cell_high | `#C4572E` |\n| header | `#4E4237` |\n| row_label | `#31261D` |\n| value | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-14 EVIDENTIA -->\n\n## XY HEATMAP chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#2251FF` |\n| header | `#3C4A5A` |\n| row_label | `#0B1F35` |\n| value | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-15 ABRID -->\n\n## XY HEATMAP chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#197A56` |\n| header | `#3E4C46` |\n| row_label | `#0E3A2C` |\n| value | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-03 XY HEATMAP rendered in language DL-16 TELOS -->\n\n## XY HEATMAP chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-03\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"pattern\",\n    \"density\"\n  ],\n  \"form\": \"two ordered dimensions x one measure, cells shaded and numbered\",\n  \"data_required\": \"grid of values over two ordered dimensions (weekday x week, hour x day)\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-TAB-02 (heatmap table for entity rows)\",\n    \"CH-TIM-07 (calendar heatmap, planned)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"rows are entities, not an ordered dimension\",\n      \"use\": \"CH-TAB-02\"\n    },\n    {\n      \"when\": \"few points\",\n      \"use\": \"CH-COR-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- patterns across two ordered dimensions: weekday x week, hour x day, section x month\n- dense grids where a scatter would be unreadable\n\nDo NOT use when:\n- entity rows with mixed-scale metrics (use CH-TAB-02, column-normalized)\n- exact value lookup as the primary job (a plain table wins)\n- diverging data around a midpoint (needs a diverging scale entry, planned)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the pattern\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"columns\": \"ordered dimension labels (x)\",\n  \"rows\": \"array of {label, values[] same length as columns}, ordered dimension (y)\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 140,\n      \"right\": 896,\n      \"top\": 168\n    },\n    \"row_height\": 56,\n    \"header_label\": {\n      \"size\": 10,\n      \"offset\": 14\n    },\n    \"row_label\": {\n      \"size\": 12,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 11\n    }\n  },\n  \"scale\": {\n    \"normalize\": \"global\",\n    \"note\": \"cell = mix(cell_low, cell_high, value/global_max); values printed in every cell, so color is never alone\"\n  }\n}\n```\n\n### Rules\n- single-hue ramp from cell_low to cell_high (primary); never a rainbow\n- the value is printed in every cell; color alone never carries the number\n- cell text flips to the low color above 55% intensity, deterministically\n- both dimensions keep their natural order\n- global normalization: one scale for the whole grid\n\n### Never do this\n- rainbow color scales\n- cells without printed values\n- sorting an ordered dimension by value\n- diverging data on a sequential ramp\n\n### QA before delivering\n- [ ] every cell prints its value\n- [ ] single-hue ramp\n- [ ] dimensions in natural order\n- [ ] title names the pattern\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| cell_low | `#FFFFFF` |\n| cell_high | `#C4001A` |\n| header | `#444444` |\n| row_label | `#1A1A1A` |\n| value | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

@@ -1,0 +1,26 @@
+{
+  "code": "BQ-06",
+  "question": "Where is the risk building?",
+  "ovp_version": "1.0",
+  "intent": [
+    "status",
+    "uncertainty"
+  ],
+  "observations": [
+    "a metric approaches its threshold",
+    "a watched value holds then steps"
+  ],
+  "patterns": [
+    "PT-06"
+  ],
+  "charts": [
+    "CH-MAG-04",
+    "CH-TAB-01",
+    "CH-TIM-13"
+  ],
+  "narrative": "NR-04",
+  "decider_hint": {
+    "audience": "operations",
+    "purpose": "alert"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Two of six systems clear 60% completion",
+  "eyebrow": "SYSTEM COMPLETION",
+  "source": "Source: completion database, wk 28",
+  "unit": "%",
+  "series_labels": [
+    "Complete",
+    "Remaining"
+  ],
+  "categories": [
+    {
+      "label": "Utilities",
+      "a": 68,
+      "b": 32
+    },
+    {
+      "label": "Power",
+      "a": 61,
+      "b": 39
+    },
+    {
+      "label": "Control",
+      "a": 57,
+      "b": 43
+    },
+    {
+      "label": "Fire & gas",
+      "a": 52,
+      "b": 48
+    },
+    {
+      "label": "Telecom",
+      "a": 44,
+      "b": 56
+    },
+    {
+      "label": "Buildings",
+      "a": 31,
+      "b": 69
+    }
+  ]
+}

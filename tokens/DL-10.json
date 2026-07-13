@@ -1,0 +1,65 @@
+{
+  "code": "DL-10",
+  "name": "BASIRA",
+  "aka": "GALLERY",
+  "ovp_version": "1.0",
+  "status": "candidate",
+  "philosophy": {
+    "civilization": "Arabic-Islamic intellectual tradition",
+    "principle": "Insight",
+    "motto": "Look deeper than sight.",
+    "laws": [
+      "Images are evidence",
+      "Minimal overlays",
+      "Captions provide context",
+      "Annotation is precise",
+      "Authenticity first"
+    ],
+    "related": [
+      "Veritas",
+      "Imago"
+    ]
+  },
+  "constitution": {
+    "narrative_style": "story-first",
+    "density": "executive",
+    "annotation_policy": "minimal",
+    "legend_policy": "direct-labels-only",
+    "highlight_policy": "single",
+    "decision_style": "evidence-only",
+    "reading_time": "glance",
+    "charts_per_page": 2
+  },
+  "occasions": [
+    "photo progress reports",
+    "drone updates",
+    "milestone records",
+    "before and after"
+  ],
+  "palette": {
+    "background": "#0B0B0B",
+    "panel": "#1C1F22",
+    "ink": "#FFFFFF",
+    "body": "#D9D9D9",
+    "hairline": "#3A3F44",
+    "gridline": "#3A3F44",
+    "primary": "#F0B429",
+    "muted": "#8A9096",
+    "positive": "#3FB68B",
+    "negative": "#E5534B"
+  },
+  "fonts": {
+    "display": {
+      "family": "'Segoe UI',Arial,sans-serif",
+      "weight": 300
+    },
+    "body": {
+      "family": "'Segoe UI',Arial,sans-serif",
+      "weight": 400
+    }
+  },
+  "chrome": {
+    "kicker": false,
+    "eyebrow": false
+  }
+}

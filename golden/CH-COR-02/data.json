@@ -1,0 +1,58 @@
+{
+  "title": "System D compounds the deepest backlog with the largest budget",
+  "eyebrow": "READINESS X BUDGET . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit_x": "%",
+  "unit_y": "",
+  "points": [
+    {
+      "label": "A",
+      "x": 92,
+      "y": 12,
+      "size": 30
+    },
+    {
+      "label": "B",
+      "x": 88,
+      "y": 18,
+      "size": 22
+    },
+    {
+      "label": "C",
+      "x": 74,
+      "y": 25,
+      "size": 18
+    },
+    {
+      "label": "D",
+      "x": 41,
+      "y": 63,
+      "size": 55,
+      "highlight": true
+    },
+    {
+      "label": "E",
+      "x": 66,
+      "y": 31,
+      "size": 26
+    },
+    {
+      "label": "F",
+      "x": 80,
+      "y": 22,
+      "size": 20
+    },
+    {
+      "label": "G",
+      "x": 58,
+      "y": 38,
+      "size": 34
+    },
+    {
+      "label": "H",
+      "x": 70,
+      "y": 26,
+      "size": 24
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/radar.schema.json",
+  "title": "Input data for chart_type radar",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "axes",
+    "series"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "code": "CP-STR-02",
+  "name": "DRAWING TITLE BLOCK",
+  "ovp_version": "1.0",
+  "purpose": "Engineering-register block: labeled rows (project, document, revision, date) in a framed grid, bottom-right of technical pages.",
+  "params": {
+    "row_height": 30,
+    "pad": 10,
+    "label_size": 8,
+    "label_dy": 11,
+    "value_size": 11,
+    "value_dy": 24
+  },
+  "roles": {
+    "block_bg": [
+      "panel",
+      "background"
+    ],
+    "frame": [
+      "ink"
+    ],
+    "rule": [
+      "hairline"
+    ],
+    "label": [
+      "body"
+    ],
+    "value": [
+      "ink"
+    ]
+  },
+  "sample": {
+    "w": 280,
+    "rows": [
+      [
+        "PROJECT",
+        "Sample program"
+      ],
+      [
+        "DOCUMENT",
+        "Weekly readiness board"
+      ],
+      [
+        "REVISION",
+        "C . issued for review"
+      ],
+      [
+        "DATE",
+        "2026-07-12"
+      ]
+    ]
+  },
+  "golden_canvas": {
+    "w": 328,
+    "h": 168
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "labels caps 8px, values below; the frame is ink, rows hairline",
+    "revision rows name the revision letter AND its status",
+    "bottom-right placement on technical pages"
+  ],
+  "qa": [
+    "frame + hairline rows",
+    "revision named",
+    "labels caps"
+  ]
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Taxonomy</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item on" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+<h1>Taxonomy</h1>
+<h1>TAXONOMY . the coding grammar and the full catalogue map</h1>
+<p>This is the index an information designer uses to talk to an agent: pick a code, name a language, get a determined visual. Example instructions: &quot;CH-TIM-02 in DL-03&quot;, &quot;CH-RNK-01 in DL-02, highlight Electrical&quot;.</p>
+<h2>Code grammar</h2>
+<pre><code>FN-nn            foundation (token contract, grid, type, numbers, perception)
+DL-nn            design language (complete visual identity + philosophy + constitution)
+BQ-nn            business question (what is being asked -&gt; patterns, charts, narrative)
+PT-nn            analytical pattern (what the data shows -&gt; which charts)
+NR-nn            narrative skeleton (how the finding is told, per decision_style)
+CH-FAM-nn        chart entry: family code + number within family
+CP-FAM-nn        component entry: family code + number within family
+RC-nnn           recipe: a fully determined page (DL + CH + CP set)</code></pre>
+<p>Built PT patterns: PT-01 TREND, PT-02 OUTLIER, PT-03 GAP-TO-PLAN, PT-04 CONCENTRATION, PT-05 MIX-SHIFT, PT-06 THRESHOLD-BREACH, PT-07 DRIVER-DECOMPOSITION, PT-08 CYCLE (see PATTERNS.md, generated). Language selection rules live in decision/engine.json (see DECIDER.md).</p>
+<p>Codes are permanent. An entry is never renumbered and never reused; retired entries keep their code with status <code>retired</code>. New entries take the next free number in their family. This is what lets external skills and design systems reference codes forever.</p>
+<p>Statuses: <code>spec</code> = built, validated, golden renders shipped. <code>planned</code> = named and scoped, not yet built. <code>warn</code> = will be built with heavy anti-pattern warnings (exists because people ask for it).</p>
+<h2>CH chart families</h2>
+<p>Adapted from the information-design canon (FT Visual Vocabulary lineage): choose the family by WHAT THE MESSAGE IS, then the entry by the data shape.</p>
+<table><tr><th>Family</th><th>Code</th><th>The message is...</th></tr>
+<tr><td>Ranking</td><td>RNK</td><td>who is biggest/smallest, ordered</td></tr>
+<tr><td>Magnitude</td><td>MAG</td><td>how big things are, natural order kept</td></tr>
+<tr><td>Change over time</td><td>TIM</td><td>how it moved, trend, progress</td></tr>
+<tr><td>Part-to-whole</td><td>PTW</td><td>how a total splits</td></tr>
+<tr><td>Deviation</td><td>DEV</td><td>distance from a reference (plan, budget, zero)</td></tr>
+<tr><td>Distribution</td><td>DST</td><td>how values spread</td></tr>
+<tr><td>Correlation</td><td>COR</td><td>how two measures relate</td></tr>
+<tr><td>Spatial</td><td>SPA</td><td>where</td></tr>
+<tr><td>Flow</td><td>FLO</td><td>movement between states or stages</td></tr>
+<tr><td>Tables</td><td>TAB</td><td>exact values the reader will look up</td></tr>
+</table>
+<h3>CH-RNK Ranking</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-RNK-01</td><td>BAR-H, horizontal bar, sorted descending</td><td>spec</td></tr>
+<tr><td>CH-RNK-02</td><td>ORDERED COLUMN, vertical, sorted</td><td>spec</td></tr>
+<tr><td>CH-RNK-03</td><td>LOLLIPOP</td><td>spec</td></tr>
+<tr><td>CH-RNK-04</td><td>BUMP, rank over time</td><td>spec</td></tr>
+<tr><td>CH-RNK-05</td><td>DOT STRIP, ordered</td><td>spec</td></tr>
+<tr><td>CH-RNK-06</td><td>TABLE WITH BARS</td><td>spec</td></tr>
+</table>
+<h3>CH-MAG Magnitude</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-MAG-01</td><td>COLUMN, vertical bar, input order kept</td><td>spec</td></tr>
+<tr><td>CH-MAG-02</td><td>PAIRED COLUMN, two measures side by side</td><td>spec</td></tr>
+<tr><td>CH-MAG-03</td><td>PAIRED BAR</td><td>spec</td></tr>
+<tr><td>CH-MAG-04</td><td>BULLET, actual vs target vs bands</td><td>spec</td></tr>
+<tr><td>CH-MAG-05</td><td>PROPORTIONAL SYMBOL</td><td>spec</td></tr>
+<tr><td>CH-MAG-06</td><td>PICTOGRAM / ISOTYPE</td><td>spec</td></tr>
+<tr><td>CH-MAG-07</td><td>RADAR</td><td>spec (warn)</td></tr>
+<tr><td>CH-MAG-08</td><td>PARLIAMENT / SEAT CHART</td><td>spec</td></tr>
+<tr><td>CH-MAG-09</td><td>GAUGE</td><td>spec (warn)</td></tr>
+</table>
+<h3>CH-TIM Change over time</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-TIM-01</td><td>LINE, trend, 2-4 series</td><td>spec</td></tr>
+<tr><td>CH-TIM-02</td><td>S-CURVE, cumulative progress vs plan</td><td>spec</td></tr>
+<tr><td>CH-TIM-03</td><td>AREA</td><td>spec</td></tr>
+<tr><td>CH-TIM-04</td><td>STACKED AREA</td><td>spec</td></tr>
+<tr><td>CH-TIM-05</td><td>SLOPE, two-point change</td><td>spec</td></tr>
+<tr><td>CH-TIM-06</td><td>SPARKLINE, inline micro-trend</td><td>spec</td></tr>
+<tr><td>CH-TIM-07</td><td>CALENDAR HEATMAP</td><td>spec</td></tr>
+<tr><td>CH-TIM-08</td><td>FAN, forecast with uncertainty bands</td><td>spec</td></tr>
+<tr><td>CH-TIM-09</td><td>GANTT, schedule bars with milestones</td><td>spec</td></tr>
+<tr><td>CH-TIM-10</td><td>CONNECTED SCATTER</td><td>spec</td></tr>
+<tr><td>CH-TIM-11</td><td>STREAMGRAPH</td><td>spec (warn)</td></tr>
+<tr><td>CH-TIM-12</td><td>HORIZON, dense multi-series in tight rows</td><td>spec (warn)</td></tr>
+<tr><td>CH-TIM-13</td><td>STEP, values that hold between changes (rates, policies, stock)</td><td>spec</td></tr>
+<tr><td>CH-TIM-14</td><td>INDEXED LINE, series rebased to 100 at a common start</td><td>spec</td></tr>
+<tr><td>CH-TIM-15</td><td>EVENT TIMELINE, dated milestones and annotations</td><td>spec</td></tr>
+</table>
+<h3>CH-PTW Part-to-whole</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-PTW-01</td><td>STACKED BAR</td><td>spec</td></tr>
+<tr><td>CH-PTW-02</td><td>100% STACKED BAR</td><td>spec</td></tr>
+<tr><td>CH-PTW-03</td><td>PIE, 3 slices max</td><td>spec (warn)</td></tr>
+<tr><td>CH-PTW-04</td><td>DONUT</td><td>spec (warn)</td></tr>
+<tr><td>CH-PTW-05</td><td>TREEMAP</td><td>spec</td></tr>
+<tr><td>CH-PTW-06</td><td>WAFFLE</td><td>spec</td></tr>
+<tr><td>CH-PTW-07</td><td>MARIMEKKO</td><td>spec</td></tr>
+<tr><td>CH-PTW-08</td><td>FUNNEL</td><td>spec</td></tr>
+<tr><td>CH-PTW-09</td><td>SUNBURST</td><td>spec (warn)</td></tr>
+<tr><td>CH-PTW-10</td><td>CIRCLE PACK</td><td>spec (warn)</td></tr>
+</table>
+<h3>CH-DEV Deviation</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-DEV-01</td><td>DIVERGING BAR, +/- from reference</td><td>spec</td></tr>
+<tr><td>CH-DEV-02</td><td>DUMBBELL, before/after per category</td><td>spec</td></tr>
+<tr><td>CH-DEV-03</td><td>SPINE</td><td>spec</td></tr>
+<tr><td>CH-DEV-04</td><td>SURPLUS/DEFICIT AREA</td><td>spec</td></tr>
+<tr><td>CH-DEV-05</td><td>DIVERGING STACKED, sentiment scales</td><td>spec</td></tr>
+</table>
+<h3>CH-DST Distribution</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-DST-01</td><td>HISTOGRAM</td><td>spec</td></tr>
+<tr><td>CH-DST-02</td><td>DOT PLOT</td><td>spec</td></tr>
+<tr><td>CH-DST-03</td><td>DOT STRIP</td><td>spec</td></tr>
+<tr><td>CH-DST-04</td><td>BOXPLOT</td><td>spec</td></tr>
+<tr><td>CH-DST-05</td><td>POPULATION PYRAMID</td><td>spec</td></tr>
+<tr><td>CH-DST-06</td><td>CUMULATIVE CURVE</td><td>spec</td></tr>
+<tr><td>CH-DST-07</td><td>BEESWARM</td><td>spec</td></tr>
+<tr><td>CH-DST-08</td><td>VIOLIN</td><td>spec (warn)</td></tr>
+<tr><td>CH-DST-09</td><td>DENSITY CURVE (KDE)</td><td>spec</td></tr>
+<tr><td>CH-DST-10</td><td>ERROR BARS &amp; BANDS, uncertainty overlays for any mark</td><td>spec</td></tr>
+</table>
+<h3>CH-COR Correlation</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-COR-01</td><td>SCATTER</td><td>spec</td></tr>
+<tr><td>CH-COR-02</td><td>BUBBLE, third measure as size</td><td>spec</td></tr>
+<tr><td>CH-COR-03</td><td>XY HEATMAP</td><td>spec</td></tr>
+<tr><td>CH-COR-04</td><td>COLUMN + LINE, two measures, labeled scales</td><td>spec</td></tr>
+<tr><td>CH-COR-05</td><td>HEXBIN, binned scatter for hundreds of points</td><td>spec</td></tr>
+<tr><td>CH-COR-06</td><td>PARALLEL COORDINATES</td><td>spec (warn)</td></tr>
+<tr><td>CH-COR-07</td><td>SCATTERPLOT MATRIX (SPLOM)</td><td>spec (warn)</td></tr>
+</table>
+<h3>CH-SPA Spatial</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-SPA-01</td><td>CHOROPLETH</td><td>spec</td></tr>
+<tr><td>CH-SPA-02</td><td>PROPORTIONAL SYMBOL MAP</td><td>spec</td></tr>
+<tr><td>CH-SPA-03</td><td>ROUTE PROGRESS, done/pending along a corridor</td><td>spec</td></tr>
+<tr><td>CH-SPA-04</td><td>DOT DENSITY</td><td>spec</td></tr>
+<tr><td>CH-SPA-05</td><td>FLOW MAP</td><td>spec</td></tr>
+</table>
+<h3>CH-FLO Flow</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-FLO-01</td><td>WATERFALL, start to end via +/- steps</td><td>spec</td></tr>
+<tr><td>CH-FLO-02</td><td>SANKEY</td><td>spec</td></tr>
+<tr><td>CH-FLO-03</td><td>NETWORK</td><td>spec</td></tr>
+<tr><td>CH-FLO-04</td><td>CHORD</td><td>spec (warn)</td></tr>
+</table>
+<h3>CH-TAB Tables</h3>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CH-TAB-01</td><td>STATUS MATRIX, entities x stages with status words</td><td>spec</td></tr>
+<tr><td>CH-TAB-02</td><td>HEATMAP TABLE</td><td>spec</td></tr>
+<tr><td>CH-TAB-03</td><td>KPI TABLE, values + deltas + micro-trends</td><td>spec</td></tr>
+</table>
+<h2>CP component families</h2>
+<table><tr><th>Code</th><th>Entry</th><th>Status</th></tr>
+<tr><td>CP-TXT-01</td><td>ACTION TITLE (with DL chrome)</td><td>spec</td></tr>
+<tr><td>CP-TXT-02</td><td>SOURCE LINE</td><td>spec</td></tr>
+<tr><td>CP-KPI-01</td><td>KPI CARD</td><td>spec</td></tr>
+<tr><td>CP-STA-01</td><td>STATUS CHIP (outlined, dot + word)</td><td>spec</td></tr>
+<tr><td>CP-CAL-01</td><td>INSIGHT CALLOUT</td><td>spec</td></tr>
+<tr><td>CP-KPI-02</td><td>BIG NUMBER</td><td>spec</td></tr>
+<tr><td>CP-STA-02</td><td>OUTLINED STAMP (blueprint register)</td><td>spec</td></tr>
+<tr><td>CP-STR-01</td><td>HEADER BAND</td><td>spec</td></tr>
+<tr><td>CP-STR-02</td><td>DRAWING TITLE BLOCK</td><td>spec</td></tr>
+<tr><td>CP-LAB-01</td><td>LEADER-LINE ANNOTATION (standalone)</td><td>spec</td></tr>
+<tr><td>CP-CAL-02</td><td>EXCEPTION ROW</td><td>spec</td></tr>
+</table>
+<h2>RC recipes</h2>
+<p>A recipe pins everything: DL + charts + components + exact positions on the 1280x720 canvas. Recurring deliverables reference a recipe code, so a weekly deck renders identically forever.</p>
+<table><tr><th>Code</th><th>Recipe</th><th>DL</th><th>Status</th></tr>
+<tr><td>RC-001</td><td>WEEKLY PROGRESS PAGE: title + KPI strip + S-curve + chips + callout</td><td>DL-02</td><td>spec</td></tr>
+<tr><td>RC-002</td><td>ANALYSIS PAGE: kicker title + waterfall at 70% of page</td><td>DL-03</td><td>spec</td></tr>
+<tr><td>RC-003</td><td>READINESS BOARD: title + status matrix + critical chip + callout</td><td>DL-04</td><td>spec</td></tr>
+<tr><td>RC-004</td><td>EXECUTIVE BRIEF: claim + big number + bridge + decision + owner (NR-01)</td><td>DL-01</td><td>spec</td></tr>
+<tr><td>RC-005</td><td>EXCEPTION FLASH: header band + bullet board + exception rows + stamp (NR-04)</td><td>DL-12</td><td>spec</td></tr>
+<tr><td>RC-006</td><td>EVIDENCE READOUT: question + exhibit + finding + evidence-only stamp (NR-02)</td><td>DL-14</td><td>spec</td></tr>
+</table>
+<h2>Cross-cutting mechanisms (MX, built as specs)</h2>
+<table><tr><th>Code</th><th>Mechanism</th><th>Status</th></tr>
+<tr><td>MX-01</td><td>SMALL MULTIPLES, faceting any chart entry into a shared-scale grid</td><td>spec</td></tr>
+<tr><td>MX-02</td><td>FIT OVERLAYS, declared fits on COR charts (no silent trend lines)</td><td>spec</td></tr>
+</table>
+<p>Specs: <code>catalogue/mechanisms/</code>.</p>
+<h2>Excluded, with reasons (benchmarked against Datawrapper, Flourish, Vega-Lite, Observable)</h2>
+<table><tr><th>Type</th><th>Why OVP excludes it</th></tr>
+<tr><td>Bar/line chart races, animation</td><td>v0.1 is a static, deterministic, print-safe protocol; motion is a future layer, not a chart</td></tr>
+<tr><td>Word clouds</td><td>area encodes string length, not value; perceptually dishonest</td></tr>
+<tr><td>3D anything</td><td>violates the AI-tells blacklist and Cleveland-McGill; no exceptions</td></tr>
+<tr><td>Radial bar, pyramid pie</td><td>angle+radius double-distortion (FN-06)</td></tr>
+<tr><td>Ternary, Q-Q, contour, raster</td><td>scientific niches outside the reporting domain; adopt on demand via PR</td></tr>
+<tr><td>Candlestick</td><td>finance-domain-specific; add when a finance adopter exists</td></tr>
+<tr><td>Trail / comet marks</td><td>decoration over information</td></tr>
+<tr><td>Quiz, survey cards, interactive stories</td><td>applications, not visualizations; out of protocol scope</td></tr>
+</table>
+<h2>Output targets</h2>
+<p>The catalogue is renderer-agnostic by design: specs are exact px/hex, so any backend can consume them. Current reference implementation: SVG (<code>tools/render.py</code>). Planned backends, in order: PPTX (python-pptx), HTML, XLSX, Power BI themes. Not now; specs first.</p>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

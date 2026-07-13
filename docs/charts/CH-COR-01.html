@@ -1,0 +1,910 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-COR-01 SCATTER</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-COR-01</div>
+<div class="kicker">CH-COR-01 . family COR</div>
+<h1>SCATTER</h1>
+<p class="lead">scatter plot, labeled points. Needs:
+entities with two numeric measures; under ~20 points if labeled.</p>
+<p><span class="tag">correlation</span><span class="tag">outlier-detection</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#D8D5CE" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#EFEDE8" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#EFEDE8" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#EFEDE8" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#EFEDE8" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#D8D5CE" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#EFEDE8" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#EFEDE8" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#EFEDE8" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#EFEDE8" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#EFEDE8" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#C9C6BF"/>
+<text x="809.2" y="393.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#C9C6BF"/>
+<text x="778.8" y="369.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#C9C6BF"/>
+<text x="672.4" y="342.5" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#008080"/>
+<text x="421.6" y="194.3" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#C9C6BF"/>
+<text x="611.6" y="319.1" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#C9C6BF"/>
+<text x="718" y="354.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#C9C6BF"/>
+<text x="550.8" y="291.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#C9C6BF"/>
+<text x="642" y="338.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#E2E8E8" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#E2E8E8" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#EAEAEA" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#EAEAEA" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#EAEAEA" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#EAEAEA" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#EAEAEA" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B7DCDC"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B7DCDC"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B7DCDC"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#008080"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B7DCDC"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B7DCDC"/>
+<text x="718" y="354.2" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B7DCDC"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B7DCDC"/>
+<text x="642" y="338.6" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">READINESS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="440" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="362" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="284" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="206" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="128" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="96" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="248" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="400" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="552" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="704" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="856" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B8B2A7"/>
+<text x="809.2" y="393.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B8B2A7"/>
+<text x="778.8" y="369.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B8B2A7"/>
+<text x="672.4" y="342.5" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#9E2B25"/>
+<text x="421.6" y="194.3" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B8B2A7"/>
+<text x="611.6" y="319.1" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B8B2A7"/>
+<text x="718" y="354.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B8B2A7"/>
+<text x="550.8" y="291.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B8B2A7"/>
+<text x="642" y="338.6" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#C6D5E0" stroke-width="1"/>
+<text x="84" y="440" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<text x="84" y="362" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E7EEF4" stroke-width="1"/>
+<text x="84" y="284" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E7EEF4" stroke-width="1"/>
+<text x="84" y="206" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E7EEF4" stroke-width="1"/>
+<text x="84" y="128" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#C6D5E0" stroke-width="1"/>
+<text x="96" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E7EEF4" stroke-width="1"/>
+<text x="248" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E7EEF4" stroke-width="1"/>
+<text x="400" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E7EEF4" stroke-width="1"/>
+<text x="552" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E7EEF4" stroke-width="1"/>
+<text x="704" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E7EEF4" stroke-width="1"/>
+<text x="856" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#C6D5E0"/>
+<text x="809.2" y="393.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#C6D5E0"/>
+<text x="778.8" y="369.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#C6D5E0"/>
+<text x="672.4" y="342.5" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#1B6E8F"/>
+<text x="421.6" y="194.3" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#C6D5E0"/>
+<text x="611.6" y="319.1" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#C6D5E0"/>
+<text x="718" y="354.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#C6D5E0"/>
+<text x="550.8" y="291.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#C6D5E0"/>
+<text x="642" y="338.6" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#64748B" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#CBD5E1" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#CBD5E1" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#CBD5E1" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#CBD5E1" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#64748B" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#CBD5E1" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#CBD5E1" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#CBD5E1" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#CBD5E1" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#CBD5E1" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#64748B"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#64748B"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#64748B"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#C2410C"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#64748B"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#64748B"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#64748B"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#64748B"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#B9B9B9" stroke-width="1"/>
+<text x="84" y="440" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#CCCCCC" stroke-width="1"/>
+<text x="84" y="362" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#CCCCCC" stroke-width="1"/>
+<text x="84" y="284" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#CCCCCC" stroke-width="1"/>
+<text x="84" y="206" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#CCCCCC" stroke-width="1"/>
+<text x="84" y="128" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#B9B9B9" stroke-width="1"/>
+<text x="96" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#CCCCCC" stroke-width="1"/>
+<text x="248" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#CCCCCC" stroke-width="1"/>
+<text x="400" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#CCCCCC" stroke-width="1"/>
+<text x="552" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#CCCCCC" stroke-width="1"/>
+<text x="704" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#CCCCCC" stroke-width="1"/>
+<text x="856" y="460" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B9B9B9"/>
+<text x="809.2" y="393.2" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B9B9B9"/>
+<text x="778.8" y="369.8" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B9B9B9"/>
+<text x="672.4" y="342.5" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#B9B9B9"/>
+<text x="421.6" y="194.3" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B9B9B9"/>
+<text x="611.6" y="319.1" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B9B9B9"/>
+<text x="718" y="354.2" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B9B9B9"/>
+<text x="550.8" y="291.8" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B9B9B9"/>
+<text x="642" y="338.6" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#111111" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#111111" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E4E4E4" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E4E4E4" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E4E4E4" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E4E4E4" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E4E4E4" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B0B0B0"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B0B0B0"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B0B0B0"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#C0182B"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B0B0B0"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B0B0B0"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B0B0B0"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B0B0B0"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#2A323A" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#5C6B78"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#5C6B78"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#5C6B78"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#F0B429"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#5C6B78"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#5C6B78"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#5C6B78"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#5C6B78"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#CDC3AE" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#CDC3AE" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B9AE9C"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B9AE9C"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B9AE9C"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#0F766E"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B9AE9C"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B9AE9C"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B9AE9C"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B9AE9C"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#8A9096"/>
+<text x="809.2" y="393.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#8A9096"/>
+<text x="778.8" y="369.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#8A9096"/>
+<text x="672.4" y="342.5" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#F0B429"/>
+<text x="421.6" y="194.3" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#8A9096"/>
+<text x="611.6" y="319.1" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#8A9096"/>
+<text x="718" y="354.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#8A9096"/>
+<text x="550.8" y="291.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#8A9096"/>
+<text x="642" y="338.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#8EAADB" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#C9D6EE" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#C9D6EE" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#C9D6EE" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#C9D6EE" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#8EAADB" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#C9D6EE" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#C9D6EE" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#C9D6EE" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#C9D6EE" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#C9D6EE" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#A9BBD9"/>
+<text x="809.2" y="393.2" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#A9BBD9"/>
+<text x="778.8" y="369.8" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#A9BBD9"/>
+<text x="672.4" y="342.5" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#1F3864"/>
+<text x="421.6" y="194.3" font-size="12" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#A9BBD9"/>
+<text x="611.6" y="319.1" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#A9BBD9"/>
+<text x="718" y="354.2" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#A9BBD9"/>
+<text x="550.8" y="291.8" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#A9BBD9"/>
+<text x="642" y="338.6" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E2E8F0" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E2E8F0" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E2E8F0" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E2E8F0" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#94A3B8"/>
+<text x="809.2" y="393.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#94A3B8"/>
+<text x="778.8" y="369.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#94A3B8"/>
+<text x="672.4" y="342.5" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#D63A2F"/>
+<text x="421.6" y="194.3" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#94A3B8"/>
+<text x="611.6" y="319.1" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#94A3B8"/>
+<text x="718" y="354.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#94A3B8"/>
+<text x="550.8" y="291.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#94A3B8"/>
+<text x="642" y="338.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#DCCFB6" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E5D9C2" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E5D9C2" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E5D9C2" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E5D9C2" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#DCCFB6" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E5D9C2" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E5D9C2" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E5D9C2" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E5D9C2" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E5D9C2" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#C9BBA4"/>
+<text x="809.2" y="393.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#C9BBA4"/>
+<text x="778.8" y="369.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#C9BBA4"/>
+<text x="672.4" y="342.5" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#C4572E"/>
+<text x="421.6" y="194.3" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#C9BBA4"/>
+<text x="611.6" y="319.1" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#C9BBA4"/>
+<text x="718" y="354.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#C9BBA4"/>
+<text x="550.8" y="291.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#C9BBA4"/>
+<text x="642" y="338.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">READINESS . WEEK 28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#C7D0D9" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E3E8ED" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E3E8ED" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E3E8ED" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E3E8ED" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#C7D0D9" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E3E8ED" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E3E8ED" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E3E8ED" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E3E8ED" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E3E8ED" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#A9B4C0"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#A9B4C0"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#A9B4C0"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#2251FF"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#A9B4C0"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#A9B4C0"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#A9B4C0"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#A9B4C0"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#C9D2CC" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E5E7E2" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E5E7E2" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E5E7E2" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E5E7E2" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#C9D2CC" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E5E7E2" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E5E7E2" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E5E7E2" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E5E7E2" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E5E7E2" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#A7C4B5"/>
+<text x="809.2" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#A7C4B5"/>
+<text x="778.8" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#A7C4B5"/>
+<text x="672.4" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#197A56"/>
+<text x="421.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#A7C4B5"/>
+<text x="611.6" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#A7C4B5"/>
+<text x="718" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#A7C4B5"/>
+<text x="550.8" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#A7C4B5"/>
+<text x="642" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#D9D6D2" stroke-width="1"/>
+<text x="84" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E8E6E2" stroke-width="1"/>
+<text x="84" y="362" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E8E6E2" stroke-width="1"/>
+<text x="84" y="284" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E8E6E2" stroke-width="1"/>
+<text x="84" y="206" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E8E6E2" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#D9D6D2" stroke-width="1"/>
+<text x="96" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E8E6E2" stroke-width="1"/>
+<text x="248" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E8E6E2" stroke-width="1"/>
+<text x="400" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E8E6E2" stroke-width="1"/>
+<text x="552" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E8E6E2" stroke-width="1"/>
+<text x="704" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E8E6E2" stroke-width="1"/>
+<text x="856" y="460" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B5B1AB"/>
+<text x="809.2" y="393.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B5B1AB"/>
+<text x="778.8" y="369.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B5B1AB"/>
+<text x="672.4" y="342.5" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#C4001A"/>
+<text x="421.6" y="194.3" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B5B1AB"/>
+<text x="611.6" y="319.1" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B5B1AB"/>
+<text x="718" y="354.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B5B1AB"/>
+<text x="550.8" y="291.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B5B1AB"/>
+<text x="642" y="338.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" dominant-baseline="middle">H</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>how two measures relate across entities</li><li>finding the outlier (the point the title talks about)</li><li>up to ~20 labeled points</li></ul>
+<h2>Do not use when</h2><ul><li>time is one of the axes (use CH-TIM-01)</li><li>hundreds of points (labels collapse; use CH-COR-03)</li><li>one measure only (use CH-RNK-01)</li></ul>
+<h2>See instead</h2><ul><li>a third measure matters: <a href='CH-COR-02.html'>CH-COR-02</a></li><li>hundreds of points: <a href='CH-COR-03.html'>CH-COR-03</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-COR-02 (bubble, adds a size measure)</li><li>CH-COR-03 (XY heatmap for dense grids)</li></ul>
+<h2>Rules</h2><ul><li>both axes start at zero; both use the FN-05 tick algorithm</li><li>every point labeled directly (this entry caps at ~20 points, so labels fit)</li><li>one highlight maximum: role primary with ink label; the rest muted</li><li>gridlines both directions, hairline zero lines</li><li>units once per axis, on the max tick</li></ul>
+<h2>Never do this</h2><ul><li>trend lines without stating the fit (no silent regressions)</li><li>color-coded groups without direct labels</li><li>log scales without declaring them</li><li>point clouds too dense to label (wrong entry)</li></ul>
+<h2>QA before delivering</h2><ul><li>both axes at zero with algorithmic ticks</li><li>every point labeled</li><li>highlight count &lt;= 1</li><li>units once per axis</li><li>title names the outlier or relationship with numbers</li><li>source line present bottom-left</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>string, action title naming the outlier or the relationship with numbers</td></tr><tr><td>eyebrow</td><td>string caps, rendered only when the DL chrome asks for it</td></tr><tr><td>source</td><td>string, rendered bottom-left, always</td></tr><tr><td>unit_x</td><td>string appended to the max x tick</td></tr><tr><td>unit_y</td><td>string appended to the max y tick</td></tr><tr><td>points</td><td>array of {label, x &gt;= 0, y &gt;= 0, highlight?}, one highlight max</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;System D pairs 41% progress with 63 open punch items&quot;,
+  &quot;eyebrow&quot;: &quot;READINESS . WEEK 28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;unit_x&quot;: &quot;%&quot;,
+  &quot;unit_y&quot;: &quot;&quot;,
+  &quot;points&quot;: [
+    {
+      &quot;label&quot;: &quot;A&quot;,
+      &quot;x&quot;: 92,
+      &quot;y&quot;: 12
+    },
+    {
+      &quot;label&quot;: &quot;B&quot;,
+      &quot;x&quot;: 88,
+      &quot;y&quot;: 18
+    },
+    {
+      &quot;label&quot;: &quot;C&quot;,
+      &quot;x&quot;: 74,
+      &quot;y&quot;: 25
+    },
+    {
+      &quot;label&quot;: &quot;D&quot;,
+      &quot;x&quot;: 41,
+      &quot;y&quot;: 63,
+      &quot;highlight&quot;: true
+    },
+    {
+      &quot;label&quot;: &quot;E&quot;,
+      &quot;x&quot;: 66,
+      &quot;y&quot;: 31
+    },
+    {
+      &quot;label&quot;: &quot;F&quot;,
+      &quot;x&quot;: 80,
+      &quot;y&quot;: 22
+    },
+    {
+      &quot;label&quot;: &quot;G&quot;,
+      &quot;x&quot;: 58,
+      &quot;y&quot;: 38
+    },
+    {
+      &quot;label&quot;: &quot;H&quot;,
+      &quot;x&quot;: 70,
+      &quot;y&quot;: 26
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER, role-based (themeable) -->\n\n## SCATTER chart (CH-COR-01)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| point | muted |\n| point_highlight | primary |\n| label | body |\n| label_highlight | ink |\n| gridline | gridline |\n| zero_line | hairline |\n| tick_label | body |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"System D pairs 41% progress with 63 open punch items\",\n  \"eyebrow\": \"READINESS . WEEK 28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"unit_x\": \"%\",\n  \"unit_y\": \"\",\n  \"points\": [\n    {\n      \"label\": \"A\",\n      \"x\": 92,\n      \"y\": 12\n    },\n    {\n      \"label\": \"B\",\n      \"x\": 88,\n      \"y\": 18\n    },\n    {\n      \"label\": \"C\",\n      \"x\": 74,\n      \"y\": 25\n    },\n    {\n      \"label\": \"D\",\n      \"x\": 41,\n      \"y\": 63,\n      \"highlight\": true\n    },\n    {\n      \"label\": \"E\",\n      \"x\": 66,\n      \"y\": 31\n    },\n    {\n      \"label\": \"F\",\n      \"x\": 80,\n      \"y\": 22\n    },\n    {\n      \"label\": \"G\",\n      \"x\": 58,\n      \"y\": 38\n    },\n    {\n      \"label\": \"H\",\n      \"x\": 70,\n      \"y\": 26\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-COR-01\",\n  \"name\": \"SCATTER\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"scatter\",\n  \"meta\": {\n    \"intent\": [\n      \"correlation\",\n      \"outlier-detection\"\n    ],\n    \"form\": \"scatter plot, labeled points\",\n    \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n    \"relations\": {\n      \"family\": \"COR\",\n      \"alternatives\": [\n        \"CH-COR-02 (bubble, adds a size measure)\",\n        \"CH-COR-03 (XY heatmap for dense grids)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"a third measure matters\",\n          \"use\": \"CH-COR-02\"\n        },\n        {\n          \"when\": \"hundreds of points\",\n          \"use\": \"CH-COR-03\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"how two measures relate across entities\",\n    \"finding the outlier (the point the title talks about)\",\n    \"up to ~20 labeled points\"\n  ],\n  \"not_when\": [\n    \"time is one of the axes (use CH-TIM-01)\",\n    \"hundreds of points (labels collapse; use CH-COR-03)\",\n    \"one measure only (use CH-RNK-01)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n    \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n    \"source\": \"string, rendered bottom-left, always\",\n    \"unit_x\": \"string appended to the max x tick\",\n    \"unit_y\": \"string appended to the max y tick\",\n    \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  },\n  \"rules\": [\n    \"both axes start at zero; both use the FN-05 tick algorithm\",\n    \"every point labeled directly (this entry caps at ~20 points, so labels fit)\",\n    \"one highlight maximum: role primary with ink label; the rest muted\",\n    \"gridlines both directions, hairline zero lines\",\n    \"units once per axis, on the max tick\"\n  ],\n  \"roles\": {\n    \"point\": [\n      \"muted\"\n    ],\n    \"point_highlight\": [\n      \"primary\"\n    ],\n    \"label\": [\n      \"body\"\n    ],\n    \"label_highlight\": [\n      \"ink\"\n    ],\n    \"gridline\": [\n      \"gridline\"\n    ],\n    \"zero_line\": [\n      \"hairline\"\n    ],\n    \"tick_label\": [\n      \"body\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"trend lines without stating the fit (no silent regressions)\",\n    \"color-coded groups without direct labels\",\n    \"log scales without declaring them\",\n    \"point clouds too dense to label (wrong entry)\"\n  ],\n  \"qa\": [\n    \"both axes at zero with algorithmic ticks\",\n    \"every point labeled\",\n    \"highlight count <= 1\",\n    \"units once per axis\",\n    \"title names the outlier or relationship with numbers\",\n    \"source line present bottom-left\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-01 AGRAW -->\n\n## SCATTER chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#C9C6BF` |\n| point_highlight | `#008080` |\n| label | `#3D3D3D` |\n| label_highlight | `#1A1A1A` |\n| gridline | `#EFEDE8` |\n| zero_line | `#D8D5CE` |\n| tick_label | `#3D3D3D` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-02 KATA -->\n\n## SCATTER chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#B7DCDC` |\n| point_highlight | `#008080` |\n| label | `#555555` |\n| label_highlight | `#222222` |\n| gridline | `#EAEAEA` |\n| zero_line | `#E2E8E8` |\n| tick_label | `#555555` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-03 LOGOS -->\n\n## SCATTER chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| point | `#B8B2A7` |\n| point_highlight | `#9E2B25` |\n| label | `#4A4E57` |\n| label_highlight | `#262A33` |\n| gridline | `#E8E0D4` |\n| zero_line | `#E8E0D4` |\n| tick_label | `#4A4E57` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-04 SHILPA -->\n\n## SCATTER chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| point | `#C6D5E0` |\n| point_highlight | `#1B6E8F` |\n| label | `#33424E` |\n| label_highlight | `#143D59` |\n| gridline | `#E7EEF4` |\n| zero_line | `#C6D5E0` |\n| tick_label | `#33424E` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-05 OBEYA -->\n\n## SCATTER chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#64748B` |\n| point_highlight | `#C2410C` |\n| label | `#334155` |\n| label_highlight | `#0F172A` |\n| gridline | `#CBD5E1` |\n| zero_line | `#64748B` |\n| tick_label | `#334155` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-06 LEX -->\n\n## SCATTER chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#B9B9B9` |\n| point_highlight | `#7A1F1F` |\n| label | `#333333` |\n| label_highlight | `#1A1A1A` |\n| gridline | `#CCCCCC` |\n| zero_line | `#B9B9B9` |\n| tick_label | `#333333` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-07 SAGA -->\n\n## SCATTER chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#B0B0B0` |\n| point_highlight | `#C0182B` |\n| label | `#2E2E2E` |\n| label_highlight | `#111111` |\n| gridline | `#E4E4E4` |\n| zero_line | `#111111` |\n| tick_label | `#2E2E2E` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-08 SENTINEL -->\n\n## SCATTER chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| point | `#5C6B78` |\n| point_highlight | `#F0B429` |\n| label | `#9FB0BE` |\n| label_highlight | `#E6EDF3` |\n| gridline | `#2A323A` |\n| zero_line | `#2A323A` |\n| tick_label | `#9FB0BE` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-09 ATLAS -->\n\n## SCATTER chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| point | `#B9AE9C` |\n| point_highlight | `#0F766E` |\n| label | `#4A5860` |\n| label_highlight | `#2B3A42` |\n| gridline | `#E3DCCB` |\n| zero_line | `#CDC3AE` |\n| tick_label | `#4A5860` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-10 BASIRA -->\n\n## SCATTER chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| point | `#8A9096` |\n| point_highlight | `#F0B429` |\n| label | `#D9D9D9` |\n| label_highlight | `#FFFFFF` |\n| gridline | `#3A3F44` |\n| zero_line | `#3A3F44` |\n| tick_label | `#D9D9D9` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-11 SUTRA -->\n\n## SCATTER chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#A9BBD9` |\n| point_highlight | `#1F3864` |\n| label | `#262626` |\n| label_highlight | `#1F3864` |\n| gridline | `#C9D6EE` |\n| zero_line | `#8EAADB` |\n| tick_label | `#262626` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-12 NOROSHI -->\n\n## SCATTER chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#94A3B8` |\n| point_highlight | `#D63A2F` |\n| label | `#475569` |\n| label_highlight | `#0F172A` |\n| gridline | `#E2E8F0` |\n| zero_line | `#E2E8F0` |\n| tick_label | `#475569` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-13 MIZAN -->\n\n## SCATTER chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| point | `#C9BBA4` |\n| point_highlight | `#C4572E` |\n| label | `#4E4237` |\n| label_highlight | `#31261D` |\n| gridline | `#E5D9C2` |\n| zero_line | `#DCCFB6` |\n| tick_label | `#4E4237` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-14 EVIDENTIA -->\n\n## SCATTER chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#A9B4C0` |\n| point_highlight | `#2251FF` |\n| label | `#3C4A5A` |\n| label_highlight | `#0B1F35` |\n| gridline | `#E3E8ED` |\n| zero_line | `#C7D0D9` |\n| tick_label | `#3C4A5A` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-15 ABRID -->\n\n## SCATTER chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#A7C4B5` |\n| point_highlight | `#197A56` |\n| label | `#3E4C46` |\n| label_highlight | `#0E3A2C` |\n| gridline | `#E5E7E2` |\n| zero_line | `#C9D2CC` |\n| tick_label | `#3E4C46` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-COR-01 SCATTER rendered in language DL-16 TELOS -->\n\n## SCATTER chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-COR-01\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"correlation\",\n    \"outlier-detection\"\n  ],\n  \"form\": \"scatter plot, labeled points\",\n  \"data_required\": \"entities with two numeric measures; under ~20 points if labeled\",\n  \"family\": \"COR\",\n  \"alternatives\": [\n    \"CH-COR-02 (bubble, adds a size measure)\",\n    \"CH-COR-03 (XY heatmap for dense grids)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"a third measure matters\",\n      \"use\": \"CH-COR-02\"\n    },\n    {\n      \"when\": \"hundreds of points\",\n      \"use\": \"CH-COR-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- how two measures relate across entities\n- finding the outlier (the point the title talks about)\n- up to ~20 labeled points\n\nDo NOT use when:\n- time is one of the axes (use CH-TIM-01)\n- hundreds of points (labels collapse; use CH-COR-03)\n- one measure only (use CH-RNK-01)\n\n### Input data shape\n```json\n{\n  \"title\": \"string, action title naming the outlier or the relationship with numbers\",\n  \"eyebrow\": \"string caps, rendered only when the DL chrome asks for it\",\n  \"source\": \"string, rendered bottom-left, always\",\n  \"unit_x\": \"string appended to the max x tick\",\n  \"unit_y\": \"string appended to the max y tick\",\n  \"points\": \"array of {label, x >= 0, y >= 0, highlight?}, one highlight max\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 96,\n      \"right\": 856,\n      \"top\": 128,\n      \"bottom\": 440\n    },\n    \"dot_r\": 6,\n    \"bubble_max_r\": 28,\n    \"tick_label\": {\n      \"size\": 11,\n      \"offset\": 12\n    },\n    \"x_label\": {\n      \"size\": 11,\n      \"offset\": 20\n    },\n    \"point_label\": {\n      \"size\": 11,\n      \"offset\": 8\n    }\n  },\n  \"scale\": {\n    \"y_zero\": true,\n    \"target_ticks\": 5,\n    \"nice_steps\": [\n      1,\n      2,\n      5,\n      10\n    ],\n    \"algorithm\": \"both axes: FN-05 nice-scale from each axis max\"\n  }\n}\n```\n\n### Rules\n- both axes start at zero; both use the FN-05 tick algorithm\n- every point labeled directly (this entry caps at ~20 points, so labels fit)\n- one highlight maximum: role primary with ink label; the rest muted\n- gridlines both directions, hairline zero lines\n- units once per axis, on the max tick\n\n### Never do this\n- trend lines without stating the fit (no silent regressions)\n- color-coded groups without direct labels\n- log scales without declaring them\n- point clouds too dense to label (wrong entry)\n\n### QA before delivering\n- [ ] both axes at zero with algorithmic ticks\n- [ ] every point labeled\n- [ ] highlight count <= 1\n- [ ] units once per axis\n- [ ] title names the outlier or relationship with numbers\n- [ ] source line present bottom-left\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| point | `#B5B1AB` |\n| point_highlight | `#C4001A` |\n| label | `#444444` |\n| label_highlight | `#1A1A1A` |\n| gridline | `#E8E6E2` |\n| zero_line | `#D9D6D2` |\n| tick_label | `#444444` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

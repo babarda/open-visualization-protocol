@@ -1,0 +1,82 @@
+{
+  "code": "RC-006",
+  "name": "EVIDENCE READOUT",
+  "ovp_version": "1.0",
+  "dl": "DL-14",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "elements": [
+    {
+      "type": "title",
+      "x": 48,
+      "y": 84,
+      "data": {
+        "title": "Piping alone matches the next four sections combined",
+        "eyebrow": "DIAGNOSTIC READOUT . WEEK 28"
+      }
+    },
+    {
+      "type": "chart",
+      "ref": "CH-RNK-01",
+      "data_ref": "golden/CH-RNK-01/data.json",
+      "x": 48,
+      "y": 170,
+      "w": 760,
+      "h": 213.75,
+      "crop": [
+        0,
+        100,
+        960,
+        270
+      ]
+    },
+    {
+      "type": "callout",
+      "x": 850,
+      "y": 170,
+      "data": {
+        "w": 382,
+        "h": 72,
+        "lines": [
+          "Finding: 34 items is the lever.",
+          "Alternative checked: age profile",
+          "is not the driver."
+        ]
+      }
+    },
+    {
+      "type": "big_number",
+      "x": 850,
+      "y": 290,
+      "data": {
+        "label": "OPEN ITEMS",
+        "value": "109",
+        "context": "across five sections"
+      }
+    },
+    {
+      "type": "stamp",
+      "x": 850,
+      "y": 420,
+      "data": {
+        "word": "EVIDENCE ONLY",
+        "tone": "neutral",
+        "w": 190
+      }
+    },
+    {
+      "type": "source",
+      "x": 48,
+      "y": 688,
+      "text": "Source: sample dataset v1, 2026-07-12 . told as NR-02 analyst readout, no recommendation"
+    }
+  ],
+  "qa": [
+    "one chart (EVIDENTIA charts_per_page = 1)",
+    "question answered, alternative explanation addressed (NR-02)",
+    "no recommendation anywhere",
+    "source line present"
+  ]
+}

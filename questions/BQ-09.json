@@ -1,0 +1,26 @@
+{
+  "code": "BQ-09",
+  "question": "Are these two measures related?",
+  "ovp_version": "1.0",
+  "intent": [
+    "correlation",
+    "outlier-detection"
+  ],
+  "observations": [
+    "points align along a direction",
+    "one point breaks the relationship"
+  ],
+  "patterns": [
+    "PT-02"
+  ],
+  "charts": [
+    "CH-COR-01",
+    "CH-COR-02",
+    "CH-COR-03"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "analyst",
+    "purpose": "explain"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "code": "CP-CAL-01",
+  "name": "INSIGHT CALLOUT",
+  "ovp_version": "1.0",
+  "purpose": "A short so-what box beside a visual: lead line in ink, supporting lines in body, primary-colored bar on the left edge.",
+  "params": {
+    "bar_w": 4,
+    "pad": 12,
+    "text_size": 12,
+    "line_height": 18
+  },
+  "roles": {
+    "bar": [
+      "primary"
+    ],
+    "border": [
+      "hairline"
+    ],
+    "box_bg": [
+      "panel",
+      "background"
+    ],
+    "lead": [
+      "ink"
+    ],
+    "text": [
+      "body"
+    ]
+  },
+  "sample": {
+    "w": 340,
+    "h": 76,
+    "lines": [
+      "Slippage steady since May.",
+      "Recovery plan due Wednesday",
+      "with the logistics contractor."
+    ]
+  },
+  "golden_canvas": {
+    "w": 400,
+    "h": 124
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "first line is the lead (ink, weight 600); the rest support it",
+    "a callout states a consequence or an ask, never repeats the chart title",
+    "one callout per visual maximum"
+  ],
+  "qa": [
+    "lead line present",
+    "does not restate the title"
+  ]
+}

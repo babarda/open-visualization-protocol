@@ -1,0 +1,52 @@
+{
+  "title": "System D trails on every metric of the readiness set",
+  "eyebrow": "READINESS METRICS . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "columns": [
+    "PROGRESS %",
+    "OPEN PUNCH",
+    "TESTS LEFT"
+  ],
+  "rows": [
+    {
+      "label": "System A",
+      "values": [
+        92,
+        12,
+        4
+      ]
+    },
+    {
+      "label": "System B",
+      "values": [
+        88,
+        18,
+        6
+      ]
+    },
+    {
+      "label": "System C",
+      "values": [
+        74,
+        25,
+        11
+      ]
+    },
+    {
+      "label": "System D",
+      "values": [
+        41,
+        63,
+        28
+      ]
+    },
+    {
+      "label": "System E",
+      "values": [
+        66,
+        31,
+        15
+      ]
+    }
+  ]
+}

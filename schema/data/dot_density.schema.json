@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/dot_density.schema.json",
+  "title": "Input data for chart_type dot_density",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "unit_value",
+    "regions",
+    "dots"
+  ]
+}

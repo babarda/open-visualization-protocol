@@ -1,0 +1,21 @@
+{
+  "title": "Deliveries doubled in a year: 240 loads against 120",
+  "eyebrow": "LOADS BY YEAR",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "loads",
+  "unit_value": 20,
+  "categories": [
+    {
+      "label": "2024",
+      "value": 120
+    },
+    {
+      "label": "2025",
+      "value": 240
+    },
+    {
+      "label": "2026 plan",
+      "value": 300
+    }
+  ]
+}

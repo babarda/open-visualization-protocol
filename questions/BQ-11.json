@@ -1,0 +1,25 @@
+{
+  "code": "BQ-11",
+  "question": "Will we hit the target?",
+  "ovp_version": "1.0",
+  "intent": [
+    "progress",
+    "uncertainty"
+  ],
+  "observations": [
+    "trajectory vs commitment",
+    "gap to target per metric"
+  ],
+  "patterns": [
+    "PT-03"
+  ],
+  "charts": [
+    "CH-TIM-02",
+    "CH-MAG-04"
+  ],
+  "narrative": "NR-01",
+  "decider_hint": {
+    "audience": "executive",
+    "purpose": "decide"
+  }
+}

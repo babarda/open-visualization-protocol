@@ -1,0 +1,36 @@
+{
+  "code": "NR-02",
+  "name": "THE ANALYST READOUT",
+  "ovp_version": "1.0",
+  "decision_style": "evidence-only",
+  "sections": [
+    {
+      "role": "question",
+      "guidance": "The business question verbatim; the reader must know what is being answered."
+    },
+    {
+      "role": "evidence",
+      "guidance": "Charts in reading order, strongest first; declared inputs only."
+    },
+    {
+      "role": "cause",
+      "guidance": "What explains the shape, with the competing explanation named and excluded."
+    },
+    {
+      "role": "claim",
+      "guidance": "The finding, stated without a recommendation; the reader decides."
+    }
+  ],
+  "example": [
+    "Question: is quality improving?",
+    "Test pass rate CH-TIM-01; year-on-year slope CH-TIM-05",
+    "Improvement tracks the new inspection gate, not headcount",
+    "Finding: pass rate up 9 points since the gate landed"
+  ],
+  "qa": [
+    "question stated verbatim",
+    "no recommendation anywhere",
+    "alternative explanation addressed",
+    "sources on every chart"
+  ]
+}

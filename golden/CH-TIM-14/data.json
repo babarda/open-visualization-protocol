@@ -1,0 +1,46 @@
+{
+  "title": "Cement cost rose 32% since January; steel held within 4% of baseline",
+  "eyebrow": "INPUT COSTS . INDEXED JAN = 100",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "",
+  "x": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug"
+  ],
+  "series": [
+    {
+      "name": "Steel",
+      "values": [
+        880,
+        872,
+        889,
+        901,
+        915,
+        908,
+        921,
+        899
+      ],
+      "role": "context"
+    },
+    {
+      "name": "Cement",
+      "values": [
+        412,
+        428,
+        441,
+        459,
+        472,
+        495,
+        517,
+        544
+      ],
+      "role": "key"
+    }
+  ]
+}

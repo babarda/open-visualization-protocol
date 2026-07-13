@@ -1,0 +1,16 @@
+{
+  "code": "PT-04",
+  "name": "CONCENTRATION",
+  "ovp_version": "0.1",
+  "recognition": "a few categories hold most of the total (80/20 shape)",
+  "meaning": "leverage and risk both live in the top few",
+  "business_reading": "manage the heavy heads individually; batch the tail",
+  "show_with": [
+    "CH-PTW-05",
+    "CH-RNK-01"
+  ],
+  "avoid": [
+    "pies with more than 3 slices",
+    "equal visual weight for head and tail"
+  ]
+}

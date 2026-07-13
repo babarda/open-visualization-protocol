@@ -1,0 +1,34 @@
+{
+  "code": "CP-TXT-02",
+  "name": "SOURCE LINE",
+  "ovp_version": "1.0",
+  "purpose": "The data provenance line, bottom-left of every page that shows data. Non-negotiable across all languages.",
+  "params": {
+    "size": 11
+  },
+  "roles": {
+    "text": [
+      "body"
+    ]
+  },
+  "sample": {
+    "text": "Source: sample dataset v1, 2026-07-12"
+  },
+  "golden_canvas": {
+    "w": 520,
+    "h": 60
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 38
+  },
+  "rules": [
+    "always bottom-left, always present when the page shows data",
+    "states source name and as-of date",
+    "missing data is declared here, never silently omitted"
+  ],
+  "qa": [
+    "present on every data page",
+    "carries an as-of date"
+  ]
+}

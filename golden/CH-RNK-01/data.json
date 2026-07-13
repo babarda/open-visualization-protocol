@@ -1,0 +1,13 @@
+{
+  "title": "Electrical holds 34 of 109 open items, the largest single backlog",
+  "eyebrow": "OPEN ITEMS . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "categories": [
+    {"label": "Electrical", "value": 34, "highlight": true},
+    {"label": "Mechanical", "value": 28},
+    {"label": "Piping", "value": 21},
+    {"label": "Instrumentation", "value": 17},
+    {"label": "Civil", "value": 9}
+  ]
+}

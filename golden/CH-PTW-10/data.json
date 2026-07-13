@@ -1,0 +1,41 @@
+{
+  "title": "Piping dwarfs every other backlog",
+  "eyebrow": "OPEN ITEMS BY SECTION",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "categories": [
+    {
+      "label": "Piping",
+      "value": 84,
+      "highlight": true
+    },
+    {
+      "label": "Electrical",
+      "value": 46
+    },
+    {
+      "label": "Instr.",
+      "value": 33
+    },
+    {
+      "label": "Civil",
+      "value": 22
+    },
+    {
+      "label": "Mech.",
+      "value": 18
+    },
+    {
+      "label": "HVAC",
+      "value": 10
+    },
+    {
+      "label": "Paint",
+      "value": 7
+    },
+    {
+      "label": "Scaffold",
+      "value": 5
+    }
+  ]
+}

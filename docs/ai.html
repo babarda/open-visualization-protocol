@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . AI</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item on" href="ai.html">AI</a></nav>
+<main>
+<h1>OVP for AI agents</h1>
+<p class="lead">OVP is written for machine consumption first: controlled
+vocabularies, machine metadata on every object, a generated registry,
+and copy-paste blocks. An agent that follows this page produces
+deterministic, honest visuals instead of plausible ones.</p>
+
+<h2>The instruction grammar</h2>
+<pre><code>Render CH-TIM-02 in DL-03 with data.json</code></pre>
+<p>Object code + design language + data. Nothing else is needed,
+because the spec and the token file determine everything else.</p>
+
+<h2>Resolution order</h2>
+<ol>
+<li><b><a href="questions.html">Questions</a></b>: match the business
+question; confirm its observations in the data.</li>
+<li><b><a href="decider.html">Decider</a></b>: audience + purpose +
+medium resolve the design language; its constitution sets the
+communication contract.</li>
+<li><b><a href="patterns.html">Patterns</a></b>: what you found in the
+data maps to chart codes.</li>
+<li><b><a href="charts/index.html">Charts</a></b>: disambiguate by
+message intent; honor every <code>see_instead</code> exit before
+committing.</li>
+<li><b>Narrative</b>: structure the telling with the question's NR
+skeleton, ordered by the language's decision_style.</li>
+<li><b>Render</b> the code in the language: exact px, exact hex, no
+adjectives, then run the object's QA checklist.</li>
+</ol>
+
+<h2>The registry</h2>
+<p>Resolve objects through <a href="REGISTRY.json">REGISTRY.json</a>
+rather than walking the repository. One entry per object:</p>
+<pre><code>{
+  &quot;id&quot;: &quot;CH-COR-01&quot;,
+  &quot;name&quot;: &quot;SCATTER&quot;,
+  &quot;type&quot;: &quot;chart&quot;,
+  &quot;family&quot;: &quot;COR&quot;,
+  &quot;ovp_version&quot;: &quot;1.0&quot;,
+  &quot;status&quot;: &quot;candidate&quot;,
+  &quot;intent&quot;: [
+    &quot;correlation&quot;,
+    &quot;outlier-detection&quot;
+  ],
+  &quot;relations&quot;: {
+    &quot;alternatives&quot;: [
+      &quot;CH-COR-02 (bubble, adds a size measure)&quot;,
+      &quot;CH-COR-03 (XY heatmap for dense grids)&quot;
+    ],
+    &quot;see_instead&quot;: [
+      {
+        &quot;when&quot;: &quot;a third measure matters&quot;,
+        &quot;use&quot;: &quot;CH-COR-02&quot;
+      },
+      {
+        &quot;when&quot;: &quot;hundreds of points&quot;,
+        &quot;use&quot;: &quot;CH-COR-03&quot;
+      }
+    ],
+    &quot;implemented_by&quot;: [
+      &quot;svg&quot;,
+      &quot;pptx&quot;
+    ],
+    &quot;answers&quot;: [
+      &quot;BQ-09&quot;
+    ],
+    &quot;recommended_by&quot;: [
+      &quot;PT-02&quot;
+    ],
+    &quot;used_in&quot;: []
+  },
+  &quot;source&quot;: &quot;specs/CH-COR-01.json&quot;
+}</code></pre>
+
+<h2>Controlled vocabularies</h2>
+<p><b>audience:</b> executive, operations, analyst, technical, legal, field, public</p><p><b>purpose:</b> decide, monitor, explain, alert, document, brief, archive, navigate, prove, celebrate</p><p><b>medium:</b> screen, print, projector, wall, phone</p><p><b>intent:</b> ranking, comparison, magnitude, trend, change-over-time, schedule, progress, part-to-whole, composition, share, volume, deviation, variance, flow, bridge, variance-decomposition, correlation, outlier-detection, pattern, density, status, lookup, readiness, uncertainty, distribution</p><p><b>narrative_style:</b> recommendation-first, evidence-first, question-first, story-first</p><p><b>density:</b> executive, operational, scientific</p><p><b>annotation_policy:</b> none, minimal, guided, full</p><p><b>legend_policy:</b> direct-labels-only, level-key-allowed</p><p><b>highlight_policy:</b> single, dual, none</p><p><b>decision_style:</b> recommendation-with-owner, options, evidence-only</p><p><b>reading_time:</b> glance, minute, session</p>
+<p>Chart specs draw <code>meta.intent</code> from the intent list; the
+validator rejects anything off-vocabulary.</p>
+
+<h2>The runtime contract</h2>
+<p>Three products, three audiences: the <b>handbook</b> (this site) is
+for humans; the <b>registry</b> is for machine lookup; the
+<b>runtime</b> is what an agent loads to execute one request, and it is
+deliberately tiny:</p>
+<pre><code>request
+  -> registry lookup (one entry)
+  -> one DL token block
+  -> matched chart block(s), within charts_per_page
+  -> the narrative skeleton the question names
+  -> render</code></pre>
+<p>Never load the handbook into an agent context: the copy blocks are
+self-contained on purpose, and token efficiency is a protocol
+objective (PROTOCOL 2.1). Registry chart entries carry the reverse
+edges (<code>answers</code>, <code>recommended_by</code>,
+<code>used_in</code>) so resolution is one lookup, not a crawl.</p>
+
+<h2>Copy blocks: two flavors</h2>
+<p><b>Design-system blocks</b> (per chart per language) resolve every
+color to hex: paste one into a CLAUDE.md or system prompt and the agent
+needs nothing else. <b>Skill blocks</b> (per chart) stay role-based:
+paste next to one language token block and re-theme by swapping that
+block. Both are on every <a href="charts/index.html">chart page</a>,
+generated from the canonical specs and drift-gated.</p>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . DL-10 BASIRA</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item on" href="../languages/index.html">Languages</a><a class="item" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Languages</a> /
+DL-10</div>
+<div class="kicker">DL-10 . Arabic-Islamic intellectual tradition .
+candidate</div>
+<h1>BASIRA</h1>
+<p class="motto">Look deeper than sight.</p>
+<p class="lead">Insight.
+Related traditions: Veritas, Imago.</p>
+<div class="copybar">
+<button class="copy" onclick="copyPayload(this,'dl-md')">Copy token block
+(markdown)</button>
+<button class="copy alt" onclick="copyPayload(this,'dl-json')">Copy token
+JSON</button>
+</div>
+<div class="thumb" style="margin-bottom:24px"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#0B0B0B"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">62 of every 100 scope items are complete</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Look deeper than sight . BASIRA on photo progress reports</text>
+<svg x="48" y="233.5" width="832" height="312" viewBox="0 116 960 360">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<rect x="96" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="140" width="26" height="26" fill="#1C1F22"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">of scope complete</text>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#1C1F22" stroke="#3A3F44" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">COMPLETE</text>
+<text x="926" y="262" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="926" y="282" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="400">+4 vs last visit</text>
+<rect x="912" y="316" width="320" height="54" fill="#1C1F22" stroke="#3A3F44" stroke-width="1"/>
+<rect x="912" y="316" width="4" height="54" fill="#F0B429"/>
+<text x="928" y="337" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600">Same angle, same light:</text>
+<text x="928" y="355" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">every visit records the change.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-10 BASIRA</text>
+</svg>
+</div>
+<div class="two">
+<div>
+<h2>Design laws</h2><ul><li>Images are evidence</li><li>Minimal overlays</li><li>Captions provide context</li><li>Annotation is precise</li><li>Authenticity first</li></ul>
+<h2>Constitution</h2>
+<p>The deterministic communication contract: these values are
+schema-enforced and validator-checked, not styling suggestions.</p>
+<table><tr><td>narrative style</td><td>story-first</td></tr><tr><td>density</td><td>executive</td></tr><tr><td>annotation policy</td><td>minimal</td></tr><tr><td>legend policy</td><td>direct-labels-only</td></tr><tr><td>highlight policy</td><td>single</td></tr><tr><td>decision style</td><td>evidence-only</td></tr><tr><td>reading time</td><td>glance</td></tr><tr><td>charts per page</td><td>2</td></tr></table>
+<h2>Occasions</h2><p><span class="tag">photo progress reports</span><span class="tag">drone updates</span><span class="tag">milestone records</span><span class="tag">before and after</span></p>
+<h2>Chrome</h2><p>no kicker, no eyebrow; the title stands alone.</p>
+</div>
+<div>
+<h2>Palette</h2>
+<table class="palette"><tr><th>Role</th><th>Hex</th></tr><tr><td>background</td><td><i style='background:#0B0B0B'></i><code>#0B0B0B</code></td></tr><tr><td>panel</td><td><i style='background:#1C1F22'></i><code>#1C1F22</code></td></tr><tr><td>ink</td><td><i style='background:#FFFFFF'></i><code>#FFFFFF</code></td></tr><tr><td>body</td><td><i style='background:#D9D9D9'></i><code>#D9D9D9</code></td></tr><tr><td>hairline</td><td><i style='background:#3A3F44'></i><code>#3A3F44</code></td></tr><tr><td>gridline</td><td><i style='background:#3A3F44'></i><code>#3A3F44</code></td></tr><tr><td>primary</td><td><i style='background:#F0B429'></i><code>#F0B429</code></td></tr><tr><td>muted</td><td><i style='background:#8A9096'></i><code>#8A9096</code></td></tr><tr><td>positive</td><td><i style='background:#3FB68B'></i><code>#3FB68B</code></td></tr><tr><td>negative</td><td><i style='background:#E5534B'></i><code>#E5534B</code></td></tr></table>
+<h2>Fonts</h2>
+<p>Display: &#x27;Segoe UI&#x27;,Arial,sans-serif, weight
+300.<br>
+Body: &#x27;Segoe UI&#x27;,Arial,sans-serif, weight
+400.</p>
+</div>
+</div>
+<h2>The language in use</h2>
+<p>Six chart objects rendered from the same golden data as every other
+language. Only the token file differs.</p>
+<div class="grid g2"><figure><figcaption>CH-RNK-01 BAR-H</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Electrical holds 34 of 109 open items, the largest single backlog</text>
+<rect x="208" y="128" width="648" height="32" fill="#F0B429"/>
+<text x="192" y="144" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="end" dominant-baseline="middle">Electrical</text>
+<text x="864" y="144" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">34 items</text>
+<rect x="208" y="176" width="533.65" height="32" fill="#8A9096"/>
+<text x="192" y="192" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Mechanical</text>
+<text x="749.65" y="192" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">28</text>
+<rect x="208" y="224" width="400.24" height="32" fill="#8A9096"/>
+<text x="192" y="240" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Piping</text>
+<text x="616.24" y="240" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">21</text>
+<rect x="208" y="272" width="324" height="32" fill="#8A9096"/>
+<text x="192" y="288" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Instrumentation</text>
+<text x="540" y="288" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">17</text>
+<rect x="208" y="320" width="171.53" height="32" fill="#8A9096"/>
+<text x="192" y="336" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">Civil</text>
+<text x="387.53" y="336" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">9</text>
+<line x1="208" y1="120" x2="208" y2="360" stroke="#3A3F44" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure><figure><figcaption>CH-TIM-01 LINE</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Actual progress reached 62% in June, 9 points behind plan</text>
+<line x1="96" y1="452" x2="756" y2="452" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="371" x2="756" y2="371" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="371" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="290" x2="756" y2="290" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="290" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="209" x2="756" y2="209" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="209" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="756" y2="128" stroke="#3A3F44" stroke-width="1"/>
+<text x="84" y="128" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">80%</text>
+<text x="96" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Jan</text>
+<text x="228" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Feb</text>
+<text x="360" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Mar</text>
+<text x="492" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Apr</text>
+<text x="624" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">May</text>
+<text x="756" y="472" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Jun</text>
+<polyline points="96,411.5 228,350.75 360,290 492,241.4 624,196.85 756,164.45" fill="none" stroke="#8A9096" stroke-width="2"/>
+<text x="766" y="164.45" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">Plan</text>
+<polyline points="96,419.6 228,371 360,318.35 492,269.75 624,229.25 756,200.9" fill="none" stroke="#F0B429" stroke-width="2.5"/>
+<text x="766" y="200.9" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600" dominant-baseline="middle">Actual</text>
+<line x1="492" y1="269.75" x2="474" y2="335" stroke="#D9D9D9" stroke-width="1"/>
+<text x="470" y="340" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" font-style="italic">gap widens from April</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure><figure><figcaption>CH-PTW-01 STACKED BAR</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Delivered goods reached 1,284 in week 28, 90% of all items</text>
+<rect x="125.5" y="267.43" width="56" height="164.57" fill="#F0B429"/>
+<rect x="125.5" y="241.49" width="56" height="25.94" fill="#8A9096"/>
+<rect x="125.5" y="222.03" width="56" height="19.46" fill="#3A3F44"/>
+<text x="153.5" y="214.03" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle">1036 items</text>
+<text x="153.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">W25</text>
+<rect x="304.5" y="240.27" width="56" height="191.73" fill="#F0B429"/>
+<rect x="304.5" y="217.98" width="56" height="22.29" fill="#8A9096"/>
+<rect x="304.5" y="203.59" width="56" height="14.39" fill="#3A3F44"/>
+<text x="332.5" y="195.59" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle">1127</text>
+<text x="332.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">W26</text>
+<rect x="483.5" y="208.05" width="56" height="223.95" fill="#F0B429"/>
+<rect x="483.5" y="188.18" width="56" height="19.86" fill="#8A9096"/>
+<rect x="483.5" y="177.24" width="56" height="10.94" fill="#3A3F44"/>
+<text x="511.5" y="169.24" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle">1257</text>
+<text x="511.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">W27</text>
+<rect x="662.5" y="171.77" width="56" height="260.23" fill="#F0B429"/>
+<rect x="662.5" y="152.31" width="56" height="19.46" fill="#8A9096"/>
+<rect x="662.5" y="144" width="56" height="8.31" fill="#3A3F44"/>
+<text x="690.5" y="136" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="middle">1421</text>
+<text x="690.5" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">W28</text>
+<rect x="796" y="297.88" width="8" height="8" fill="#F0B429"/>
+<text x="810" y="301.88" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">Delivered</text>
+<rect x="796" y="158.04" width="8" height="8" fill="#8A9096"/>
+<text x="810" y="162.04" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">In transit</text>
+<rect x="796" y="144.15" width="8" height="8" fill="#3A3F44"/>
+<text x="810" y="148.15" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">Pending</text>
+<line x1="64" y1="432" x2="780" y2="432" stroke="#3A3F44" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure><figure><figcaption>CH-DEV-04 SURPLUS/DEFICIT AREA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Output ran 8% under plan at the June trough</text>
+<line x1="110" y1="440" x2="820" y2="440" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="440" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">-15</text>
+<line x1="110" y1="391.67" x2="820" y2="391.67" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="391.67" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">-10</text>
+<line x1="110" y1="343.33" x2="820" y2="343.33" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="343.33" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">-5</text>
+<line x1="110" y1="246.67" x2="820" y2="246.67" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="246.67" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">+5</text>
+<line x1="110" y1="198.33" x2="820" y2="198.33" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="198.33" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">+10</text>
+<line x1="110" y1="150" x2="820" y2="150" stroke="#3A3F44" stroke-width="1"/>
+<text x="98" y="150" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">+15%</text>
+<polygon points="110,295 110,256.33 174.55,227.33 239.09,246.67 303.64,275.67 329.45,295 368.18,295 432.73,295 497.27,295 561.82,295 577.95,295 626.36,266 690.91,237 755.45,208 820,179 820,295" fill="#3FB68B" fill-opacity="0.75"/>
+<polygon points="110,295 110,295 174.55,295 239.09,295 303.64,295 329.45,295 368.18,324 432.73,372.33 497.27,343.33 561.82,304.67 577.95,295 626.36,295 690.91,295 755.45,295 820,295 820,295" fill="#E5534B" fill-opacity="0.75"/>
+<polyline points="110,256.33 174.55,227.33 239.09,246.67 303.64,275.67 329.45,295 368.18,324 432.73,372.33 497.27,343.33 561.82,304.67 577.95,295 626.36,266 690.91,237 755.45,208 820,179" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+<line x1="110" y1="295" x2="820" y2="295" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="110" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Jan</text>
+<text x="174.55" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Feb</text>
+<text x="239.09" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Mar</text>
+<text x="303.64" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Apr</text>
+<text x="368.18" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">May</text>
+<text x="432.73" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Jun</text>
+<text x="497.27" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Jul</text>
+<text x="561.82" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Aug</text>
+<text x="626.36" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Sep</text>
+<text x="690.91" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Oct</text>
+<text x="755.45" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Nov</text>
+<text x="820" y="462" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">Dec</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: production ledger, Dec</text>
+</svg>
+</figure><figure><figcaption>CH-DST-07 BEESWARM</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">One lot sits at 62 days, twice the next slowest</text>
+<circle cx="172.5" cy="300" r="6" fill="#8A9096"/>
+<circle cx="181.25" cy="287" r="6" fill="#8A9096"/>
+<circle cx="190" cy="300" r="6" fill="#8A9096"/>
+<circle cx="198.75" cy="287" r="6" fill="#8A9096"/>
+<circle cx="198.75" cy="313" r="6" fill="#8A9096"/>
+<circle cx="207.5" cy="300" r="6" fill="#8A9096"/>
+<circle cx="216.25" cy="287" r="6" fill="#8A9096"/>
+<circle cx="225" cy="300" r="6" fill="#8A9096"/>
+<circle cx="225" cy="313" r="6" fill="#8A9096"/>
+<circle cx="233.75" cy="287" r="6" fill="#8A9096"/>
+<circle cx="242.5" cy="300" r="6" fill="#8A9096"/>
+<circle cx="251.25" cy="287" r="6" fill="#8A9096"/>
+<circle cx="251.25" cy="313" r="6" fill="#8A9096"/>
+<circle cx="260" cy="300" r="6" fill="#8A9096"/>
+<circle cx="268.75" cy="287" r="6" fill="#8A9096"/>
+<circle cx="277.5" cy="300" r="6" fill="#8A9096"/>
+<circle cx="286.25" cy="287" r="6" fill="#8A9096"/>
+<circle cx="303.75" cy="300" r="6" fill="#8A9096"/>
+<circle cx="312.5" cy="287" r="6" fill="#8A9096"/>
+<circle cx="330" cy="300" r="6" fill="#8A9096"/>
+<circle cx="347.5" cy="300" r="6" fill="#8A9096"/>
+<circle cx="373.75" cy="300" r="6" fill="#8A9096"/>
+<circle cx="408.75" cy="300" r="6" fill="#8A9096"/>
+<circle cx="540" cy="300" r="6" fill="#8A9096"/>
+<circle cx="662.5" cy="300" r="6" fill="#F0B429"/>
+<text x="662.5" y="286" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="middle">Lot 88  62 days</text>
+<line x1="120" y1="430" x2="820" y2="430" stroke="#FFFFFF" stroke-width="1"/>
+<line x1="120" y1="430" x2="120" y2="434" stroke="#FFFFFF" stroke-width="1"/>
+<text x="120" y="448" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">0</text>
+<line x1="295" y1="430" x2="295" y2="434" stroke="#FFFFFF" stroke-width="1"/>
+<text x="295" y="448" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">20</text>
+<line x1="470" y1="430" x2="470" y2="434" stroke="#FFFFFF" stroke-width="1"/>
+<text x="470" y="448" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">40</text>
+<line x1="645" y1="430" x2="645" y2="434" stroke="#FFFFFF" stroke-width="1"/>
+<text x="645" y="448" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">60</text>
+<line x1="820" y1="430" x2="820" y2="434" stroke="#FFFFFF" stroke-width="1"/>
+<text x="820" y="448" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle">80days</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: customs log, wk 28</text>
+</svg>
+</figure><figure><figcaption>CH-TAB-01 STATUS MATRIX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Two of five systems are handover-ready; System D is critical in test</text>
+<text x="212" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="174" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="218" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#3FB68B"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="262" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#F0B429"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#8A9096"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="306" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#3FB68B"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#E5534B"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#3A3F44"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#3A3F44" stroke-width="1"/>
+<text x="184" y="350" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#F0B429"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#8A9096"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#3A3F44"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#3A3F44"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#3A3F44" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<script>const PAYLOADS = {"dl-md": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Design language DL-10 BASIRA token block -->\n\n## Design language: BASIRA (DL-10)\n\n**Look deeper than sight.** Arabic-Islamic intellectual tradition: Insight.\n\nStatus: candidate. Occasions: photo progress reports, drone updates, milestone records, before and after.\n\n### Design laws\n\n- Images are evidence\n- Minimal overlays\n- Captions provide context\n- Annotation is precise\n- Authenticity first\n\n### Constitution (deterministic communication contract)\n\n| Dimension | Value |\n|---|---|\n| narrative_style | story-first |\n| density | executive |\n| annotation_policy | minimal |\n| legend_policy | direct-labels-only |\n| highlight_policy | single |\n| decision_style | evidence-only |\n| reading_time | glance |\n| charts_per_page | 2 |\n\n### Palette\n\n| Role | Hex |\n|---|---|\n| background | `#0B0B0B` |\n| panel | `#1C1F22` |\n| ink | `#FFFFFF` |\n| body | `#D9D9D9` |\n| hairline | `#3A3F44` |\n| gridline | `#3A3F44` |\n| primary | `#F0B429` |\n| muted | `#8A9096` |\n| positive | `#3FB68B` |\n| negative | `#E5534B` |\n\n### Fonts\n\n- display: 'Segoe UI',Arial,sans-serif, weight 300\n- body: 'Segoe UI',Arial,sans-serif, weight 400\n\n### Chrome\n\nkicker: false, eyebrow: false\n\n### Machine-readable tokens\n\n```json\n{\n  \"code\": \"DL-10\",\n  \"name\": \"BASIRA\",\n  \"aka\": \"GALLERY\",\n  \"ovp_version\": \"1.0\",\n  \"status\": \"candidate\",\n  \"philosophy\": {\n    \"civilization\": \"Arabic-Islamic intellectual tradition\",\n    \"principle\": \"Insight\",\n    \"motto\": \"Look deeper than sight.\",\n    \"laws\": [\n      \"Images are evidence\",\n      \"Minimal overlays\",\n      \"Captions provide context\",\n      \"Annotation is precise\",\n      \"Authenticity first\"\n    ],\n    \"related\": [\n      \"Veritas\",\n      \"Imago\"\n    ]\n  },\n  \"constitution\": {\n    \"narrative_style\": \"story-first\",\n    \"density\": \"executive\",\n    \"annotation_policy\": \"minimal\",\n    \"legend_policy\": \"direct-labels-only\",\n    \"highlight_policy\": \"single\",\n    \"decision_style\": \"evidence-only\",\n    \"reading_time\": \"glance\",\n    \"charts_per_page\": 2\n  },\n  \"occasions\": [\n    \"photo progress reports\",\n    \"drone updates\",\n    \"milestone records\",\n    \"before and after\"\n  ],\n  \"palette\": {\n    \"background\": \"#0B0B0B\",\n    \"panel\": \"#1C1F22\",\n    \"ink\": \"#FFFFFF\",\n    \"body\": \"#D9D9D9\",\n    \"hairline\": \"#3A3F44\",\n    \"gridline\": \"#3A3F44\",\n    \"primary\": \"#F0B429\",\n    \"muted\": \"#8A9096\",\n    \"positive\": \"#3FB68B\",\n    \"negative\": \"#E5534B\"\n  },\n  \"fonts\": {\n    \"display\": {\n      \"family\": \"'Segoe UI',Arial,sans-serif\",\n      \"weight\": 300\n    },\n    \"body\": {\n      \"family\": \"'Segoe UI',Arial,sans-serif\",\n      \"weight\": 400\n    }\n  },\n  \"chrome\": {\n    \"kicker\": false,\n    \"eyebrow\": false\n  }\n}\n```\n", "dl-json": "{\n  \"code\": \"DL-10\",\n  \"name\": \"BASIRA\",\n  \"aka\": \"GALLERY\",\n  \"ovp_version\": \"1.0\",\n  \"status\": \"candidate\",\n  \"philosophy\": {\n    \"civilization\": \"Arabic-Islamic intellectual tradition\",\n    \"principle\": \"Insight\",\n    \"motto\": \"Look deeper than sight.\",\n    \"laws\": [\n      \"Images are evidence\",\n      \"Minimal overlays\",\n      \"Captions provide context\",\n      \"Annotation is precise\",\n      \"Authenticity first\"\n    ],\n    \"related\": [\n      \"Veritas\",\n      \"Imago\"\n    ]\n  },\n  \"constitution\": {\n    \"narrative_style\": \"story-first\",\n    \"density\": \"executive\",\n    \"annotation_policy\": \"minimal\",\n    \"legend_policy\": \"direct-labels-only\",\n    \"highlight_policy\": \"single\",\n    \"decision_style\": \"evidence-only\",\n    \"reading_time\": \"glance\",\n    \"charts_per_page\": 2\n  },\n  \"occasions\": [\n    \"photo progress reports\",\n    \"drone updates\",\n    \"milestone records\",\n    \"before and after\"\n  ],\n  \"palette\": {\n    \"background\": \"#0B0B0B\",\n    \"panel\": \"#1C1F22\",\n    \"ink\": \"#FFFFFF\",\n    \"body\": \"#D9D9D9\",\n    \"hairline\": \"#3A3F44\",\n    \"gridline\": \"#3A3F44\",\n    \"primary\": \"#F0B429\",\n    \"muted\": \"#8A9096\",\n    \"positive\": \"#3FB68B\",\n    \"negative\": \"#E5534B\"\n  },\n  \"fonts\": {\n    \"display\": {\n      \"family\": \"'Segoe UI',Arial,sans-serif\",\n      \"weight\": 300\n    },\n    \"body\": {\n      \"family\": \"'Segoe UI',Arial,sans-serif\",\n      \"weight\": 400\n    }\n  },\n  \"chrome\": {\n    \"kicker\": false,\n    \"eyebrow\": false\n  }\n}"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

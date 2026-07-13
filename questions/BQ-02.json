@@ -1,0 +1,26 @@
+{
+  "code": "BQ-02",
+  "question": "Are we on schedule?",
+  "ovp_version": "1.0",
+  "intent": [
+    "progress",
+    "schedule"
+  ],
+  "observations": [
+    "cumulative actual vs plan diverge",
+    "tasks slip against a milestone line"
+  ],
+  "patterns": [
+    "PT-03"
+  ],
+  "charts": [
+    "CH-TIM-02",
+    "CH-TIM-09",
+    "CH-DEV-01"
+  ],
+  "narrative": "NR-01",
+  "decider_hint": {
+    "audience": "operations",
+    "purpose": "monitor"
+  }
+}

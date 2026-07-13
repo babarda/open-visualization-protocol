@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/gantt.schema.json",
+  "title": "Input data for chart_type gantt",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "axis",
+    "today",
+    "tasks"
+  ]
+}

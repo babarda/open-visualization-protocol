@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/fan.schema.json",
+  "title": "Input data for chart_type fan",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "x",
+    "split",
+    "actual",
+    "median",
+    "band50",
+    "band90"
+  ]
+}

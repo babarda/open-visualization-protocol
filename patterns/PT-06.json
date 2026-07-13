@@ -1,0 +1,16 @@
+{
+  "code": "PT-06",
+  "name": "THRESHOLD-BREACH",
+  "ovp_version": "0.1",
+  "recognition": "a value crosses a defined limit (SLA, budget, capacity, safety)",
+  "meaning": "a commitment is broken; this is an event, not a trend",
+  "business_reading": "every breach needs an owner and an ask; no breach without a name",
+  "show_with": [
+    "CH-TAB-01",
+    "CH-DEV-01"
+  ],
+  "avoid": [
+    "burying breaches in averages",
+    "color-only breach markers"
+  ]
+}

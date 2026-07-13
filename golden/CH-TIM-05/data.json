@@ -1,0 +1,32 @@
+{
+  "title": "Electrical jumped 23 points year on year, the fastest improver",
+  "eyebrow": "PROGRESS BY DISCIPLINE . YOY",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "periods": [
+    "2025",
+    "2026"
+  ],
+  "categories": [
+    {
+      "label": "Electrical",
+      "a": 61,
+      "b": 84,
+      "highlight": true
+    },
+    {
+      "label": "Piping",
+      "a": 72,
+      "b": 79
+    },
+    {
+      "label": "Civil",
+      "a": 88,
+      "b": 91
+    },
+    {
+      "label": "Mechanical",
+      "a": 70,
+      "b": 68
+    }
+  ]
+}

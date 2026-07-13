@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/table_bars.schema.json",
+  "title": "Input data for chart_type table_bars",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "value_header",
+    "delta_header",
+    "categories"
+  ]
+}

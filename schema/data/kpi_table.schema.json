@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/kpi_table.schema.json",
+  "title": "Input data for chart_type kpi_table",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "value_header",
+    "delta_header",
+    "trend_header",
+    "rows"
+  ]
+}

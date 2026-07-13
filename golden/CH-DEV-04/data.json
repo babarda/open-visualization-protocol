@@ -1,0 +1,34 @@
+{
+  "title": "Output ran 8% under plan at the June trough",
+  "eyebrow": "OUTPUT VS PLAN",
+  "source": "Source: production ledger, Dec",
+  "unit": "%",
+  "x": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ],
+  "values": [
+    4,
+    7,
+    5,
+    2,
+    -3,
+    -8,
+    -5,
+    -1,
+    3,
+    6,
+    9,
+    12
+  ]
+}

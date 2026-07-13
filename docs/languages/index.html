@@ -1,0 +1,1066 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Design languages</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item on" href="../languages/index.html">Languages</a><a class="item" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<h1>Design languages</h1><p class='lead'>A design language is a complete visual identity: a palette bound to the role contract, two fonts, chrome rules, and a philosophy that explains why. Codes are permanent; names are revisable. Candidate languages promote to adopted after two real deliverables ship in them.</p><input class='search' placeholder='Filter by name, civilization, principle, occasion...' oninput='filterCards(this.value)'><div class='grid g2'><a class="card findable" href="DL-01.html">
+<div class="kicker">DL-01 . Amazigh (Berber)</div>
+<h3>AGRAW</h3>
+<p class="motto">Lead with wisdom.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#3D3D3D"></i><i style="background:#008080"></i><i style="background:#C9C6BF"></i><i style="background:#2E6E4E"></i><i style="background:#8B1E1E"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Forecast lands 18 points over budget;</text>
+<text x="48" y="152" font-size="34" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">logistics drives two thirds of the overrun</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Lead with wisdom . AGRAW on board packs</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<rect x="105.33" y="199.74" width="56" height="232.26" fill="#1A1A1A"/>
+<text x="133.33" y="191.74" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">100 pts</text>
+<rect x="244" y="171.87" width="56" height="27.87" fill="#8B1E1E"/>
+<text x="272" y="163.87" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">+12</text>
+<rect x="382.67" y="153.29" width="56" height="18.58" fill="#8B1E1E"/>
+<text x="410.67" y="145.29" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">+8</text>
+<rect x="521.33" y="144" width="56" height="9.29" fill="#8B1E1E"/>
+<text x="549.33" y="136" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">+4</text>
+<rect x="660" y="144" width="56" height="13.94" fill="#2E6E4E"/>
+<text x="688" y="136" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">-6</text>
+<rect x="798.67" y="157.94" width="56" height="274.06" fill="#1A1A1A"/>
+<text x="826.67" y="149.94" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" text-anchor="middle">118</text>
+<line x1="161.33" y1="199.74" x2="244" y2="199.74" stroke="#D8D5CE" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="300" y1="171.87" x2="382.67" y2="171.87" stroke="#D8D5CE" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="438.67" y1="153.29" x2="521.33" y2="153.29" stroke="#D8D5CE" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="577.33" y1="144" x2="660" y2="144" stroke="#D8D5CE" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="716" y1="157.94" x2="798.67" y2="157.94" stroke="#D8D5CE" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="133.33" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">Budget</text>
+<text x="272" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">Logistics</text>
+<text x="410.67" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">Rework</text>
+<text x="549.33" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">FX</text>
+<text x="688" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">Scope savings</text>
+<text x="826.67" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle">Forecast</text>
+<line x1="64" y1="432" x2="896" y2="432" stroke="#D8D5CE" stroke-width="1"/>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#FAFAF7" stroke="#D8D5CE" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" letter-spacing="1">FORECAST</text>
+<text x="926" y="262" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#008080" font-weight="600">118 pts</text>
+<text x="926" y="282" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#8B1E1E" font-weight="400">+18 vs budget</text>
+<rect x="912" y="316" width="320" height="72" fill="#FAFAF7" stroke="#D8D5CE" stroke-width="1"/>
+<rect x="912" y="316" width="4" height="72" fill="#008080"/>
+<text x="928" y="337" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600">Decision asked of the board:</text>
+<text x="928" y="355" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">resequence to recover 8 points;</text>
+<text x="928" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">logistics carries two thirds.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-01 AGRAW</text>
+</svg>
+</div>
+<p>Leadership and collective governance. One governing message per page, Authority through restraint, One focal metric or chart.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">board packs</span><span class="tag">steering committees</span></p>
+</a>
+<a class="card findable" href="DL-02.html">
+<div class="kicker">DL-02 . Japan</div>
+<h3>KATA</h3>
+<p class="motto">Perfect through repetition.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#222222"></i><i style="background:#555555"></i><i style="background:#008080"></i><i style="background:#B7DCDC"></i><i style="background:#339966"></i><i style="background:#D63A2F"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Cumulative progress reached 63% in</text>
+<text x="48" y="152" font-size="34" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">August, 9 points behind plan</text>
+<text x="48" y="182" font-size="15" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Perfect through repetition . KATA on weekly status decks</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<line x1="96" y1="452" x2="756" y2="452" stroke="#E2E8E8" stroke-width="1"/>
+<text x="84" y="452" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="371" x2="756" y2="371" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="371" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="290" x2="756" y2="290" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="290" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="209" x2="756" y2="209" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="209" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="756" y2="128" stroke="#EAEAEA" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">80%</text>
+<text x="96" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Jan</text>
+<text x="190.29" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Feb</text>
+<text x="284.57" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Mar</text>
+<text x="378.86" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Apr</text>
+<text x="473.14" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">May</text>
+<text x="567.43" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Jun</text>
+<text x="661.71" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Jul</text>
+<text x="756" y="472" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle">Aug</text>
+<polyline points="96,435.8 190.29,411.5 284.57,375.05 378.86,330.5 473.14,281.9 567.43,233.3 661.71,192.8 756,160.4" fill="none" stroke="#AAAAAA" stroke-width="2"/>
+<text x="766" y="160.4" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" dominant-baseline="middle">Plan</text>
+<polyline points="96,439.85 190.29,419.6 284.57,387.2 378.86,346.7 473.14,306.2 567.43,265.7 661.71,229.25 756,196.85" fill="none" stroke="#008080" stroke-width="2.5"/>
+<text x="766" y="196.85" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600" dominant-baseline="middle">Actual</text>
+<line x1="567.43" y1="265.7" x2="524" y2="325" stroke="#555555" stroke-width="1"/>
+<text x="520" y="330" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" font-style="italic">slippage steady since May</text>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">ACTUAL</text>
+<text x="926" y="262" font-size="32" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600">63%</text>
+<text x="926" y="282" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#D63A2F" font-weight="400">-9 pts vs plan</text>
+<rect x="912" y="310" width="200" height="92" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<text x="926" y="334" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" letter-spacing="1">PLAN</text>
+<text x="926" y="368" font-size="32" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600">72%</text>
+<text x="926" y="388" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">month 8 of 12</text>
+<rect x="912" y="422" width="320" height="54" fill="#F7FAFA" stroke="#E2E8E8" stroke-width="1"/>
+<rect x="912" y="422" width="4" height="54" fill="#008080"/>
+<text x="928" y="443" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600">Gap steady since April.</text>
+<text x="928" y="461" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Recovery review each Wednesday.</text>
+<text x="48" y="688" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-02 KATA</text>
+</svg>
+</div>
+<p>Discipline and continuous practice. Standardized layouts, Repeatable structures, Consistency over novelty.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">weekly status decks</span><span class="tag">progress dashboards</span></p>
+</a>
+<a class="card findable" href="DL-03.html">
+<div class="kicker">DL-03 . Ancient Greece</div>
+<h3>LOGOS</h3>
+<p class="motto">Evidence before opinion.</p>
+<div class="swatches"><i style="background:#FDF4EA"></i><i style="background:#262A33"></i><i style="background:#4A4E57"></i><i style="background:#9E2B25"></i><i style="background:#B8B2A7"></i><i style="background:#2E6E4E"></i><i style="background:#9E2B25"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FDF4EA"/>
+<rect x="48" y="50" width="28" height="4" fill="#9E2B25"/>
+<text x="48" y="72" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">READINESS . WEEK 28</text>
+<text x="48" y="112" font-size="34" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">System D pairs 41% progress with 63 open punch items</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Evidence before opinion . LOGOS on deep-dive analysis</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="440" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="362" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="284" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="206" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E8E0D4" stroke-width="1"/>
+<text x="84" y="128" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="96" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="248" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="400" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="552" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="704" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E8E0D4" stroke-width="1"/>
+<text x="856" y="460" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="6" fill="#B8B2A7"/>
+<text x="809.2" y="393.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="6" fill="#B8B2A7"/>
+<text x="778.8" y="369.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="6" fill="#B8B2A7"/>
+<text x="672.4" y="342.5" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="6" fill="#9E2B25"/>
+<text x="421.6" y="194.3" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="6" fill="#B8B2A7"/>
+<text x="611.6" y="319.1" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="6" fill="#B8B2A7"/>
+<text x="718" y="354.2" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="6" fill="#B8B2A7"/>
+<text x="550.8" y="291.8" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="6" fill="#B8B2A7"/>
+<text x="642" y="338.6" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" dominant-baseline="middle">H</text>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FDF4EA" stroke="#E8E0D4" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#9E2B25"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600">Claim: low progress pairs with deep punch.</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Evidence: 8 systems plotted, D flagged.</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Next: split D's 63 items by cause.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-03 LOGOS</text>
+</svg>
+</div>
+<p>Logic and evidence. Every chart proves one claim, Annotation over legends, Sources always visible.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">deep-dive analysis</span><span class="tag">monthly chartbooks</span></p>
+</a>
+<a class="card findable" href="DL-04.html">
+<div class="kicker">DL-04 . India</div>
+<h3>SHILPA</h3>
+<p class="motto">Craft every detail.</p>
+<div class="swatches"><i style="background:#FBFDFF"></i><i style="background:#143D59"></i><i style="background:#33424E"></i><i style="background:#1B6E8F"></i><i style="background:#C6D5E0"></i><i style="background:#2E6E4E"></i><i style="background:#9E2B25"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FBFDFF"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Loop tests drive the path to RFSU on 30 November</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Craft every detail . SHILPA on technical packs</text>
+<svg x="48" y="240.43" width="832" height="298.13" viewBox="0 104 960 344">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<line x1="208" y1="144" x2="208" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="322.67" y1="144" x2="322.67" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="437.33" y1="144" x2="437.33" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="552" y1="144" x2="552" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="666.67" y1="144" x2="666.67" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="781.33" y1="144" x2="781.33" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<line x1="896" y1="144" x2="896" y2="362" stroke="#E7EEF4" stroke-width="1"/>
+<text x="265.33" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Jul</text>
+<text x="380" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Aug</text>
+<text x="494.67" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Sep</text>
+<text x="609.33" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Oct</text>
+<text x="724" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Nov</text>
+<text x="838.67" y="140" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle">Dec</text>
+<text x="192" y="165" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Pre-commissioning</text>
+<rect x="208" y="152" width="401.33" height="26" fill="#C6D5E0"/>
+<rect x="208" y="152" width="252.27" height="26" fill="#1B6E8F"/>
+<text x="192" y="209" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Energization prep</text>
+<rect x="322.67" y="196" width="206.4" height="26" fill="#C6D5E0"/>
+<rect x="322.67" y="196" width="149.07" height="26" fill="#1B6E8F"/>
+<text x="192" y="253" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Loop tests</text>
+<rect x="437.33" y="240" width="298.13" height="26" fill="#C6D5E0"/>
+<rect x="437.33" y="240" width="45.87" height="26" fill="#1B6E8F"/>
+<text x="192" y="297" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">Punch clearing</text>
+<rect x="574.93" y="284" width="229.33" height="26" fill="#C6D5E0"/>
+<text x="192" y="341" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">RFSU</text>
+<path d="M 781.33,332 L 790.33,341 L 781.33,350 L 772.33,341 Z" fill="#143D59"/>
+<line x1="483.2" y1="144" x2="483.2" y2="362" stroke="#9E2B25" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="483.2" y="378" font-size="8" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="400" text-anchor="middle">today</text>
+</svg>
+<rect x="912" y="204" width="160" height="24" rx="4" fill="none" stroke="#1B6E8F" stroke-width="1.5"/>
+<circle cx="922" cy="216" r="3" fill="#1B6E8F"/>
+<text x="932" y="216" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle" letter-spacing="1">SEQUENCE HOLDS</text>
+<rect x="912" y="244" width="320" height="72" fill="#EDF3F7" stroke="#C6D5E0" stroke-width="1"/>
+<rect x="912" y="244" width="4" height="72" fill="#1B6E8F"/>
+<text x="928" y="265" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Hold point: loop tests complete</text>
+<text x="928" y="283" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">before energization.</text>
+<text x="928" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Float on the driver: 2 days.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-04 SHILPA</text>
+</svg>
+</div>
+<p>Craftsmanship and structure. Precision before aesthetics, Standards are sacred, Components align.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">technical packs</span><span class="tag">procedures</span></p>
+</a>
+<a class="card findable" href="DL-05.html">
+<div class="kicker">DL-05 . Japan</div>
+<h3>OBEYA</h3>
+<p class="motto">See together. Decide together.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#0F172A"></i><i style="background:#334155"></i><i style="background:#C2410C"></i><i style="background:#64748B"></i><i style="background:#1F7A4D"></i><i style="background:#B91C1C"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Two of five systems are handover-ready;</text>
+<text x="48" y="152" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D is critical in test</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">See together. Decide together . OBEYA on stand-up boards</text>
+<svg x="48" y="268.17" width="832" height="242.67" viewBox="0 112 960 280">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="212" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">INSTALL</text>
+<text x="394" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">TEST</text>
+<text x="576" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">PUNCH</text>
+<text x="758" y="138" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" letter-spacing="1">HANDOVER</text>
+<line x1="32" y1="152" x2="928" y2="152" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="174" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System A</text>
+<rect x="212" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="170" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="174" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="196" x2="928" y2="196" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="218" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System B</text>
+<rect x="212" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="408" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="576" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="590" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="758" y="214" width="8" height="8" fill="#1F7A4D"/>
+<text x="772" y="218" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<line x1="32" y1="240" x2="928" y2="240" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="262" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System C</text>
+<rect x="212" y="258" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="258" width="8" height="8" fill="#C2410C"/>
+<text x="408" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="576" y="258" width="8" height="8" fill="#64748B"/>
+<text x="590" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="758" y="258" width="8" height="8" fill="#64748B"/>
+<text x="772" y="262" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="284" x2="928" y2="284" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="306" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<rect x="212" y="302" width="8" height="8" fill="#1F7A4D"/>
+<text x="226" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">COMPLETE</text>
+<rect x="394" y="302" width="8" height="8" fill="#B91C1C"/>
+<text x="408" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">CRITICAL</text>
+<rect x="576" y="302" width="8" height="8" fill="#64748B"/>
+<text x="590" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="302" width="8" height="8" fill="#64748B"/>
+<text x="772" y="306" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="328" x2="928" y2="328" stroke="#64748B" stroke-width="1"/>
+<text x="184" y="350" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" text-anchor="end" dominant-baseline="middle">System E</text>
+<rect x="212" y="346" width="8" height="8" fill="#C2410C"/>
+<text x="226" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">ON TRACK</text>
+<rect x="394" y="346" width="8" height="8" fill="#64748B"/>
+<text x="408" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">WATCH</text>
+<rect x="576" y="346" width="8" height="8" fill="#64748B"/>
+<text x="590" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<rect x="758" y="346" width="8" height="8" fill="#64748B"/>
+<text x="772" y="350" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" dominant-baseline="middle">-</text>
+<line x1="32" y1="372" x2="928" y2="372" stroke="#64748B" stroke-width="1"/>
+</svg>
+<rect x="912" y="204" width="170" height="24" rx="4" fill="none" stroke="#B91C1C" stroke-width="1.5"/>
+<circle cx="922" cy="216" r="3" fill="#B91C1C"/>
+<text x="932" y="216" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle" letter-spacing="1">SYSTEM D . TEST</text>
+<rect x="912" y="238" width="175" height="24" rx="4" fill="none" stroke="#C2410C" stroke-width="1.5"/>
+<circle cx="922" cy="250" r="3" fill="#C2410C"/>
+<text x="932" y="250" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle" letter-spacing="1">A + B . HANDOVER</text>
+<rect x="912" y="278" width="320" height="54" fill="#FFFFFF" stroke="#64748B" stroke-width="1"/>
+<rect x="912" y="278" width="4" height="54" fill="#C2410C"/>
+<text x="928" y="299" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600">Owners named in the morning round;</text>
+<text x="928" y="317" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">blockers cleared on the wall.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-05 OBEYA</text>
+</svg>
+</div>
+<p>Collaboration and shared visibility. Information remains visible, Ownership is explicit, Progress is collaborative.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">stand-up boards</span><span class="tag">site wall prints</span></p>
+</a>
+<a class="card findable" href="DL-06.html">
+<div class="kicker">DL-06 . Ancient Rome</div>
+<h3>LEX</h3>
+<p class="motto">Everything must be traceable.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#333333"></i><i style="background:#7A1F1F"></i><i style="background:#B9B9B9"></i><i style="background:#333333"></i><i style="background:#7A1F1F"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">RFSU holds on 30 November; grid</text>
+<text x="48" y="152" font-size="34" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">energization is the critical driver</text>
+<text x="48" y="182" font-size="15" font-family="Georgia,serif" fill="#333333" font-weight="400">Everything must be traceable . LEX on claims</text>
+<svg x="48" y="298.5" width="832" height="182" viewBox="0 210 960 210">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<line x1="96" y1="312" x2="864" y2="312" stroke="#B9B9B9" stroke-width="2"/>
+<text x="96" y="336" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="400">JAN 2026</text>
+<text x="864" y="336" font-size="9" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end">NOV 2026</text>
+<circle cx="126.72" cy="312" r="6" fill="#B9B9B9"/>
+<line x1="126.72" y1="302" x2="126.72" y2="272" stroke="#B9B9B9" stroke-width="1"/>
+<text x="126.72" y="254" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600">Kickoff</text>
+<text x="126.72" y="269" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400">12 Jan</text>
+<path d="M 480,304 L 488,312 L 480,320 L 472,312 Z" fill="#7A1F1F"/>
+<line x1="480" y1="322" x2="480" y2="352" stroke="#B9B9B9" stroke-width="1"/>
+<text x="480" y="376" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="middle">Mechanical completion S3</text>
+<text x="480" y="391" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">15 Jun</text>
+<path d="M 633.6,304 L 641.6,312 L 633.6,320 L 625.6,312 Z" fill="#7A1F1F"/>
+<line x1="633.6" y1="302" x2="633.6" y2="272" stroke="#B9B9B9" stroke-width="1"/>
+<text x="633.6" y="254" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="middle">Grid energization</text>
+<text x="633.6" y="269" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">22 Aug</text>
+<path d="M 725.76,304 L 733.76,312 L 725.76,320 L 717.76,312 Z" fill="#7A1F1F"/>
+<line x1="725.76" y1="322" x2="725.76" y2="352" stroke="#B9B9B9" stroke-width="1"/>
+<text x="725.76" y="376" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="middle">Loop tests complete</text>
+<text x="725.76" y="391" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle">30 Sep</text>
+<path d="M 864,304 L 872,312 L 864,320 L 856,312 Z" fill="#7A1F1F"/>
+<line x1="864" y1="302" x2="864" y2="272" stroke="#B9B9B9" stroke-width="1"/>
+<text x="864" y="254" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600" text-anchor="end">RFSU</text>
+<text x="864" y="269" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end">30 Nov</text>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FFFFFF" stroke="#B9B9B9" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#7A1F1F"/>
+<text x="928" y="231" font-size="12" font-family="Georgia,serif" fill="#1A1A1A" font-weight="600">Every event carries its reference.</text>
+<text x="928" y="249" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400">The chronology is the argument;</text>
+<text x="928" y="267" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400">the record decides, not the memory.</text>
+<text x="48" y="688" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-06 LEX</text>
+</svg>
+</div>
+<p>Law and accountability. Every statement is referenced, Chronology matters, Evidence before opinion.</p>
+<p style="margin-top:8px"><span class="tag">adopted</span>
+<span class="tag">claims</span><span class="tag">mediation</span></p>
+</a>
+<a class="card findable" href="DL-07.html">
+<div class="kicker">DL-07 . Nordic</div>
+<h3>SAGA</h3>
+<p class="motto">Every report becomes history.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#111111"></i><i style="background:#2E2E2E"></i><i style="background:#C0182B"></i><i style="background:#B0B0B0"></i><i style="background:#2E2E2E"></i><i style="background:#C0182B"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="Georgia,serif" fill="#111111" font-weight="700">Actual progress reached 62% in June, 9 points behind plan</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Every report becomes history . SAGA on weekly digests</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<line x1="96" y1="452" x2="756" y2="452" stroke="#111111" stroke-width="1"/>
+<text x="84" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="371" x2="756" y2="371" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="371" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="290" x2="756" y2="290" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="290" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="209" x2="756" y2="209" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="209" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="756" y2="128" stroke="#E4E4E4" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">80%</text>
+<text x="96" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">Jan</text>
+<text x="228" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">Feb</text>
+<text x="360" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">Mar</text>
+<text x="492" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">Apr</text>
+<text x="624" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">May</text>
+<text x="756" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle">Jun</text>
+<polyline points="96,411.5 228,350.75 360,290 492,241.4 624,196.85 756,164.45" fill="none" stroke="#B0B0B0" stroke-width="2"/>
+<text x="766" y="164.45" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" dominant-baseline="middle">Plan</text>
+<polyline points="96,419.6 228,371 360,318.35 492,269.75 624,229.25 756,200.9" fill="none" stroke="#C0182B" stroke-width="2.5"/>
+<text x="766" y="200.9" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600" dominant-baseline="middle">Actual</text>
+<line x1="492" y1="269.75" x2="474" y2="335" stroke="#2E2E2E" stroke-width="1"/>
+<text x="470" y="340" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" font-style="italic">gap widens from April</text>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#C0182B"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600">The gap opened in April and held.</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Week 28 continues the account</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">started in week 1.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-07 SAGA</text>
+</svg>
+</div>
+<p>History and continuity. Narrative hierarchy, Time is explicit, Trends over snapshots.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">weekly digests</span><span class="tag">bulletins</span></p>
+</a>
+<a class="card findable" href="DL-08.html">
+<div class="kicker">DL-08 . Latin tradition</div>
+<h3>SENTINEL</h3>
+<p class="motto">Watch without distraction.</p>
+<div class="swatches"><i style="background:#101418"></i><i style="background:#E6EDF3"></i><i style="background:#9FB0BE"></i><i style="background:#F0B429"></i><i style="background:#5C6B78"></i><i style="background:#3FB68B"></i><i style="background:#E5534B"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#101418"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Stock held at 41 units for three</text>
+<text x="48" y="152" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">weeks after the June draw-down</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Watch without distraction . SENTINEL on live dashboards</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#101418"/>
+<line x1="96" y1="452" x2="756" y2="452" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="452" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="371" x2="756" y2="371" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="371" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="290" x2="756" y2="290" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="290" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="209" x2="756" y2="209" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="209" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="756" y2="128" stroke="#2A323A" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">80 units</text>
+<text x="96" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W20</text>
+<text x="178.5" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W21</text>
+<text x="261" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W22</text>
+<text x="343.5" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W23</text>
+<text x="426" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W24</text>
+<text x="508.5" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W25</text>
+<text x="591" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W26</text>
+<text x="673.5" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W27</text>
+<text x="756" y="472" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle">W28</text>
+<polyline points="96,192.8 178.5,192.8 178.5,192.8 261,192.8 261,192.8 343.5,192.8 343.5,217.1 426,217.1 426,217.1 508.5,217.1 508.5,253.55 591,253.55 591,285.95 673.5,285.95 673.5,285.95 756,285.95 756,285.95" fill="none" stroke="#F0B429" stroke-width="2.5"/>
+<text x="766" y="285.95" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600" dominant-baseline="middle">Stock</text>
+<line x1="508.5" y1="253.55" x2="466" y2="195" stroke="#9FB0BE" stroke-width="1"/>
+<text x="470" y="200" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" font-style="italic">June draw-down: -23 in three weeks</text>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#1A2026" stroke="#2A323A" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" letter-spacing="1">STOCK</text>
+<text x="926" y="262" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">41 units</text>
+<text x="926" y="282" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#E5534B" font-weight="400">-23 since June</text>
+<rect x="912" y="310" width="165" height="24" rx="4" fill="none" stroke="#5C6B78" stroke-width="1.5"/>
+<circle cx="922" cy="322" r="3" fill="#5C6B78"/>
+<text x="932" y="322" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle" letter-spacing="1">WATCH . REORDER</text>
+<rect x="912" y="350" width="320" height="36" fill="#1A2026" stroke="#2A323A" stroke-width="1"/>
+<rect x="912" y="350" width="4" height="36" fill="#F0B429"/>
+<text x="928" y="371" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Alarm level unchanged at 30 units.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-08 SENTINEL</text>
+</svg>
+</div>
+<p>Vigilance. Constant visibility, One highlighted watch metric, Dark environments.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">live dashboards</span><span class="tag">control-room screens</span></p>
+</a>
+<a class="card findable" href="DL-09.html">
+<div class="kicker">DL-09 . Greek mythology and cartography</div>
+<h3>ATLAS</h3>
+<p class="motto">Always know where you are.</p>
+<div class="swatches"><i style="background:#F4EFE6"></i><i style="background:#2B3A42"></i><i style="background:#4A5860"></i><i style="background:#0F766E"></i><i style="background:#B9AE9C"></i><i style="background:#2E6E4E"></i><i style="background:#C2410C"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#F4EFE6"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">System D compounds the deepest</text>
+<text x="48" y="152" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">backlog with the largest budget</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Always know where you are . ATLAS on route progress</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<line x1="96" y1="440" x2="856" y2="440" stroke="#CDC3AE" stroke-width="1"/>
+<text x="84" y="440" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="96" y1="362" x2="856" y2="362" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="362" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="96" y1="284" x2="856" y2="284" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="284" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="96" y1="206" x2="856" y2="206" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="206" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="96" y1="128" x2="856" y2="128" stroke="#E3DCCB" stroke-width="1"/>
+<text x="84" y="128" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">80</text>
+<line x1="96" y1="128" x2="96" y2="440" stroke="#CDC3AE" stroke-width="1"/>
+<text x="96" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">0</text>
+<line x1="248" y1="128" x2="248" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="248" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">20</text>
+<line x1="400" y1="128" x2="400" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="400" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">40</text>
+<line x1="552" y1="128" x2="552" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="552" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">60</text>
+<line x1="704" y1="128" x2="704" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="704" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">80</text>
+<line x1="856" y1="128" x2="856" y2="440" stroke="#E3DCCB" stroke-width="1"/>
+<text x="856" y="460" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle">100%</text>
+<circle cx="795.2" cy="393.2" r="20.68" fill="#B9AE9C"/>
+<text x="823.88" y="393.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">A</text>
+<circle cx="764.8" cy="369.8" r="17.71" fill="#B9AE9C"/>
+<text x="790.51" y="369.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">B</text>
+<circle cx="658.4" cy="342.5" r="16.02" fill="#B9AE9C"/>
+<text x="682.42" y="342.5" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">C</text>
+<circle cx="407.6" cy="194.3" r="28" fill="#0F766E"/>
+<text x="443.6" y="194.3" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">D</text>
+<circle cx="597.6" cy="319.1" r="19.25" fill="#B9AE9C"/>
+<text x="624.85" y="319.1" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">E</text>
+<circle cx="704" cy="354.2" r="16.88" fill="#B9AE9C"/>
+<text x="728.88" y="354.2" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">F</text>
+<circle cx="536.8" cy="291.8" r="22.01" fill="#B9AE9C"/>
+<text x="566.81" y="291.8" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">G</text>
+<circle cx="628" cy="338.6" r="18.5" fill="#B9AE9C"/>
+<text x="654.5" y="338.6" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" dominant-baseline="middle">H</text>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#EAE3D5" stroke="#CDC3AE" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#0F766E"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Position tells priority:</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">D holds the largest scope</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">and the least readiness.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-09 ATLAS</text>
+</svg>
+</div>
+<p>Orientation. Geography drives layout, Exceptions dominate attention, Routes tell progress.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">route progress</span><span class="tag">section and site status maps</span></p>
+</a>
+<a class="card findable" href="DL-10.html">
+<div class="kicker">DL-10 . Arabic-Islamic intellectual tradition</div>
+<h3>BASIRA</h3>
+<p class="motto">Look deeper than sight.</p>
+<div class="swatches"><i style="background:#0B0B0B"></i><i style="background:#FFFFFF"></i><i style="background:#D9D9D9"></i><i style="background:#F0B429"></i><i style="background:#8A9096"></i><i style="background:#3FB68B"></i><i style="background:#E5534B"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#0B0B0B"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">62 of every 100 scope items are complete</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Look deeper than sight . BASIRA on photo progress reports</text>
+<svg x="48" y="233.5" width="832" height="312" viewBox="0 116 960 360">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<rect x="96" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="428" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="396" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="364" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="332" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="300" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="192" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="224" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="256" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="288" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="320" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="352" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="384" y="268" width="26" height="26" fill="#F0B429"/>
+<rect x="96" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="128" y="236" width="26" height="26" fill="#F0B429"/>
+<rect x="160" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="236" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="204" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="172" width="26" height="26" fill="#1C1F22"/>
+<rect x="96" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="128" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="160" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="192" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="224" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="256" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="288" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="320" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="352" y="140" width="26" height="26" fill="#1C1F22"/>
+<rect x="384" y="140" width="26" height="26" fill="#1C1F22"/>
+<text x="464" y="180" font-size="56" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="464" y="210" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">of scope complete</text>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#1C1F22" stroke="#3A3F44" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" letter-spacing="1">COMPLETE</text>
+<text x="926" y="262" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">62%</text>
+<text x="926" y="282" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3FB68B" font-weight="400">+4 vs last visit</text>
+<rect x="912" y="316" width="320" height="54" fill="#1C1F22" stroke="#3A3F44" stroke-width="1"/>
+<rect x="912" y="316" width="4" height="54" fill="#F0B429"/>
+<text x="928" y="337" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600">Same angle, same light:</text>
+<text x="928" y="355" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">every visit records the change.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-10 BASIRA</text>
+</svg>
+</div>
+<p>Insight. Images are evidence, Minimal overlays, Captions provide context.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">photo progress reports</span><span class="tag">drone updates</span></p>
+</a>
+<a class="card findable" href="DL-11.html">
+<div class="kicker">DL-11 . India</div>
+<h3>SUTRA</h3>
+<p class="motto">Complexity distilled.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#1F3864"></i><i style="background:#262626"></i><i style="background:#1F3864"></i><i style="background:#A9BBD9"></i><i style="background:#2E6E4E"></i><i style="background:#9E2B25"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Piping holds 84 of 213 open items</text>
+<text x="48" y="146" font-size="15" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Complexity distilled . SUTRA on briefing notes</text>
+<svg x="48" y="281.17" width="832" height="216.67" viewBox="0 120 960 250">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="250" y="136" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" letter-spacing="1">OPEN ITEMS</text>
+<text x="820" y="136" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="end" letter-spacing="1">VS LAST WEEK</text>
+<line x1="32" y1="150" x2="820" y2="150" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="167" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="end" dominant-baseline="middle">Piping</text>
+<rect x="250" y="159" width="390" height="16" fill="#1F3864"/>
+<text x="650" y="167" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">84 items</text>
+<text x="820" y="167" font-size="13" font-family="Cambria,Georgia,serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-6</text>
+<line x1="32" y1="184" x2="820" y2="184" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="201" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Electrical</text>
+<rect x="250" y="193" width="213.57" height="16" fill="#A9BBD9"/>
+<text x="473.57" y="201" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">46</text>
+<text x="820" y="201" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+4</text>
+<line x1="32" y1="218" x2="820" y2="218" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="235" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Instrumentation</text>
+<rect x="250" y="227" width="153.21" height="16" fill="#A9BBD9"/>
+<text x="413.21" y="235" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">33</text>
+<text x="820" y="235" font-size="13" font-family="Cambria,Georgia,serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-2</text>
+<line x1="32" y1="252" x2="820" y2="252" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="269" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Civil</text>
+<rect x="250" y="261" width="102.14" height="16" fill="#A9BBD9"/>
+<text x="362.14" y="269" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">22</text>
+<text x="820" y="269" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="32" y1="286" x2="820" y2="286" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="303" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">Mechanical</text>
+<rect x="250" y="295" width="83.57" height="16" fill="#A9BBD9"/>
+<text x="343.57" y="303" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">18</text>
+<text x="820" y="303" font-size="13" font-family="Cambria,Georgia,serif" fill="#2E6E4E" font-weight="600" text-anchor="end" dominant-baseline="middle">+3</text>
+<line x1="32" y1="320" x2="820" y2="320" stroke="#8EAADB" stroke-width="1"/>
+<text x="234" y="337" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">HVAC</text>
+<rect x="250" y="329" width="46.43" height="16" fill="#A9BBD9"/>
+<text x="306.43" y="337" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">10</text>
+<text x="820" y="337" font-size="13" font-family="Cambria,Georgia,serif" fill="#9E2B25" font-weight="600" text-anchor="end" dominant-baseline="middle">-1</text>
+<line x1="32" y1="354" x2="820" y2="354" stroke="#8EAADB" stroke-width="1"/>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FFFFFF" stroke="#8EAADB" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#1F3864"/>
+<text x="928" y="231" font-size="12" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600">One page, exact values,</text>
+<text x="928" y="249" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">nothing left to interpret.</text>
+<text x="928" y="267" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Piping first: 84 of 213.</text>
+<text x="48" y="688" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: weekly punch list, wk 28  .  Open Visualization Protocol, DL-11 SUTRA</text>
+</svg>
+</div>
+<p>Condensed knowledge. Brevity with clarity, Structured hierarchy, Recommendation concludes.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">briefing notes</span><span class="tag">position papers</span></p>
+</a>
+<a class="card findable" href="DL-12.html">
+<div class="kicker">DL-12 . Japan</div>
+<h3>NOROSHI</h3>
+<p class="motto">Signal only what matters.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#0F172A"></i><i style="background:#475569"></i><i style="background:#D63A2F"></i><i style="background:#94A3B8"></i><i style="background:#1F7A4D"></i><i style="background:#D63A2F"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Docs on time misses target by 14</text>
+<text x="48" y="152" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">points; deliveries close the gap</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Signal only what matters . NOROSHI on escalations</text>
+<svg x="48" y="306.3" width="832" height="166.4" viewBox="0 124 960 192">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<rect x="208" y="155" width="355.2" height="20" fill="#EEEFF0"/>
+<rect x="563.2" y="155" width="148" height="20" fill="#DDDFE1"/>
+<rect x="711.2" y="155" width="88.8" height="20" fill="#CDCED2"/>
+<rect x="208" y="161" width="515.04" height="8" fill="#0F172A"/>
+<line x1="770.4" y1="155" x2="770.4" y2="175" stroke="#D63A2F" stroke-width="2.5"/>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Delivery OTD</text>
+<text x="812" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">87 %</text>
+<rect x="208" y="211" width="414.4" height="20" fill="#EEEFF0"/>
+<rect x="622.4" y="211" width="118.4" height="20" fill="#DDDFE1"/>
+<rect x="740.8" y="211" width="59.2" height="20" fill="#CDCED2"/>
+<rect x="208" y="217" width="544.64" height="8" fill="#0F172A"/>
+<line x1="740.8" y1="211" x2="740.8" y2="231" stroke="#D63A2F" stroke-width="2.5"/>
+<text x="192" y="221" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Test pass rate</text>
+<text x="812" y="221" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">92</text>
+<rect x="208" y="267" width="296" height="20" fill="#EEEFF0"/>
+<rect x="504" y="267" width="177.6" height="20" fill="#DDDFE1"/>
+<rect x="681.6" y="267" width="118.4" height="20" fill="#CDCED2"/>
+<rect x="208" y="273" width="420.32" height="8" fill="#0F172A"/>
+<line x1="711.2" y1="267" x2="711.2" y2="287" stroke="#D63A2F" stroke-width="2.5"/>
+<text x="192" y="277" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">Docs on time</text>
+<text x="812" y="277" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">71</text>
+</svg>
+<rect x="912" y="204" width="180" height="24" rx="4" fill="none" stroke="#D63A2F" stroke-width="1.5"/>
+<circle cx="922" cy="216" r="3" fill="#D63A2F"/>
+<text x="932" y="216" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle" letter-spacing="1">DOCS ON TIME . -14</text>
+<rect x="912" y="238" width="175" height="24" rx="4" fill="none" stroke="#B45309" stroke-width="1.5"/>
+<circle cx="922" cy="250" r="3" fill="#B45309"/>
+<text x="932" y="250" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle" letter-spacing="1">DELIVERY OTD . -8</text>
+<rect x="912" y="278" width="320" height="36" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="912" y="278" width="4" height="36" fill="#D63A2F"/>
+<text x="928" y="299" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600">Escalated 07:00, response due 12:00.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-12 NOROSHI</text>
+</svg>
+</div>
+<p>Alert and escalation. Immediate verdict, Exception-focused, Maximum clarity.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">escalations</span><span class="tag">flash reports</span></p>
+</a>
+<a class="card findable" href="DL-13.html">
+<div class="kicker">DL-13 . Islamic tradition</div>
+<h3>MIZAN</h3>
+<p class="motto">Balance creates clarity.</p>
+<div class="swatches"><i style="background:#F7EFE3"></i><i style="background:#31261D"></i><i style="background:#4E4237"></i><i style="background:#C4572E"></i><i style="background:#C9BBA4"></i><i style="background:#3D5A46"></i><i style="background:#7A3B1E"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#F7EFE3"/>
+<text x="48" y="112" font-size="34" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Electrical runs 14 days behind plan, the</text>
+<text x="48" y="152" font-size="34" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">deepest slip of five disciplines</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Balance creates clarity . MIZAN on cultural projects</text>
+<svg x="48" y="272.5" width="832" height="234" viewBox="0 100 960 270">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<rect x="532" y="128" width="162" height="32" fill="#3D5A46"/>
+<text x="702" y="144" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">+7 days</text>
+<text x="192" y="144" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Mechanical</text>
+<rect x="532" y="176" width="92.57" height="32" fill="#3D5A46"/>
+<text x="632.57" y="192" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">+4</text>
+<text x="192" y="192" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Instrumentation</text>
+<rect x="462.57" y="224" width="69.43" height="32" fill="#7A3B1E"/>
+<text x="454.57" y="240" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">-3</text>
+<text x="192" y="240" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Civil</text>
+<rect x="323.71" y="272" width="208.29" height="32" fill="#7A3B1E"/>
+<text x="315.71" y="288" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">-9</text>
+<text x="192" y="288" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Piping</text>
+<rect x="208" y="320" width="324" height="32" fill="#7A3B1E"/>
+<text x="200" y="336" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">-14</text>
+<text x="192" y="336" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">Electrical</text>
+<line x1="532" y1="120" x2="532" y2="360" stroke="#DCCFB6" stroke-width="1"/>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#F1E5D3" stroke="#DCCFB6" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#C4572E"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600">Both sides of the story, one scale.</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Electrical carries the deepest slip;</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">mechanical funds the recovery.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-13 MIZAN</text>
+</svg>
+</div>
+<p>Balance and harmony. Harmony before decoration, Warm restrained palette, Elegant proportion.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">cultural projects</span><span class="tag">personal-brand material</span></p>
+</a>
+<a class="card findable" href="DL-14.html">
+<div class="kicker">DL-14 . Ancient Rome</div>
+<h3>EVIDENTIA</h3>
+<p class="motto">Proof over persuasion.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#0B1F35"></i><i style="background:#3C4A5A"></i><i style="background:#2251FF"></i><i style="background:#A9B4C0"></i><i style="background:#2E6E4E"></i><i style="background:#9E2B25"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="72" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">OPEN ITEMS . WEEK 28</text>
+<text x="48" y="112" font-size="34" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Electrical holds 34 of 109 open items,</text>
+<text x="48" y="152" font-size="34" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">the largest single backlog</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Proof over persuasion . EVIDENTIA on evidence-led strategy decks</text>
+<svg x="48" y="272.5" width="832" height="234" viewBox="0 100 960 270">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<rect x="208" y="128" width="648" height="32" fill="#2251FF"/>
+<text x="192" y="144" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="end" dominant-baseline="middle">Electrical</text>
+<text x="864" y="144" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">34 items</text>
+<rect x="208" y="176" width="533.65" height="32" fill="#A9B4C0"/>
+<text x="192" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Mechanical</text>
+<text x="749.65" y="192" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">28</text>
+<rect x="208" y="224" width="400.24" height="32" fill="#A9B4C0"/>
+<text x="192" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Piping</text>
+<text x="616.24" y="240" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">21</text>
+<rect x="208" y="272" width="324" height="32" fill="#A9B4C0"/>
+<text x="192" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Instrumentation</text>
+<text x="540" y="288" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">17</text>
+<rect x="208" y="320" width="171.53" height="32" fill="#A9B4C0"/>
+<text x="192" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">Civil</text>
+<text x="387.53" y="336" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">9</text>
+<line x1="208" y1="120" x2="208" y2="360" stroke="#C7D0D9" stroke-width="1"/>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FFFFFF" stroke="#C7D0D9" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#2251FF"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600">So what: one section, one crew.</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">34 items is the lever;</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">everything else is noise.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-14 EVIDENTIA</text>
+</svg>
+</div>
+<p>Proof. Every exhibit answers one question, Sources are mandatory, Footnotes are integral.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">evidence-led strategy decks</span><span class="tag">diagnostic readouts</span></p>
+</a>
+<a class="card findable" href="DL-15.html">
+<div class="kicker">DL-15 . Amazigh</div>
+<h3>ABRID</h3>
+<p class="motto">Everything is connected.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#0E3A2C"></i><i style="background:#3E4C46"></i><i style="background:#197A56"></i><i style="background:#A7C4B5"></i><i style="background:#197A56"></i><i style="background:#9E2B25"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Electrical jumped 23 points year on</text>
+<text x="48" y="152" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">year, the fastest improver</text>
+<text x="48" y="182" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Everything is connected . ABRID on framework decks</text>
+<svg x="48" y="226.57" width="832" height="325.87" viewBox="0 100 960 376">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<line x1="300" y1="132" x2="300" y2="468" stroke="#C9D2CC" stroke-width="1"/>
+<text x="300" y="124" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">2025</text>
+<line x1="660" y1="132" x2="660" y2="468" stroke="#C9D2CC" stroke-width="1"/>
+<text x="660" y="124" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="middle" letter-spacing="1">2026</text>
+<line x1="300" y1="264.8" x2="660" y2="191.2" stroke="#197A56" stroke-width="2.5"/>
+<text x="288" y="264.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" text-anchor="end" dominant-baseline="middle">Electrical  61</text>
+<text x="672" y="191.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">84</text>
+<line x1="300" y1="229.6" x2="660" y2="207.2" stroke="#A7C4B5" stroke-width="2"/>
+<text x="288" y="229.6" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Piping  72</text>
+<text x="672" y="207.2" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">79</text>
+<line x1="300" y1="178.4" x2="660" y2="168.8" stroke="#A7C4B5" stroke-width="2"/>
+<text x="288" y="178.4" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Civil  88</text>
+<text x="672" y="168.8" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">91</text>
+<line x1="300" y1="236" x2="660" y2="242.4" stroke="#A7C4B5" stroke-width="2"/>
+<text x="288" y="236" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">Mechanical  70</text>
+<text x="672" y="242.4" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" dominant-baseline="middle">68</text>
+</svg>
+<rect x="912" y="210" width="320" height="72" fill="#FFFFFF" stroke="#C9D2CC" stroke-width="1"/>
+<rect x="912" y="210" width="4" height="72" fill="#197A56"/>
+<text x="928" y="231" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600">Three disciplines improved,</text>
+<text x="928" y="249" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">mechanical slipped: the paths</text>
+<text x="928" y="267" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">matter more than the points.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-15 ABRID</text>
+</svg>
+</div>
+<p>Connection and pathways. Relationships first, Structure reveals insight, Connections are explicit.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">framework decks</span><span class="tag">portfolio reviews</span></p>
+</a>
+<a class="card findable" href="DL-16.html">
+<div class="kicker">DL-16 . Ancient Greece</div>
+<h3>TELOS</h3>
+<p class="motto">Every page serves a purpose.</p>
+<div class="swatches"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#444444"></i><i style="background:#C4001A"></i><i style="background:#B5B1AB"></i><i style="background:#2E6E4E"></i><i style="background:#C4001A"></i></div>
+<div class="thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="48" y="112" font-size="34" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Q4 spend overran budget by 21 k$, the widest quarterly gap</text>
+<text x="48" y="146" font-size="15" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Every page serves a purpose . TELOS on results decks</text>
+<svg x="48" y="204.03" width="832" height="370.93" viewBox="0 92 960 428">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<rect x="126" y="225.89" width="40" height="206.11" fill="#B5B1AB"/>
+<text x="146" y="219.89" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">220 k$</text>
+<text x="146" y="144" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B5B1AB" font-weight="600" text-anchor="middle">Budget</text>
+<rect x="170" y="231.51" width="40" height="200.49" fill="#C4001A"/>
+<text x="190" y="225.51" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">214</text>
+<text x="190" y="144" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600" text-anchor="middle">Actual</text>
+<text x="168" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">Q1</text>
+<rect x="334" y="207.15" width="40" height="224.85" fill="#B5B1AB"/>
+<text x="354" y="201.15" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">240</text>
+<rect x="378" y="195.91" width="40" height="236.09" fill="#C4001A"/>
+<text x="398" y="189.91" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">252</text>
+<text x="376" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">Q2</text>
+<rect x="542" y="188.41" width="40" height="243.59" fill="#B5B1AB"/>
+<text x="562" y="182.41" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">260</text>
+<rect x="586" y="198.72" width="40" height="233.28" fill="#C4001A"/>
+<text x="606" y="192.72" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">249</text>
+<text x="584" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">Q3</text>
+<rect x="750" y="169.67" width="40" height="262.33" fill="#B5B1AB"/>
+<text x="770" y="163.67" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">280</text>
+<rect x="794" y="150" width="40" height="282" fill="#C4001A"/>
+<text x="814" y="144" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="middle">301</text>
+<text x="792" y="452" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle">Q4</text>
+<line x1="64" y1="432" x2="896" y2="432" stroke="#D9D6D2" stroke-width="1"/>
+</svg>
+<rect x="912" y="204" width="200" height="92" fill="#FFFFFF" stroke="#D9D6D2" stroke-width="1"/>
+<text x="926" y="228" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" letter-spacing="1">Q4 GAP</text>
+<text x="926" y="262" font-size="32" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600">+21 k$</text>
+<text x="926" y="282" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="400">over budget</text>
+<rect x="912" y="316" width="320" height="54" fill="#FFFFFF" stroke="#D9D6D2" stroke-width="1"/>
+<rect x="912" y="316" width="4" height="54" fill="#C4001A"/>
+<text x="928" y="337" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600">Result against intention,</text>
+<text x="928" y="355" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">quarter by quarter, no smoothing.</text>
+<text x="48" y="688" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12  .  Open Visualization Protocol, DL-16 TELOS</text>
+</svg>
+</div>
+<p>Purpose and resolution. Answer first, Support with evidence, Remove unnecessary detail.</p>
+<p style="margin-top:8px"><span class="tag">candidate</span>
+<span class="tag">results decks</span><span class="tag">due-diligence readouts</span></p>
+</a></div>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

@@ -1,0 +1,78 @@
+{
+  "title": "Progress vs punch is the only strong pair",
+  "eyebrow": "SCREENING . 8 SYSTEMS",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "axes": [
+    {
+      "name": "Progress",
+      "unit": "%"
+    },
+    {
+      "name": "Punch",
+      "unit": ""
+    },
+    {
+      "name": "Docs",
+      "unit": "%"
+    }
+  ],
+  "points": [
+    {
+      "values": [
+        92,
+        12,
+        95
+      ]
+    },
+    {
+      "values": [
+        88,
+        18,
+        90
+      ]
+    },
+    {
+      "values": [
+        74,
+        25,
+        80
+      ]
+    },
+    {
+      "values": [
+        41,
+        63,
+        55
+      ],
+      "highlight": true
+    },
+    {
+      "values": [
+        66,
+        31,
+        75
+      ]
+    },
+    {
+      "values": [
+        80,
+        22,
+        85
+      ]
+    },
+    {
+      "values": [
+        70,
+        28,
+        78
+      ]
+    },
+    {
+      "values": [
+        85,
+        15,
+        88
+      ]
+    }
+  ]
+}

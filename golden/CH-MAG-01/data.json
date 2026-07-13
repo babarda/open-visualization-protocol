@@ -1,0 +1,12 @@
+{
+  "title": "Site A stores 42 of 120 units, a third of total inventory",
+  "eyebrow": "INVENTORY . WEEK 28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "units",
+  "categories": [
+    {"label": "Site A", "value": 42, "highlight": true},
+    {"label": "Site B", "value": 35},
+    {"label": "Site C", "value": 27},
+    {"label": "Site D", "value": 16}
+  ]
+}

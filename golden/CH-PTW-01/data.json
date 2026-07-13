@@ -1,0 +1,12 @@
+{
+  "title": "Delivered goods reached 1,284 in week 28, 90% of all items",
+  "eyebrow": "PIPELINE . WEEKS 25-28",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "items",
+  "x": ["W25", "W26", "W27", "W28"],
+  "series": [
+    {"name": "Delivered", "values": [812, 946, 1105, 1284]},
+    {"name": "In transit", "values": [128, 110, 98, 96]},
+    {"name": "Pending", "values": [96, 71, 54, 41]}
+  ]
+}

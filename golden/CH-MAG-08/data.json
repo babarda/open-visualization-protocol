@@ -1,0 +1,28 @@
+{
+  "title": "Two contractors hold 74 of 120 berths",
+  "eyebrow": "BERTH ALLOCATION",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "berths",
+  "parties": [
+    {
+      "name": "Contractor A",
+      "seats": 42
+    },
+    {
+      "name": "Contractor B",
+      "seats": 32
+    },
+    {
+      "name": "Contractor C",
+      "seats": 22
+    },
+    {
+      "name": "Shared pool",
+      "seats": 14
+    },
+    {
+      "name": "Reserved",
+      "seats": 10
+    }
+  ]
+}

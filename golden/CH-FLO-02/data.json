@@ -1,0 +1,79 @@
+{
+  "title": "Road carries 70 of 130 loads; barge stays marginal",
+  "eyebrow": "ORIGIN TO ROUTE . JUNE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "loads",
+  "columns": [
+    {
+      "name": "Origin",
+      "nodes": [
+        {
+          "name": "Supplier A",
+          "value": 60
+        },
+        {
+          "name": "Supplier B",
+          "value": 40
+        },
+        {
+          "name": "Supplier C",
+          "value": 30
+        }
+      ]
+    },
+    {
+      "name": "Route",
+      "nodes": [
+        {
+          "name": "Road",
+          "value": 70
+        },
+        {
+          "name": "Rail",
+          "value": 40
+        },
+        {
+          "name": "Barge",
+          "value": 20
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "from": "Supplier A",
+      "to": "Road",
+      "value": 35
+    },
+    {
+      "from": "Supplier A",
+      "to": "Rail",
+      "value": 25
+    },
+    {
+      "from": "Supplier B",
+      "to": "Road",
+      "value": 25
+    },
+    {
+      "from": "Supplier B",
+      "to": "Barge",
+      "value": 15
+    },
+    {
+      "from": "Supplier C",
+      "to": "Road",
+      "value": 10
+    },
+    {
+      "from": "Supplier C",
+      "to": "Rail",
+      "value": 15
+    },
+    {
+      "from": "Supplier C",
+      "to": "Barge",
+      "value": 5
+    }
+  ]
+}

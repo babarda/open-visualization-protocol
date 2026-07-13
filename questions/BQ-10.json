@@ -1,0 +1,25 @@
+{
+  "code": "BQ-10",
+  "question": "How long do things take, and how spread out is it?",
+  "ovp_version": "1.0",
+  "intent": [
+    "distribution"
+  ],
+  "observations": [
+    "values cluster with a tail",
+    "groups differ in spread more than in center"
+  ],
+  "patterns": [
+    "PT-02"
+  ],
+  "charts": [
+    "CH-DST-01",
+    "CH-DST-04",
+    "CH-DST-06"
+  ],
+  "narrative": "NR-02",
+  "decider_hint": {
+    "audience": "analyst",
+    "purpose": "explain"
+  }
+}

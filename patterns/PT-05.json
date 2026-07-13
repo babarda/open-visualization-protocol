@@ -1,0 +1,16 @@
+{
+  "code": "PT-05",
+  "name": "MIX-SHIFT",
+  "ovp_version": "0.1",
+  "recognition": "the composition of a total changes across periods even if the total does not",
+  "meaning": "the business is becoming something else underneath a stable headline",
+  "business_reading": "state which segment is winning share and at whose expense",
+  "show_with": [
+    "CH-PTW-02",
+    "CH-PTW-01"
+  ],
+  "avoid": [
+    "two pies side by side",
+    "100% stacked when the total is also moving (hides growth)"
+  ]
+}

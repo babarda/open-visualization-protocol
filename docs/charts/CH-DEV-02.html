@@ -1,0 +1,732 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-DEV-02 DUMBBELL</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-DEV-02</div>
+<div class="kicker">CH-DEV-02 . family DEV</div>
+<h1>DUMBBELL</h1>
+<p class="lead">two dots + connector per category: before and after. Needs:
+categories with a value at two moments; the movement is the message.</p>
+<p><span class="tag">deviation</span><span class="tag">change-over-time</span><span class="tag">comparison</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C9C6BF" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#008080" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#D8D5CE" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#C9C6BF"/>
+<circle cx="320.76" cy="165" r="6" fill="#008080"/>
+<text x="483.11" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#D8D5CE" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#C9C6BF"/>
+<circle cx="377.14" cy="217" r="6" fill="#008080"/>
+<text x="511.3" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#D8D5CE" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#C9C6BF"/>
+<circle cx="442.92" cy="269" r="6" fill="#008080"/>
+<text x="586.48" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#D8D5CE" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#C9C6BF"/>
+<circle cx="800" cy="321" r="6" fill="#008080"/>
+<text x="812" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#D8D5CE" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#C9C6BF"/>
+<circle cx="499.3" cy="373" r="6" fill="#008080"/>
+<text x="558.29" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#B7DCDC" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#E2E8E8" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B7DCDC"/>
+<circle cx="320.76" cy="165" r="6" fill="#008080"/>
+<text x="483.11" y="165" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#E2E8E8" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B7DCDC"/>
+<circle cx="377.14" cy="217" r="6" fill="#008080"/>
+<text x="511.3" y="217" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#E2E8E8" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B7DCDC"/>
+<circle cx="442.92" cy="269" r="6" fill="#008080"/>
+<text x="586.48" y="269" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#E2E8E8" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B7DCDC"/>
+<circle cx="800" cy="321" r="6" fill="#008080"/>
+<text x="812" y="321" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#E2E8E8" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B7DCDC"/>
+<circle cx="499.3" cy="373" r="6" fill="#008080"/>
+<text x="558.29" y="373" font-size="12" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">OPEN PUNCH . W24 VS W28</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B8B2A7" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#E8E0D4" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B8B2A7"/>
+<circle cx="320.76" cy="165" r="6" fill="#9E2B25"/>
+<text x="483.11" y="165" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#E8E0D4" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B8B2A7"/>
+<circle cx="377.14" cy="217" r="6" fill="#9E2B25"/>
+<text x="511.3" y="217" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#E8E0D4" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B8B2A7"/>
+<circle cx="442.92" cy="269" r="6" fill="#9E2B25"/>
+<text x="586.48" y="269" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#E8E0D4" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B8B2A7"/>
+<circle cx="800" cy="321" r="6" fill="#9E2B25"/>
+<text x="812" y="321" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#E8E0D4" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B8B2A7"/>
+<circle cx="499.3" cy="373" r="6" fill="#9E2B25"/>
+<text x="558.29" y="373" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C6D5E0" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#1B6E8F" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#C6D5E0" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#C6D5E0"/>
+<circle cx="320.76" cy="165" r="6" fill="#1B6E8F"/>
+<text x="483.11" y="165" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#C6D5E0" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#C6D5E0"/>
+<circle cx="377.14" cy="217" r="6" fill="#1B6E8F"/>
+<text x="511.3" y="217" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#C6D5E0" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#C6D5E0"/>
+<circle cx="442.92" cy="269" r="6" fill="#1B6E8F"/>
+<text x="586.48" y="269" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#C6D5E0" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#C6D5E0"/>
+<circle cx="800" cy="321" r="6" fill="#1B6E8F"/>
+<text x="812" y="321" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#C6D5E0" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#C6D5E0"/>
+<circle cx="499.3" cy="373" r="6" fill="#1B6E8F"/>
+<text x="558.29" y="373" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#64748B" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C2410C" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#64748B" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#64748B"/>
+<circle cx="320.76" cy="165" r="6" fill="#C2410C"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#64748B" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#64748B"/>
+<circle cx="377.14" cy="217" r="6" fill="#C2410C"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#64748B" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#64748B"/>
+<circle cx="442.92" cy="269" r="6" fill="#C2410C"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#64748B" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#64748B"/>
+<circle cx="800" cy="321" r="6" fill="#C2410C"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#64748B" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#64748B"/>
+<circle cx="499.3" cy="373" r="6" fill="#C2410C"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="Georgia,serif" fill="#B9B9B9" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="Georgia,serif" fill="#7A1F1F" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#B9B9B9" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B9B9B9"/>
+<circle cx="320.76" cy="165" r="6" fill="#7A1F1F"/>
+<text x="483.11" y="165" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#B9B9B9" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B9B9B9"/>
+<circle cx="377.14" cy="217" r="6" fill="#7A1F1F"/>
+<text x="511.3" y="217" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#B9B9B9" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B9B9B9"/>
+<circle cx="442.92" cy="269" r="6" fill="#7A1F1F"/>
+<text x="586.48" y="269" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#B9B9B9" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B9B9B9"/>
+<circle cx="800" cy="321" r="6" fill="#7A1F1F"/>
+<text x="812" y="321" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#B9B9B9" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B9B9B9"/>
+<circle cx="499.3" cy="373" r="6" fill="#7A1F1F"/>
+<text x="558.29" y="373" font-size="11" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="12" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B0B0B0" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#111111" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B0B0B0"/>
+<circle cx="320.76" cy="165" r="6" fill="#C0182B"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#111111" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B0B0B0"/>
+<circle cx="377.14" cy="217" r="6" fill="#C0182B"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#111111" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B0B0B0"/>
+<circle cx="442.92" cy="269" r="6" fill="#C0182B"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#111111" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B0B0B0"/>
+<circle cx="800" cy="321" r="6" fill="#C0182B"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#111111" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B0B0B0"/>
+<circle cx="499.3" cy="373" r="6" fill="#C0182B"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#5C6B78" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#2A323A" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#5C6B78"/>
+<circle cx="320.76" cy="165" r="6" fill="#F0B429"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#2A323A" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#5C6B78"/>
+<circle cx="377.14" cy="217" r="6" fill="#F0B429"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#2A323A" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#5C6B78"/>
+<circle cx="442.92" cy="269" r="6" fill="#F0B429"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#2A323A" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#5C6B78"/>
+<circle cx="800" cy="321" r="6" fill="#F0B429"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#2A323A" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#5C6B78"/>
+<circle cx="499.3" cy="373" r="6" fill="#F0B429"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B9AE9C" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F766E" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#CDC3AE" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B9AE9C"/>
+<circle cx="320.76" cy="165" r="6" fill="#0F766E"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#CDC3AE" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B9AE9C"/>
+<circle cx="377.14" cy="217" r="6" fill="#0F766E"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#CDC3AE" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B9AE9C"/>
+<circle cx="442.92" cy="269" r="6" fill="#0F766E"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#CDC3AE" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B9AE9C"/>
+<circle cx="800" cy="321" r="6" fill="#0F766E"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#CDC3AE" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B9AE9C"/>
+<circle cx="499.3" cy="373" r="6" fill="#0F766E"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#8A9096" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#3A3F44" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#8A9096"/>
+<circle cx="320.76" cy="165" r="6" fill="#F0B429"/>
+<text x="483.11" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#3A3F44" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#8A9096"/>
+<circle cx="377.14" cy="217" r="6" fill="#F0B429"/>
+<text x="511.3" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#3A3F44" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#8A9096"/>
+<circle cx="442.92" cy="269" r="6" fill="#F0B429"/>
+<text x="586.48" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#3A3F44" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#8A9096"/>
+<circle cx="800" cy="321" r="6" fill="#F0B429"/>
+<text x="812" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#3A3F44" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#8A9096"/>
+<circle cx="499.3" cy="373" r="6" fill="#F0B429"/>
+<text x="558.29" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="Cambria,Georgia,serif" fill="#A9BBD9" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#8EAADB" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#A9BBD9"/>
+<circle cx="320.76" cy="165" r="6" fill="#1F3864"/>
+<text x="483.11" y="165" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#8EAADB" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#A9BBD9"/>
+<circle cx="377.14" cy="217" r="6" fill="#1F3864"/>
+<text x="511.3" y="217" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#8EAADB" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#A9BBD9"/>
+<circle cx="442.92" cy="269" r="6" fill="#1F3864"/>
+<text x="586.48" y="269" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#8EAADB" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#A9BBD9"/>
+<circle cx="800" cy="321" r="6" fill="#1F3864"/>
+<text x="812" y="321" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#8EAADB" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#A9BBD9"/>
+<circle cx="499.3" cy="373" r="6" fill="#1F3864"/>
+<text x="558.29" y="373" font-size="13" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#94A3B8" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#D63A2F" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#94A3B8"/>
+<circle cx="320.76" cy="165" r="6" fill="#D63A2F"/>
+<text x="483.11" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#94A3B8"/>
+<circle cx="377.14" cy="217" r="6" fill="#D63A2F"/>
+<text x="511.3" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#94A3B8"/>
+<circle cx="442.92" cy="269" r="6" fill="#D63A2F"/>
+<text x="586.48" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#94A3B8"/>
+<circle cx="800" cy="321" r="6" fill="#D63A2F"/>
+<text x="812" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#94A3B8"/>
+<circle cx="499.3" cy="373" r="6" fill="#D63A2F"/>
+<text x="558.29" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C9BBA4" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C4572E" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#DCCFB6" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#C9BBA4"/>
+<circle cx="320.76" cy="165" r="6" fill="#C4572E"/>
+<text x="483.11" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#DCCFB6" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#C9BBA4"/>
+<circle cx="377.14" cy="217" r="6" fill="#C4572E"/>
+<text x="511.3" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#DCCFB6" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#C9BBA4"/>
+<circle cx="442.92" cy="269" r="6" fill="#C4572E"/>
+<text x="586.48" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#DCCFB6" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#C9BBA4"/>
+<circle cx="800" cy="321" r="6" fill="#C4572E"/>
+<text x="812" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#DCCFB6" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#C9BBA4"/>
+<circle cx="499.3" cy="373" r="6" fill="#C4572E"/>
+<text x="558.29" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">OPEN PUNCH . W24 VS W28</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#A9B4C0" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2251FF" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#C7D0D9" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#A9B4C0"/>
+<circle cx="320.76" cy="165" r="6" fill="#2251FF"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#C7D0D9" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#A9B4C0"/>
+<circle cx="377.14" cy="217" r="6" fill="#2251FF"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#C7D0D9" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#A9B4C0"/>
+<circle cx="442.92" cy="269" r="6" fill="#2251FF"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#C7D0D9" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#A9B4C0"/>
+<circle cx="800" cy="321" r="6" fill="#2251FF"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#C7D0D9" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#A9B4C0"/>
+<circle cx="499.3" cy="373" r="6" fill="#2251FF"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#A7C4B5" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#C9D2CC" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#A7C4B5"/>
+<circle cx="320.76" cy="165" r="6" fill="#197A56"/>
+<text x="483.11" y="165" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#C9D2CC" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#A7C4B5"/>
+<circle cx="377.14" cy="217" r="6" fill="#197A56"/>
+<text x="511.3" y="217" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#C9D2CC" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#A7C4B5"/>
+<circle cx="442.92" cy="269" r="6" fill="#197A56"/>
+<text x="586.48" y="269" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#C9D2CC" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#A7C4B5"/>
+<circle cx="800" cy="321" r="6" fill="#197A56"/>
+<text x="812" y="321" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#C9D2CC" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#A7C4B5"/>
+<circle cx="499.3" cy="373" r="6" fill="#197A56"/>
+<text x="558.29" y="373" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">System D is the only system where punch grew, 52 to 63</text>
+<text x="471.11" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B5B1AB" font-weight="600" text-anchor="middle">W24</text>
+<text x="320.76" y="149" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600" text-anchor="middle">W28</text>
+<line x1="471.11" y1="165" x2="320.76" y2="165" stroke="#D9D6D2" stroke-width="2"/>
+<circle cx="471.11" cy="165" r="6" fill="#B5B1AB"/>
+<circle cx="320.76" cy="165" r="6" fill="#C4001A"/>
+<text x="483.11" y="165" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">28 &gt; 12 items</text>
+<text x="192" y="165" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">System A</text>
+<line x1="499.3" y1="217" x2="377.14" y2="217" stroke="#D9D6D2" stroke-width="2"/>
+<circle cx="499.3" cy="217" r="6" fill="#B5B1AB"/>
+<circle cx="377.14" cy="217" r="6" fill="#C4001A"/>
+<text x="511.3" y="217" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">31 &gt; 18</text>
+<text x="192" y="217" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">System B</text>
+<line x1="574.48" y1="269" x2="442.92" y2="269" stroke="#D9D6D2" stroke-width="2"/>
+<circle cx="574.48" cy="269" r="6" fill="#B5B1AB"/>
+<circle cx="442.92" cy="269" r="6" fill="#C4001A"/>
+<text x="586.48" y="269" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">39 &gt; 25</text>
+<text x="192" y="269" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">System C</text>
+<line x1="696.63" y1="321" x2="800" y2="321" stroke="#D9D6D2" stroke-width="2"/>
+<circle cx="696.63" cy="321" r="6" fill="#B5B1AB"/>
+<circle cx="800" cy="321" r="6" fill="#C4001A"/>
+<text x="812" y="321" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="600" dominant-baseline="middle">52 &gt; 63</text>
+<text x="192" y="321" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="600" text-anchor="end" dominant-baseline="middle">System D</text>
+<line x1="546.29" y1="373" x2="499.3" y2="373" stroke="#D9D6D2" stroke-width="2"/>
+<circle cx="546.29" cy="373" r="6" fill="#B5B1AB"/>
+<circle cx="499.3" cy="373" r="6" fill="#C4001A"/>
+<text x="558.29" y="373" font-size="13" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">36 &gt; 31</text>
+<text x="192" y="373" font-size="14" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="end" dominant-baseline="middle">System E</text>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: sample dataset v1, 2026-07-12</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>before/after per category: backlog W24 vs W28, score last year vs now</li><li>spotting the row that moved against the trend</li></ul>
+<h2>Do not use when</h2><ul><li>more than two moments (CH-TIM-01)</li><li>two unrelated measures (CH-DST-02)</li></ul>
+<h2>See instead</h2><ul><li>more than 2 time points: <a href='CH-TIM-01.html'>CH-TIM-01</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-TIM-05 (few categories, slope reads better)</li></ul>
+<h2>Rules</h2><ul><li>before = dot_a muted, after = dot_b primary; the connector is the story</li><li>labels state both values: &#x27;52 &gt; 63&#x27;</li><li>highlight the row moving against the trend</li></ul>
+<h2>Never do this</h2><ul><li>arrows instead of connectors (double-encodes direction)</li><li>legends</li><li>sorting that hides the counter-mover</li></ul>
+<h2>QA before delivering</h2><ul><li>both values labeled per row</li><li>series labeled on first row</li><li>highlight &lt;= 1</li><li>source present</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>action title naming the mover with numbers</td></tr><tr><td>source</td><td>bottom-left always</td></tr><tr><td>unit</td><td>on first label</td></tr><tr><td>series_labels</td><td>[before_name, after_name]</td></tr><tr><td>categories</td><td>array of {label, values: [before, after], highlight?}</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;System D is the only system where punch grew, 52 to 63&quot;,
+  &quot;eyebrow&quot;: &quot;OPEN PUNCH . W24 VS W28&quot;,
+  &quot;source&quot;: &quot;Source: sample dataset v1, 2026-07-12&quot;,
+  &quot;unit&quot;: &quot;items&quot;,
+  &quot;series_labels&quot;: [
+    &quot;W24&quot;,
+    &quot;W28&quot;
+  ],
+  &quot;categories&quot;: [
+    {
+      &quot;label&quot;: &quot;System A&quot;,
+      &quot;values&quot;: [
+        28,
+        12
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System B&quot;,
+      &quot;values&quot;: [
+        31,
+        18
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System C&quot;,
+      &quot;values&quot;: [
+        39,
+        25
+      ]
+    },
+    {
+      &quot;label&quot;: &quot;System D&quot;,
+      &quot;values&quot;: [
+        52,
+        63
+      ],
+      &quot;highlight&quot;: true
+    },
+    {
+      &quot;label&quot;: &quot;System E&quot;,
+      &quot;values&quot;: [
+        36,
+        31
+      ]
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL, role-based (themeable) -->\n\n## DUMBBELL chart (CH-DEV-02)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| dot_a | muted |\n| dot_b | primary |\n| connector | hairline |\n| category_label | body |\n| value_label | ink |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"System D is the only system where punch grew, 52 to 63\",\n  \"eyebrow\": \"OPEN PUNCH . W24 VS W28\",\n  \"source\": \"Source: sample dataset v1, 2026-07-12\",\n  \"unit\": \"items\",\n  \"series_labels\": [\n    \"W24\",\n    \"W28\"\n  ],\n  \"categories\": [\n    {\n      \"label\": \"System A\",\n      \"values\": [\n        28,\n        12\n      ]\n    },\n    {\n      \"label\": \"System B\",\n      \"values\": [\n        31,\n        18\n      ]\n    },\n    {\n      \"label\": \"System C\",\n      \"values\": [\n        39,\n        25\n      ]\n    },\n    {\n      \"label\": \"System D\",\n      \"values\": [\n        52,\n        63\n      ],\n      \"highlight\": true\n    },\n    {\n      \"label\": \"System E\",\n      \"values\": [\n        36,\n        31\n      ]\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-DEV-02\",\n  \"name\": \"DUMBBELL\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"dots_h\",\n  \"meta\": {\n    \"intent\": [\n      \"deviation\",\n      \"change-over-time\",\n      \"comparison\"\n    ],\n    \"form\": \"two dots + connector per category: before and after\",\n    \"data_required\": \"categories with a value at two moments; the movement is the message\",\n    \"relations\": {\n      \"family\": \"DEV\",\n      \"alternatives\": [\n        \"CH-TIM-05 (few categories, slope reads better)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"more than 2 time points\",\n          \"use\": \"CH-TIM-01\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"before/after per category: backlog W24 vs W28, score last year vs now\",\n    \"spotting the row that moved against the trend\"\n  ],\n  \"not_when\": [\n    \"more than two moments (CH-TIM-01)\",\n    \"two unrelated measures (CH-DST-02)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"action title naming the mover with numbers\",\n    \"source\": \"bottom-left always\",\n    \"unit\": \"on first label\",\n    \"series_labels\": \"[before_name, after_name]\",\n    \"categories\": \"array of {label, values: [before, after], highlight?}\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  },\n  \"rules\": [\n    \"before = dot_a muted, after = dot_b primary; the connector is the story\",\n    \"labels state both values: '52 > 63'\",\n    \"highlight the row moving against the trend\"\n  ],\n  \"roles\": {\n    \"dot_a\": [\n      \"muted\"\n    ],\n    \"dot_b\": [\n      \"primary\"\n    ],\n    \"connector\": [\n      \"hairline\"\n    ],\n    \"category_label\": [\n      \"body\"\n    ],\n    \"value_label\": [\n      \"ink\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"arrows instead of connectors (double-encodes direction)\",\n    \"legends\",\n    \"sorting that hides the counter-mover\"\n  ],\n  \"qa\": [\n    \"both values labeled per row\",\n    \"series labeled on first row\",\n    \"highlight <= 1\",\n    \"source present\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-01 AGRAW -->\n\n## DUMBBELL chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#C9C6BF` |\n| dot_b | `#008080` |\n| connector | `#D8D5CE` |\n| category_label | `#3D3D3D` |\n| value_label | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-02 KATA -->\n\n## DUMBBELL chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#B7DCDC` |\n| dot_b | `#008080` |\n| connector | `#E2E8E8` |\n| category_label | `#555555` |\n| value_label | `#222222` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-03 LOGOS -->\n\n## DUMBBELL chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| dot_a | `#B8B2A7` |\n| dot_b | `#9E2B25` |\n| connector | `#E8E0D4` |\n| category_label | `#4A4E57` |\n| value_label | `#262A33` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-04 SHILPA -->\n\n## DUMBBELL chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| dot_a | `#C6D5E0` |\n| dot_b | `#1B6E8F` |\n| connector | `#C6D5E0` |\n| category_label | `#33424E` |\n| value_label | `#143D59` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-05 OBEYA -->\n\n## DUMBBELL chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#64748B` |\n| dot_b | `#C2410C` |\n| connector | `#64748B` |\n| category_label | `#334155` |\n| value_label | `#0F172A` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-06 LEX -->\n\n## DUMBBELL chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#B9B9B9` |\n| dot_b | `#7A1F1F` |\n| connector | `#B9B9B9` |\n| category_label | `#333333` |\n| value_label | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-07 SAGA -->\n\n## DUMBBELL chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#B0B0B0` |\n| dot_b | `#C0182B` |\n| connector | `#111111` |\n| category_label | `#2E2E2E` |\n| value_label | `#111111` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-08 SENTINEL -->\n\n## DUMBBELL chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| dot_a | `#5C6B78` |\n| dot_b | `#F0B429` |\n| connector | `#2A323A` |\n| category_label | `#9FB0BE` |\n| value_label | `#E6EDF3` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-09 ATLAS -->\n\n## DUMBBELL chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| dot_a | `#B9AE9C` |\n| dot_b | `#0F766E` |\n| connector | `#CDC3AE` |\n| category_label | `#4A5860` |\n| value_label | `#2B3A42` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-10 BASIRA -->\n\n## DUMBBELL chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| dot_a | `#8A9096` |\n| dot_b | `#F0B429` |\n| connector | `#3A3F44` |\n| category_label | `#D9D9D9` |\n| value_label | `#FFFFFF` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-11 SUTRA -->\n\n## DUMBBELL chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#A9BBD9` |\n| dot_b | `#1F3864` |\n| connector | `#8EAADB` |\n| category_label | `#262626` |\n| value_label | `#1F3864` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-12 NOROSHI -->\n\n## DUMBBELL chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#94A3B8` |\n| dot_b | `#D63A2F` |\n| connector | `#E2E8F0` |\n| category_label | `#475569` |\n| value_label | `#0F172A` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-13 MIZAN -->\n\n## DUMBBELL chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| dot_a | `#C9BBA4` |\n| dot_b | `#C4572E` |\n| connector | `#DCCFB6` |\n| category_label | `#4E4237` |\n| value_label | `#31261D` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-14 EVIDENTIA -->\n\n## DUMBBELL chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#A9B4C0` |\n| dot_b | `#2251FF` |\n| connector | `#C7D0D9` |\n| category_label | `#3C4A5A` |\n| value_label | `#0B1F35` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-15 ABRID -->\n\n## DUMBBELL chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#A7C4B5` |\n| dot_b | `#197A56` |\n| connector | `#C9D2CC` |\n| category_label | `#3E4C46` |\n| value_label | `#0E3A2C` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DEV-02 DUMBBELL rendered in language DL-16 TELOS -->\n\n## DUMBBELL chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DEV-02\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"deviation\",\n    \"change-over-time\",\n    \"comparison\"\n  ],\n  \"form\": \"two dots + connector per category: before and after\",\n  \"data_required\": \"categories with a value at two moments; the movement is the message\",\n  \"family\": \"DEV\",\n  \"alternatives\": [\n    \"CH-TIM-05 (few categories, slope reads better)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"more than 2 time points\",\n      \"use\": \"CH-TIM-01\"\n    }\n  ]\n}\n```\n\nUse when:\n- before/after per category: backlog W24 vs W28, score last year vs now\n- spotting the row that moved against the trend\n\nDo NOT use when:\n- more than two moments (CH-TIM-01)\n- two unrelated measures (CH-DST-02)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the mover with numbers\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first label\",\n  \"series_labels\": \"[before_name, after_name]\",\n  \"categories\": \"array of {label, values: [before, after], highlight?}\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 208,\n      \"right\": 800,\n      \"top\": 150\n    },\n    \"row_height\": 30,\n    \"row_gap\": 22,\n    \"category_label\": {\n      \"size\": 13,\n      \"offset\": 16\n    },\n    \"value_label\": {\n      \"size\": 12,\n      \"offset\": 12\n    }\n  },\n  \"scale\": {\n    \"note\": \"shared scale; connector shows the travel\"\n  }\n}\n```\n\n### Rules\n- before = dot_a muted, after = dot_b primary; the connector is the story\n- labels state both values: '52 > 63'\n- highlight the row moving against the trend\n\n### Never do this\n- arrows instead of connectors (double-encodes direction)\n- legends\n- sorting that hides the counter-mover\n\n### QA before delivering\n- [ ] both values labeled per row\n- [ ] series labeled on first row\n- [ ] highlight <= 1\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| dot_a | `#B5B1AB` |\n| dot_b | `#C4001A` |\n| connector | `#D9D6D2` |\n| category_label | `#444444` |\n| value_label | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

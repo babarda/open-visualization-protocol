@@ -1,0 +1,69 @@
+{
+  "code": "DL-06",
+  "name": "LEX",
+  "aka": "TRIBUNAL",
+  "ovp_version": "1.0",
+  "status": "adopted",
+  "philosophy": {
+    "civilization": "Ancient Rome",
+    "principle": "Law and accountability",
+    "motto": "Everything must be traceable.",
+    "laws": [
+      "Every statement is referenced",
+      "Chronology matters",
+      "Evidence before opinion",
+      "Citations are mandatory",
+      "Ambiguity is minimized"
+    ],
+    "related": [
+      "Ma'at",
+      "Adl",
+      "Nomos"
+    ]
+  },
+  "constitution": {
+    "narrative_style": "evidence-first",
+    "density": "scientific",
+    "annotation_policy": "full",
+    "legend_policy": "direct-labels-only",
+    "highlight_policy": "none",
+    "decision_style": "evidence-only",
+    "reading_time": "session",
+    "charts_per_page": 2
+  },
+  "occasions": [
+    "claims",
+    "mediation",
+    "arbitration decks",
+    "contractual correspondence"
+  ],
+  "palette": {
+    "background": "#FFFFFF",
+    "ink": "#1A1A1A",
+    "body": "#333333",
+    "hairline": "#B9B9B9",
+    "gridline": "#CCCCCC",
+    "primary": "#7A1F1F",
+    "muted": "#B9B9B9",
+    "positive": "#333333",
+    "negative": "#7A1F1F"
+  },
+  "fonts": {
+    "display": {
+      "family": "Georgia,serif",
+      "weight": 700
+    },
+    "body": {
+      "family": "Georgia,serif",
+      "weight": 400
+    },
+    "mono": {
+      "family": "Consolas,monospace",
+      "weight": 400
+    }
+  },
+  "chrome": {
+    "kicker": false,
+    "eyebrow": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "code": "NR-01",
+  "name": "THE EXECUTIVE BRIEF",
+  "ovp_version": "1.0",
+  "decision_style": "recommendation-with-owner",
+  "sections": [
+    {
+      "role": "claim",
+      "guidance": "One sentence stating the finding with its number; this is the action title."
+    },
+    {
+      "role": "cause",
+      "guidance": "The single driver that explains most of the finding; name it, quantify it."
+    },
+    {
+      "role": "evidence",
+      "guidance": "The chart(s) proving claim and cause; each with its QA checklist run."
+    },
+    {
+      "role": "action",
+      "guidance": "The decision requested or taken, stated as a verb with a deadline."
+    },
+    {
+      "role": "owner",
+      "guidance": "One name accountable for the action; a team is not an owner."
+    }
+  ],
+  "example": [
+    "Forecast lands 18 points over budget",
+    "Logistics drives two thirds of the overrun",
+    "Cost bridge CH-FLO-01; scorecard CH-MAG-04",
+    "Resequence deliveries to recover 8 points by Q3",
+    "Owner: logistics lead, review Friday"
+  ],
+  "qa": [
+    "claim carries a number",
+    "exactly one owner",
+    "action has a date",
+    "every chart passed its own QA"
+  ]
+}

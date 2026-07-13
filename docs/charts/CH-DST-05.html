@@ -1,0 +1,753 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . CH-DST-05 POPULATION PYRAMID</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="../index.html">OVP<span>.</span></a><a class="item" href="../index.html">Home</a><a class="item" href="../protocol.html">Protocol</a><a class="item" href="../foundations.html">Foundations</a><a class="item" href="../taxonomy.html">Taxonomy</a><a class="item" href="../languages/index.html">Languages</a><a class="item on" href="../charts/index.html">Charts</a><a class="item" href="../questions.html">Questions</a><a class="item" href="../patterns.html">Patterns</a><a class="item" href="../decider.html">Decider</a><a class="item" href="../components.html">Components</a><a class="item" href="../recipes.html">Recipes</a><a class="item" href="../implement.html">Implement</a><a class="item" href="../ai.html">AI</a></nav>
+<main>
+<div class="crumb"><a href="index.html">Charts</a> /
+CH-DST-05</div>
+<div class="kicker">CH-DST-05 . family DST</div>
+<h1>POPULATION PYRAMID</h1>
+<p class="lead">two mirrored bar stacks around a labeled center gutter, one row per band. Needs:
+ordered bands (age, tenure, size class) with counts for two groups.</p>
+<p><span class="tag">distribution</span><span class="tag">comparison</span></p>
+<div class="copybar">
+<button class="copy" onclick="copyDS(this)">Copy design-system block
+(current language)</button>
+<button class="copy alt" onclick="copyPayload(this,'skill')">Copy skill
+block (themeable)</button>
+<button class="copy alt" onclick="copyPayload(this,'data')">Copy sample
+data</button>
+<button class="copy alt" onclick="copyPayload(this,'spec')">Copy spec
+JSON</button>
+</div>
+<div class="dlbar"><button class='dlbtn on' data-dl='DL-01' onclick="showDL('DL-01')">DL-01 AGRAW</button><button class='dlbtn' data-dl='DL-02' onclick="showDL('DL-02')">DL-02 KATA</button><button class='dlbtn' data-dl='DL-03' onclick="showDL('DL-03')">DL-03 LOGOS</button><button class='dlbtn' data-dl='DL-04' onclick="showDL('DL-04')">DL-04 SHILPA</button><button class='dlbtn' data-dl='DL-05' onclick="showDL('DL-05')">DL-05 OBEYA</button><button class='dlbtn' data-dl='DL-06' onclick="showDL('DL-06')">DL-06 LEX</button><button class='dlbtn' data-dl='DL-07' onclick="showDL('DL-07')">DL-07 SAGA</button><button class='dlbtn' data-dl='DL-08' onclick="showDL('DL-08')">DL-08 SENTINEL</button><button class='dlbtn' data-dl='DL-09' onclick="showDL('DL-09')">DL-09 ATLAS</button><button class='dlbtn' data-dl='DL-10' onclick="showDL('DL-10')">DL-10 BASIRA</button><button class='dlbtn' data-dl='DL-11' onclick="showDL('DL-11')">DL-11 SUTRA</button><button class='dlbtn' data-dl='DL-12' onclick="showDL('DL-12')">DL-12 NOROSHI</button><button class='dlbtn' data-dl='DL-13' onclick="showDL('DL-13')">DL-13 MIZAN</button><button class='dlbtn' data-dl='DL-14' onclick="showDL('DL-14')">DL-14 EVIDENTIA</button><button class='dlbtn' data-dl='DL-15' onclick="showDL('DL-15')">DL-15 ABRID</button><button class='dlbtn' data-dl='DL-16' onclick="showDL('DL-16')">DL-16 TELOS</button></div>
+<div class='dlview' id='v-DL-01' style='display:block'><figure><figcaption>DL-01 AGRAW</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#1A1A1A" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C9C6BF" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#008080" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#C9C6BF"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#008080"/>
+<text x="480" y="181" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#C9C6BF"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#008080"/>
+<text x="480" y="211" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#C9C6BF"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#008080"/>
+<text x="480" y="241" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#C9C6BF"/>
+<rect x="520" y="260" width="320" height="22" fill="#008080"/>
+<text x="480" y="271" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#C9C6BF"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#008080"/>
+<text x="480" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3D3D3D" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-02' style='display:none'><figure><figcaption>DL-02 KATA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Rethink Sans','Segoe UI',sans-serif" fill="#222222" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#B7DCDC" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#008080" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B7DCDC"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#008080"/>
+<text x="480" y="181" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B7DCDC"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#008080"/>
+<text x="480" y="211" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B7DCDC"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#008080"/>
+<text x="480" y="241" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B7DCDC"/>
+<rect x="520" y="260" width="320" height="22" fill="#008080"/>
+<text x="480" y="271" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B7DCDC"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#008080"/>
+<text x="480" y="301" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Poppins','Segoe UI',sans-serif" fill="#222222" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#222222" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#222222" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Poppins','Segoe UI',sans-serif" fill="#555555" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-03' style='display:none'><figure><figcaption>DL-03 LOGOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FDF4EA"/>
+<rect x="32" y="28" width="24" height="4" fill="#9E2B25"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="600" letter-spacing="2">WORKFORCE BY AGE</text>
+<text x="32" y="88" font-size="24" font-family="'Oswald','Arial Narrow',Arial,sans-serif" fill="#262A33" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#B8B2A7" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#9E2B25" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B8B2A7"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#9E2B25"/>
+<text x="480" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B8B2A7"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#9E2B25"/>
+<text x="480" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B8B2A7"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#9E2B25"/>
+<text x="480" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B8B2A7"/>
+<rect x="520" y="260" width="320" height="22" fill="#9E2B25"/>
+<text x="480" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B8B2A7"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#9E2B25"/>
+<text x="480" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#262A33" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#262A33" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#262A33" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A4E57" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-04' style='display:none'><figure><figcaption>DL-04 SHILPA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FBFDFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#C6D5E0" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#1B6E8F" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#C6D5E0"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#1B6E8F"/>
+<text x="480" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#C6D5E0"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#1B6E8F"/>
+<text x="480" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#C6D5E0"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#1B6E8F"/>
+<text x="480" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#C6D5E0"/>
+<rect x="520" y="260" width="320" height="22" fill="#1B6E8F"/>
+<text x="480" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#C6D5E0"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#1B6E8F"/>
+<text x="480" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="9" font-family="'Segoe UI',Arial,sans-serif" fill="#143D59" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#143D59" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#143D59" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#33424E" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-05' style='display:none'><figure><figcaption>DL-05 OBEYA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#64748B" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#C2410C" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#64748B"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#C2410C"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#64748B"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#C2410C"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#64748B"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#C2410C"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#64748B"/>
+<rect x="520" y="260" width="320" height="22" fill="#C2410C"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#64748B"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#C2410C"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#0F172A" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#0F172A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#334155" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-06' style='display:none'><figure><figcaption>DL-06 LEX</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#1A1A1A" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="10" font-family="Georgia,serif" fill="#B9B9B9" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="10" font-family="Georgia,serif" fill="#7A1F1F" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B9B9B9"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#7A1F1F"/>
+<text x="480" y="181" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B9B9B9"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#7A1F1F"/>
+<text x="480" y="211" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B9B9B9"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#7A1F1F"/>
+<text x="480" y="241" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B9B9B9"/>
+<rect x="520" y="260" width="320" height="22" fill="#7A1F1F"/>
+<text x="480" y="271" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B9B9B9"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#7A1F1F"/>
+<text x="480" y="301" font-size="10" font-family="Georgia,serif" fill="#333333" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="9" font-family="Georgia,serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="Georgia,serif" fill="#333333" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-07' style='display:none'><figure><figcaption>DL-07 SAGA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Georgia,serif" fill="#111111" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#B0B0B0" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#C0182B" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B0B0B0"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#C0182B"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B0B0B0"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#C0182B"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B0B0B0"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#C0182B"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B0B0B0"/>
+<rect x="520" y="260" width="320" height="22" fill="#C0182B"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B0B0B0"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#C0182B"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#111111" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#111111" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#111111" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2E2E2E" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-08' style='display:none'><figure><figcaption>DL-08 SENTINEL</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#101418"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#5C6B78" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#5C6B78"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#F0B429"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#5C6B78"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#F0B429"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#5C6B78"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#F0B429"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#5C6B78"/>
+<rect x="520" y="260" width="320" height="22" fill="#F0B429"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#5C6B78"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#F0B429"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#E6EDF3" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#E6EDF3" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#E6EDF3" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#9FB0BE" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-09' style='display:none'><figure><figcaption>DL-09 ATLAS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F4EFE6"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#B9AE9C" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F766E" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B9AE9C"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#0F766E"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B9AE9C"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#0F766E"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B9AE9C"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#0F766E"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B9AE9C"/>
+<rect x="520" y="260" width="320" height="22" fill="#0F766E"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B9AE9C"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#0F766E"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#2B3A42" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#2B3A42" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#2B3A42" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4A5860" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-10' style='display:none'><figure><figcaption>DL-10 BASIRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#0B0B0B"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="300">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#8A9096" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#F0B429" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#8A9096"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#F0B429"/>
+<text x="480" y="181" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#8A9096"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#F0B429"/>
+<text x="480" y="211" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#8A9096"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#F0B429"/>
+<text x="480" y="241" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#8A9096"/>
+<rect x="520" y="260" width="320" height="22" fill="#F0B429"/>
+<text x="480" y="271" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#8A9096"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#F0B429"/>
+<text x="480" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#FFFFFF" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#FFFFFF" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#FFFFFF" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#D9D9D9" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-11' style='display:none'><figure><figcaption>DL-11 SUTRA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="Cambria,Georgia,serif" fill="#A9BBD9" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#A9BBD9"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#1F3864"/>
+<text x="480" y="181" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#A9BBD9"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#1F3864"/>
+<text x="480" y="211" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#A9BBD9"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#1F3864"/>
+<text x="480" y="241" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#A9BBD9"/>
+<rect x="520" y="260" width="320" height="22" fill="#1F3864"/>
+<text x="480" y="271" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#A9BBD9"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#1F3864"/>
+<text x="480" y="301" font-size="12" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="Cambria,Georgia,serif" fill="#1F3864" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#1F3864" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#1F3864" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="Cambria,Georgia,serif" fill="#262626" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-12' style='display:none'><figure><figcaption>DL-12 NOROSHI</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#94A3B8" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#D63A2F" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#94A3B8"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#D63A2F"/>
+<text x="480" y="181" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#94A3B8"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#D63A2F"/>
+<text x="480" y="211" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#94A3B8"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#D63A2F"/>
+<text x="480" y="241" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#94A3B8"/>
+<rect x="520" y="260" width="320" height="22" fill="#D63A2F"/>
+<text x="480" y="271" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#94A3B8"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#D63A2F"/>
+<text x="480" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#0F172A" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#0F172A" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#0F172A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#475569" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-13' style='display:none'><figure><figcaption>DL-13 MIZAN</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#F7EFE3"/>
+<text x="32" y="56" font-size="24" font-family="'EB Garamond',Georgia,serif" fill="#31261D" font-weight="600">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C9BBA4" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C4572E" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#C9BBA4"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#C4572E"/>
+<text x="480" y="181" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#C9BBA4"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#C4572E"/>
+<text x="480" y="211" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#C9BBA4"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#C4572E"/>
+<text x="480" y="241" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#C9BBA4"/>
+<rect x="520" y="260" width="320" height="22" fill="#C4572E"/>
+<text x="480" y="271" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#C9BBA4"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#C4572E"/>
+<text x="480" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#31261D" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#31261D" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#31261D" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#4E4237" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-14' style='display:none'><figure><figcaption>DL-14 EVIDENTIA</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="52" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="600" letter-spacing="2">WORKFORCE BY AGE</text>
+<text x="32" y="88" font-size="24" font-family="Georgia,serif" fill="#0B1F35" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#A9B4C0" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#2251FF" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#A9B4C0"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#2251FF"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#A9B4C0"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#2251FF"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#A9B4C0"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#2251FF"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#A9B4C0"/>
+<rect x="520" y="260" width="320" height="22" fill="#2251FF"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#A9B4C0"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#2251FF"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0B1F35" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#0B1F35" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#0B1F35" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3C4A5A" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-15' style='display:none'><figure><figcaption>DL-15 ABRID</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#A7C4B5" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#197A56" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#A7C4B5"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#197A56"/>
+<text x="480" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#A7C4B5"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#197A56"/>
+<text x="480" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#A7C4B5"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#197A56"/>
+<text x="480" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#A7C4B5"/>
+<rect x="520" y="260" width="320" height="22" fill="#197A56"/>
+<text x="480" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#A7C4B5"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#197A56"/>
+<text x="480" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="10" font-family="'Segoe UI',Arial,sans-serif" fill="#0E3A2C" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#0E3A2C" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#0E3A2C" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#3E4C46" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div><div class='dlview' id='v-DL-16' style='display:none'><figure><figcaption>DL-16 TELOS</figcaption><svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#FFFFFF"/>
+<text x="32" y="56" font-size="24" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="700">Staffing thins sharply above 50</text>
+<text x="440" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#B5B1AB" font-weight="600" text-anchor="end">Women</text>
+<text x="520" y="158" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#C4001A" font-weight="600">Men</text>
+<rect x="413.46" y="170" width="26.54" height="22" fill="#B5B1AB"/>
+<rect x="520" y="170" width="40.59" height="22" fill="#C4001A"/>
+<text x="480" y="181" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">60+</text>
+<text x="407.46" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">34 staff</text>
+<text x="566.59" y="181" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">52</text>
+<rect x="372.88" y="200" width="67.12" height="22" fill="#B5B1AB"/>
+<rect x="520" y="200" width="109.27" height="22" fill="#C4001A"/>
+<text x="480" y="211" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">50-59</text>
+<text x="366.88" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">86</text>
+<text x="635.27" y="211" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">140</text>
+<rect x="291.71" y="230" width="148.29" height="22" fill="#B5B1AB"/>
+<rect x="520" y="230" width="234.15" height="22" fill="#C4001A"/>
+<text x="480" y="241" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">40-49</text>
+<text x="285.71" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">190</text>
+<text x="760.15" y="241" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">300</text>
+<rect x="229.27" y="260" width="210.73" height="22" fill="#B5B1AB"/>
+<rect x="520" y="260" width="320" height="22" fill="#C4001A"/>
+<text x="480" y="271" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">30-39</text>
+<text x="223.27" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">270</text>
+<text x="846" y="271" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">410</text>
+<rect x="315.12" y="290" width="124.88" height="22" fill="#B5B1AB"/>
+<rect x="520" y="290" width="171.71" height="22" fill="#C4001A"/>
+<text x="480" y="301" font-size="12" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400" text-anchor="middle" dominant-baseline="middle">20-29</text>
+<text x="309.12" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" text-anchor="end" dominant-baseline="middle">160</text>
+<text x="697.71" y="301" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#1A1A1A" font-weight="400" dominant-baseline="middle">220</text>
+<line x1="440" y1="162" x2="440" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<line x1="520" y1="162" x2="520" y2="320" stroke="#1A1A1A" stroke-width="1"/>
+<text x="32" y="516" font-size="11" font-family="'Segoe UI',Arial,sans-serif" fill="#444444" font-weight="400">Source: HR register, June</text>
+</svg>
+</figure></div>
+<div class="two">
+<div>
+<h2>Use when</h2><ul><li>two groups across ordered bands: age structures, tenure mixes</li><li>asymmetry between the two sides is the message</li></ul>
+<h2>Do not use when</h2><ul><li>more than two groups (small multiples)</li><li>bands without a natural order (CH-MAG-03)</li></ul>
+<h2>See instead</h2><ul><li>categories have no natural band order: <a href='CH-MAG-03.html'>CH-MAG-03</a></li><li>the two parts share one whole: <a href='CH-DEV-03.html'>CH-DEV-03</a></li></ul>
+<h2>Alternatives</h2><ul><li>CH-MAG-03 (unordered categories)</li><li>CH-DEV-03 (two-part shares)</li></ul>
+<h2>Rules</h2><ul><li>both sides share one zero-based scale, mirrored</li><li>band labels live in the center gutter</li><li>sides named above the first row, never a legend</li></ul>
+<h2>Never do this</h2><ul><li>different scales per side (the classic pyramid lie)</li><li>unordered bands</li><li>more than two sides</li></ul>
+<h2>QA before delivering</h2><ul><li>one shared mirrored scale</li><li>bands in order</li><li>sides named once</li><li>unit once</li><li>source present</li></ul>
+</div>
+<div>
+<h2>Data shape</h2>
+<table><tr><td>title</td><td>action title naming the asymmetry</td></tr><tr><td>source</td><td>bottom-left always</td></tr><tr><td>unit</td><td>on first left value</td></tr><tr><td>series_labels</td><td>[left_name, right_name], printed above the first row</td></tr><tr><td>bands</td><td>array of {label, a, b}, ordered top band first</td></tr></table>
+<details><summary>Sample data (golden)</summary>
+<pre><code>{
+  &quot;title&quot;: &quot;Staffing thins sharply above 50&quot;,
+  &quot;eyebrow&quot;: &quot;WORKFORCE BY AGE&quot;,
+  &quot;source&quot;: &quot;Source: HR register, June&quot;,
+  &quot;unit&quot;: &quot;staff&quot;,
+  &quot;series_labels&quot;: [
+    &quot;Women&quot;,
+    &quot;Men&quot;
+  ],
+  &quot;bands&quot;: [
+    {
+      &quot;label&quot;: &quot;60+&quot;,
+      &quot;a&quot;: 34,
+      &quot;b&quot;: 52
+    },
+    {
+      &quot;label&quot;: &quot;50-59&quot;,
+      &quot;a&quot;: 86,
+      &quot;b&quot;: 140
+    },
+    {
+      &quot;label&quot;: &quot;40-49&quot;,
+      &quot;a&quot;: 190,
+      &quot;b&quot;: 300
+    },
+    {
+      &quot;label&quot;: &quot;30-39&quot;,
+      &quot;a&quot;: 270,
+      &quot;b&quot;: 410
+    },
+    {
+      &quot;label&quot;: &quot;20-29&quot;,
+      &quot;a&quot;: 160,
+      &quot;b&quot;: 220
+    }
+  ]
+}</code></pre></details>
+</div>
+</div>
+<script>const PAYLOADS = {"skill": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID, role-based (themeable) -->\n\n## POPULATION PYRAMID chart (CH-DST-05)\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nColors are ROLES, not hex: resolve each role against the active design\nlanguage token block (a DL-xx block pasted next to this one). A role\nchain like `benchmark -> muted` means use the first role the palette\ndefines.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Color roles\n\n| Element | Role chain |\n|---|---|\n| background | background |\n| side_a | muted |\n| side_b | primary |\n| band_label | body |\n| value_label | ink |\n| baseline | ink |\n| title | ink |\n| source | body |\n\n### Fonts\n\nTitle uses the token block's `display` font; everything else uses\n`body`. Weight 600 only on highlighted items.\n", "data": "{\n  \"title\": \"Staffing thins sharply above 50\",\n  \"eyebrow\": \"WORKFORCE BY AGE\",\n  \"source\": \"Source: HR register, June\",\n  \"unit\": \"staff\",\n  \"series_labels\": [\n    \"Women\",\n    \"Men\"\n  ],\n  \"bands\": [\n    {\n      \"label\": \"60+\",\n      \"a\": 34,\n      \"b\": 52\n    },\n    {\n      \"label\": \"50-59\",\n      \"a\": 86,\n      \"b\": 140\n    },\n    {\n      \"label\": \"40-49\",\n      \"a\": 190,\n      \"b\": 300\n    },\n    {\n      \"label\": \"30-39\",\n      \"a\": 270,\n      \"b\": 410\n    },\n    {\n      \"label\": \"20-29\",\n      \"a\": 160,\n      \"b\": 220\n    }\n  ]\n}", "spec": "{\n  \"code\": \"CH-DST-05\",\n  \"name\": \"POPULATION PYRAMID\",\n  \"ovp_version\": \"1.0\",\n  \"chart_type\": \"pyramid\",\n  \"meta\": {\n    \"intent\": [\n      \"distribution\",\n      \"comparison\"\n    ],\n    \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n    \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n    \"relations\": {\n      \"family\": \"DST\",\n      \"alternatives\": [\n        \"CH-MAG-03 (unordered categories)\",\n        \"CH-DEV-03 (two-part shares)\"\n      ],\n      \"see_instead\": [\n        {\n          \"when\": \"categories have no natural band order\",\n          \"use\": \"CH-MAG-03\"\n        },\n        {\n          \"when\": \"the two parts share one whole\",\n          \"use\": \"CH-DEV-03\"\n        }\n      ],\n      \"implemented_by\": [\n        \"svg\",\n        \"pptx\"\n      ]\n    }\n  },\n  \"use_when\": [\n    \"two groups across ordered bands: age structures, tenure mixes\",\n    \"asymmetry between the two sides is the message\"\n  ],\n  \"not_when\": [\n    \"more than two groups (small multiples)\",\n    \"bands without a natural order (CH-MAG-03)\"\n  ],\n  \"data_shape\": {\n    \"title\": \"action title naming the asymmetry\",\n    \"source\": \"bottom-left always\",\n    \"unit\": \"on first left value\",\n    \"series_labels\": \"[left_name, right_name], printed above the first row\",\n    \"bands\": \"array of {label, a, b}, ordered top band first\"\n  },\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  },\n  \"rules\": [\n    \"both sides share one zero-based scale, mirrored\",\n    \"band labels live in the center gutter\",\n    \"sides named above the first row, never a legend\"\n  ],\n  \"roles\": {\n    \"side_a\": [\n      \"muted\"\n    ],\n    \"side_b\": [\n      \"primary\"\n    ],\n    \"band_label\": [\n      \"body\"\n    ],\n    \"value_label\": [\n      \"ink\"\n    ],\n    \"baseline\": [\n      \"ink\"\n    ],\n    \"title\": [\n      \"ink\"\n    ],\n    \"source\": [\n      \"body\"\n    ]\n  },\n  \"overrides\": {},\n  \"anti_patterns\": [\n    \"different scales per side (the classic pyramid lie)\",\n    \"unordered bands\",\n    \"more than two sides\"\n  ],\n  \"qa\": [\n    \"one shared mirrored scale\",\n    \"bands in order\",\n    \"sides named once\",\n    \"unit once\",\n    \"source present\"\n  ]\n}", "ds-DL-01": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-01 AGRAW -->\n\n## POPULATION PYRAMID chart, AGRAW style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#C9C6BF` |\n| side_b | `#008080` |\n| band_label | `#3D3D3D` |\n| value_label | `#1A1A1A` |\n| baseline | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#3D3D3D` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-02": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-02 KATA -->\n\n## POPULATION PYRAMID chart, KATA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#B7DCDC` |\n| side_b | `#008080` |\n| band_label | `#555555` |\n| value_label | `#222222` |\n| baseline | `#222222` |\n| title | `#222222` |\n| source | `#555555` |\n\n### Fonts\n\n- Title font: 'Rethink Sans','Segoe UI',sans-serif, weight 600\n- All other text: 'Poppins','Segoe UI',sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-03": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-03 LOGOS -->\n\n## POPULATION PYRAMID chart, LOGOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FDF4EA` |\n| side_a | `#B8B2A7` |\n| side_b | `#9E2B25` |\n| band_label | `#4A4E57` |\n| value_label | `#262A33` |\n| baseline | `#262A33` |\n| title | `#262A33` |\n| source | `#4A4E57` |\n\n### Fonts\n\n- Title font: 'Oswald','Arial Narrow',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-04": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-04 SHILPA -->\n\n## POPULATION PYRAMID chart, SHILPA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FBFDFF` |\n| side_a | `#C6D5E0` |\n| side_b | `#1B6E8F` |\n| band_label | `#33424E` |\n| value_label | `#143D59` |\n| baseline | `#143D59` |\n| title | `#143D59` |\n| source | `#33424E` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-05": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-05 OBEYA -->\n\n## POPULATION PYRAMID chart, OBEYA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#64748B` |\n| side_b | `#C2410C` |\n| band_label | `#334155` |\n| value_label | `#0F172A` |\n| baseline | `#0F172A` |\n| title | `#0F172A` |\n| source | `#334155` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 600 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-06": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-06 LEX -->\n\n## POPULATION PYRAMID chart, LEX style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#B9B9B9` |\n| side_b | `#7A1F1F` |\n| band_label | `#333333` |\n| value_label | `#1A1A1A` |\n| baseline | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#333333` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-07": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-07 SAGA -->\n\n## POPULATION PYRAMID chart, SAGA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#B0B0B0` |\n| side_b | `#C0182B` |\n| band_label | `#2E2E2E` |\n| value_label | `#111111` |\n| baseline | `#111111` |\n| title | `#111111` |\n| source | `#2E2E2E` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-08": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-08 SENTINEL -->\n\n## POPULATION PYRAMID chart, SENTINEL style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#101418` |\n| side_a | `#5C6B78` |\n| side_b | `#F0B429` |\n| band_label | `#9FB0BE` |\n| value_label | `#E6EDF3` |\n| baseline | `#E6EDF3` |\n| title | `#E6EDF3` |\n| source | `#9FB0BE` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-09": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-09 ATLAS -->\n\n## POPULATION PYRAMID chart, ATLAS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F4EFE6` |\n| side_a | `#B9AE9C` |\n| side_b | `#0F766E` |\n| band_label | `#4A5860` |\n| value_label | `#2B3A42` |\n| baseline | `#2B3A42` |\n| title | `#2B3A42` |\n| source | `#4A5860` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-10": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-10 BASIRA -->\n\n## POPULATION PYRAMID chart, BASIRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#0B0B0B` |\n| side_a | `#8A9096` |\n| side_b | `#F0B429` |\n| band_label | `#D9D9D9` |\n| value_label | `#FFFFFF` |\n| baseline | `#FFFFFF` |\n| title | `#FFFFFF` |\n| source | `#D9D9D9` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 300\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-11": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-11 SUTRA -->\n\n## POPULATION PYRAMID chart, SUTRA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#A9BBD9` |\n| side_b | `#1F3864` |\n| band_label | `#262626` |\n| value_label | `#1F3864` |\n| baseline | `#1F3864` |\n| title | `#1F3864` |\n| source | `#262626` |\n\n### Fonts\n\n- Title font: Cambria,Georgia,serif, weight 700\n- All other text: Cambria,Georgia,serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-12": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-12 NOROSHI -->\n\n## POPULATION PYRAMID chart, NOROSHI style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#94A3B8` |\n| side_b | `#D63A2F` |\n| band_label | `#475569` |\n| value_label | `#0F172A` |\n| baseline | `#0F172A` |\n| title | `#0F172A` |\n| source | `#475569` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-13": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-13 MIZAN -->\n\n## POPULATION PYRAMID chart, MIZAN style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#F7EFE3` |\n| side_a | `#C9BBA4` |\n| side_b | `#C4572E` |\n| band_label | `#4E4237` |\n| value_label | `#31261D` |\n| baseline | `#31261D` |\n| title | `#31261D` |\n| source | `#4E4237` |\n\n### Fonts\n\n- Title font: 'EB Garamond',Georgia,serif, weight 600\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-14": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-14 EVIDENTIA -->\n\n## POPULATION PYRAMID chart, EVIDENTIA style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#A9B4C0` |\n| side_b | `#2251FF` |\n| band_label | `#3C4A5A` |\n| value_label | `#0B1F35` |\n| baseline | `#0B1F35` |\n| title | `#0B1F35` |\n| source | `#3C4A5A` |\n\n### Fonts\n\n- Title font: Georgia,serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nDraw the kicker bar and CAPS eyebrow defined in the layout, and use title y_with_eyebrow.\n", "ds-DL-15": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-15 ABRID -->\n\n## POPULATION PYRAMID chart, ABRID style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#A7C4B5` |\n| side_b | `#197A56` |\n| band_label | `#3E4C46` |\n| value_label | `#0E3A2C` |\n| baseline | `#0E3A2C` |\n| title | `#0E3A2C` |\n| source | `#3E4C46` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n", "ds-DL-16": "<!-- Generated by VizCatalogue. Do not hand-edit; regenerate from source. -->\n<!-- Chart CH-DST-05 POPULATION PYRAMID rendered in language DL-16 TELOS -->\n\n## POPULATION PYRAMID chart, TELOS style\n\nRender as SVG (or equivalent) on a 960x540 px canvas.\nEvery position, size, and color below is exact. No adjectives, no improvisation.\n\n### AI metadata (for agent routing)\n```json\n{\n  \"code\": \"CH-DST-05\",\n  \"ovp_version\": \"1.0\",\n  \"intent\": [\n    \"distribution\",\n    \"comparison\"\n  ],\n  \"form\": \"two mirrored bar stacks around a labeled center gutter, one row per band\",\n  \"data_required\": \"ordered bands (age, tenure, size class) with counts for two groups\",\n  \"family\": \"DST\",\n  \"alternatives\": [\n    \"CH-MAG-03 (unordered categories)\",\n    \"CH-DEV-03 (two-part shares)\"\n  ],\n  \"see_instead\": [\n    {\n      \"when\": \"categories have no natural band order\",\n      \"use\": \"CH-MAG-03\"\n    },\n    {\n      \"when\": \"the two parts share one whole\",\n      \"use\": \"CH-DEV-03\"\n    }\n  ]\n}\n```\n\nUse when:\n- two groups across ordered bands: age structures, tenure mixes\n- asymmetry between the two sides is the message\n\nDo NOT use when:\n- more than two groups (small multiples)\n- bands without a natural order (CH-MAG-03)\n\n### Input data shape\n```json\n{\n  \"title\": \"action title naming the asymmetry\",\n  \"source\": \"bottom-left always\",\n  \"unit\": \"on first left value\",\n  \"series_labels\": \"[left_name, right_name], printed above the first row\",\n  \"bands\": \"array of {label, a, b}, ordered top band first\"\n}\n```\n\n### Exact layout (px on the canvas, follow literally)\n```json\n{\n  \"canvas\": {\n    \"width\": 960,\n    \"height\": 540\n  },\n  \"layout\": {\n    \"title\": {\n      \"x\": 32,\n      \"y\": 56,\n      \"y_with_eyebrow\": 88,\n      \"size\": 24\n    },\n    \"kicker\": {\n      \"x\": 32,\n      \"y\": 28,\n      \"w\": 24,\n      \"h\": 4\n    },\n    \"eyebrow\": {\n      \"x\": 32,\n      \"y\": 52,\n      \"size\": 11,\n      \"letter_spacing\": 2\n    },\n    \"source\": {\n      \"x\": 32,\n      \"y\": 516,\n      \"size\": 11\n    },\n    \"plot\": {\n      \"left\": 120,\n      \"right\": 840,\n      \"top\": 170\n    },\n    \"row_height\": 22,\n    \"row_gap\": 8,\n    \"gutter\": 80,\n    \"series_label\": {\n      \"size\": 11,\n      \"gap\": 12\n    },\n    \"band_label\": {\n      \"size\": 11\n    },\n    \"value_label\": {\n      \"size\": 10,\n      \"offset\": 6\n    }\n  }\n}\n```\n\n### Rules\n- both sides share one zero-based scale, mirrored\n- band labels live in the center gutter\n- sides named above the first row, never a legend\n\n### Never do this\n- different scales per side (the classic pyramid lie)\n- unordered bands\n- more than two sides\n\n### QA before delivering\n- [ ] one shared mirrored scale\n- [ ] bands in order\n- [ ] sides named once\n- [ ] unit once\n- [ ] source present\n\n### Colors (resolved, use these exact values)\n\n| Element | Color |\n|---|---|\n| background | `#FFFFFF` |\n| side_a | `#B5B1AB` |\n| side_b | `#C4001A` |\n| band_label | `#444444` |\n| value_label | `#1A1A1A` |\n| baseline | `#1A1A1A` |\n| title | `#1A1A1A` |\n| source | `#444444` |\n\n### Fonts\n\n- Title font: 'Segoe UI',Arial,sans-serif, weight 700\n- All other text: 'Segoe UI',Arial,sans-serif, weight 400 (600 on highlighted items)\n\n### Language chrome\n\nNo kicker, no eyebrow; title at the default y.\n"};</script>
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

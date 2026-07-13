@@ -1,0 +1,63 @@
+{
+  "code": "DL-03",
+  "name": "LOGOS",
+  "aka": "CHARTBOOK",
+  "ovp_version": "1.0",
+  "status": "adopted",
+  "philosophy": {
+    "civilization": "Ancient Greece",
+    "principle": "Logic and evidence",
+    "motto": "Evidence before opinion.",
+    "laws": [
+      "Every chart proves one claim",
+      "Annotation over legends",
+      "Sources always visible",
+      "Titles make arguments",
+      "Decoration never competes with evidence"
+    ],
+    "related": [
+      "Nyaya",
+      "Burhan"
+    ]
+  },
+  "constitution": {
+    "narrative_style": "evidence-first",
+    "density": "scientific",
+    "annotation_policy": "guided",
+    "legend_policy": "direct-labels-only",
+    "highlight_policy": "single",
+    "decision_style": "evidence-only",
+    "reading_time": "session",
+    "charts_per_page": 3
+  },
+  "occasions": [
+    "deep-dive analysis",
+    "monthly chartbooks",
+    "advisory notes"
+  ],
+  "palette": {
+    "background": "#FDF4EA",
+    "ink": "#262A33",
+    "body": "#4A4E57",
+    "hairline": "#E8E0D4",
+    "gridline": "#E8E0D4",
+    "primary": "#9E2B25",
+    "muted": "#B8B2A7",
+    "positive": "#2E6E4E",
+    "negative": "#9E2B25"
+  },
+  "fonts": {
+    "display": {
+      "family": "'Oswald','Arial Narrow',Arial,sans-serif",
+      "weight": 700
+    },
+    "body": {
+      "family": "'Segoe UI',Arial,sans-serif",
+      "weight": 400
+    }
+  },
+  "chrome": {
+    "kicker": true,
+    "eyebrow": true
+  }
+}

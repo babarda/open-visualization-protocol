@@ -1,0 +1,36 @@
+{
+  "code": "NR-04",
+  "name": "THE EXCEPTION FLASH",
+  "ovp_version": "1.0",
+  "decision_style": "recommendation-with-owner",
+  "sections": [
+    {
+      "role": "claim",
+      "guidance": "The breach, its size, and when it happened; nothing else on the first line."
+    },
+    {
+      "role": "action",
+      "guidance": "What must happen and by which hour; flashes measure response in hours."
+    },
+    {
+      "role": "owner",
+      "guidance": "The one name paged; escalation path if no response."
+    },
+    {
+      "role": "evidence",
+      "guidance": "One chart maximum; the flash links to the full readout, it does not contain it."
+    }
+  ],
+  "example": [
+    "Docs on-time missed target by 14 points this morning",
+    "Recovery response due 12:00",
+    "Owner: document control lead; escalate to PMO at 14:00",
+    "KPI board CH-MAG-04"
+  ],
+  "qa": [
+    "one breach per flash",
+    "response deadline in hours",
+    "single chart maximum",
+    "escalation path named"
+  ]
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OVP . Open Visualization Protocol</title>
+<style>
+:root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
+        --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Segoe UI',system-ui,Arial,sans-serif; color:var(--ink);
+       background:var(--bg); font-size:15px; line-height:1.55; }
+nav { position:sticky; top:0; z-index:10; background:var(--card);
+      border-bottom:1px solid var(--line); padding:0 32px; display:flex;
+      align-items:center; gap:4px; flex-wrap:wrap; }
+nav .brand { font-weight:700; font-size:15px; color:var(--ink);
+             margin-right:16px; padding:14px 0; text-decoration:none; }
+nav .brand span { color:var(--accent); }
+nav a.item { color:var(--body); text-decoration:none; font-size:13px;
+             font-weight:600; padding:14px 10px; border-bottom:2px solid transparent; }
+nav a.item:hover { color:var(--ink); }
+nav a.item.on { color:var(--accent); border-bottom-color:var(--accent); }
+main { max-width:1080px; margin:0 auto; padding:40px 32px 96px; }
+h1 { font-size:28px; line-height:1.25; margin-bottom:8px; }
+h2 { font-size:20px; margin:36px 0 10px; }
+h3 { font-size:16px; margin:24px 0 8px; }
+h4 { font-size:14px; margin:18px 0 6px; }
+p { margin-bottom:12px; color:var(--body); }
+p b, li b { color:var(--ink); }
+.lead { font-size:17px; color:var(--body); max-width:760px; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+ul, ol { margin:0 0 14px 22px; color:var(--body); }
+li { margin-bottom:4px; }
+a { color:var(--accent); }
+code { background:var(--accent-soft); border-radius:3px; padding:1px 5px;
+       font-size:13px; font-family:Consolas,monospace; color:var(--ink); }
+pre { background:#10201E; color:#D9E6E4; border-radius:8px; padding:16px;
+      font-size:13px; overflow-x:auto; margin:0 0 16px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:0 0 18px; font-size:13.5px; }
+th { text-align:left; font-size:11px; letter-spacing:1px; text-transform:uppercase;
+     color:var(--body); border-bottom:2px solid var(--line); padding:8px 10px; }
+td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;
+     color:var(--body); }
+td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+.grid { display:grid; gap:16px; }
+.g2 { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px;
+        padding:20px; }
+.card h3 { margin:0 0 6px; font-size:15px; }
+.card p { font-size:13.5px; margin-bottom:0; }
+a.card { text-decoration:none; display:block; transition:border-color .15s; }
+a.card:hover { border-color:var(--accent); }
+.tag { display:inline-block; background:var(--accent-soft); color:var(--accent);
+       font-size:11px; font-weight:700; border-radius:20px; padding:2px 10px;
+       margin:0 4px 4px 0; letter-spacing:.4px; }
+.tag.warn { background:#FBEAEA; color:#A33; }
+.kicker { font-size:11px; font-weight:700; letter-spacing:2px; color:var(--accent);
+          text-transform:uppercase; margin-bottom:6px; }
+.hero { padding:24px 0 8px; }
+.stats { display:flex; gap:28px; flex-wrap:wrap; margin:24px 0 8px; }
+.stat b { display:block; font-size:26px; color:var(--ink); }
+.stat span { font-size:12px; color:var(--body); letter-spacing:.5px; }
+.swatches { display:flex; height:14px; border-radius:7px; overflow:hidden;
+            margin:10px 0 4px; border:1px solid var(--line); }
+.swatches i { flex:1; }
+.palette td i { display:inline-block; width:14px; height:14px; border-radius:3px;
+                border:1px solid var(--line); vertical-align:-2px; margin-right:8px; }
+.motto { font-size:17px; font-style:italic; color:var(--ink); margin-bottom:4px; }
+figure { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px; margin-bottom:16px; }
+figure svg { width:100%; height:auto; display:block; }
+.thumb { border:1px solid var(--line); border-radius:8px; overflow:hidden;
+         margin:0 0 12px; line-height:0; }
+.thumb svg { width:100%; height:auto; display:block; }
+figcaption { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--body);
+             margin-bottom:8px; }
+.copybar { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 22px; }
+button.copy { font:600 12.5px 'Segoe UI',system-ui,sans-serif; color:#fff;
+              background:var(--accent); border:none; border-radius:6px;
+              padding:9px 16px; cursor:pointer; }
+button.copy.alt { background:var(--card); color:var(--accent);
+                  border:1px solid var(--accent); }
+button.copy.copied { background:#2E8B57; border-color:#2E8B57; color:#fff; }
+.dlbar { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+.dlbtn { font:600 11.5px 'Segoe UI',system-ui,sans-serif; color:var(--body);
+         background:var(--card); border:1px solid var(--line); border-radius:20px;
+         padding:5px 12px; cursor:pointer; }
+.dlbtn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+.two { display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+@media (max-width:860px) { .two { grid-template-columns:1fr; } }
+details { margin:0 0 14px; }
+summary { cursor:pointer; font-weight:600; font-size:14px; }
+details > *:not(summary) { margin-top:10px; }
+input.search { width:100%; max-width:420px; font-size:14px; padding:10px 14px;
+               border:1px solid var(--line); border-radius:8px; margin:8px 0 20px;
+               background:var(--card); color:var(--ink); }
+footer { border-top:1px solid var(--line); color:var(--body); font-size:12px;
+         padding:20px 32px; text-align:center; }
+.crumb { font-size:12.5px; margin-bottom:14px; }
+.crumb a { text-decoration:none; }
+.tocbox { background:var(--card); border:1px solid var(--line); border-radius:10px;
+          padding:14px 18px; font-size:13.5px; margin-bottom:24px; }
+</style><script>
+function copyPayload(btn, key) {
+  var t = PAYLOADS[key];
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.textContent;
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.textContent = old; }, 1500);
+  }, function() { alert('Clipboard blocked by the browser.'); });
+}
+function showDL(code) {
+  document.querySelectorAll('.dlview').forEach(function(e){ e.style.display = 'none'; });
+  var v = document.getElementById('v-' + code);
+  if (v) v.style.display = 'block';
+  document.querySelectorAll('.dlbtn').forEach(function(b){
+    b.classList.toggle('on', b.dataset.dl === code); });
+  window.CURRENT_DL = code;
+}
+function copyDS(btn) { copyPayload(btn, 'ds-' + (window.CURRENT_DL || 'DL-02')); }
+function filterCards(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.findable').forEach(function(c) {
+    c.style.display = c.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+}
+</script></head><body>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item on" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a></nav>
+<main>
+
+<div class="hero">
+<div class="kicker">Open Visualization Protocol</div>
+<h1>Describe the chart once.<br>Every renderer draws the same pixels.</h1>
+<p class="lead">OVP is an open, deterministic, AI-native standard for
+information design. A visualization is an instruction, not an artwork:
+<code>Render CH-TIM-02 in DL-03 with data.json</code>. Any agent, human,
+or renderer that speaks the protocol produces the same visual result
+from the same instruction.</p>
+<div class="stats">
+<div class="stat"><b>16</b><span>DESIGN LANGUAGES</span></div>
+<div class="stat"><b>74</b><span>CHART OBJECTS BUILT</span></div>
+<div class="stat"><b>8</b><span>ANALYTICAL PATTERNS</span></div>
+<div class="stat"><b>11</b><span>COMPONENTS</span></div>
+<div class="stat"><b>6</b><span>RECIPES</span></div>
+<div class="stat"><b>1184</b><span>GOLDEN RENDERS</span></div>
+</div>
+</div>
+
+<h2>The principles</h2>
+<div class="grid g3">
+<div class="card"><h3>Deterministic by contract</h3><p>Same spec, same
+tokens, same data: byte-identical output, every run, every machine. No
+randomness, no timestamps, no jitter. A QA gate re-renders every golden
+and blocks the repo on a single byte of drift.</p></div>
+<div class="card"><h3>Roles, never hex</h3><p>Chart specs name color
+roles (primary, muted, negative). Design languages bind roles to hex.
+Rebranding a whole deliverable is swapping one token file; no spec
+changes, no re-authoring.</p></div>
+<div class="card"><h3>Honest by rule</h3><p>Zero baselines. Direct labels
+instead of legends. Declared inputs only: no silent KDE, no silent trend
+lines, no unstated normalization. Every chart ships with anti-patterns
+and a QA checklist.</p></div>
+<div class="card"><h3>Message first</h3><p>Charts are coded by what the
+message is (ranking, deviation, distribution), not by shape. The first
+question an agent answers is "what is the message"; the shape is
+metadata.</p></div>
+<div class="card"><h3>AI-native</h3><p>A controlled intent vocabulary,
+machine metadata on every object, a decision engine for language choice,
+and copy-paste blocks in two flavors: hex-resolved for design systems,
+role-based for themeable skills.</p></div>
+<div class="card"><h3>Canonical JSON, generated everything else</h3>
+<p>Specs and tokens are the source of truth. Blocks, chooser, decider,
+pattern docs, previews, and this entire site are generated from them and
+drift-gated where it matters.</p></div>
+</div>
+
+<h2>How an agent resolves a request</h2>
+<div class="tocbox">
+<b>1. Decider</b> picks the design language from audience, purpose, and
+medium. &nbsp;<b>2. Patterns</b> map what was found in the data to chart
+codes. &nbsp;<b>3. Charts</b> disambiguate by message intent, with
+"see instead" exits. &nbsp;<b>4. Render</b> the code in the language:
+exact px, exact hex, no adjectives.</div>
+
+<h2>Learn</h2>
+<div class="grid g2">
+<a class="card" href="manifesto.html"><h3>Manifesto</h3>
+<p>Why OVP exists and the seven laws that never break: determinism,
+roles never hex, honesty by construction, message first.</p></a>
+<a class="card" href="foundations.html"><h3>Foundations</h3>
+<p>The rule sets everything builds on: token contract, canvas and grid,
+type scale, contrast, numbers and scales, perceptual research.</p></a>
+</div>
+<h2>Reference</h2>
+<div class="grid g2">
+<a class="card" href="protocol.html"><h3>The protocol</h3>
+<p>The normative reference: object grammar, layer model, determinism
+contract, conformance levels, lifecycle and stability policy.</p></a>
+<a class="card" href="taxonomy.html"><h3>Taxonomy</h3>
+<p>The full object map: every family, every entry, statuses, and the
+exclusions with their reasons.</p></a>
+</div>
+<h2>Explore</h2>
+<div class="grid g2">
+<a class="card" href="languages/index.html"><h3>Design languages</h3>
+<p>16 complete visual identities, each built on a philosophy:
+a civilization, a principle, a motto, and design laws that explain why
+the rules exist.</p></a>
+<a class="card" href="charts/index.html"><h3>Chart objects</h3>
+<p>74 built entries coded by message family, each with exact
+geometry, honesty rules, QA checklist, golden renders in all
+16 languages, and one-click copy blocks.</p></a>
+</div>
+<h2>Build</h2>
+<div class="grid g2">
+<a class="card" href="questions.html"><h3>Business questions</h3>
+<p>Start from what is being asked: each question names its observations,
+patterns, charts, and the narrative skeleton that tells the finding.</p></a>
+<a class="card" href="patterns.html"><h3>Analytical patterns</h3>
+<p>The layer above charts: recognize what the data shows, read its
+meaning, take the recommended chart codes.</p></a>
+<a class="card" href="decider.html"><h3>Language decider</h3>
+<p>Audience, purpose, medium in; design language out. Ordered rules over
+a controlled vocabulary, validator-enforced.</p></a>
+<a class="card" href="components.html"><h3>Components</h3>
+<p>Titles, sources, KPI cards, chips, callouts: the furniture around
+charts, same role contract, composable into recipes.</p></a>
+<a class="card" href="recipes.html"><h3>Recipes</h3>
+<p>Fully determined pages: language, charts, components, exact
+positions. A recurring deliverable renders identically forever.</p></a>
+</div>
+<h2>Implement and automate</h2>
+<div class="grid g2">
+<a class="card" href="implement.html"><h3>Implement</h3>
+<p>Build an OVP-conformant renderer or validator from the published
+schemas, the determinism contract, and the conformance levels. No
+questions to the authors required.</p></a>
+<a class="card" href="ai.html"><h3>AI</h3>
+<p>How agents speak OVP: the resolution order, the machine registry,
+the controlled vocabularies, and the copy-paste blocks.</p></a>
+</div>
+
+<h2>Get the code</h2>
+<p>Every chart page carries copy buttons for two block flavors.
+<b>Design-system blocks</b> resolve colors to hex for one language:
+paste into any CLAUDE.md or design-system doc, zero dependencies.
+<b>Skill blocks</b> stay role-based: paste next to a language token
+block and re-theme by swapping that one block.</p>
+
+</main>
+<footer>Open Visualization Protocol, v0.1-draft. This site is generated by
+tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
+</body></html>

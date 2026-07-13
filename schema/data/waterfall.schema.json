@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vizcatalogue.dev/schema/data/waterfall.schema.json",
+  "title": "Input data for chart_type waterfall",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "unit",
+    "start",
+    "steps",
+    "end_label"
+  ]
+}

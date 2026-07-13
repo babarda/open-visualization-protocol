@@ -1,0 +1,37 @@
+{
+  "title": "Staffing thins sharply above 50",
+  "eyebrow": "WORKFORCE BY AGE",
+  "source": "Source: HR register, June",
+  "unit": "staff",
+  "series_labels": [
+    "Women",
+    "Men"
+  ],
+  "bands": [
+    {
+      "label": "60+",
+      "a": 34,
+      "b": 52
+    },
+    {
+      "label": "50-59",
+      "a": 86,
+      "b": 140
+    },
+    {
+      "label": "40-49",
+      "a": 190,
+      "b": 300
+    },
+    {
+      "label": "30-39",
+      "a": 270,
+      "b": 410
+    },
+    {
+      "label": "20-29",
+      "a": 160,
+      "b": 220
+    }
+  ]
+}

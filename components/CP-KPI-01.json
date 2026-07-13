@@ -1,0 +1,64 @@
+{
+  "code": "CP-KPI-01",
+  "name": "KPI CARD",
+  "ovp_version": "1.0",
+  "purpose": "One number that matters, with its label and week-over-week delta. Used in strips of 5 maximum.",
+  "params": {
+    "w": 200,
+    "h": 92,
+    "pad": 14,
+    "label_size": 10,
+    "label_dy": 24,
+    "value_size": 32,
+    "value_dy": 58,
+    "delta_size": 11,
+    "delta_dy": 78
+  },
+  "roles": {
+    "card_bg": [
+      "panel",
+      "background"
+    ],
+    "border": [
+      "hairline"
+    ],
+    "label": [
+      "body"
+    ],
+    "value": [
+      "primary"
+    ],
+    "delta_positive": [
+      "positive"
+    ],
+    "delta_negative": [
+      "negative"
+    ],
+    "delta_neutral": [
+      "body"
+    ]
+  },
+  "sample": {
+    "label": "DELIVERED",
+    "value": "1,284",
+    "delta": "+179 vs W27",
+    "tone": "positive"
+  },
+  "golden_canvas": {
+    "w": 248,
+    "h": 140
+  },
+  "golden_origin": {
+    "x": 24,
+    "y": 24
+  },
+  "rules": [
+    "value in tabular figures; delta always signed and always named against its reference",
+    "tone (positive/negative/neutral) is semantic, set by the data, not by the sign",
+    "maximum 5 cards per strip; more means the page has no message"
+  ],
+  "qa": [
+    "delta signed and referenced",
+    "strip count <= 5 wherever used"
+  ]
+}

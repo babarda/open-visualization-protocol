@@ -1,0 +1,25 @@
+{
+  "title": "Line 3 produced 412 units in June, 38% of plant output",
+  "eyebrow": "OUTPUT BY LINE . JUNE",
+  "source": "Source: sample dataset v1, 2026-07-12",
+  "unit": "units",
+  "categories": [
+    {
+      "label": "Line 3",
+      "value": 412,
+      "highlight": true
+    },
+    {
+      "label": "Line 1",
+      "value": 298
+    },
+    {
+      "label": "Line 4",
+      "value": 214
+    },
+    {
+      "label": "Line 2",
+      "value": 166
+    }
+  ]
+}

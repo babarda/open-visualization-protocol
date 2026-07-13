@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>OVP design languages . hero review</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#F2F4F4; color:#222;
+         padding:40px 48px 80px; }
+  h1 { font-size:22px; margin-bottom:4px; }
+  .sub { color:#555; font-size:13px; margin-bottom:8px; }
+  .howto { background:#fff; border:1px solid #E2E8E8; border-left:3px solid #008080;
+           border-radius:6px; padding:14px 18px; margin:20px 0 32px; font-size:13px; color:#555; }
+  h2.group { font-size:15px; margin:36px 0 16px; color:#222; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(470px,1fr)); gap:24px; }
+  .card { background:#fff; border:1px solid #E2E8E8; border-radius:6px; overflow:hidden; }
+  .hero { aspect-ratio:16/9; position:relative; overflow:hidden; padding:20px 24px;
+          border-bottom:1px solid #E2E8E8; }
+  .cap { padding:12px 16px 14px; }
+  .cap b { font-size:13px; }
+  .cap p { font-size:12px; color:#555; margin-top:4px; line-height:1.45; }
+  .st { float:right; font-size:10px; font-weight:600; letter-spacing:1px; padding:3px 8px;
+        border-radius:3px; }
+  .st.adopted { background:#008080; color:#fff; }
+  .st.candidate { background:#fff; color:#008080; border:1px solid #008080; }
+  .st.proposal { background:#B45309; color:#fff; }
+  .sw { display:flex; gap:4px; margin-top:8px; }
+  .sw i { width:22px; height:10px; border-radius:2px; border:1px solid rgba(0,0,0,.08); }
+  .num { font-variant-numeric:tabular-nums; }
+
+  /* DL-01 BOARDROOM */
+  .dl01 { background:#FFFFFF; }
+  .dl01 .t { font-family:Georgia,serif; font-size:15px; color:#1A1A1A; font-weight:600;
+             padding-bottom:9px; border-bottom:1px solid #D8D5CE; }
+  .dl01 .row { display:flex; gap:24px; margin-top:16px; align-items:flex-start; }
+  .dl01 .big { font-family:Georgia,serif; font-size:58px; color:#1A1A1A; line-height:1; }
+  .dl01 .big span { color:#008080; }
+  .dl01 .note { font-size:10px; color:#3D3D3D; margin-top:8px; }
+  .dl01 .pg { position:absolute; bottom:12px; right:22px; font-size:9px; color:#3D3D3D; }
+
+  /* DL-02 OPS ROOM */
+  .dl02 { background:#FFFFFF; padding:0; }
+  .dl02 .band { background:#008080; color:#fff; padding:10px 20px; font-weight:600;
+                font-size:12.5px; display:flex; justify-content:space-between; }
+  .dl02 .band span { font-weight:400; font-size:10.5px; opacity:.85; }
+  .dl02 .kpis { display:flex; gap:10px; padding:12px 20px 0; }
+  .dl02 .kpi { flex:1; background:#F7FAFA; border:1px solid #E2E8E8; padding:7px 10px; }
+  .dl02 .kpi b { font-size:19px; color:#008080; display:block; }
+  .dl02 .kpi s { text-decoration:none; font-size:8.5px; letter-spacing:1px; color:#555; }
+  .dl02 .body2 { display:flex; gap:16px; padding:12px 20px 0; align-items:flex-start; }
+  .dl02 table { border-collapse:collapse; font-size:10px; flex:1; }
+  .dl02 th { text-align:left; color:#555; font-size:8.5px; letter-spacing:1px;
+             border-bottom:1px solid #E2E8E8; padding:3px 6px; }
+  .dl02 td { padding:3.5px 6px; border-bottom:1px solid #E2E8E8; color:#222; }
+  .dl02 td.n, .dl02 th.n { text-align:right; }
+  .dl02 .chip { display:inline-block; background:#E08A00; color:#fff; font-size:9px;
+                font-weight:600; padding:3px 8px; border-radius:4px; }
+
+  /* DL-03 CHARTBOOK */
+  .dl03 { background:#FDF4EA; }
+  .dl03 .kick { width:24px; height:4px; background:#9E2B25; margin-bottom:5px; }
+  .dl03 .eye { font-size:9px; letter-spacing:2px; color:#4A4E57; font-weight:600; }
+  .dl03 .t { font-family:'Arial Narrow',Arial,sans-serif; font-weight:700; font-size:18px;
+             color:#262A33; margin:5px 0 8px; }
+  .dl03 .src { position:absolute; bottom:11px; left:24px; font-size:9px; color:#4A4E57; }
+
+  /* DL-04 BLUEPRINT */
+  .dl04 { background:#FBFDFF;
+          background-image:repeating-linear-gradient(0deg,#E7EEF4 0 1px,transparent 1px 24px),
+                           repeating-linear-gradient(90deg,#E7EEF4 0 1px,transparent 1px 24px); }
+  .dl04 .t { color:#143D59; font-weight:600; font-size:14.5px; }
+  .dl04 .stamp { position:absolute; top:20px; right:24px; border:2px solid #2E6E4E;
+                 color:#2E6E4E; font-weight:700; font-size:10px; letter-spacing:2px;
+                 padding:3px 9px; transform:rotate(-4deg); background:#FBFDFF; }
+  .dl04 .tb { position:absolute; bottom:12px; right:14px; border:1px solid #143D59;
+              box-shadow:0 0 0 2px #FBFDFF,0 0 0 3px #143D59; font-family:Consolas,monospace;
+              font-size:8px; color:#33424E; background:#fff; }
+  .dl04 .tb div { padding:2.5px 8px; border-bottom:1px solid #C6D5E0; }
+  .dl04 .tb div:last-child { border-bottom:none; }
+
+  /* DL-05 FIELD */
+  .dl05 { background:#FFFFFF; display:flex; gap:18px; }
+  .dl05 .col { flex:1; }
+  .dl05 .h { font-size:14px; font-weight:700; color:#334155; letter-spacing:1px; margin-bottom:8px; }
+  .dl05 .cardf { border:2px solid #64748B; padding:6px 9px; margin-bottom:7px; font-size:11px;
+                 font-weight:600; color:#0F172A; display:flex; justify-content:space-between; align-items:center; }
+  .dl05 .own { width:20px; height:20px; border:2px solid #334155; font-size:9px; font-weight:700;
+               display:flex; align-items:center; justify-content:center; color:#334155; flex:none; }
+  .dl05 .hot { border-color:#C2410C; color:#C2410C; }
+  .dl05 .barrow { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+  .dl05 .barrow s { text-decoration:none; width:52px; font-size:10px; font-weight:700; color:#334155; }
+  .dl05 .barrow i { height:18px; background:#334155; }
+  .dl05 .barrow b { font-size:12px; color:#0F172A; }
+
+  /* DL-06 TRIBUNAL */
+  .dl06 { background:#FFFFFF; font-family:Georgia,serif; }
+  .dl06 .ex { display:inline-block; background:#1A1A1A; color:#fff; font-size:8.5px;
+              letter-spacing:1px; padding:3px 8px; font-family:'Segoe UI',sans-serif; }
+  .dl06 .t { font-weight:700; font-size:14px; color:#1A1A1A; margin:8px 0 7px; }
+  .dl06 table { border-collapse:collapse; width:100%; font-size:9.5px; }
+  .dl06 th, .dl06 td { border:1px solid #B9B9B9; padding:3.5px 7px; text-align:left; color:#333; }
+  .dl06 th { font-size:8px; letter-spacing:1px; font-family:'Segoe UI',sans-serif; }
+  .dl06 td.ref { font-family:Consolas,monospace; font-size:8.5px; }
+  .dl06 .disp { color:#7A1F1F; font-weight:700; }
+  .dl06 .foot { position:absolute; bottom:10px; left:24px; right:24px; border-top:1px solid #B9B9B9;
+                padding-top:4px; font-size:8px; color:#333; font-family:Consolas,monospace; }
+
+  /* DL-07 GAZETTE */
+  .dl07 { background:#FFFFFF; }
+  .dl07 .mast { font-family:Georgia,serif; font-weight:700; font-size:19px; color:#111;
+                border-bottom:3px solid #111; padding-bottom:5px; }
+  .dl07 .cols { display:flex; gap:14px; margin-top:10px; }
+  .dl07 .c { flex:1.4; border-left:1px solid #ddd; padding-left:12px; }
+  .dl07 .c:first-child { border-left:none; padding-left:0; }
+  .dl07 .c2 { flex:1; border-left:1px solid #ddd; padding-left:12px; }
+  .dl07 .hl { font-family:Georgia,serif; font-weight:700; font-size:11.5px; margin-bottom:5px; }
+  .dl07 .hl i { display:inline-block; width:8px; height:8px; background:#C0182B; margin-right:5px; }
+  .dl07 .ln { height:4px; background:#E4E4E4; margin:4px 0; }
+  .dl07 .ln.s { width:70%; }
+  .dl07 .inh { font-size:8px; letter-spacing:1.5px; color:#6B6B6B; font-weight:600;
+               border-bottom:1px solid #111; padding-bottom:3px; margin-bottom:5px; }
+  .dl07 .inr { display:flex; justify-content:space-between; font-size:10px; color:#2E2E2E;
+               padding:2.5px 0; }
+  .dl07 .inr b.red { color:#C0182B; }
+
+  /* DL-08 TERMINAL */
+  .dl08 { background:#101418; padding:14px 16px; display:flex; flex-direction:column; gap:10px; }
+  .dl08 .toprow { display:flex; gap:10px; }
+  .dl08 .pan { flex:1; background:#1A2026; border:1px solid #2A323A; padding:8px 11px; }
+  .dl08 .lab { font-size:7.5px; letter-spacing:1.5px; color:#9FB0BE; }
+  .dl08 .v { font-family:Consolas,monospace; font-size:20px; margin-top:3px; color:#E6EDF3; }
+  .dl08 .v.amber { color:#F0B429; }
+  .dl08 .d { font-family:Consolas,monospace; font-size:9px; margin-top:2px; }
+  .dl08 .up { color:#3FB68B; } .dl08 .dn { color:#E5534B; } .dl08 .in { color:#58A6FF; }
+  .dl08 .chartpan { background:#1A2026; border:1px solid #2A323A; padding:8px 11px; flex:1; }
+
+  /* DL-09 ATLAS */
+  .dl09 { background:#F4EFE6; padding:0; }
+  .dl09 .lbl { position:absolute; top:16px; left:22px; font-size:10px; letter-spacing:2px;
+               color:#2B3A42; font-weight:600; }
+  .dl09 .callout { position:absolute; top:36px; right:26px; width:132px; background:#FBF8F2;
+                   border:1px solid #2B3A42; padding:7px 9px; font-size:9px; color:#2B3A42; }
+  .dl09 .callout b { display:block; font-size:10px; }
+  .dl09 .track { height:7px; background:#E3DCCB; margin-top:5px; }
+  .dl09 .track i { display:block; height:7px; width:84%; background:#0F766E; }
+  .dl09 .leg { position:absolute; bottom:11px; left:22px; font-size:9px; color:#4A5860; }
+  .dl09 .leg i { display:inline-block; width:14px; height:3px; vertical-align:middle; margin:0 4px 0 10px; }
+
+  /* DL-10 GALLERY */
+  .dl10 { background:#0B0B0B; padding:0; display:flex; gap:4px; }
+  .dl10 .ph { flex:1; position:relative; }
+  .dl10 .ph.a { background:#4A5158; }
+  .dl10 .ph.b { background:#353B41; }
+  .dl10 .ph .tagm { position:absolute; top:10px; left:12px; font-size:9px; letter-spacing:2px;
+                    color:#fff; opacity:.85; }
+  .dl10 .ridge { position:absolute; left:0; right:0; bottom:34px; height:52px; background:rgba(255,255,255,.06); }
+  .dl10 .annot { position:absolute; top:44px; right:22px; width:76px; height:46px;
+                 border:2px solid #F0B429; }
+  .dl10 .annot span { position:absolute; top:-15px; right:0; font-size:8.5px; color:#F0B429; white-space:nowrap; }
+  .dl10 .capbar { position:absolute; left:0; right:0; bottom:0; background:rgba(11,11,11,.85);
+                  color:#fff; font-size:10px; padding:8px 16px; }
+
+  /* DL-11 MEMO */
+  .dl11 { background:#FFFFFF; font-family:Cambria,Georgia,serif; }
+  .dl11 .hdr { border-bottom:1px solid #8EAADB; padding-bottom:6px; font-size:10px;
+               color:#262626; line-height:1.55; }
+  .dl11 .hdr b { color:#1F3864; display:inline-block; width:42px; }
+  .dl11 .cols { display:flex; gap:16px; margin-top:8px; }
+  .dl11 h4 { font-size:11.5px; color:#1F3864; margin-bottom:3px; }
+  .dl11 p { font-size:9.5px; color:#262626; line-height:1.5; }
+  .dl11 .rec { font-weight:700; margin-top:7px; }
+  .dl11 .exh { border:1px solid #8EAADB; padding:6px 8px; flex:none; width:170px; }
+  .dl11 .exh caption, .dl11 .exhcap { font-size:8px; color:#1F3864; font-style:italic; margin-bottom:4px; display:block; }
+  .dl11 table { border-collapse:collapse; width:100%; font-size:9px; }
+  .dl11 td, .dl11 th { border-bottom:0.5px solid #C9D6EE; padding:2.5px 4px; text-align:left; color:#262626; }
+  .dl11 td.n { text-align:right; }
+
+  /* DL-12 SIGNAL */
+  .dl12 { background:#FFFFFF; }
+  .dl12 .verdict { font-size:18px; font-weight:700; letter-spacing:2px; color:#B45309;
+                   border-bottom:1px solid #E2E8F0; padding-bottom:7px; }
+  .dl12 table { border-collapse:collapse; width:100%; margin-top:8px; font-size:10px; }
+  .dl12 th { text-align:left; font-size:7.5px; letter-spacing:1px; color:#475569; padding:3px 6px; }
+  .dl12 td { padding:5px 6px; color:#0F172A; border-top:1px solid #E2E8F0; }
+  .dl12 td.n, .dl12 th.n { text-align:right; }
+  .dl12 .sev { width:4px; padding:0; }
+  .dl12 .sev i { display:block; width:4px; height:22px; }
+  .dl12 .own { color:#475569; font-size:9px; }
+
+  /* DL-13 MEDINA */
+  .dl13 { background:#F7EFE3; }
+  .dl13 .t { font-family:Georgia,serif; font-size:17px; color:#31261D; }
+  .dl13 .s { font-size:10px; color:#4E4237; margin-top:4px; }
+  .dl13 svg.motif { position:absolute; top:14px; right:14px; }
+  .dl13 .capn { font-size:9px; color:#4E4237; margin-top:6px; }
+
+  /* DL-14 EXHIBIT */
+  .dl14 { background:#FFFFFF; }
+  .dl14 .ex { font-size:9px; letter-spacing:2px; color:#0B1F35; font-weight:600; }
+  .dl14 .t { font-family:Georgia,serif; font-size:14.5px; color:#0B1F35; margin:5px 0 10px; }
+  .dl14 .fn { position:absolute; bottom:10px; left:24px; font-size:8px; color:#3C4A5A;
+              border-top:1px solid #E3E8ED; padding-top:4px; right:24px; }
+
+  /* DL-15 MATRIX */
+  .dl15 { background:#FFFFFF; }
+  .dl15 .t { font-size:14.5px; font-weight:700; color:#0E3A2C; margin-bottom:10px; }
+  .dl15 .wrap { display:flex; gap:18px; align-items:flex-start; }
+  .dl15 .mxbox { position:relative; }
+  .dl15 .mx { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
+              width:210px; height:118px; border-left:2px solid #0E3A2C; border-bottom:2px solid #0E3A2C; }
+  .dl15 .q { border:1px solid #E5E7E2; position:relative; font-size:8px; font-weight:700;
+             color:#3E4C46; letter-spacing:1px; padding:3px 5px; }
+  .dl15 .q.win { background:#EAF4EF; }
+  .dl15 .bub { position:absolute; border-radius:50%; display:flex; align-items:center;
+               justify-content:center; font-size:8px; font-weight:700; }
+  .dl15 .ax { font-size:8px; letter-spacing:1.5px; color:#3E4C46; margin-top:4px; }
+  .dl15 .note15 { font-size:9.5px; color:#3E4C46; line-height:1.5; max-width:150px; padding-top:4px; }
+
+  /* DL-16 ANSWER */
+  .dl16 { background:#FFFFFF; }
+  .dl16 .t { font-size:13.5px; font-weight:700; color:#1A1A1A; margin-bottom:9px; }
+  .dl16 table { border-collapse:collapse; width:100%; font-size:10px; }
+  .dl16 th { text-align:left; font-size:8px; letter-spacing:1px; color:#444;
+             border-bottom:2px solid #1A1A1A; padding:3.5px 6px; }
+  .dl16 th.n, .dl16 td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .dl16 td { border-bottom:1px solid #E8E6E2; padding:4.5px 6px; color:#1A1A1A; }
+  .dl16 .red { color:#C4001A; font-weight:700; }
+  .dl16 .trk { width:90px; }
+  .dl16 .trk i { display:block; height:9px; background:#B5B1AB; }
+  .dl16 .trk i.neg { background:#C4001A; }
+</style>
+</head>
+<body>
+<h1>OVP design languages . hero review</h1>
+<p class="sub">One mini-slide per language with its native visual: chart, table, schematic, map, matrix, or scoreboard. 13 from the seed catalogue + 3 new consulting-idiom proposals.</p>
+<div class="howto"><b>Give your go or corrections per code</b>, e.g. "DL-15: green too dark", "DL-14 approved", "drop DL-16", or "go all 16". On go, wave 1 builds every approved language as a validated token file and renders every built chart in each.</div>
+
+<h2 class="group">Adopted (from your design system Part B)</h2>
+<div class="grid">
+
+<div class="card"><div class="hero dl01">
+  <div class="t">Pole erection recovered to 84%, six days behind forecast</div>
+  <div class="row">
+    <div><div class="big">84<span>%</span></div><div class="note">Lot 2 cumulative erection, week 28</div></div>
+    <svg width="210" height="112" viewBox="0 0 210 112">
+      <line x1="0" y1="104" x2="200" y2="104" stroke="#D8D5CE"/>
+      <polyline points="0,96 40,88 80,76 120,62 160,46 200,30" fill="none" stroke="#C9C6BF" stroke-width="2"/>
+      <polyline points="0,98 40,92 80,84 120,74 160,56 200,38" fill="none" stroke="#1A1A1A" stroke-width="2.5"/>
+      <circle cx="200" cy="38" r="4" fill="#008080"/>
+      <text x="164" y="24" font-size="9" fill="#3D3D3D" font-family="Segoe UI">forecast</text>
+      <text x="150" y="70" font-size="9" fill="#1A1A1A" font-weight="600" font-family="Segoe UI">erected</text>
+    </svg>
+  </div>
+  <div class="pg">14 . 2026-07-12</div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-01 BOARDROOM</b>
+  <p>Board packs, steering, exec monthlies. Ink and paper, serif authority, one message, one accent use. Key series in ink, context recedes, no gridlines.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#3D3D3D"></i><i style="background:#008080"></i><i style="background:#C9C6BF"></i><i style="background:#8B1E1E"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl02">
+  <div class="band">Weekly logistics status <span>WEEK 28 . 2026-07-12</span></div>
+  <div class="kpis">
+    <div class="kpi"><s>DELIVERED</s><b class="num">1,284</b></div>
+    <div class="kpi"><s>IN TRANSIT</s><b class="num">96</b></div>
+    <div class="kpi"><s>PENDING</s><b class="num">41</b></div>
+  </div>
+  <div class="body2">
+    <svg width="180" height="92" viewBox="0 0 180 92">
+      <line x1="0" y1="20" x2="180" y2="20" stroke="#EAEAEA"/>
+      <line x1="0" y1="50" x2="180" y2="50" stroke="#EAEAEA"/>
+      <line x1="0" y1="80" x2="180" y2="80" stroke="#EAEAEA"/>
+      <rect x="10" y="44" width="26" height="36" fill="#008080"/><rect x="10" y="30" width="26" height="14" fill="#B7DCDC"/>
+      <rect x="55" y="38" width="26" height="42" fill="#008080"/><rect x="55" y="26" width="26" height="12" fill="#B7DCDC"/>
+      <rect x="100" y="32" width="26" height="48" fill="#008080"/><rect x="100" y="24" width="26" height="8" fill="#B7DCDC"/>
+      <rect x="145" y="26" width="26" height="54" fill="#008080"/><rect x="145" y="21" width="26" height="5" fill="#B7DCDC"/>
+      <text x="10" y="91" font-size="8" fill="#555" font-family="Segoe UI">W25</text>
+      <text x="55" y="91" font-size="8" fill="#555" font-family="Segoe UI">W26</text>
+      <text x="100" y="91" font-size="8" fill="#555" font-family="Segoe UI">W27</text>
+      <text x="145" y="91" font-size="8" fill="#555" font-family="Segoe UI">W28</text>
+    </svg>
+    <table>
+      <tr><th>OWNER</th><th class="n">OPEN</th><th class="n">&#916; WK</th></tr>
+      <tr><td>EPS</td><td class="n num">27</td><td class="n num">-4</td></tr>
+      <tr><td>MLC</td><td class="n num">9</td><td class="n num">+2</td></tr>
+      <tr><td>CPY</td><td class="n num">5</td><td class="n num">0</td></tr>
+    </table>
+    <span class="chip">WATCH . customs</span>
+  </div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-02 OPS ROOM</b>
+  <p>Weekly status decks, PMO, dashboards. Header band + KPI strip + stacked bars for pipelines + gridded tables + chips that always carry the word.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#008080"></i><i style="background:#B7DCDC"></i><i style="background:#339966"></i><i style="background:#E08A00"></i><i style="background:#D63A2F"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl03">
+  <div class="kick"></div>
+  <div class="eye">PROCUREMENT . WEEK 28</div>
+  <div class="t">Customs dwell doubled in June</div>
+  <svg width="400" height="112" viewBox="0 0 400 112">
+    <line x1="0" y1="100" x2="352" y2="100" stroke="#E8E0D4"/>
+    <line x1="0" y1="64" x2="352" y2="64" stroke="#E8E0D4"/>
+    <line x1="0" y1="28" x2="352" y2="28" stroke="#E8E0D4"/>
+    <text x="356" y="31" font-size="8" fill="#4A4E57" font-family="Segoe UI">12d</text>
+    <text x="356" y="103" font-size="8" fill="#4A4E57" font-family="Segoe UI">0</text>
+    <polyline points="0,84 70,80 140,76 210,70 280,66 352,62" fill="none" stroke="#B8B2A7" stroke-width="2"/>
+    <polyline points="0,86 70,82 140,72 210,52 280,34 352,20" fill="none" stroke="#9E2B25" stroke-width="2.5"/>
+    <text x="300" y="14" font-size="9" font-weight="600" fill="#9E2B25" font-family="Segoe UI">2026</text>
+    <text x="316" y="58" font-size="9" fill="#4A4E57" font-family="Segoe UI">2025</text>
+    <line x1="210" y1="52" x2="242" y2="76" stroke="#4A4E57" stroke-width="1"/>
+    <text x="246" y="82" font-size="9.5" font-style="italic" fill="#4A4E57" font-family="Segoe UI">doubles here</text>
+  </svg>
+  <div class="src">Source: clearance log, 2026-07-09</div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-03 CHARTBOOK</b>
+  <p>Deep-dive analysis, chartbooks. Warm paper, claret kicker + eyebrow, chart at 70% of the page, series labeled at line ends, annotation on the data, source always.</p>
+  <div class="sw"><i style="background:#FDF4EA"></i><i style="background:#262A33"></i><i style="background:#9E2B25"></i><i style="background:#B8B2A7"></i><i style="background:#2E6E4E"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl04">
+  <div class="t">3.2.1 &nbsp;Loop check sequence, PS4 compressor train</div>
+  <svg width="380" height="96" viewBox="0 0 380 96" style="margin-top:12px">
+    <rect x="4" y="30" width="92" height="34" fill="#fff" stroke="#143D59" stroke-width="2"/>
+    <text x="50" y="50" font-size="10" fill="#143D59" text-anchor="middle" font-family="Consolas">V-1201</text>
+    <line x1="96" y1="47" x2="146" y2="47" stroke="#143D59" stroke-width="2"/>
+    <rect x="146" y="30" width="92" height="34" fill="#fff" stroke="#143D59" stroke-width="2"/>
+    <text x="192" y="50" font-size="10" fill="#143D59" text-anchor="middle" font-family="Consolas">P-1203A</text>
+    <line x1="238" y1="47" x2="288" y2="47" stroke="#1B6E8F" stroke-width="1"/>
+    <path d="M263,40 L270,47 L263,54 L256,47 Z" fill="#fff" stroke="#B54708" stroke-width="2"/>
+    <text x="263" y="32" font-size="8" fill="#B54708" text-anchor="middle" font-family="Consolas">HP-2</text>
+    <rect x="288" y="30" width="88" height="34" fill="#fff" stroke="#143D59" stroke-width="2"/>
+    <text x="332" y="50" font-size="10" fill="#143D59" text-anchor="middle" font-family="Consolas">E-1204</text>
+    <text x="4" y="86" font-size="9" fill="#33424E" font-family="Consolas">SRN-04-1187 . P&amp;ID-2204-B . line class 2px/1px</text>
+  </svg>
+  <div class="stamp">APPROVED</div>
+  <div class="tb">
+    <div>DOC &nbsp;COM-PS4-PRC-014</div>
+    <div>REV C &nbsp;. &nbsp;2026-07-12 &nbsp;. &nbsp;B.A.</div>
+  </div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-04 BLUEPRINT</b>
+  <p>Technical packs, procedures, job cards. Node-and-connector schematics, hold-point flags, monospace IDs, outlined stamps, drawing title block on every page.</p>
+  <div class="sw"><i style="background:#FBFDFF"></i><i style="background:#143D59"></i><i style="background:#1B6E8F"></i><i style="background:#EDF3F7"></i><i style="background:#B54708"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl05">
+  <div class="col">
+    <div class="h">IN PROGRESS . 6</div>
+    <div class="cardf">Cable tray QC <span class="own">MK</span></div>
+    <div class="cardf hot">Permit blocked <span class="own" style="border-color:#C2410C;color:#C2410C">BA</span></div>
+    <div class="cardf">EHT loop 12 test <span class="own">SO</span></div>
+  </div>
+  <div class="col">
+    <div class="h">BLOCKERS . 3</div>
+    <div class="barrow"><s>AREA 1</s><i style="width:110px"></i><b>7</b></div>
+    <div class="barrow"><s>AREA 2</s><i style="width:64px"></i><b>4</b></div>
+    <div class="barrow"><s>AREA 3</s><i style="width:32px;background:#C2410C"></i><b style="color:#C2410C">2 NEW</b></div>
+  </div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-05 FIELD</b>
+  <p>Stand-up boards, site prints, A3. Thick borders, CAPS headers with counts, fat bars with direct labels, nothing thin, readable from 3 meters in grayscale.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#334155"></i><i style="background:#0F172A"></i><i style="background:#C2410C"></i><i style="background:#1F7A4D"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl06">
+  <span class="ex">EXHIBIT C-12</span>
+  <div class="t">4.2 &nbsp;Chronology of the disputed instruction</div>
+  <table>
+    <tr><th>DATE</th><th>EVENT</th><th>REF</th></tr>
+    <tr><td>14 Mar 2026</td><td>Engineer directs suspension, Section 3</td><td class="ref">LET-0427</td></tr>
+    <tr><td>21 Mar 2026</td><td>Contractor records standing time, <span class="disp">DISPUTED</span></td><td class="ref">COR-030</td></tr>
+    <tr><td>02 Apr 2026</td><td>Notice of claim under Sub-Clause 20.1</td><td class="ref">LET-0453</td></tr>
+  </table>
+  <div class="foot">LET-0427 (2026-03-14) . COR-030 . Sub-Clause 8.9 . page 14 of 62</div>
+</div><div class="cap"><span class="st adopted">ADOPTED</span><b>DL-06 TRIBUNAL</b>
+  <p>Claims, mediation, arbitration. Chronologies as fully boxed ruled tables, exhibit tags, numbered paragraphs, citation footer, one reserved red.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#333333"></i><i style="background:#B9B9B9"></i><i style="background:#7A1F1F"></i></div>
+</div></div>
+
+</div>
+
+<h2 class="group">Candidates (from the seed catalogue)</h2>
+<div class="grid">
+
+<div class="card"><div class="hero dl07">
+  <div class="mast">WEEK 28 BULLETIN</div>
+  <div class="cols">
+    <div class="c">
+      <div class="hl"><i></i>Grid energization slips to August</div>
+      <div class="ln"></div><div class="ln"></div><div class="ln s"></div>
+      <svg width="120" height="18" viewBox="0 0 120 18" style="margin-top:4px">
+        <polyline points="0,14 20,12 40,13 60,9 80,10 100,5 118,3" fill="none" stroke="#111" stroke-width="1.5"/>
+        <circle cx="118" cy="3" r="2.5" fill="#C0182B"/>
+      </svg>
+      <div style="font-size:8px;color:#6B6B6B;margin-top:2px">Dwell time, 7-week trend</div>
+    </div>
+    <div class="c">
+      <div class="hl">Three sections reach mechanical completion</div>
+      <div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln s"></div>
+    </div>
+    <div class="c2">
+      <div class="inh">IN NUMBERS</div>
+      <div class="inr"><span>Poles erected</span><b class="num">1,412</b></div>
+      <div class="inr"><span>Loops tested</span><b class="num">386</b></div>
+      <div class="inr"><span>Days to RFSU</span><b class="red num">141</b></div>
+    </div>
+  </div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-07 GAZETTE</b>
+  <p>Digests, bulletins, newsletters. Masthead, columns, sparkline-scale inline charts in ink, red on the one datum that matters, hierarchy by size only.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#111111"></i><i style="background:#2E2E2E"></i><i style="background:#C0182B"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl08">
+  <div class="toprow">
+    <div class="pan"><div class="lab">PROGRESS</div><div class="v amber">62.4%</div><div class="d up">+1.2 wk</div></div>
+    <div class="pan"><div class="lab">OPEN PUNCH</div><div class="v">418</div><div class="d dn">+37</div></div>
+    <div class="pan"><div class="lab">NEXT MILESTONE</div><div class="v">RFSU</div><div class="d in">141 d</div></div>
+  </div>
+  <div class="chartpan">
+    <div class="lab">LOOP TEST THROUGHPUT / WK</div>
+    <svg width="100%" height="54" viewBox="0 0 400 54" preserveAspectRatio="none">
+      <line x1="0" y1="14" x2="400" y2="14" stroke="#2A323A"/>
+      <line x1="0" y1="32" x2="400" y2="32" stroke="#2A323A"/>
+      <line x1="0" y1="50" x2="400" y2="50" stroke="#2A323A"/>
+      <polyline points="0,44 50,40 100,42 150,36 200,38 250,30 300,33 350,26 400,28" fill="none" stroke="#9FB0BE" stroke-width="1.5"/>
+      <polyline points="0,48 50,45 100,40 150,38 200,32 250,28 300,22 350,18 400,12" fill="none" stroke="#F0B429" stroke-width="2"/>
+      <text x="352" y="10" font-size="8" fill="#F0B429" font-family="Consolas">ACTUAL</text>
+      <text x="352" y="40" font-size="8" fill="#9FB0BE" font-family="Consolas">PLAN</text>
+    </svg>
+  </div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-08 TERMINAL</b>
+  <p>Live dashboards, control rooms. Mono numerals, desaturated series with ONE amber watch-metric, panel grid with 1px separations. Never printed.</p>
+  <div class="sw"><i style="background:#101418"></i><i style="background:#1A2026"></i><i style="background:#F0B429"></i><i style="background:#3FB68B"></i><i style="background:#E5534B"></i><i style="background:#58A6FF"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl09">
+  <svg width="100%" height="100%" viewBox="0 0 470 264" preserveAspectRatio="none" style="position:absolute;inset:0">
+    <rect width="470" height="264" fill="#F4EFE6"/>
+    <path d="M0,66 C130,22 285,99 470,55 L470,264 L0,264 Z" fill="#EAE3D5"/>
+    <path d="M0,220 C155,198 330,242 470,209 L470,264 L0,264 Z" fill="#D7E4E8"/>
+    <polyline points="33,209 132,165 231,143" fill="none" stroke="#0F766E" stroke-width="4"/>
+    <polyline points="231,143 330,121 440,88" fill="none" stroke="#B9AE9C" stroke-width="4" stroke-dasharray="7 6"/>
+    <circle cx="231" cy="143" r="7" fill="#C2410C"/>
+    <line x1="238" y1="136" x2="330" y2="78" stroke="#2B3A42" stroke-width="1"/>
+  </svg>
+  <div class="lbl">SECTION 3 . KM 412</div>
+  <div class="callout"><b>Pump station 4</b>84% erected . 6d behind
+    <div class="track"><i></i></div>
+  </div>
+  <div class="leg">done <i style="background:#0F766E"></i> pending <i style="background:#B9AE9C"></i> exception <i style="background:#C2410C;width:8px;height:8px;border-radius:50%"></i></div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-09 ATLAS</b>
+  <p>Route progress, corridors, site maps. The map IS the chart: done vs pending route, exception markers only, callout boxes with mini-bars anchored by leader lines.</p>
+  <div class="sw"><i style="background:#F4EFE6"></i><i style="background:#EAE3D5"></i><i style="background:#D7E4E8"></i><i style="background:#0F766E"></i><i style="background:#C2410C"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl10">
+  <div class="ph a"><span class="tagm">MARCH</span><div class="ridge"></div></div>
+  <div class="ph b"><span class="tagm">JULY</span><div class="ridge" style="bottom:60px"></div>
+    <div class="annot"><span>tie-in complete</span></div>
+  </div>
+  <div class="capbar">KM 412, Section 3 &nbsp;.&nbsp; 2026-07-12 &nbsp;.&nbsp; Pole erection 84%</div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-10 GALLERY</b>
+  <p>Photo progress, drone updates. Full-bleed photos, 2-up before/after with 4px gutter, aligned captions, amber annotation on the image, location + date always.</p>
+  <div class="sw"><i style="background:#0B0B0B"></i><i style="background:#FFFFFF"></i><i style="background:#F0B429"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl11">
+  <div class="hdr"><b>TO</b> Project Director &nbsp;&nbsp;<b>FROM</b> Planning<br><b>DATE</b> 12 July 2026 &nbsp;&nbsp;<b>RE</b> Grid energization slip</div>
+  <div class="cols">
+    <div>
+      <h4>1. Background</h4>
+      <p>Energization moved from 15 July to 22 August after the utility revised its outage window (Figure 1). The critical path absorbs 24 of the 38 days.</p>
+      <p class="rec">RECOMMENDATION: hold RFSU; resequence loop checks to the temporary supply.</p>
+    </div>
+    <div class="exh">
+      <span class="exhcap">Figure 1. Outage windows (days)</span>
+      <table>
+        <tr><th>Window</th><td class="n num">Old</td><td class="n num">New</td></tr>
+        <tr><th>Start</th><td class="n num">15 Jul</td><td class="n num">22 Aug</td></tr>
+        <tr><th>Float used</th><td class="n num">-</td><td class="n num">24</td></tr>
+      </table>
+    </div>
+  </div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-11 MEMO</b>
+  <p>Briefing notes, position papers. Ruled header block, numbered headings, at most ONE boxed and captioned exhibit, recommendation always last and bolded.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#1F3864"></i><i style="background:#262626"></i><i style="background:#8EAADB"></i><i style="background:#9E2B25"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl12">
+  <div class="verdict">WATCH</div>
+  <table>
+    <tr><th></th><th>EXCEPTION</th><th class="n">LIMIT</th><th class="n">ACTUAL</th><th class="n">&#916;</th><th>OWNER . ASK</th></tr>
+    <tr><td class="sev"><i style="background:#D63A2F"></i></td><td>Customs dwell</td><td class="n num">7d</td><td class="n num">12d</td><td class="n num" style="color:#D63A2F;font-weight:700">+5</td><td class="own">BA . escalate broker</td></tr>
+    <tr><td class="sev"><i style="background:#B45309"></i></td><td>JB deliveries</td><td class="n num">30</td><td class="n num">41</td><td class="n num" style="color:#B45309;font-weight:700">+11</td><td class="own">MK . confirm ETA</td></tr>
+    <tr><td class="sev"><i style="background:#1F7A4D"></i></td><td>EHT cable shortage</td><td class="n num">-</td><td class="n num">0</td><td class="n num" style="color:#1F7A4D">cleared</td><td class="own">closed</td></tr>
+  </table>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-12 SIGNAL</b>
+  <p>Escalations, flash reports. Verdict on top, max 7 rows: what, threshold, actual, delta, owner, ask. No charts by design; a phone screenshot must suffice.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#0F172A"></i><i style="background:#D63A2F"></i><i style="background:#B45309"></i><i style="background:#1F7A4D"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl13">
+  <svg class="motif" width="50" height="50" viewBox="0 0 54 54">
+    <path d="M27 3 L33 21 L51 27 L33 33 L27 51 L21 33 L3 27 L21 21 Z"
+          fill="none" stroke="#C4572E" stroke-width="1.5"/>
+    <circle cx="27" cy="27" r="7" fill="none" stroke="#31486E" stroke-width="1.2"/>
+  </svg>
+  <div class="t">Four cities hold 70% of the archive</div>
+  <svg width="330" height="104" viewBox="0 0 330 104" style="margin-top:10px">
+    <line x1="70" y1="0" x2="70" y2="96" stroke="#E0D5C2"/>
+    <rect x="70" y="4" width="180" height="16" fill="#C4572E"/>
+    <text x="64" y="15" font-size="10" fill="#31261D" text-anchor="end" font-family="Segoe UI">Casablanca</text>
+    <text x="256" y="15" font-size="10" fill="#31261D" font-weight="600" font-family="Segoe UI">412</text>
+    <rect x="70" y="28" width="128" height="16" fill="#C4572E" opacity="0.75"/>
+    <text x="64" y="39" font-size="10" fill="#31261D" text-anchor="end" font-family="Segoe UI">Fès</text>
+    <text x="204" y="39" font-size="10" fill="#31261D" font-family="Segoe UI">288</text>
+    <rect x="70" y="52" width="96" height="16" fill="#C4572E" opacity="0.55"/>
+    <text x="64" y="63" font-size="10" fill="#31261D" text-anchor="end" font-family="Segoe UI">Tanger</text>
+    <text x="172" y="63" font-size="10" fill="#31261D" font-family="Segoe UI">203</text>
+    <rect x="70" y="76" width="60" height="16" fill="#7A3B1E"/>
+    <text x="64" y="87" font-size="10" fill="#31261D" text-anchor="end" font-family="Segoe UI">Rabat</text>
+    <text x="136" y="87" font-size="10" fill="#31261D" font-family="Segoe UI">131</text>
+  </svg>
+  <div class="capn">Photographs restored per city, 1920-1960</div>
+</div><div class="cap"><span class="st candidate">CANDIDATE</span><b>DL-13 MEDINA</b>
+  <p>Personal-brand and cultural projects. Terracotta single-series on sand, precise not folkloric, one thin zellige-derived motif, warm serif titles.</p>
+  <div class="sw"><i style="background:#F7EFE3"></i><i style="background:#31261D"></i><i style="background:#C4572E"></i><i style="background:#3D5A46"></i><i style="background:#31486E"></i></div>
+</div></div>
+
+</div>
+
+<h2 class="group">New proposals (consulting idioms, inspiration only, no names)</h2>
+<div class="grid">
+
+<div class="card"><div class="hero dl14">
+  <div class="ex">EXHIBIT 4</div>
+  <div class="t">Three drivers explain 80% of the cost overrun</div>
+  <svg width="400" height="118" viewBox="0 0 400 118">
+    <line x1="0" y1="108" x2="400" y2="108" stroke="#0B1F35"/>
+    <rect x="10" y="60" width="46" height="48" fill="#0B1F35"/>
+    <text x="33" y="54" font-size="9" fill="#0B1F35" text-anchor="middle" font-weight="600" font-family="Segoe UI">46</text>
+    <line x1="56" y1="60" x2="80" y2="60" stroke="#A9B4C0" stroke-dasharray="3 3"/>
+    <rect x="80" y="31" width="46" height="29" fill="#2251FF"/>
+    <text x="103" y="25" font-size="9" fill="#0B1F35" text-anchor="middle" font-weight="600" font-family="Segoe UI">+28</text>
+    <line x1="126" y1="31" x2="150" y2="31" stroke="#A9B4C0" stroke-dasharray="3 3"/>
+    <rect x="150" y="13" width="46" height="18" fill="#2251FF"/>
+    <text x="173" y="8" font-size="9" fill="#0B1F35" text-anchor="middle" font-weight="600" font-family="Segoe UI">+18</text>
+    <line x1="196" y1="13" x2="220" y2="13" stroke="#A9B4C0" stroke-dasharray="3 3"/>
+    <rect x="220" y="5" width="46" height="8" fill="#A9B4C0"/>
+    <text x="243" y="26" font-size="9" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">+8</text>
+    <line x1="266" y1="5" x2="290" y2="5" stroke="#A9B4C0" stroke-dasharray="3 3"/>
+    <rect x="290" y="5" width="50" height="103" fill="#0B1F35"/>
+    <text x="315" y="60" font-size="10" fill="#fff" text-anchor="middle" font-weight="700" font-family="Segoe UI">100</text>
+    <text x="33" y="117" font-size="7.5" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">BASE</text>
+    <text x="103" y="117" font-size="7.5" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">LOGISTICS</text>
+    <text x="173" y="117" font-size="7.5" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">REWORK</text>
+    <text x="243" y="117" font-size="7.5" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">FX</text>
+    <text x="315" y="117" font-size="7.5" fill="#3C4A5A" text-anchor="middle" font-family="Segoe UI">TOTAL</text>
+  </svg>
+  <div class="fn">Source: project cost report, June 2026 . Figures rounded, indexed to base = 46</div>
+</div><div class="cap"><span class="st proposal">NEW PROPOSAL</span><b>DL-14 EXHIBIT</b>
+  <p>Evidence-led strategy decks. Numbered exhibit + governing-thought title + waterfall with dashed connectors and labeled steps, monochrome blue, disciplined footnote.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#0B1F35"></i><i style="background:#2251FF"></i><i style="background:#A9B4C0"></i><i style="background:#E3E8ED"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl15">
+  <div class="t">Concentrate capex where share is winnable</div>
+  <div class="wrap">
+    <div class="mxbox">
+      <div class="mx">
+        <div class="q">EXPLORE<span class="bub" style="width:18px;height:18px;background:#A7C4B5;color:#0E3A2C;left:34px;top:26px">C</span></div>
+        <div class="q win">INVEST
+          <span class="bub" style="width:30px;height:30px;background:#197A56;color:#fff;left:30px;top:16px">A</span>
+          <span class="bub" style="width:22px;height:22px;background:#197A56;color:#fff;left:68px;top:30px">B</span>
+        </div>
+        <div class="q">EXIT<span class="bub" style="width:14px;height:14px;background:#A7C4B5;color:#0E3A2C;left:50px;top:22px">E</span></div>
+        <div class="q">HARVEST<span class="bub" style="width:20px;height:20px;background:#A7C4B5;color:#0E3A2C;left:40px;top:20px">D</span></div>
+      </div>
+      <div class="ax">MARKET SHARE &#8594; &nbsp;&nbsp;(bubble = revenue)</div>
+    </div>
+    <div class="note15">A and B sit in the invest quadrant and hold 60% of revenue; both are supply-constrained today. D funds the move.</div>
+  </div>
+</div><div class="cap"><span class="st proposal">NEW PROPOSAL</span><b>DL-15 MATRIX</b>
+  <p>Framework and workshop decks. The 2x2 with quadrant verdicts and positioned bubbles as a first-class object, green monochrome scale, bold statement pages.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#0E3A2C"></i><i style="background:#197A56"></i><i style="background:#A7C4B5"></i><i style="background:#E5E7E2"></i></div>
+</div></div>
+
+<div class="card"><div class="hero dl16">
+  <div class="t">Exit the retail segment; it destroys 18% of margin</div>
+  <table>
+    <tr><th>SEGMENT</th><th class="n">REVENUE</th><th class="trk">SHARE OF TOTAL</th><th class="n">MARGIN</th><th class="n">3Y TREND</th></tr>
+    <tr><td>Industrial</td><td class="n num">412</td><td class="trk"><i style="width:82px"></i></td><td class="n num">+22%</td><td class="n num">&#9650; &#9650; &#9650;</td></tr>
+    <tr><td>Infrastructure</td><td class="n num">287</td><td class="trk"><i style="width:57px"></i></td><td class="n num">+9%</td><td class="n num">&#9650; &#9650; &#9644;</td></tr>
+    <tr><td>Retail</td><td class="n num">96</td><td class="trk"><i class="neg" style="width:19px"></i></td><td class="n red num">-18%</td><td class="n red num">&#9660; &#9660; &#9660;</td></tr>
+    <tr><td style="font-weight:700">Total</td><td class="n num" style="font-weight:700">795</td><td class="trk"></td><td class="n num" style="font-weight:700">+11%</td><td></td></tr>
+  </table>
+</div><div class="cap"><span class="st proposal">NEW PROPOSAL</span><b>DL-16 ANSWER</b>
+  <p>Results and due-diligence decks. Answer-first headline, dense scoreboard with inline share bars and trend marks, red on exactly the decisive figures.</p>
+  <div class="sw"><i style="background:#FFFFFF"></i><i style="background:#1A1A1A"></i><i style="background:#C4001A"></i><i style="background:#B5B1AB"></i><i style="background:#E8E6E2"></i></div>
+</div></div>
+
+</div>
+</body>
+</html>
