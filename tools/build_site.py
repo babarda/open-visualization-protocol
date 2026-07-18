@@ -157,7 +157,8 @@ NAV = [("index.html", "Home"), ("protocol.html", "Protocol"),
        ("questions.html", "Questions"),
        ("patterns.html", "Patterns"), ("decider.html", "Decider"),
        ("components.html", "Components"), ("recipes.html", "Recipes"),
-       ("implement.html", "Implement"), ("ai.html", "AI")]
+       ("implement.html", "Implement"), ("ai.html", "AI"),
+       ("compare.html", "Compare")]
 
 # hero slide per language: a realistic deliverable page in that language's
 # voice. The chart is matched to what the language ships on; the title and
@@ -1219,6 +1220,96 @@ generated from the canonical specs and drift-gated.</p>"""
     write("ai.html", page("OVP . AI", body, active="ai.html"))
 
 
+def build_compare(toks, specs):
+    body = f"""<h1>OVP vs prompting matplotlib vs Vega-Lite, for agents</h1>
+<p class="lead">If an AI agent has to turn data into a chart, it has
+three options: write plotting code from a prompt, emit a Vega-Lite
+spec, or resolve an OVP object. They solve different parts of the
+problem. This page is the honest comparison, including where OVP is the
+wrong tool.</p>
+
+<h2>The one-line difference</h2>
+<ul>
+<li><b>Prompt a plotting library</b> (matplotlib, Plotly): the model
+writes fresh code every time. Maximum flexibility, zero guarantees.</li>
+<li><b>Vega-Lite</b>: a precise visualization grammar. You declare the
+encoding and it renders the same picture every time. It does not decide
+which chart the message needs, and it ships no house style.</li>
+<li><b>OVP</b>: a decision layer and a determinism contract on top of a
+closed set of {len(specs)} chart objects and {len(toks)} design
+languages. It picks the chart, defends the choice, and renders the same
+pixels from any agent or renderer.</li>
+</ul>
+
+<h2>Side by side</h2>
+<table>
+<tr><th>&nbsp;</th><th>Prompt matplotlib</th><th>Vega-Lite</th>
+<th>OVP</th></tr>
+<tr><td>Same input, same output</td>
+<td>No. The model improvises; two runs diverge</td>
+<td>Yes, once you have written the spec</td>
+<td>Yes. Byte-identical goldens are the conformance suite</td></tr>
+<tr><td>Chart choice</td>
+<td>Whatever the model guesses this time</td>
+<td>Yours to specify; the grammar does not advise</td>
+<td>Resolved from audience, purpose and message, with the
+<a href="patterns.html">pattern</a> and
+<a href="decider.html">decider</a> that justify it</td></tr>
+<tr><td>House style</td>
+<td>Different every run</td>
+<td>Hand-themed per project</td>
+<td>{len(toks)} named languages; colors are roles, not hex</td></tr>
+<tr><td>Honesty guardrails</td>
+<td>None</td><td>None</td>
+<td>Anti-patterns, warn-level charts, and QA checks: pies cap at three
+slices, waterfalls must reconcile, cumulative curves never fall</td></tr>
+<tr><td>Output formats</td>
+<td>PNG via a code sandbox</td>
+<td>SVG or canvas via a JS runtime</td>
+<td>SVG and PPTX from one spec, member-identical decks</td></tr>
+<tr><td>What the agent loads</td>
+<td>Re-derives styling and layout on every call</td>
+<td>A verbose spec per chart</td>
+<td>One <a href="REGISTRY.json">registry</a> lookup plus a self-contained
+copy block</td></tr>
+<tr><td>Fails loudly on bad input</td>
+<td>No; it renders something plausible</td>
+<td>Partially; schema-invalid specs error</td>
+<td>Yes; the gate rejects off-vocabulary intent and unsound data</td></tr>
+</table>
+
+<h2>Where each one wins</h2>
+<ul>
+<li><b>Reach for a plotting library</b> when the chart is bespoke or
+exploratory and reproducibility does not matter: a one-off notebook
+figure, a novel encoding no catalogue has.</li>
+<li><b>Reach for Vega-Lite</b> when you want a precise, interactive web
+chart and you already know the encoding you want. It is an excellent
+renderer and a clean grammar.</li>
+<li><b>Reach for OVP</b> when the output must be consistent, defensible,
+and repeatable across many charts, people, and runs: recurring reports,
+agent-generated decks, a team that needs the same chart to look the
+same every week.</li>
+</ul>
+
+<h2>OVP composes with them, not against them</h2>
+<p>OVP is a layer, not a renderer lock-in. Its tokens already export as
+matplotlib styles, Plotly templates, and Vega-Lite config blocks (see
+the <b>report-themes</b> companion repo), so you can keep your existing
+renderer and still inherit the {len(toks)} languages. The decision and
+determinism live in OVP; the drawing can live wherever you like.</p>
+
+<h2>The agent-specific case</h2>
+<p>For an autonomous agent the failure mode of free-form prompting is
+not ugliness, it is silent plausibility: a chart that looks right and
+encodes the wrong thing, differently each run, with no way to test it.
+OVP replaces "generate a chart" with "resolve an object and render it",
+which is a lookup with a known-good answer and a golden to check
+against. That is the whole pitch:
+<a href="ai.html">deterministic and honest</a>, not plausible.</p>"""
+    write("compare.html", page("OVP . Compare", body, active="compare.html"))
+
+
 def llms_txt(toks, specs):
     fams = {}
     for s in specs:
@@ -1298,6 +1389,7 @@ def main():
     build_questions(specs)
     build_implement(toks, specs)
     build_ai(toks, specs)
+    build_compare(toks, specs)
     for p in sorted((ROOT / "schema").glob("*.json")):
         write(f"schemas/{p.name}", p.read_text(encoding="utf-8"))
     write("schemas/engine.json",

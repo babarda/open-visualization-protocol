@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OVP . Open Visualization Protocol</title>
+<title>OVP . Compare</title>
 <style>
 :root { --ink:#1A2323; --body:#4A5757; --line:#E2E8E8; --accent:#0F766E;
         --accent-soft:#E6F2F1; --bg:#F7F9F9; --card:#FFFFFF; }
@@ -125,128 +125,94 @@ function filterCards(q) {
   });
 }
 </script></head><body>
-<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item on" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a><a class="item" href="compare.html">Compare</a></nav>
+<nav><a class="brand" href="index.html">OVP<span>.</span></a><a class="item" href="index.html">Home</a><a class="item" href="protocol.html">Protocol</a><a class="item" href="foundations.html">Foundations</a><a class="item" href="taxonomy.html">Taxonomy</a><a class="item" href="languages/index.html">Languages</a><a class="item" href="charts/index.html">Charts</a><a class="item" href="questions.html">Questions</a><a class="item" href="patterns.html">Patterns</a><a class="item" href="decider.html">Decider</a><a class="item" href="components.html">Components</a><a class="item" href="recipes.html">Recipes</a><a class="item" href="implement.html">Implement</a><a class="item" href="ai.html">AI</a><a class="item on" href="compare.html">Compare</a></nav>
 <main>
+<h1>OVP vs prompting matplotlib vs Vega-Lite, for agents</h1>
+<p class="lead">If an AI agent has to turn data into a chart, it has
+three options: write plotting code from a prompt, emit a Vega-Lite
+spec, or resolve an OVP object. They solve different parts of the
+problem. This page is the honest comparison, including where OVP is the
+wrong tool.</p>
 
-<div class="hero">
-<div class="kicker">Open Visualization Protocol</div>
-<h1>Describe the chart once.<br>Every renderer draws the same pixels.</h1>
-<p class="lead">OVP is an open, deterministic, AI-native standard for
-information design. A visualization is an instruction, not an artwork:
-<code>Render CH-TIM-02 in DL-03 with data.json</code>. Any agent, human,
-or renderer that speaks the protocol produces the same visual result
-from the same instruction.</p>
-<div class="stats">
-<div class="stat"><b>16</b><span>DESIGN LANGUAGES</span></div>
-<div class="stat"><b>74</b><span>CHART OBJECTS BUILT</span></div>
-<div class="stat"><b>8</b><span>ANALYTICAL PATTERNS</span></div>
-<div class="stat"><b>11</b><span>COMPONENTS</span></div>
-<div class="stat"><b>6</b><span>RECIPES</span></div>
-<div class="stat"><b>1184</b><span>GOLDEN RENDERS</span></div>
-</div>
-</div>
+<h2>The one-line difference</h2>
+<ul>
+<li><b>Prompt a plotting library</b> (matplotlib, Plotly): the model
+writes fresh code every time. Maximum flexibility, zero guarantees.</li>
+<li><b>Vega-Lite</b>: a precise visualization grammar. You declare the
+encoding and it renders the same picture every time. It does not decide
+which chart the message needs, and it ships no house style.</li>
+<li><b>OVP</b>: a decision layer and a determinism contract on top of a
+closed set of 74 chart objects and 16 design
+languages. It picks the chart, defends the choice, and renders the same
+pixels from any agent or renderer.</li>
+</ul>
 
-<h2>The principles</h2>
-<div class="grid g3">
-<div class="card"><h3>Deterministic by contract</h3><p>Same spec, same
-tokens, same data: byte-identical output, every run, every machine. No
-randomness, no timestamps, no jitter. A QA gate re-renders every golden
-and blocks the repo on a single byte of drift.</p></div>
-<div class="card"><h3>Roles, never hex</h3><p>Chart specs name color
-roles (primary, muted, negative). Design languages bind roles to hex.
-Rebranding a whole deliverable is swapping one token file; no spec
-changes, no re-authoring.</p></div>
-<div class="card"><h3>Honest by rule</h3><p>Zero baselines. Direct labels
-instead of legends. Declared inputs only: no silent KDE, no silent trend
-lines, no unstated normalization. Every chart ships with anti-patterns
-and a QA checklist.</p></div>
-<div class="card"><h3>Message first</h3><p>Charts are coded by what the
-message is (ranking, deviation, distribution), not by shape. The first
-question an agent answers is "what is the message"; the shape is
-metadata.</p></div>
-<div class="card"><h3>AI-native</h3><p>A controlled intent vocabulary,
-machine metadata on every object, a decision engine for language choice,
-and copy-paste blocks in two flavors: hex-resolved for design systems,
-role-based for themeable skills.</p></div>
-<div class="card"><h3>Canonical JSON, generated everything else</h3>
-<p>Specs and tokens are the source of truth. Blocks, chooser, decider,
-pattern docs, previews, and this entire site are generated from them and
-drift-gated where it matters.</p></div>
-</div>
+<h2>Side by side</h2>
+<table>
+<tr><th>&nbsp;</th><th>Prompt matplotlib</th><th>Vega-Lite</th>
+<th>OVP</th></tr>
+<tr><td>Same input, same output</td>
+<td>No. The model improvises; two runs diverge</td>
+<td>Yes, once you have written the spec</td>
+<td>Yes. Byte-identical goldens are the conformance suite</td></tr>
+<tr><td>Chart choice</td>
+<td>Whatever the model guesses this time</td>
+<td>Yours to specify; the grammar does not advise</td>
+<td>Resolved from audience, purpose and message, with the
+<a href="patterns.html">pattern</a> and
+<a href="decider.html">decider</a> that justify it</td></tr>
+<tr><td>House style</td>
+<td>Different every run</td>
+<td>Hand-themed per project</td>
+<td>16 named languages; colors are roles, not hex</td></tr>
+<tr><td>Honesty guardrails</td>
+<td>None</td><td>None</td>
+<td>Anti-patterns, warn-level charts, and QA checks: pies cap at three
+slices, waterfalls must reconcile, cumulative curves never fall</td></tr>
+<tr><td>Output formats</td>
+<td>PNG via a code sandbox</td>
+<td>SVG or canvas via a JS runtime</td>
+<td>SVG and PPTX from one spec, member-identical decks</td></tr>
+<tr><td>What the agent loads</td>
+<td>Re-derives styling and layout on every call</td>
+<td>A verbose spec per chart</td>
+<td>One <a href="REGISTRY.json">registry</a> lookup plus a self-contained
+copy block</td></tr>
+<tr><td>Fails loudly on bad input</td>
+<td>No; it renders something plausible</td>
+<td>Partially; schema-invalid specs error</td>
+<td>Yes; the gate rejects off-vocabulary intent and unsound data</td></tr>
+</table>
 
-<h2>How an agent resolves a request</h2>
-<div class="tocbox">
-<b>1. Decider</b> picks the design language from audience, purpose, and
-medium. &nbsp;<b>2. Patterns</b> map what was found in the data to chart
-codes. &nbsp;<b>3. Charts</b> disambiguate by message intent, with
-"see instead" exits. &nbsp;<b>4. Render</b> the code in the language:
-exact px, exact hex, no adjectives.</div>
+<h2>Where each one wins</h2>
+<ul>
+<li><b>Reach for a plotting library</b> when the chart is bespoke or
+exploratory and reproducibility does not matter: a one-off notebook
+figure, a novel encoding no catalogue has.</li>
+<li><b>Reach for Vega-Lite</b> when you want a precise, interactive web
+chart and you already know the encoding you want. It is an excellent
+renderer and a clean grammar.</li>
+<li><b>Reach for OVP</b> when the output must be consistent, defensible,
+and repeatable across many charts, people, and runs: recurring reports,
+agent-generated decks, a team that needs the same chart to look the
+same every week.</li>
+</ul>
 
-<h2>Learn</h2>
-<div class="grid g2">
-<a class="card" href="manifesto.html"><h3>Manifesto</h3>
-<p>Why OVP exists and the seven laws that never break: determinism,
-roles never hex, honesty by construction, message first.</p></a>
-<a class="card" href="foundations.html"><h3>Foundations</h3>
-<p>The rule sets everything builds on: token contract, canvas and grid,
-type scale, contrast, numbers and scales, perceptual research.</p></a>
-</div>
-<h2>Reference</h2>
-<div class="grid g2">
-<a class="card" href="protocol.html"><h3>The protocol</h3>
-<p>The normative reference: object grammar, layer model, determinism
-contract, conformance levels, lifecycle and stability policy.</p></a>
-<a class="card" href="taxonomy.html"><h3>Taxonomy</h3>
-<p>The full object map: every family, every entry, statuses, and the
-exclusions with their reasons.</p></a>
-</div>
-<h2>Explore</h2>
-<div class="grid g2">
-<a class="card" href="languages/index.html"><h3>Design languages</h3>
-<p>16 complete visual identities, each built on a philosophy:
-a civilization, a principle, a motto, and design laws that explain why
-the rules exist.</p></a>
-<a class="card" href="charts/index.html"><h3>Chart objects</h3>
-<p>74 built entries coded by message family, each with exact
-geometry, honesty rules, QA checklist, golden renders in all
-16 languages, and one-click copy blocks.</p></a>
-</div>
-<h2>Build</h2>
-<div class="grid g2">
-<a class="card" href="questions.html"><h3>Business questions</h3>
-<p>Start from what is being asked: each question names its observations,
-patterns, charts, and the narrative skeleton that tells the finding.</p></a>
-<a class="card" href="patterns.html"><h3>Analytical patterns</h3>
-<p>The layer above charts: recognize what the data shows, read its
-meaning, take the recommended chart codes.</p></a>
-<a class="card" href="decider.html"><h3>Language decider</h3>
-<p>Audience, purpose, medium in; design language out. Ordered rules over
-a controlled vocabulary, validator-enforced.</p></a>
-<a class="card" href="components.html"><h3>Components</h3>
-<p>Titles, sources, KPI cards, chips, callouts: the furniture around
-charts, same role contract, composable into recipes.</p></a>
-<a class="card" href="recipes.html"><h3>Recipes</h3>
-<p>Fully determined pages: language, charts, components, exact
-positions. A recurring deliverable renders identically forever.</p></a>
-</div>
-<h2>Implement and automate</h2>
-<div class="grid g2">
-<a class="card" href="implement.html"><h3>Implement</h3>
-<p>Build an OVP-conformant renderer or validator from the published
-schemas, the determinism contract, and the conformance levels. No
-questions to the authors required.</p></a>
-<a class="card" href="ai.html"><h3>AI</h3>
-<p>How agents speak OVP: the resolution order, the machine registry,
-the controlled vocabularies, and the copy-paste blocks.</p></a>
-</div>
+<h2>OVP composes with them, not against them</h2>
+<p>OVP is a layer, not a renderer lock-in. Its tokens already export as
+matplotlib styles, Plotly templates, and Vega-Lite config blocks (see
+the <b>report-themes</b> companion repo), so you can keep your existing
+renderer and still inherit the 16 languages. The decision and
+determinism live in OVP; the drawing can live wherever you like.</p>
 
-<h2>Get the code</h2>
-<p>Every chart page carries copy buttons for two block flavors.
-<b>Design-system blocks</b> resolve colors to hex for one language:
-paste into any CLAUDE.md or design-system doc, zero dependencies.
-<b>Skill blocks</b> stay role-based: paste next to a language token
-block and re-theme by swapping that one block.</p>
-
+<h2>The agent-specific case</h2>
+<p>For an autonomous agent the failure mode of free-form prompting is
+not ugliness, it is silent plausibility: a chart that looks right and
+encodes the wrong thing, differently each run, with no way to test it.
+OVP replaces "generate a chart" with "resolve an object and render it",
+which is a lookup with a known-good answer and a golden to check
+against. That is the whole pitch:
+<a href="ai.html">deterministic and honest</a>, not plausible.</p>
 </main>
 <footer>Open Visualization Protocol, v0.1-draft. This site is generated by
 tools/build_site.py from the canonical specs and tokens. Do not hand-edit.</footer>
