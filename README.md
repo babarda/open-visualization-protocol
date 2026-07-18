@@ -262,9 +262,13 @@ canonical tokens and gated against drift:
   design languages exported as ready-to-use themes for Power BI, Excel
   (.thmx), matplotlib, plotly, Vega-Lite, and CSS. One download,
   matching reports everywhere.
+- [which-chart](https://github.com/babarda/which-chart): say what you
+  want to show, get the right chart, its data shape, and when not to use
+  it. An interactive chooser page, a printable A3 decision poster, and a
+  paste-in agent skill, all generated from this canon.
 
-More are on the way: a chart chooser, an installable skill pack, a
-`json2chart` CLI, an MCP server, and a data-to-deck compiler.
+More are on the way: an installable skill pack, a `json2chart` CLI, an
+MCP server, a live playground, and a data-to-deck compiler.
 
 ## Contributing
 
