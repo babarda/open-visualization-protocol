@@ -253,6 +253,19 @@ suite are in [docs/implement.html](docs/implement.html). That is this
 project's success criterion: an independent team ships an
 OVP-compatible implementation without asking us anything.
 
+## Ecosystem
+
+Companion repos built on the frozen v1.0 spec, each generated from the
+canonical tokens and gated against drift:
+
+- [report-themes](https://github.com/babarda/report-themes): the 16
+  design languages exported as ready-to-use themes for Power BI, Excel
+  (.thmx), matplotlib, plotly, Vega-Lite, and CSS. One download,
+  matching reports everywhere.
+
+More are on the way: a chart chooser, an installable skill pack, a
+`json2chart` CLI, an MCP server, and a data-to-deck compiler.
+
 ## Contributing
 
 Codes are permanent, the gate is law, and every admission rule is
