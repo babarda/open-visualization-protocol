@@ -266,9 +266,14 @@ canonical tokens and gated against drift:
   want to show, get the right chart, its data shape, and when not to use
   it. An interactive chooser page, a printable A3 decision poster, and a
   paste-in agent skill, all generated from this canon.
+- [ai-chart-skills](https://github.com/babarda/ai-chart-skills): a
+  focused skill pack (chart-chooser, honest-charts, deterministic-slides,
+  exec-deck) with Cursor and AGENTS.md mirrors, so an agent picks the
+  right chart, refuses a dishonest one, and renders it the same way every
+  time.
 
-More are on the way: an installable skill pack, a `json2chart` CLI, an
-MCP server, a live playground, and a data-to-deck compiler.
+More are on the way: a `json2chart` CLI, an MCP server, a live
+playground, and a data-to-deck compiler.
 
 ## Contributing
 
