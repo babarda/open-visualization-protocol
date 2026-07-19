@@ -272,8 +272,13 @@ canonical tokens and gated against drift:
   right chart, refuses a dishonest one, and renders it the same way every
   time.
 
-More are on the way: a `json2chart` CLI, an MCP server, a live
-playground, and a data-to-deck compiler.
+- [json2chart](https://github.com/babarda/json2chart): `pip install
+  json2chart`. Render any of the 74 charts to SVG or PPTX from the
+  command line or Python, choose a design language for an audience, all
+  deterministic and byte-identical to this protocol's goldens.
+
+More are on the way: an MCP server, a live playground, and a
+data-to-deck compiler.
 
 ## Contributing
 
